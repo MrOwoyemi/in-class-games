@@ -8,7 +8,7 @@ Fourteen classroom games for Maths, English, Science and Computing. Every game h
 
 **Play it here: https://mrowoyemi.github.io/in-class-games/**
 
-> **Not matched to an exam board.** No exam board has been chosen and no exam board's specification has been used, so the content follows general curriculum topics and may not match exactly what your course requires. Check it against your own specification before relying on it.
+> **Exam boards.** The Computing games follow the [AQA GCSE Computer Science specification (8525)](https://www.aqa.org.uk/subjects/computer-science/gcse/computer-science-8525/specification), including AQA's wording, Boolean notation and pseudo-code. The Maths, English and Science games aren't matched to an exam board: they follow general curriculum topics and may not match exactly what your course requires, so check them against your own specification. This site isn't produced or endorsed by AQA or any other exam board.
 
 ## Using it in class
 
@@ -25,7 +25,7 @@ It works best on a computer or interactive whiteboard. It also works on tablets 
 | Maths | FizzBuzz, Times Table Sprint, Hit the Target, Fraction Wall |
 | English | Spelling Challenge, Punctuation Fix, Homophone Hunt, Device Detective |
 | Science | Periodic Pairs, Label the Cell, Food Web Builder |
-| Computing | Binary Switches, Logic Gate Lights, Code Shuffle |
+| Computing (AQA 8525) | Binary Switches (3.3), Logic Gate Lights (3.4.2), Code Shuffle (3.1 and 3.2) |
 
 Several games let you add your own content, including your own spelling lists (which you can save) and lines from the book your class is reading.
 
