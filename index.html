@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Educational In-Class Games</title>
-<meta name="description" content="Classroom games for Maths, English, Science and Computing. Every game can be played on your own, in groups, or as a whole class on the board.">
+<meta name="description" content="Classroom games for Maths, English, Science and Computing (AQA GCSE Computer Science). Every game can be played on your own, in groups, or as a whole class on the board.">
 <meta property="og:title" content="Educational In-Class Games">
-<meta property="og:description" content="Classroom games for Maths, English, Science and Computing. Every game can be played on your own, in groups, or as a whole class on the board.">
+<meta property="og:description" content="Classroom games for Maths, English, Science and Computing (AQA GCSE Computer Science). Every game can be played on your own, in groups, or as a whole class on the board.">
 <meta property="og:type" content="website">
 <meta name="theme-color" content="#2443a6">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect x='9' y='4' width='46' height='56' rx='6' fill='%232b56a6'/%3E%3Crect x='9' y='4' width='9' height='56' rx='4' fill='%23173f80'/%3E%3Crect x='24' y='15' width='24' height='14' rx='2' fill='%23fcfcfa'/%3E%3Cpath d='M28 20h16M28 24h10' stroke='%232443a6' stroke-width='2.4' stroke-linecap='round'/%3E%3C/svg%3E">
@@ -279,10 +279,11 @@
   .cover-geography { --cover: var(--sub-geography); }
 
   .shelf { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: minmax(0, 1fr); gap: 20px; }
-  .shelf li { display: grid; min-width: 0; }
-  @media (min-width: 560px) { .shelf { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  .shelf li { display: grid; grid-template-columns: minmax(0, 1fr); min-width: 0; }
+  /* Two books a row once each is wide enough for its label; more only on wide screens (below). */
+  @media (min-width: 680px) { .shelf { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
   .book {
-    display: grid; grid-template-rows: auto 1fr; gap: 18px;
+    display: grid; grid-template-rows: auto 1fr; gap: 18px; min-width: 0;
     min-height: 14rem; padding: 20px 20px 18px 40px; text-align: left;
     background: var(--cover); color: var(--on-cover);
     border: 0; border-radius: 5px 14px 14px 5px;
@@ -299,7 +300,7 @@
   }
   .label-row { display: flex; align-items: baseline; gap: 10px; border-bottom: 1px solid var(--label-line); }
   .label-key { flex: none; width: 4.4rem; font-size: .68rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--label-soft); }
-  .label-val { min-width: 0; font: 700 1.5rem/1.4 var(--font-hand); color: var(--label-ink); }
+  .label-val { min-width: 0; overflow-wrap: anywhere; font: 700 1.5rem/1.4 var(--font-hand); color: var(--label-ink); }
   .label-val.none { font-size: 1.1rem; color: var(--label-soft); }
   .book-foot { align-self: end; display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 6px 16px; }
   .book-blurb { max-width: 24ch; }
@@ -1502,6 +1503,31 @@
   .dv-card.bad { border-color: var(--wrong); background: var(--wrong-wash); }
   .dv-should { display: block; margin-top: 4px; font: 700 .8rem var(--font-body); color: var(--wrong); }
 
+  /* Computing (AQA): a bar over anything that goes through NOT, the XOR gate, sums, shifts and spec labels */
+  .ovl { --ovl: 0; border-top: .08em solid currentColor; padding-top: calc(var(--ovl) * .22em); } /* each bar sets its own height */
+  .gate .xor-back { fill: none; }
+  .lg-expr .lg-words { display: block; margin-top: 4px; font: 400 .85rem var(--font-body); color: var(--ink-soft); }
+  .lg-opts { list-style: none; margin: 0; padding: 0; width: 100%; max-width: 46rem; display: grid; grid-template-columns: minmax(0, 1fr); gap: 10px; }
+  @container (min-width: 30rem) { .lg-opts { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  .lg-opts li { display: flex; align-items: center; gap: 10px; padding: 8px 14px; border: 2px solid var(--line); border-radius: 12px; background: var(--card); font: 700 1.3rem var(--font-code); }
+  .lg-opts li.ok { border-color: var(--right); box-shadow: 0 0 0 2px var(--right); }
+  .lg-opts li.dim { opacity: .45; }
+  .lg-opt span { font-family: var(--font-code); }
+  .bin-sum { display: grid; grid-template-columns: auto auto; justify-content: center; align-items: center; gap: 2px 12px; font: 700 1.5rem/1.3 var(--font-code); }
+  .bin-sign { min-width: 2ch; text-align: right; color: var(--ink-soft); font-size: .7em; font-family: var(--font-body); }
+  .bin-bits { display: inline-flex; }
+  .bin-bits span { display: inline-block; width: 1.15ch; text-align: center; }
+  .bin-bits i { display: inline-block; width: .6ch; }
+  .bin-bits.carries { color: var(--pen); font-weight: 400; }
+  .bin-sum .bin-bits:last-child { padding-bottom: 4px; border-bottom: 3px solid var(--ink); }
+  .bin-start { margin: 0; font-size: 1.1rem; color: var(--ink-soft); }
+  .bin-start b { color: var(--ink); font: 700 1.6rem var(--font-code); letter-spacing: .05em; }
+  .hexv { font-family: var(--font-code); }
+  .code-spec {
+    display: inline-block; margin-left: 4px; padding: 0 8px; border: 1px solid var(--line); border-radius: 6px;
+    background: var(--paper); color: var(--ink-soft); font-size: .8rem; font-weight: 700; white-space: nowrap;
+  }
+
   /* The exam board note on the home and subject pages */
   .notice {
     margin: 0; max-width: 78ch; padding: 12px 16px; border: 1.5px solid var(--line); border-left: 6px solid var(--hl-5);
@@ -1533,7 +1559,7 @@
     h1 { font-size: clamp(4rem, 6vw, 6.5rem); }
 
     /* Home and subject pages */
-    .shelf { grid-template-columns: repeat(var(--cols, 3), minmax(0, 1fr)); gap: 28px; }
+    .shelf { gap: 28px; }
     .book { min-height: 17rem; padding: 24px 24px 22px 46px; }
     .book-label { width: min(100%, 19rem); }
     .mini-book { width: 80px; height: 104px; }
@@ -1654,6 +1680,11 @@
     .cg-word .sp-meaning, .cg-word .sp-example { font-size: min(1.5rem, 3.6cqh); }
   }
 
+  /* A row of 3 or 4 subjects only when each book has room for its label. */
+  @media (min-width: 1440px) {
+    .shelf { grid-template-columns: repeat(var(--cols, 3), minmax(0, 1fr)); }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { animation: none !important; transition: none !important; }
   }
@@ -1683,7 +1714,7 @@
         <h1 id="home-title">Educational <span class="hl c1">In-Class</span> Games</h1>
         <p class="lede">Quick games to play together as a class or on your own. Pick a subject to see its games.</p>
       </div>
-      <p class="notice" role="note"><b>Not matched to an exam board.</b> No exam board has been chosen and no exam board’s specification has been used, so the content follows general curriculum topics and may not match exactly what your course requires. Check it against your own specification before relying on it.</p>
+      <p class="notice" role="note"><b>Exam boards.</b> Computing follows the AQA GCSE Computer Science specification (8525). The other subjects aren’t matched to an exam board: they follow general curriculum topics and may not match exactly what your course requires, so check them against your own specification. This site isn’t produced or endorsed by any exam board.</p>
       <ul class="shelf" id="subjects" aria-label="Subjects"></ul>
     </section>
 
@@ -1697,7 +1728,7 @@
           <p class="lede" id="subject-blurb"></p>
         </div>
       </header>
-      <p class="notice" role="note"><b>Not matched to an exam board.</b> No exam board has been chosen and no exam board’s specification has been used, so the content follows general curriculum topics and may not match exactly what your course requires. Check it against your own specification before relying on it.</p>
+      <p class="notice" role="note" id="subject-notice"></p>
       <div class="game-list" id="game-list"></div>
       <button type="button" class="btn-link" data-nav="home">← All subjects</button>
     </section>
@@ -2037,7 +2068,7 @@
     </section>
 
     <footer class="site-foot">
-      <p><b>Not matched to an exam board.</b> No exam board’s specification has been used, so check the content against your own course.</p>
+      <p><b>Exam boards.</b> Computing follows AQA GCSE Computer Science (8525). The other subjects aren’t matched to an exam board, so check them against your own course. Not produced or endorsed by any exam board.</p>
       <p><b>Private by design.</b> Everything runs in your web browser. Nothing you type, including pupils’ names, is sent anywhere, and saved word lists and scores stay on the computer you use.</p>
       <details>
         <summary>Credits and licences</summary>
@@ -2083,7 +2114,7 @@ THIS SOFTWARE.</pre>
     { id: 'maths', name: 'Maths', blurb: 'Number, patterns and problem solving', paper: 'squared', games: ['fizzbuzz', 'tables', 'target', 'fractions'] },
     { id: 'english', name: 'English', blurb: 'Reading, spelling and grammar', paper: 'lined', games: ['spelling', 'punctuation', 'homophones', 'devices'] },
     { id: 'science', name: 'Science', blurb: 'Biology, chemistry and physics', paper: 'squared', games: ['periodic', 'cell', 'foodweb'] },
-    { id: 'computing', name: 'Computing', blurb: 'Algorithms, logic and code', paper: 'squared', games: ['binary', 'logic', 'code'] },
+    { id: 'computing', name: 'Computing', blurb: 'AQA GCSE Computer Science: data, logic and programming', paper: 'squared', games: ['binary', 'logic', 'code'], exam: 'aqa' },
     { id: 'history', name: 'History', blurb: 'People, events and dates', paper: 'lined', games: ['timeline', 'who', 'source'], hidden: true },
     { id: 'geography', name: 'Geography', blurb: 'Places, maps and the planet', paper: 'lined', games: ['grid', 'pin', 'climate'], hidden: true },
   ];
@@ -2218,33 +2249,33 @@ THIS SOFTWARE.</pre>
     }),
     binary: cgGame('binary', {
       title: 'Binary Switches',
-      summary: 'A row of switches worth 128 down to 1. Flip them to make a number, or read the number they show.',
-      skills: 'Converting between binary and denary',
+      summary: 'A row of switches worth 128 down to 1. Convert between binary, decimal and hexadecimal, add up to three binary numbers, and apply logical shifts.',
+      skills: 'AQA 3.3: number bases, conversions and binary arithmetic',
       time: '10 to 15 minutes',
       versions: {
-        solo: 'Make or read numbers with 4 or 8 switches, with a hint when you need one.',
+        solo: 'Binary, decimal and hexadecimal conversions, binary addition and shifts, with worked answers and hints.',
         groups: 'A buzzer race on one computer: first to buzz answers, and a wrong answer lets the others buzz.',
         class: 'Human binary: pupils at the front are the switches and the class tells them which to flip.',
       },
     }),
     logic: cgGame('logic', {
       title: 'Logic Gate Lights',
-      summary: 'Set the inputs on AND, OR and NOT circuits to light the bulb, predict what the bulb will do, and fill in truth tables.',
-      skills: 'Boolean logic and truth tables',
+      summary: 'Circuits of NOT, AND, OR and XOR gates with up to three inputs. Light the bulb, predict it, fill in truth tables, and match circuits to Boolean expressions written the AQA way.',
+      skills: 'AQA 3.4.2: logic gates, truth tables and Boolean expressions',
       time: '10 to 15 minutes',
       versions: {
-        solo: 'Light the bulb, predict the bulb and fill in truth tables, from one gate up to three.',
+        solo: 'Light the bulb, predict it, fill in truth tables and pick the Boolean expression, from one gate up to three.',
         groups: 'Each player controls their own inputs. Agree first, because you get one test per circuit.',
-        class: 'A circuit on the board. Teams vote on whether the bulb will light, then watch the signal travel.',
+        class: 'A circuit on the board. Teams vote on whether the bulb will light, or which Boolean expression matches it.',
       },
     }),
     code: cgGame('code', {
       title: 'Code Shuffle',
-      summary: 'The lines of a short Python program are jumbled. Drag them back into order, and set the indents on the harder setting.',
-      skills: 'Reading code: sequence, selection and iteration',
+      summary: 'The lines of a short program are jumbled. Drag them back into order, in AQA pseudo-code or Python. Programs cover selection, iteration, arrays, validation, searching, sorting and subroutines.',
+      skills: 'AQA 3.1 and 3.2: algorithms and programming',
       time: '10 to 20 minutes',
       versions: {
-        solo: '13 programs from starter to secure, including FizzBuzz, with 3 checks for each.',
+        solo: '20 programs from starter to secure, including linear search and bubble sort, with 3 checks for each.',
         groups: 'Pair programming: one player drives, the other navigates, and you swap every program.',
         class: 'Jumbled code on the board. Teams call out the order while the teacher moves the lines.',
       },
@@ -2479,6 +2510,9 @@ THIS SOFTWARE.</pre>
     $('subject-count').textContent = n ? `Subject · ${gamesLabel(n)}` : 'Subject';
     $('subject-title').textContent = s.name;
     $('subject-blurb').textContent = s.blurb;
+    $('subject-notice').innerHTML = s.exam === 'aqa'
+      ? '<b>Based on AQA GCSE Computer Science (8525).</b> These games follow the AQA specification: number bases and binary arithmetic (3.3), Boolean logic (3.4.2), and algorithms and programming, using AQA pseudo-code (3.1 and 3.2). They aren’t produced or endorsed by AQA, so check against the latest specification on AQA’s website.'
+      : '<b>Not matched to an exam board.</b> No exam board has been chosen and no exam board’s specification has been used, so the content follows general curriculum topics and may not match exactly what your course requires. Check it against your own specification before relying on it.';
 
     if (!n) {
       const others = SUBJECTS.filter((x) => x.games.length);
@@ -4681,7 +4715,9 @@ THIS SOFTWARE.</pre>
   let cgTicker = null;
   let cgDrag = null;
 
-  // ---------- Binary Switches ----------
+  // ---------- Binary Switches (AQA GCSE 8525, 3.3.1 to 3.3.4) ----------
+  // AQA wording: decimal (not denary), up to 8 bits (0 to 255, hex 00 to FF), adding up to three numbers
+  // with no more than three 1s in a column and no overflow, and logical shifts.
   const binValues = (bits) => Array.from({ length: bits }, (_, i) => 2 ** (bits - 1 - i));
   const toBits = (n, bits) => binValues(bits).map((v) => (n & v ? 1 : 0));
   const fromBits = (arr) => arr.reduce((sum, b, i) => sum + (b ? 2 ** (arr.length - 1 - i) : 0), 0);
@@ -4690,8 +4726,109 @@ THIS SOFTWARE.</pre>
     const parts = binValues(bits).filter((v) => n & v);
     return parts.length ? parts.join(' + ') : '0';
   };
+  const HEX_DIGITS = '0123456789ABCDEF';
+  const toHex = (n, bits) => n.toString(16).toUpperCase().padStart(bits / 4, '0');
+  const BIN_KINDS = {
+    basics: ['make', 'read'],
+    hex: ['hex2dec', 'dec2hex', 'bin2hex', 'hex2bin'],
+    arith: ['add', 'shift'],
+  };
+  BIN_KINDS.all = [...BIN_KINDS.basics, ...BIN_KINDS.hex, ...BIN_KINDS.arith];
+  // Questions answered with the switches; the others are typed.
+  const binUsesSwitches = (q) => ['make', 'hex2bin', 'add', 'shift'].includes(q.kind);
+  const binShifted = (q) => (q.dir === 'left' ? (q.target << q.places) & (2 ** q.bits - 1) : q.target >> q.places);
+  const binAnswer = (q) => (q.kind === 'add' ? q.nums.reduce((a, b) => a + b, 0) : q.kind === 'shift' ? binShifted(q) : q.target);
+  const binTyped = (q) => (q.kind === 'dec2hex' || q.kind === 'bin2hex' ? 'Hexadecimal' : 'Decimal number');
   function binReset(q) {
-    q.work = q.kind === 'make' ? { bits: new Array(q.bits).fill(0) } : { typed: '' };
+    q.work = binUsesSwitches(q) ? { bits: new Array(q.bits).fill(0) } : { typed: '' };
+  }
+  // Column addition, keeping to AQA's limits: no more than three 1s in any column (counting carries), no overflow.
+  function binCarries(nums, bits) {
+    const carries = new Array(bits).fill(0);
+    let carry = 0;
+    for (let col = bits - 1; col >= 0; col -= 1) {
+      const place = 2 ** (bits - 1 - col);
+      const ones = nums.filter((n) => n & place).length + carry;
+      if (ones > 3) return null;
+      carry = ones >> 1;
+      if (col > 0) carries[col - 1] = carry;
+      else if (carry) return null; // would overflow
+    }
+    return carries;
+  }
+  // One question of a given kind. `used` keeps numbers from repeating.
+  function binQuestion(kind, bits, used) {
+    const max = 2 ** bits - 1;
+    const pick = (lo, hi) => {
+      let n = 0;
+      let guard = 0;
+      do { n = lo + Math.floor(Math.random() * (hi - lo + 1)); guard += 1; } while (used.has(`${kind}${n}`) && guard < 40);
+      used.add(`${kind}${n}`);
+      return n;
+    };
+    if (kind === 'add') {
+      const count = bits === 8 && Math.random() < 0.35 ? 3 : 2;
+      for (let tries = 0; tries < 500; tries += 1) {
+        const nums = Array.from({ length: count }, () => 1 + Math.floor(Math.random() * (max >> (count - 1))));
+        if (binCarries(nums, bits) && nums.some((n, i) => nums.some((m, j) => i !== j && n & m))) return { kind, bits, nums, target: 0 };
+      }
+      return { kind, bits, nums: bits === 8 ? [45, 30] : [5, 6], target: 0 };
+    }
+    if (kind === 'shift') {
+      const dir = Math.random() < 0.5 ? 'left' : 'right';
+      const places = 1 + Math.floor(Math.random() * (bits === 8 ? 3 : 2));
+      // Left shifts never push a 1 off the end, so they are exact multiplications.
+      const target = dir === 'left' ? pick(1, max >> places) : pick(2 ** places, max);
+      return { kind, bits, dir, places, target };
+    }
+    return { kind, bits, target: pick(1, max) };
+  }
+  // "3C = 3 × 16 + 12 = 60"
+  function hexWorking(n, bits) {
+    const h = toHex(n, bits);
+    if (h.length === 1) return `${h} = ${n}`;
+    return `${h} = ${parseInt(h[0], 16)} × 16 + ${parseInt(h[1], 16)} = ${n}`;
+  }
+  // "0011 = 3 and 1100 = 12 (C), so 3C"
+  function nibbleWorking(n, bits) {
+    const b = toBits(n, bits);
+    const parts = [];
+    for (let i = 0; i < bits; i += 4) {
+      const v = fromBits(b.slice(i, i + 4));
+      parts.push(`${b.slice(i, i + 4).join('')} = ${v}${v > 9 ? ` (${HEX_DIGITS[v]})` : ''}`);
+    }
+    return `${listAnd(parts)}, so it’s <b>${toHex(n, bits)}</b>`;
+  }
+  const hexLetters = (h) => ([...h].some((d) => /[A-F]/.test(d)) ? ' Remember: A = 10, B = 11, C = 12, D = 13, E = 14 and F = 15.' : '');
+  // The worked answer for any kind of question.
+  function binExplain(q) {
+    const n = q.target;
+    const b = q.bits;
+    const h = toHex(n, b);
+    if (q.kind === 'make') return `<p><b>${n}</b> = ${binSum(n, b)}, so the switches are ${bitString(toBits(n, b))}.</p>`;
+    if (q.kind === 'read') return `<p>${bitString(toBits(n, b))} = ${binSum(n, b)} = <b>${n}</b>.</p>`;
+    if (q.kind === 'hex2dec') return `<p>${hexWorking(n, b)}.${hexLetters(h)}</p>`;
+    if (q.kind === 'dec2hex') return `<p>${n} = ${h.length === 1 ? h : `${parseInt(h[0], 16)} × 16 + ${parseInt(h[1], 16)}`}, so it’s <b>${h}</b>.${hexLetters(h)}</p>`;
+    if (q.kind === 'bin2hex') return `<p>Split the bits into groups of 4: ${nibbleWorking(n, b)}.</p>`;
+    if (q.kind === 'hex2bin') return `<p>Each hexadecimal digit makes 4 bits: ${[...h].map((d) => `${d} = ${toBits(parseInt(d, 16), 4).join('')}`).join(' and ')}, so the switches are <b>${bitString(toBits(n, b))}</b>.</p>`;
+    if (q.kind === 'add') {
+      const sum = binAnswer(q);
+      return `<p>In decimal, ${q.nums.join(' + ')} = ${sum}, which is <b>${bitString(toBits(sum, b))}</b>.</p><p>Work from the right: 1 + 1 = 10 (write 0, carry 1), and 1 + 1 + 1 = 11 (write 1, carry 1).</p>`;
+    }
+    const res = binShifted(q);
+    const f = 2 ** q.places;
+    if (q.dir === 'left') return `<p>Every bit moves ${q.places} place${q.places === 1 ? '' : 's'} left and 0s fill the gaps. A left shift of ${q.places} multiplies by ${f}: ${n} × ${f} = <b>${res}</b>.</p>`;
+    const lost = n % f !== 0;
+    return `<p>Every bit moves ${q.places} place${q.places === 1 ? '' : 's'} right and 0s fill the gaps. A right shift of ${q.places} divides by ${f}${lost ? ', and the 1s shifted off the end are lost' : ''}: ${n} DIV ${f} = <b>${res}</b>.</p>`;
+  }
+  // The numbers being added, lined up in columns, with the carries once the answer is shown.
+  function binAddHTML(q, done) {
+    const carries = done ? binCarries(q.nums, q.bits) : null;
+    const row = (sign, bits, cls) => `<span class="bin-sign">${sign}</span><span class="bin-bits${cls ? ` ${cls}` : ''}">${bits.map((d, i) => `<span>${d}</span>${(i + 1) % 4 === 0 && i + 1 < bits.length ? '<i></i>' : ''}`).join('')}</span>`;
+    return `<div class="bin-sum" style="--bits:${q.bits}" role="img" aria-label="Add ${q.nums.map((n) => bitString(toBits(n, q.bits))).join(' and ')}">
+      ${carries ? row('carry', carries.map((c) => (c ? '1' : '')), 'carries') : ''}
+      ${q.nums.map((n, i) => row(i ? '+' : '', toBits(n, q.bits))).join('')}
+    </div>`;
   }
   function binPreview() {
     const values = binValues(8);
@@ -4699,11 +4836,13 @@ THIS SOFTWARE.</pre>
     return `
       <div class="bin mini" style="--bits:8">
         <div class="bin-row">${bits.map((b, i) => `<span class="bit${b ? ' on' : ''}"><span class="bit-value">${values[i]}</span><span class="bit-lamp"></span><span class="bit-digit">${b}</span></span>`).join('')}</div>
-        <p class="bin-string">1010 0100 = 164</p>
+        <p class="bin-string">1010 0100 = 164 = A4</p>
       </div>`;
   }
 
-  // ---------- Logic Gate Lights ----------
+  // ---------- Logic Gate Lights (AQA GCSE 8525, 3.4.2) ----------
+  // AQA: NOT, AND, OR and XOR gates, up to three inputs, and Boolean expressions written
+  // with . for AND, + for OR, ⊕ for XOR and a bar over NOT (so (A AND B) OR (NOT C) is A.B + C̅).
   // Circuits are small trees of gates; each input (A, B, C) is used once, so they draw without crossing wires.
   const LG_A = { op: 'IN', n: 'A' };
   const LG_B = { op: 'IN', n: 'B' };
@@ -4711,13 +4850,16 @@ THIS SOFTWARE.</pre>
   const lAND = (a, b) => ({ op: 'AND', a, b });
   const lOR = (a, b) => ({ op: 'OR', a, b });
   const lNOT = (a) => ({ op: 'NOT', a });
+  const lXOR = (a, b) => ({ op: 'XOR', a, b });
   const LG_CIRCUITS = {
-    1: [lAND(LG_A, LG_B), lOR(LG_A, LG_B), lNOT(LG_A)],
+    1: [lAND(LG_A, LG_B), lOR(LG_A, LG_B), lNOT(LG_A), lXOR(LG_A, LG_B)],
     2: [lNOT(lAND(LG_A, LG_B)), lNOT(lOR(LG_A, LG_B)), lAND(lNOT(LG_A), LG_B), lOR(LG_A, lNOT(LG_B)),
-      lAND(lOR(LG_A, LG_B), LG_C), lOR(lAND(LG_A, LG_B), LG_C)],
+      lAND(lOR(LG_A, LG_B), LG_C), lOR(lAND(LG_A, LG_B), LG_C), lNOT(lXOR(LG_A, LG_B)), lXOR(lAND(LG_A, LG_B), LG_C),
+      lAND(lXOR(LG_A, LG_B), LG_C), lXOR(LG_A, lNOT(LG_B))],
     3: [lOR(lAND(LG_A, LG_B), lNOT(LG_C)), lAND(lNOT(lOR(LG_A, LG_B)), LG_C), lAND(lOR(LG_A, LG_B), lNOT(LG_C)),
       lNOT(lAND(lOR(LG_A, LG_B), LG_C)), lOR(lAND(LG_A, lNOT(LG_B)), LG_C), lAND(lNOT(LG_A), lOR(LG_B, LG_C)),
-      lNOT(lOR(lAND(LG_A, LG_B), LG_C)), lOR(lNOT(LG_A), lAND(LG_B, LG_C))],
+      lNOT(lOR(lAND(LG_A, LG_B), LG_C)), lOR(lNOT(LG_A), lAND(LG_B, LG_C)), lOR(lXOR(LG_A, LG_B), lNOT(LG_C)),
+      lAND(lXOR(LG_A, LG_B), lNOT(LG_C)), lXOR(lNOT(lAND(LG_A, LG_B)), LG_C), lNOT(lXOR(lOR(LG_A, LG_B), LG_C))],
   };
   function lgInputs(node, out = []) {
     if (node.op === 'IN') { if (!out.includes(node.n)) out.push(node.n); return out; }
@@ -4729,7 +4871,46 @@ THIS SOFTWARE.</pre>
     if (node.op === 'IN') return vals[node.n] ? 1 : 0;
     if (node.op === 'NOT') return lgEval(node.a, vals) ? 0 : 1;
     if (node.op === 'AND') return lgEval(node.a, vals) & lgEval(node.b, vals);
+    if (node.op === 'XOR') return lgEval(node.a, vals) ^ lgEval(node.b, vals);
     return lgEval(node.a, vals) | lgEval(node.b, vals);
+  }
+  // A Boolean expression in AQA notation, as HTML (the bar over NOT is drawn with an overline).
+  // AND binds tighter than OR, so A.B + C needs no brackets; anything else mixed gets brackets.
+  // A bar with another bar under it is drawn higher, as on paper.
+  const lgNots = (n) => (n.op === 'IN' ? 0 : (n.op === 'NOT' ? 1 : 0) + Math.max(lgNots(n.a), n.b ? lgNots(n.b) : 0));
+  function lgAQA(node) {
+    if (node.op === 'IN') return node.n;
+    if (node.op === 'NOT') {
+      const under = lgNots(node.a);
+      return `<span class="ovl"${under ? ` style="--ovl:${under}"` : ''}>${lgAQA(node.a)}</span>`;
+    }
+    const sym = { AND: '.', OR: ' + ', XOR: ' ⊕ ' }[node.op];
+    const side = (c) => (c.op === 'IN' || c.op === 'NOT' || (node.op === 'OR' && c.op === 'AND') ? lgAQA(c) : `(${lgAQA(c)})`);
+    return `${side(node.a)}${sym}${side(node.b)}`;
+  }
+  // The truth table as a string of 0s and 1s, for telling expressions apart.
+  const lgSig = (tree, names) => Array.from({ length: 2 ** names.length }, (_, r) => lgEval(tree, rowVals(names, r))).join('');
+  // Wrong expressions for "pick the expression": change one gate, or add or remove one NOT.
+  function lgVariants(node) {
+    if (node.op === 'IN') return [lNOT(node)];
+    if (node.op === 'NOT') return [node.a, ...lgVariants(node.a).filter((v) => v.op !== 'NOT').map((v) => lNOT(v))];
+    return [
+      ...['AND', 'OR', 'XOR'].filter((op) => op !== node.op).map((op) => ({ op, a: node.a, b: node.b })),
+      ...lgVariants(node.a).map((v) => ({ op: node.op, a: v, b: node.b })),
+      ...lgVariants(node.b).map((v) => ({ op: node.op, a: node.a, b: v })),
+    ];
+  }
+  const lgDoubleNot = (n) => n.op !== 'IN' && ((n.op === 'NOT' && n.a.op === 'NOT') || lgDoubleNot(n.a) || (n.b ? lgDoubleNot(n.b) : false));
+  // Four expressions to choose from: the right one and three wrong ones, each with a different truth table.
+  function lgExprOptions(tree) {
+    const names = lgInputs(tree).sort();
+    const seen = new Set([lgSig(tree, names)]);
+    const wrong = [];
+    shuffle(lgVariants(tree)).forEach((v) => {
+      const sig = lgSig(v, names);
+      if (wrong.length < 3 && !seen.has(sig) && !lgDoubleNot(v)) { seen.add(sig); wrong.push(v); }
+    });
+    return shuffle([tree, ...wrong]);
   }
   function lgExpr(node) {
     const wrap = (c) => (c.op === 'IN' ? lgExpr(c) : `(${lgExpr(c)})`);
@@ -4754,7 +4935,7 @@ THIS SOFTWARE.</pre>
       if (node.op === 'IN') return;
       walk(node.a);
       if (node.b) walk(node.b);
-      steps.push(`<li><span class="eq">${esc(lgExpr(node))}</span><span class="verdict">= ${lgEval(node, vals)}</span></li>`);
+      steps.push(`<li><span class="eq">${lgAQA(node)}</span><span class="verdict">= ${lgEval(node, vals)}</span></li>`);
     };
     walk(tree);
     return `<p>With ${valsText(lgInputs(tree).sort(), vals)}:</p><ul class="working">${steps.join('')}</ul>`;
@@ -4762,6 +4943,7 @@ THIS SOFTWARE.</pre>
   function lgReset(q) {
     if (q.type === 'light') q.work = { vals: Object.fromEntries(q.inputs.map((k) => [k, 0])) };
     else if (q.type === 'predict') q.work = { guess: null };
+    else if (q.type === 'expr') q.work = { pick: null };
     else q.work = { cells: new Array(2 ** q.inputs.length).fill(null) };
   }
 
@@ -4790,8 +4972,8 @@ THIS SOFTWARE.</pre>
     };
     const root = walk(tree);
     const gx = (d) => inX + d * colW - 34;
-    const pinIn = { AND: -32, OR: -27, NOT: -24 };
-    const pinOut = { AND: 24, OR: 28, NOT: 26 };
+    const pinIn = { AND: -32, OR: -27, NOT: -24, XOR: -35 };
+    const pinOut = { AND: 24, OR: 28, NOT: 26, XOR: 28 };
     const outX = (it) => (it.depth === 0 ? inX : gx(it.depth) + pinOut[it.node.op]);
     const vcls = (v) => (o.live ? (v ? ' v1' : ' v0') : '');
     const wires = [];
@@ -4809,8 +4991,9 @@ THIS SOFTWARE.</pre>
       const op = it.node.op;
       const shape = op === 'AND' ? '<path d="M-32 -24 H0 A24 24 0 0 1 0 24 H-32 Z"/>'
         : op === 'OR' ? '<path d="M-32 -24 Q-18 0 -32 24 Q8 24 28 0 Q8 -24 -32 -24 Z"/>'
-          : '<path d="M-24 -20 L16 0 L-24 20 Z"/><circle cx="21" cy="0" r="5"/>';
-      return `<g class="gate" transform="translate(${gx(it.depth)} ${it.y})">${shape}<text x="-5" y="4"${op === 'NOT' ? ' style="font-size:9px"' : ''}>${op}</text></g>`;
+          : op === 'XOR' ? '<path d="M-32 -24 Q-18 0 -32 24 Q8 24 28 0 Q8 -24 -32 -24 Z"/><path class="xor-back" d="M-40 -24 Q-26 0 -40 24"/>'
+            : '<path d="M-24 -20 L16 0 L-24 20 Z"/><circle cx="21" cy="0" r="5"/>';
+      return `<g class="gate" transform="translate(${gx(it.depth)} ${it.y})">${shape}<text x="-5" y="4"${op === 'NOT' || op === 'XOR' ? ' style="font-size:9px"' : ''}>${op}</text></g>`;
     }).join('');
     const switches = items.filter((it) => it.depth === 0).map((it) => {
       const n = it.node.n;
@@ -4852,40 +5035,103 @@ THIS SOFTWARE.</pre>
     return `<table class="tt"><thead><tr>${q.inputs.map((k) => `<th scope="col">${k}</th>`).join('')}<th scope="col">Q</th></tr></thead><tbody>${body}</tbody></table>`;
   }
 
-  // ---------- Code Shuffle ----------
-  // `alts` lists other line orders that also work (for example two set-up lines that can swap).
+  // ---------- Code Shuffle (AQA GCSE 8525, 3.1 and 3.2) ----------
+  // Every program comes in AQA pseudo-code (the style AQA uses in exams) and in Python.
+  // Lines are indented with 4 spaces per level. `alts` lists other line orders that also work.
+  // `spec` is the part of the AQA specification the program practises.
   const CODE_PROGRAMS = [
-    { id: 'hello', level: 1, title: 'Say hello', goal: 'Ask for a name, greet the person by name, then welcome them to Computing.',
-      src: ['name = input("What is your name? ")', 'print("Hello " + name)', 'print("Welcome to Computing!")'] },
-    { id: 'area', level: 1, title: 'Area of a rectangle', goal: 'Ask for the width and height, work out the area, then print it.',
-      src: ['width = int(input("Width: "))', 'height = int(input("Height: "))', 'area = width * height', 'print("The area is", area)'], alts: [[1, 0, 2, 3]] },
-    { id: 'pass', level: 1, title: 'Pass or fail', goal: 'Ask for a score. Print Pass if it is 50 or more, otherwise print Fail.',
-      src: ['score = int(input("Enter your score: "))', 'if score >= 50:', '    print("Pass")', 'else:', '    print("Fail")'] },
-    { id: 'countdown', level: 1, title: 'Countdown', goal: 'Count down from 10 to 1, then print Lift off!',
-      src: ['for i in range(10, 0, -1):', '    print(i)', 'print("Lift off!")'] },
-    { id: 'times', level: 2, title: 'Times table', goal: 'Ask which times table to show, then print it from 1 to 12.',
-      src: ['number = int(input("Which times table? "))', 'for i in range(1, 13):', '    answer = number * i', '    print(i, "x", number, "=", answer)'] },
-    { id: 'guess', level: 2, title: 'Guess the number', goal: 'Keep asking for guesses until the player guesses 7.',
-      src: ['secret = 7', 'guess = 0', 'while guess != secret:', '    guess = int(input("Guess: "))', 'print("You got it!")'], alts: [[1, 0, 2, 3, 4]] },
-    { id: 'total', level: 2, title: 'Add up a list', goal: 'Add up every number in the list and print the total.',
-      src: ['numbers = [4, 8, 15, 16, 23, 42]', 'total = 0', 'for n in numbers:', '    total = total + n', 'print("Total:", total)'], alts: [[1, 0, 2, 3, 4]] },
-    { id: 'password', level: 2, title: 'Password check', goal: 'Too short if under 8 characters; otherwise ask for numbers if it is all letters; otherwise call it strong.',
-      src: ['password = input("Password: ")', 'if len(password) < 8:', '    print("Too short")', 'elif password.isalpha():', '    print("Add some numbers")', 'else:', '    print("Strong password")'] },
-    { id: 'fizzbuzz', level: 3, title: 'FizzBuzz', goal: 'Count from 1 to 15, printing Fizz for multiples of 3, Buzz for multiples of 5 and FizzBuzz for both.',
-      src: ['for n in range(1, 16):', '    if n % 15 == 0:', '        print("FizzBuzz")', '    elif n % 3 == 0:', '        print("Fizz")', '    elif n % 5 == 0:', '        print("Buzz")', '    else:', '        print(n)'],
-      alts: [[0, 1, 2, 5, 6, 3, 4, 7, 8]] },
-    { id: 'biggest', level: 3, title: 'Find the biggest', goal: 'Find the biggest number in the list and print it.',
-      src: ['numbers = [12, 45, 7, 23]', 'biggest = numbers[0]', 'for n in numbers:', '    if n > biggest:', '        biggest = n', 'print("Biggest:", biggest)'] },
-    { id: 'vowels', level: 3, title: 'Count the vowels', goal: 'Ask for a word and count how many vowels it has.',
-      src: ['word = input("Type a word: ")', 'vowels = 0', 'for letter in word:', '    if letter.lower() in "aeiou":', '        vowels = vowels + 1', 'print(vowels, "vowels")'], alts: [[1, 0, 2, 3, 4, 5]] },
-    { id: 'quiz', level: 3, title: 'Times table quiz', goal: 'Ask five questions from the 7 times table and print the score at the end.',
-      src: ['score = 0', 'for i in range(1, 6):', '    answer = int(input("7 x " + str(i) + " = "))', '    if answer == 7 * i:', '        score = score + 1', 'print("You scored", score, "out of 5")'] },
-    { id: 'binary', level: 3, title: 'Binary to denary', goal: 'Turn a binary number typed by the user into denary.',
-      src: ['binary = input("Binary number: ")', 'total = 0', 'for digit in binary:', '    total = total * 2 + int(digit)', 'print("Denary:", total)'], alts: [[1, 0, 2, 3, 4]] },
-  ].map((p) => ({ ...p, text: p.src.map((l) => l.trim()), indents: p.src.map((l) => (l.length - l.trimStart().length) / 4) }));
+    { id: 'hello', level: 1, title: 'Say hello', spec: '3.2.7 Input and output',
+      goal: 'Ask for a name, greet the person by name, then welcome them to Computing.',
+      aqa: ['name ← USERINPUT', "OUTPUT 'Hello ' + name", "OUTPUT 'Welcome to Computing!'"],
+      py: ['name = input("What is your name? ")', 'print("Hello " + name)', 'print("Welcome to Computing!")'] },
+    { id: 'area', level: 1, title: 'Area of a rectangle', spec: '3.2.3 Arithmetic',
+      goal: 'Get the width and height, work out the area, then output it.',
+      aqa: ['width ← USERINPUT', 'height ← USERINPUT', 'area ← width * height', "OUTPUT 'The area is ', area"], aqaAlts: [[1, 0, 2, 3]],
+      py: ['width = int(input("Width: "))', 'height = int(input("Height: "))', 'area = width * height', 'print("The area is", area)'], pyAlts: [[1, 0, 2, 3]] },
+    { id: 'pass', level: 1, title: 'Pass or fail', spec: '3.2.2 Selection',
+      goal: 'Get a score. Output Pass if it is 50 or more, otherwise output Fail.',
+      aqa: ['score ← USERINPUT', 'IF score ≥ 50 THEN', "    OUTPUT 'Pass'", 'ELSE', "    OUTPUT 'Fail'", 'ENDIF'],
+      py: ['score = int(input("Enter your score: "))', 'if score >= 50:', '    print("Pass")', 'else:', '    print("Fail")'] },
+    { id: 'countdown', level: 1, title: 'Countdown', spec: '3.2.2 Definite iteration',
+      goal: 'Count down from 10 to 1, then output Lift off!',
+      aqa: ['FOR i ← 10 TO 1 STEP -1', '    OUTPUT i', 'ENDFOR', "OUTPUT 'Lift off!'"],
+      py: ['for i in range(10, 0, -1):', '    print(i)', 'print("Lift off!")'] },
+    { id: 'dice', level: 1, title: 'Roll a dice', spec: '3.2.9 Random numbers',
+      goal: 'Roll a dice (a random whole number from 1 to 6), output it, and say if it is a six.',
+      aqa: ['roll ← RANDOM_INT(1, 6)', "OUTPUT 'You rolled ', roll", 'IF roll = 6 THEN', "    OUTPUT 'A six!'", 'ENDIF'],
+      py: ['import random', 'roll = random.randint(1, 6)', 'print("You rolled", roll)', 'if roll == 6:', '    print("A six!")'] },
+    { id: 'times', level: 2, title: 'Times table', spec: '3.2.2 Definite iteration',
+      goal: 'Get a number, then output its times table from 1 to 12.',
+      aqa: ['number ← USERINPUT', 'FOR i ← 1 TO 12', '    answer ← number * i', "    OUTPUT i, ' x ', number, ' = ', answer", 'ENDFOR'],
+      py: ['number = int(input("Which times table? "))', 'for i in range(1, 13):', '    answer = number * i', '    print(i, "x", number, "=", answer)'] },
+    { id: 'guess', level: 2, title: 'Guess the number', spec: '3.2.2 Constants and indefinite iteration',
+      goal: 'Keep asking for guesses until the player guesses the secret number, a constant.',
+      aqa: ['CONSTANT SECRET ← 7', 'guess ← 0', 'WHILE guess ≠ SECRET', '    guess ← USERINPUT', 'ENDWHILE', "OUTPUT 'You got it!'"], aqaAlts: [[1, 0, 2, 3, 4, 5]],
+      py: ['SECRET = 7', 'guess = 0', 'while guess != SECRET:', '    guess = int(input("Guess: "))', 'print("You got it!")'], pyAlts: [[1, 0, 2, 3, 4]] },
+    { id: 'total', level: 2, title: 'Add up an array', spec: '3.2.6 Arrays',
+      goal: 'Add up every number in the array and output the total.',
+      aqa: ['numbers ← [4, 8, 15, 16, 23, 42]', 'total ← 0', 'FOR n IN numbers', '    total ← total + n', 'ENDFOR', "OUTPUT 'Total: ', total"], aqaAlts: [[1, 0, 2, 3, 4, 5]],
+      py: ['numbers = [4, 8, 15, 16, 23, 42]', 'total = 0', 'for n in numbers:', '    total = total + n', 'print("Total:", total)'], pyAlts: [[1, 0, 2, 3, 4]] },
+    { id: 'minutes', level: 2, title: 'Hours and minutes', spec: '3.2.3 DIV and MOD',
+      goal: 'Turn a number of minutes into hours and minutes, using DIV and MOD.',
+      aqa: ['total ← USERINPUT', 'hours ← total DIV 60', 'mins ← total MOD 60', "OUTPUT hours, ' hours and ', mins, ' minutes'"], aqaAlts: [[0, 2, 1, 3]],
+      py: ['total = int(input("Minutes: "))', 'hours = total // 60', 'mins = total % 60', 'print(hours, "hours and", mins, "minutes")'], pyAlts: [[0, 2, 1, 3]] },
+    { id: 'age', level: 2, title: 'Validate an age', spec: '3.2.11 Validation (range check)',
+      goal: 'Keep asking for an age until it is between 11 and 18, then say thank you.',
+      aqa: ['age ← USERINPUT', 'WHILE (age < 11) OR (age > 18)', "    OUTPUT 'Age must be from 11 to 18'", '    age ← USERINPUT', 'ENDWHILE', "OUTPUT 'Thank you'"],
+      py: ['age = int(input("Age: "))', 'while age < 11 or age > 18:', '    print("Age must be from 11 to 18")', '    age = int(input("Age: "))', 'print("Thank you")'] },
+    { id: 'password', level: 2, title: 'Check a new password', spec: '3.2.11 Validation (empty string and length)',
+      goal: 'Reject an empty password or one under 8 characters; otherwise accept it.',
+      aqa: ['password ← USERINPUT', 'IF LEN(password) = 0 THEN', "    OUTPUT 'Password cannot be empty'", 'ELSE IF LEN(password) < 8 THEN', "    OUTPUT 'Too short'", 'ELSE', "    OUTPUT 'Accepted'", 'ENDIF'],
+      py: ['password = input("Password: ")', 'if len(password) == 0:', '    print("Password cannot be empty")', 'elif len(password) < 8:', '    print("Too short")', 'else:', '    print("Accepted")'] },
+    { id: 'login', level: 2, title: 'Log in', spec: '3.2.11 Authentication',
+      goal: 'Let the user in only if both the username and the password are right.',
+      aqa: ['username ← USERINPUT', 'password ← USERINPUT', "IF (username = 'ada') AND (password = 'B1nary!') THEN", "    OUTPUT 'Welcome'", 'ELSE', "    OUTPUT 'Access denied'", 'ENDIF'], aqaAlts: [[1, 0, 2, 3, 4, 5, 6]],
+      py: ['username = input("Username: ")', 'password = input("Password: ")', 'if username == "ada" and password == "B1nary!":', '    print("Welcome")', 'else:', '    print("Access denied")'], pyAlts: [[1, 0, 2, 3, 4, 5]] },
+    { id: 'fizzbuzz', level: 3, title: 'FizzBuzz', spec: '3.2.2 Nested selection and iteration',
+      goal: 'Count from 1 to 15, outputting Fizz for multiples of 3, Buzz for multiples of 5 and FizzBuzz for both.',
+      aqa: ['FOR n ← 1 TO 15', '    IF (n MOD 15) = 0 THEN', "        OUTPUT 'FizzBuzz'", '    ELSE IF (n MOD 3) = 0 THEN', "        OUTPUT 'Fizz'", '    ELSE IF (n MOD 5) = 0 THEN', "        OUTPUT 'Buzz'", '    ELSE', '        OUTPUT n', '    ENDIF', 'ENDFOR'],
+      aqaAlts: [[0, 1, 2, 5, 6, 3, 4, 7, 8, 9, 10]],
+      py: ['for n in range(1, 16):', '    if n % 15 == 0:', '        print("FizzBuzz")', '    elif n % 3 == 0:', '        print("Fizz")', '    elif n % 5 == 0:', '        print("Buzz")', '    else:', '        print(n)'],
+      pyAlts: [[0, 1, 2, 5, 6, 3, 4, 7, 8]] },
+    { id: 'biggest', level: 3, title: 'Find the biggest', spec: '3.2.6 Arrays',
+      goal: 'Find the biggest number in the array and output it.',
+      aqa: ['numbers ← [12, 45, 7, 23]', 'biggest ← numbers[0]', 'FOR n IN numbers', '    IF n > biggest THEN', '        biggest ← n', '    ENDIF', 'ENDFOR', "OUTPUT 'Biggest: ', biggest"],
+      py: ['numbers = [12, 45, 7, 23]', 'biggest = numbers[0]', 'for n in numbers:', '    if n > biggest:', '        biggest = n', 'print("Biggest:", biggest)'] },
+    { id: 'reverse', level: 3, title: 'Reverse a word', spec: '3.2.8 String handling',
+      goal: 'Get a word and output it backwards.',
+      aqa: ['word ← USERINPUT', "reversed ← ''", 'FOR char IN word', '    reversed ← char + reversed', 'ENDFOR', 'OUTPUT reversed'], aqaAlts: [[1, 0, 2, 3, 4, 5]],
+      py: ['word = input("Type a word: ")', 'backwards = ""', 'for char in word:', '    backwards = char + backwards', 'print(backwards)'], pyAlts: [[1, 0, 2, 3, 4]] },
+    { id: 'quiz', level: 3, title: 'Times table quiz', spec: '3.2.2 Nested selection and iteration',
+      goal: 'Ask five questions from the 7 times table and output the score at the end.',
+      aqa: ['score ← 0', 'FOR i ← 1 TO 5', "    OUTPUT '7 x ', i", '    answer ← USERINPUT', '    IF answer = 7 * i THEN', '        score ← score + 1', '    ENDIF', 'ENDFOR', "OUTPUT 'You scored ', score, ' out of 5'"],
+      py: ['score = 0', 'for i in range(1, 6):', '    answer = int(input("7 x " + str(i) + " = "))', '    if answer == 7 * i:', '        score = score + 1', 'print("You scored", score, "out of 5")'] },
+    { id: 'binary', level: 3, title: 'Binary to decimal', spec: '3.3.2 Converting between number bases',
+      goal: 'Turn a binary number typed by the user into decimal.',
+      aqa: ['binary ← USERINPUT', 'total ← 0', 'FOR digit IN binary', '    total ← total * 2 + STRING_TO_INT(digit)', 'ENDFOR', "OUTPUT 'Decimal: ', total"], aqaAlts: [[1, 0, 2, 3, 4, 5]],
+      py: ['binary = input("Binary number: ")', 'total = 0', 'for digit in binary:', '    total = total * 2 + int(digit)', 'print("Decimal:", total)'], pyAlts: [[1, 0, 2, 3, 4]] },
+    { id: 'search', level: 3, title: 'Linear search', spec: '3.1.3 Searching algorithms',
+      goal: 'Check each name in the array, one by one, to see if the name typed is there.',
+      aqa: ["names ← ['Ali', 'Beth', 'Cai', 'Dev']", 'target ← USERINPUT', 'found ← False', 'FOR name IN names', '    IF name = target THEN', '        found ← True', '    ENDIF', 'ENDFOR', 'OUTPUT found'],
+      aqaAlts: [[0, 2, 1, 3, 4, 5, 6, 7, 8], [1, 0, 2, 3, 4, 5, 6, 7, 8], [1, 2, 0, 3, 4, 5, 6, 7, 8], [2, 0, 1, 3, 4, 5, 6, 7, 8], [2, 1, 0, 3, 4, 5, 6, 7, 8]],
+      py: ['names = ["Ali", "Beth", "Cai", "Dev"]', 'target = input("Name to find: ")', 'found = False', 'for name in names:', '    if name == target:', '        found = True', 'print(found)'],
+      pyAlts: [[0, 2, 1, 3, 4, 5, 6], [1, 0, 2, 3, 4, 5, 6], [1, 2, 0, 3, 4, 5, 6], [2, 0, 1, 3, 4, 5, 6], [2, 1, 0, 3, 4, 5, 6]] },
+    { id: 'bubble', level: 3, title: 'Bubble sort', spec: '3.1.4 Sorting algorithms',
+      goal: 'Sort the array into order by comparing neighbours and swapping them when they are the wrong way round.',
+      aqa: ['nums ← [5, 2, 8, 1]', 'FOR p ← 1 TO LEN(nums) - 1', '    FOR i ← 0 TO LEN(nums) - 2', '        IF nums[i] > nums[i + 1] THEN', '            temp ← nums[i]', '            nums[i] ← nums[i + 1]', '            nums[i + 1] ← temp', '        ENDIF', '    ENDFOR', 'ENDFOR', 'OUTPUT nums'],
+      py: ['nums = [5, 2, 8, 1]', 'for p in range(len(nums) - 1):', '    for i in range(len(nums) - 1):', '        if nums[i] > nums[i + 1]:', '            temp = nums[i]', '            nums[i] = nums[i + 1]', '            nums[i + 1] = temp', 'print(nums)'] },
+    { id: 'subroutine', level: 3, title: 'A subroutine that returns a value', spec: '3.2.10 Subroutines',
+      goal: 'Define a subroutine that works out an area and returns it, then call it and output the result.',
+      aqa: ['SUBROUTINE area(width, height)', '    result ← width * height', '    RETURN result', 'ENDSUBROUTINE', 'answer ← area(4, 5)', 'OUTPUT answer'],
+      py: ['def area(width, height):', '    result = width * height', '    return result', 'answer = area(4, 5)', 'print(answer)'] },
+  ];
+  // The lines, indents and other working orders for one language.
+  const codeVariant = (src, alts) => ({ text: src.map((l) => l.trim()), indents: src.map((l) => (l.length - l.trimStart().length) / 4), alts: alts || [] });
+  CODE_PROGRAMS.forEach((p) => { p.langs = { aqa: codeVariant(p.aqa, p.aqaAlts), python: codeVariant(p.py, p.pyAlts) }; });
   const CODE_BY_ID = Object.fromEntries(CODE_PROGRAMS.map((p) => [p.id, p]));
-  const codeProg = (q) => CODE_BY_ID[q.pid];
-  const codeTargets = (p) => [p.text.map((_, i) => i), ...(p.alts || [])];
+  const CODE_LANGS = { aqa: 'AQA pseudo-code', python: 'Python' };
+  const codeProg = (q) => { const p = CODE_BY_ID[q.pid]; return { ...p, ...p.langs[q.lang === 'python' ? 'python' : 'aqa'] }; };
+  const codeTargets = (p) => [p.text.map((_, i) => i), ...p.alts];
 
   function codeReset(q) {
     const p = codeProg(q);
@@ -4909,11 +5155,13 @@ THIS SOFTWARE.</pre>
     q.work.marks = null;
   }
   // A light touch of Python colouring: strings, numbers, keywords and built-in functions.
-  const PY_TOKENS = /("[^"]*"|'[^']*')|(\b\d+\b)|\b(for|in|if|elif|else|while|and|or|not|True|False|def|return)\b|\b(print|input|int|str|len|range|round)\b/g;
-  function pyHTML(text) {
+  const PY_TOKENS = /("[^"]*"|'[^']*')|(\b\d+\b)|\b(for|in|if|elif|else|while|and|or|not|True|False|def|return|import)\b|\b(print|input|int|str|len|range|round|random\.randint)\b/g;
+  // The same for AQA pseudo-code, whose keywords are written in capitals.
+  const AQA_TOKENS = /('[^']*')|(\b\d+\b)|\b(IF|THEN|ELSE|ENDIF|FOR|TO|STEP|IN|ENDFOR|WHILE|ENDWHILE|REPEAT|UNTIL|OUTPUT|USERINPUT|AND|OR|NOT|DIV|MOD|SUBROUTINE|ENDSUBROUTINE|RETURN|CONSTANT|True|False)\b|\b(LEN|POSITION|SUBSTRING|STRING_TO_INT|INT_TO_STRING|STRING_TO_REAL|REAL_TO_STRING|CHAR_TO_CODE|CODE_TO_CHAR|RANDOM_INT)\b/g;
+  function tokenHTML(text, re) {
     let out = '';
     let last = 0;
-    text.replace(PY_TOKENS, (m, str, num, kw, fn, idx) => {
+    text.replace(re, (m, str, num, kw, fn, idx) => {
       out += esc(text.slice(last, idx));
       out += `<span class="tok-${str ? 'str' : num ? 'num' : kw ? 'kw' : 'fn'}">${esc(m)}</span>`;
       last = idx + m.length;
@@ -4921,9 +5169,12 @@ THIS SOFTWARE.</pre>
     });
     return out + esc(text.slice(last));
   }
+  const pyHTML = (text) => tokenHTML(text, PY_TOKENS);
+  const aqaHTML = (text) => tokenHTML(text, AQA_TOKENS);
+  const codeHTML = (q, text) => (q.lang === 'python' ? pyHTML(text) : aqaHTML(text));
   function codePreview() {
-    const lines = [['for i in range(10, 0, -1):', 0, ''], ['print("Lift off!")', 0, ' dragging'], ['print(i)', 1, '']];
-    return `<ol class="code-list mini">${lines.map(([t, ind, cls], i) => `<li class="code-line${cls}"><span class="code-num">${i + 1}</span><code class="code-text" style="--indent:${ind}">${pyHTML(t)}</code></li>`).join('')}</ol>`;
+    const lines = [['FOR i ← 10 TO 1 STEP -1', 0, ''], ["OUTPUT 'Lift off!'", 0, ' dragging'], ['OUTPUT i', 1, ''], ['ENDFOR', 0, '']];
+    return `<ol class="code-list mini">${lines.map(([t, ind, cls], i) => `<li class="code-line${cls}"><span class="code-num">${i + 1}</span><code class="code-text" style="--indent:${ind}">${aqaHTML(t)}</code></li>`).join('')}</ol>`;
   }
 
   // ---------- Periodic Pairs ----------
@@ -8272,7 +8523,7 @@ THIS SOFTWARE.</pre>
 
     binary: {
       titleHTML: 'Binary <span class="hl c4">Switches</span>',
-      lede: 'Each switch is worth double the one to its right. Flip them to make a number, or read the number they show.',
+      lede: 'Each switch is worth double the one to its right. Convert between binary, decimal and hexadecimal, then add and shift binary numbers.',
       noun: 'Question',
       plural: 'questions',
       maxPlayers: 4,
@@ -8281,117 +8532,191 @@ THIS SOFTWARE.</pre>
       autoNext: true,
       groupStyle: 'buzz',
       classStyle: 'turns',
-      tip: 'Add up the place values.',
+      tip: 'Add up the place values, and split binary into groups of 4 for hexadecimal.',
       options: [
-        { key: 'kind', label: 'Questions', choices: [['make', 'Make the number'], ['read', 'Read the switches'], ['mix', 'A mix']] },
-        { key: 'bits', label: 'Switches', choices: [['4', '4 (up to 15)'], ['8', '8 (up to 255)']] },
+        { key: 'kind', label: 'Questions', choices: [['basics', 'Binary and decimal'], ['hex', 'Hexadecimal'], ['arith', 'Adding and shifting'], ['all', 'All of these']] },
+        { key: 'bits', label: 'Switches', choices: [['4', '4 bits (up to 15)'], ['8', '8 bits (up to 255)']] },
         { key: 'rounds', label: 'How many', choices: [['10', '10'], ['20', '20']] },
       ],
-      defaults: { kind: 'mix', bits: '8', rounds: '10' },
+      defaults: { kind: 'basics', bits: '8', rounds: '10' },
       peopleHelp: 'Up to 4 players or teams share this computer. Each gets a buzzer key.',
       personNote: (i) => `Buzzer key <kbd class="key">${BUZZ_KEYS[i]}</kbd>`,
       how(mode, s) {
         const values = binValues(Number(s.bits));
+        const what = {
+          basics: 'Turn decimal numbers into binary with the switches, and read binary as decimal.',
+          hex: 'Convert between hexadecimal and decimal, and between hexadecimal and binary (4 bits make one hex digit).',
+          arith: 'Add two or three binary numbers, and apply logical shifts left and right.',
+          all: 'A mix of binary, decimal and hexadecimal conversions, binary addition and logical shifts.',
+        }[s.kind];
         if (mode === 'groups') {
-          return ['Each question shows a number to make or switches to read.',
+          return [what,
             'Work it out, then press your buzzer key (or tap your buzzer) to buzz in.',
             `The first to buzz has ${ANSWER_SECONDS} seconds to answer on screen. A wrong answer lets the others buzz.`,
             'Most points at the end wins.'];
         }
         if (mode === 'class') {
-          return [`Put this on the board. Choose ${values.length} pupils to stand at the front holding cards ${values.join(', ')}.`,
+          return [`Put this on the board. For a human binary number, choose ${values.length} pupils to stand at the front holding cards ${values.join(', ')}.`,
             'Standing up means on (1). Sitting down means off (0).',
-            'The team whose turn it is tells the switches what to do. Click the switches on the board to match, then press Check.',
+            'The team whose turn it is gives the answer. Set the switches or type it on the board, then press Check.',
             'A wrong answer passes the question to the next team.'];
         }
-        return ['Each question shows a number to make or a row of switches to read.',
-          'Click a switch, or press its number key, to turn it on (1) or off (0).',
-          'Press Check to see how the number adds up.',
-          'Stuck? Use a hint.'];
+        return [what,
+          'Click a switch, or press its number key, to turn it on (1) or off (0). Type answers that aren’t switches.',
+          'Press Check to see the working.',
+          'This follows AQA GCSE Computer Science, sections 3.3.1 to 3.3.4.'];
       },
       count: (s) => Number(s.rounds),
       makeQuestions(s) {
         const bits = Number(s.bits);
-        const max = 2 ** bits - 1;
+        const kinds = BIN_KINDS[s.kind] || BIN_KINDS.basics;
         const used = new Set();
-        const qs = [];
-        for (let k = 0; k < Number(s.rounds); k += 1) {
-          let n = 0;
-          let guard = 0;
-          do { n = 1 + Math.floor(Math.random() * max); guard += 1; } while (used.has(n) && guard < 40);
-          used.add(n);
-          const q = { kind: s.kind === 'mix' ? (Math.random() < 0.5 ? 'make' : 'read') : s.kind, bits, target: n };
+        let deck = [];
+        return Array.from({ length: Number(s.rounds) }, () => {
+          if (!deck.length) deck = shuffle(kinds.slice());
+          const q = binQuestion(deck.pop(), bits, used);
           binReset(q);
-          qs.push(q);
-        }
-        return qs;
+          return q;
+        });
       },
       reset: (q) => binReset(q),
-      cardLabel: (q) => (q.kind === 'make' ? 'Make the number' : 'Read the switches'),
-      prompt: (q) => (q.kind === 'make' ? `Turn on the switches that add up to <b>${q.target}</b>.` : 'Add up the switches that are on, then type the number.'),
+      cardLabel: (q) => ({
+        make: 'Decimal to binary', read: 'Binary to decimal', hex2dec: 'Hexadecimal to decimal', dec2hex: 'Decimal to hexadecimal',
+        bin2hex: 'Binary to hexadecimal', hex2bin: 'Hexadecimal to binary', add: 'Binary addition', shift: 'Logical shift',
+      }[q.kind]),
+      prompt(q) {
+        const h = toHex(q.target, q.bits);
+        return {
+          make: () => `Turn on the switches that add up to <b>${q.target}</b>.`,
+          read: () => 'Add up the switches that are on, then type the decimal number.',
+          hex2dec: () => `Type hexadecimal <b>${h}</b> as a decimal number.`,
+          dec2hex: () => `Type <b>${q.target}</b> in hexadecimal.`,
+          bin2hex: () => 'Type the hexadecimal number the switches show.',
+          hex2bin: () => `Set the switches to hexadecimal <b>${h}</b>.`,
+          add: () => 'Set the switches to the answer.',
+          shift: () => `Shift the bits ${q.places} place${q.places === 1 ? '' : 's'} to the <b>${q.dir}</b>, then set the switches to the answer.`,
+        }[q.kind]();
+      },
       board(q, ctx) {
         const values = binValues(q.bits);
-        const shown = q.kind === 'read' || ctx.done ? toBits(q.target, q.bits) : q.work.bits;
-        const live = q.kind === 'make' && ctx.interactive;
-        const switches = values.map((v, i) => `
+        const switchKind = binUsesSwitches(q);
+        const answer = binAnswer(q);
+        let shown = null;
+        if (switchKind) shown = ctx.done ? toBits(answer, q.bits) : q.work.bits;
+        else if (q.kind === 'read' || q.kind === 'bin2hex') shown = toBits(q.target, q.bits);
+        const live = switchKind && ctx.interactive;
+        const switches = shown ? `<div class="bin-row">${values.map((v, i) => `
           <button type="button" class="bit${shown[i] ? ' on' : ''}" data-act="bit" data-i="${i}" id="cg-bit-${i}" aria-pressed="${shown[i] ? 'true' : 'false'}" aria-label="Switch worth ${v}"${live ? '' : ' disabled'}>
             <span class="bit-value">${v}</span><span class="bit-lamp" aria-hidden="true"></span><span class="bit-digit">${shown[i]}</span>${live ? `<kbd class="key">${i + 1}</kbd>` : ''}
-          </button>`).join('');
-        const ask = q.kind === 'make' ? `<p class="bin-ask">Make <b>${q.target}</b></p>` : '<p class="bin-ask">What number do these switches show?</p>';
-        let below;
-        if (q.kind === 'make') below = `<p class="bin-string">${bitString(shown)}${ctx.done ? ` = ${q.target}` : ''}</p>`;
-        else if (ctx.done) below = `<p class="bin-answer">= ${q.target}</p>`;
-        else below = `<label class="bin-read" for="cg-read"><span>Denary number</span><input id="cg-read" class="spell-input bin-input" type="text" inputmode="numeric" autocomplete="off" spellcheck="false" value="${esc(q.work.typed)}"${ctx.interactive ? '' : ' disabled'}></label>`;
-        return `<div class="bin" style="--bits:${q.bits}">${ask}<div class="bin-row">${switches}</div>${below}</div>`;
+          </button>`).join('')}</div>` : '';
+        const h = toHex(q.target, q.bits);
+        const typed = (label) => (ctx.done ? '' : `<label class="bin-read" for="cg-read"><span>${label}</span><input id="cg-read" class="spell-input bin-input" type="text" inputmode="${label === 'Hexadecimal' ? 'text' : 'numeric'}" autocapitalize="characters" autocomplete="off" spellcheck="false" value="${esc(q.work.typed)}"${ctx.interactive ? '' : ' disabled'}></label>`);
+        const result = (html) => (ctx.done ? `<p class="bin-answer">${html}</p>` : '');
+        let ask = '';
+        let above = '';
+        let below = '';
+        if (q.kind === 'make') {
+          ask = `Make <b>${q.target}</b>`;
+          below = `<p class="bin-string">${bitString(shown)}${ctx.done ? ` = ${q.target}` : ''}</p>`;
+        } else if (q.kind === 'read') {
+          ask = 'What decimal number do these switches show?';
+          below = result(`= ${q.target}`) + typed('Decimal number');
+        } else if (q.kind === 'hex2dec') {
+          ask = `Hexadecimal <b class="hexv">${h}</b> in decimal?`;
+          below = result(`= ${q.target}`) + typed('Decimal number');
+        } else if (q.kind === 'dec2hex') {
+          ask = `<b>${q.target}</b> in hexadecimal?`;
+          below = result(`= ${h}`) + typed('Hexadecimal');
+        } else if (q.kind === 'bin2hex') {
+          ask = 'What hexadecimal number do these switches show?';
+          below = result(`= ${h}`) + typed('Hexadecimal');
+        } else if (q.kind === 'hex2bin') {
+          ask = `Make hexadecimal <b class="hexv">${h}</b>`;
+          below = `<p class="bin-string">${bitString(shown)}${ctx.done ? ` = ${h}` : ''}</p>`;
+        } else if (q.kind === 'add') {
+          ask = 'Add these binary numbers';
+          above = binAddHTML(q, ctx.done);
+          below = `<p class="bin-string">${bitString(shown)}${ctx.done ? ` = ${answer}` : ''}</p>`;
+        } else {
+          ask = `Logical shift ${q.places} place${q.places === 1 ? '' : 's'} ${q.dir === 'left' ? 'left ←' : 'right →'}`;
+          above = `<p class="bin-start"><span>Start with</span> <b>${bitString(toBits(q.target, q.bits))}</b></p>`;
+          below = `<p class="bin-string">${bitString(shown)}${ctx.done ? ` = ${answer}` : ''}</p>`;
+        }
+        return `<div class="bin" style="--bits:${q.bits}"><p class="bin-ask">${ask}</p>${above}${switches}${below}</div>`;
       },
       controls: () => '<button type="button" class="btn-primary" data-act="check" id="cg-check">Check</button>',
-      focusId: (q) => (q.kind === 'read' ? 'cg-read' : 'cg-check'),
+      focusId: (q) => (binUsesSwitches(q) ? 'cg-check' : 'cg-read'),
       act(act, el, q) {
-        if (act !== 'bit' || q.kind !== 'make') return false;
+        if (act !== 'bit' || !binUsesSwitches(q)) return false;
         const i = Number(el.dataset.i);
         q.work.bits[i] = q.work.bits[i] ? 0 : 1;
         return true;
       },
       key(e, q) {
-        if (q.kind !== 'make' || e.altKey || !/^[1-8]$/.test(e.key)) return false;
+        if (!binUsesSwitches(q) || e.altKey || !/^[1-8]$/.test(e.key)) return false;
         const i = Number(e.key) - 1;
         if (i >= q.bits) return false;
         q.work.bits[i] = q.work.bits[i] ? 0 : 1;
         return true;
       },
       check(q) {
-        if (q.kind === 'make') {
+        const answer = binAnswer(q);
+        if (binUsesSwitches(q)) {
           const made = fromBits(q.work.bits);
-          if (made === q.target) return { correct: true, html: `<p><b>${q.target}</b> = ${binSum(q.target, q.bits)}</p>` };
-          return {
-            correct: false,
-            html: `<p>Your switches made <b>${made}</b>${made ? ` (${binSum(made, q.bits)})` : ''}.</p><p><b>${q.target}</b> = ${binSum(q.target, q.bits)}, so the switches are ${bitString(toBits(q.target, q.bits))}.</p>`,
-          };
+          if (made === answer) return { correct: true, html: binExplain(q) };
+          return { correct: false, html: `<p>Your switches show ${bitString(q.work.bits)}, which is ${made}.</p>${binExplain(q)}` };
         }
-        const typed = String(q.work.typed).trim();
-        if (!/^\d+$/.test(typed)) return { invalid: 'Type the number first, using digits.' };
-        const correct = Number(typed) === q.target;
-        return { correct, html: `<p>${bitString(toBits(q.target, q.bits))} = ${binSum(q.target, q.bits)} = <b>${q.target}</b>${correct ? '' : `, not ${Number(typed)}`}.</p>` };
+        const typed = String(q.work.typed).trim().replace(/\s+/g, '');
+        const hex = q.kind === 'dec2hex' || q.kind === 'bin2hex';
+        if (hex ? !/^[0-9a-f]{1,2}$/i.test(typed) : !/^\d+$/.test(typed)) {
+          return { invalid: hex ? 'Type the answer in hexadecimal: digits 0 to 9 and letters A to F.' : 'Type the number first, using digits.' };
+        }
+        const value = hex ? parseInt(typed, 16) : Number(typed);
+        const correct = value === answer;
+        const yours = hex ? typed.toUpperCase() : String(value);
+        return { correct, html: `${correct ? '' : `<p>You typed ${esc(yours)}.</p>`}${binExplain(q)}` };
       },
       reveal(q) {
-        if (q.kind === 'make') q.work.bits = toBits(q.target, q.bits);
-        else q.work.typed = String(q.target);
-        return { html: `<p><b>${q.target}</b> = ${binSum(q.target, q.bits)}, so the switches are ${bitString(toBits(q.target, q.bits))}.</p>` };
+        if (binUsesSwitches(q)) q.work.bits = toBits(binAnswer(q), q.bits);
+        else q.work.typed = q.kind === 'dec2hex' || q.kind === 'bin2hex' ? toHex(q.target, q.bits) : String(q.target);
+        return { html: binExplain(q) };
       },
       hint(q) {
-        if (q.kind === 'make') return `Your switches make ${fromBits(q.work.bits)} so far. Start with the biggest switch that fits.`;
-        return `Add these up: ${binValues(q.bits).filter((v) => q.target & v).join(' + ')}.`;
+        const values = binValues(q.bits);
+        return {
+          make: () => `Your switches make ${fromBits(q.work.bits)} so far. Start with the biggest switch that fits.`,
+          read: () => `Add these up: ${values.filter((v) => q.target & v).join(' + ')}.`,
+          hex2dec: () => 'Multiply the left digit by 16, then add the right digit. A = 10, B = 11, C = 12, D = 13, E = 14 and F = 15.',
+          dec2hex: () => 'How many 16s fit into the number? That’s the first digit. What’s left over is the second.',
+          bin2hex: () => 'Split the bits into groups of 4. Each group is one hex digit, from 0 to F.',
+          hex2bin: () => 'Turn each hex digit into 4 bits: 8, 4, 2 and 1.',
+          add: () => 'Work from the right. 1 + 1 = 10 (write 0, carry 1), and 1 + 1 + 1 = 11 (write 1, carry 1).',
+          shift: () => `Move every bit ${q.places} place${q.places === 1 ? '' : 's'} ${q.dir}. Bits that fall off the end are lost, and 0s fill the gaps.`,
+        }[q.kind]();
       },
       points: () => 1,
-      chip: (q) => String(q.target),
-      summary: (q) => (q.kind === 'make' ? `Make ${q.target}: ${bitString(toBits(q.target, q.bits))}` : `Read ${bitString(toBits(q.target, q.bits))}: ${q.target}`),
-      keysHint: (q) => (q.kind === 'make' ? `Keyboard: press 1–${q.bits} to flip the switches, then Enter to check.` : 'Keyboard: type the number, then press Enter.'),
+      chip: (q) => (q.kind === 'add' ? q.nums.join('+') : q.kind === 'shift' ? `${q.dir === 'left' ? '«' : '»'}${q.places}` : q.kind.includes('hex') ? toHex(q.target, q.bits) : String(q.target)),
+      summary(q) {
+        const b = bitString(toBits(q.target, q.bits));
+        const h = toHex(q.target, q.bits);
+        return {
+          make: () => `Make ${q.target}: ${b}`,
+          read: () => `Read ${b}: ${q.target}`,
+          hex2dec: () => `Hexadecimal ${h} = ${q.target}`,
+          dec2hex: () => `${q.target} = hexadecimal ${h}`,
+          bin2hex: () => `${b} = hexadecimal ${h}`,
+          hex2bin: () => `Hexadecimal ${h} = ${b}`,
+          add: () => `${q.nums.map((n) => bitString(toBits(n, q.bits))).join(' + ')} = ${bitString(toBits(binAnswer(q), q.bits))}`,
+          shift: () => `${b} shifted ${q.places} ${q.dir} = ${bitString(toBits(binAnswer(q), q.bits))}`,
+        }[q.kind]();
+      },
+      keysHint: (q) => (binUsesSwitches(q) ? `Keyboard: press 1–${q.bits} to flip the switches, then Enter to check.` : 'Keyboard: type the answer, then press Enter.'),
       preview: () => binPreview(),
     },
 
     logic: {
       titleHTML: 'Logic Gate <span class="hl c1">Lights</span>',
-      lede: 'AND, OR and NOT gates decide whether the bulb lights up. Switch the inputs between 1 and 0 and see what happens.',
+      lede: 'NOT, AND, OR and XOR gates decide whether the bulb lights up. Switch the inputs, fill in truth tables, and write Boolean expressions the AQA way.',
       noun: 'Circuit',
       plural: 'circuits',
       maxPlayers: 3,
@@ -8403,13 +8728,14 @@ THIS SOFTWARE.</pre>
       tip: 'Work through one gate at a time.',
       options: [
         { key: 'level', label: 'Circuits', choices: [['1', 'One gate'], ['2', 'Two gates'], ['3', 'Three gates'], ['mix', 'A mix']] },
-        { key: 'types', label: 'Questions', modes: ['solo'], choices: [['mix', 'A mix'], ['light', 'Light the bulb'], ['predict', 'Predict the bulb'], ['table', 'Truth tables']] },
+        { key: 'types', label: 'Questions', modes: ['solo'], choices: [['mix', 'A mix'], ['light', 'Light the bulb'], ['predict', 'Predict the bulb'], ['table', 'Truth tables'], ['expr', 'Boolean expressions']] },
+        { key: 'classTypes', label: 'Questions', modes: ['class'], choices: [['predict', 'Predict the bulb'], ['expr', 'Boolean expressions'], ['mix', 'A mix']] },
         { key: 'rounds', label: 'How many', choices: [['8', '8'], ['12', '12']] },
       ],
-      defaults: { level: 'mix', types: 'mix', rounds: '8' },
+      defaults: { level: 'mix', types: 'mix', classTypes: 'predict', rounds: '8' },
       peopleHelp: '2 or 3 players share this computer. Each one controls some of the inputs.',
       personNote: (i, n) => `Controls input ${listAnd(['A', 'B', 'C'].filter((_, j) => j % n === i))}`,
-      how(mode) {
+      how(mode, s) {
         if (mode === 'groups') {
           return ['2 or 3 players share this computer. Each player controls their own inputs.',
             'Some circuits need the bulb lit and some need it to stay off.',
@@ -8418,14 +8744,16 @@ THIS SOFTWARE.</pre>
         }
         if (mode === 'class') {
           return ['Put this on the board and split the class into teams.',
-            'Each circuit shows its inputs. Teams decide whether the bulb will light up.',
-            'Record each team’s vote (thumbs up or down), then press Reveal.',
-            'Watch the signal travel through the gates. Every team that was right scores.'];
+            s.classTypes === 'expr' ? 'Each circuit comes with four Boolean expressions. Teams decide which one matches the circuit.'
+              : s.classTypes === 'mix' ? 'Teams either predict whether the bulb lights up, or pick the Boolean expression that matches the circuit.'
+                : 'Each circuit shows its inputs. Teams decide whether the bulb will light up.',
+            'Record each team’s vote, then press Reveal.',
+            'Every team that was right scores. Expressions use AQA notation: A.B for AND, A + B for OR, A ⊕ B for XOR and a bar over NOT.'];
         }
-        return ['Questions mix three kinds: light the bulb, predict the bulb and fill in a truth table.',
+        return ['Questions mix four kinds: light the bulb, predict the bulb, fill in a truth table, and pick the Boolean expression for a circuit.',
           'Click an input, or press its letter, to switch it between 1 and 0.',
-          'When lighting the bulb you get one test, so think it through first.',
-          'After each answer you see every gate worked out.'];
+          'Expressions use AQA notation: A.B for AND, A + B for OR, A ⊕ B for XOR and a bar over NOT.',
+          'This follows AQA GCSE Computer Science, section 3.4.2.'];
       },
       count: (s) => Number(s.rounds),
       makeQuestions(s, mode) {
@@ -8437,10 +8765,18 @@ THIS SOFTWARE.</pre>
           circuits.push(JSON.parse(JSON.stringify(deck.pop())));
         }
         if (s.level === 'mix') circuits.sort((a, b) => lgGates(a) - lgGates(b)); // easier circuits first
-        const kinds = ['light', 'predict', 'table'];
+        const kinds = ['light', 'predict', 'table', 'expr'];
         return circuits.map((c, k) => {
-          const type = mode === 'class' ? 'predict' : mode === 'groups' ? 'light' : s.types === 'mix' ? kinds[k % 3] : s.types;
+          let type = mode === 'groups' ? 'light' : s.types === 'mix' ? kinds[k % 4] : s.types;
+          if (mode === 'class') type = s.classTypes === 'mix' ? (k % 2 ? 'expr' : 'predict') : s.classTypes === 'expr' ? 'expr' : 'predict';
+          // A one-input circuit (NOT A) can't give four different expressions, so swap in one of the same size.
+          if (type === 'expr' && lgInputs(c).length < 2) {
+            const two = pool.filter((p) => lgInputs(p).length > 1);
+            const same = two.filter((p) => lgGates(p) === lgGates(c));
+            c = JSON.parse(JSON.stringify(shuffle(same.length ? same : two)[0]));
+          }
           const q = { type, c, inputs: lgInputs(c).sort() };
+          if (type === 'expr') q.opts = lgExprOptions(c);
           if (type === 'light') q.target = Math.random() < (mode === 'groups' ? 0.65 : 0.8) ? 1 : 0;
           if (type === 'predict') q.vals = Object.fromEntries(q.inputs.map((n) => [n, Math.random() < 0.5 ? 1 : 0]));
           lgReset(q);
@@ -8448,10 +8784,11 @@ THIS SOFTWARE.</pre>
         });
       },
       reset: (q) => lgReset(q),
-      cardLabel: (q) => ({ light: q.target ? 'Light the bulb' : 'Keep the bulb off', predict: 'Predict the bulb', table: 'Truth table' }[q.type]),
+      cardLabel: (q) => ({ light: q.target ? 'Light the bulb' : 'Keep the bulb off', predict: 'Predict the bulb', table: 'Truth table', expr: 'Boolean expression' }[q.type]),
       prompt(q, run) {
         if (q.type === 'light') return `Set the inputs so the bulb <b>${q.target ? 'lights up' : 'stays off'}</b>, then test the circuit. You get one test.`;
         if (q.type === 'predict') return run.mode === 'class' ? 'Will the bulb light up? Each team votes, then reveal.' : 'With these inputs, will the bulb light up?';
+        if (q.type === 'expr') return run.mode === 'class' ? 'Which Boolean expression matches this circuit? Each team votes, then reveal.' : 'Which Boolean expression matches this circuit?';
         return 'Work out Q for every row of the truth table.';
       },
       board(q, ctx) {
@@ -8460,8 +8797,12 @@ THIS SOFTWARE.</pre>
         else if (q.type === 'predict') svg = lgSVG(q.c, { vals: q.vals, showInputs: true, live: ctx.done });
         else svg = lgSVG(q.c, { vals: Object.fromEntries(q.inputs.map((n) => [n, 0])), showInputs: false });
         const table = q.type === 'table' ? lgTable(q, ctx) : '';
-        const expr = ctx.done || q.type === 'table' ? `<p class="lg-expr">Q = ${esc(lgExpr(q.c))}</p>` : '';
-        return `<div class="lg-wrap">${svg}${table}</div>${expr}`;
+        // On the board (whole class), the four expressions are shown numbered so teams can vote.
+        const right = q.type === 'expr' ? q.opts.findIndex((o) => lgAQA(o) === lgAQA(q.c)) : -1;
+        const opts = q.type === 'expr' && ctx.run && ctx.run.mode === 'class'
+          ? `<ol class="lg-opts">${q.opts.map((o, i) => `<li class="${ctx.done ? (i === right ? 'ok' : 'dim') : ''}"><span class="hp-num">${i + 1}</span>Q = ${lgAQA(o)}</li>`).join('')}</ol>` : '';
+        const expr = ctx.done || q.type === 'table' ? `<p class="lg-expr">Q = ${lgAQA(q.c)} <span class="lg-words">In words: ${esc(lgExpr(q.c))}</span></p>` : '';
+        return `<div class="lg-wrap">${svg}${table}</div>${opts}${expr}`;
       },
       controls(q) {
         if (q.type === 'predict') {
@@ -8470,13 +8811,17 @@ THIS SOFTWARE.</pre>
             <button type="button" class="answer-btn" data-act="predict" data-v="0" id="cg-no"><kbd class="key">2</kbd>Stays off</button>
           </div>`;
         }
+        if (q.type === 'expr') {
+          return `<div class="answer-list">${q.opts.map((o, i) => `<button type="button" class="answer-btn lg-opt" data-act="pick" data-i="${i}" id="cg-pick-${i}"><kbd class="key">${i + 1}</kbd><span>Q = ${lgAQA(o)}</span></button>`).join('')}</div>`;
+        }
         return `<button type="button" class="btn-primary" data-act="check" id="cg-check">${q.type === 'light' ? 'Test the circuit' : 'Check the table'}</button>`;
       },
-      focusId: (q) => ({ light: 'cg-check', predict: 'cg-yes', table: 'cg-tt-0' }[q.type]),
+      focusId: (q) => ({ light: 'cg-check', predict: 'cg-yes', table: 'cg-tt-0', expr: 'cg-pick-0' }[q.type]),
       act(act, el, q) {
         if (act === 'input' && q.type === 'light') { const n = el.dataset.in; q.work.vals[n] = q.work.vals[n] ? 0 : 1; return true; }
         if (act === 'cell' && q.type === 'table') { const r = Number(el.dataset.r); q.work.cells[r] = q.work.cells[r] === 1 ? 0 : 1; return true; }
         if (act === 'predict' && q.type === 'predict') { q.work.guess = Number(el.dataset.v); return 'check'; }
+        if (act === 'pick' && q.type === 'expr') { q.work.pick = Number(el.dataset.i); return 'check'; }
         return false;
       },
       key(e, q) {
@@ -8488,6 +8833,7 @@ THIS SOFTWARE.</pre>
           if ((e.key === 'Enter' || e.key === ' ') && t.dataset && t.dataset.in) { q.work.vals[t.dataset.in] = q.work.vals[t.dataset.in] ? 0 : 1; return true; }
         }
         if (q.type === 'predict' && (e.key === '1' || e.key === '2')) { q.work.guess = e.key === '1' ? 1 : 0; return 'check'; }
+        if (q.type === 'expr' && /^[1-4]$/.test(e.key) && Number(e.key) <= q.opts.length) { q.work.pick = Number(e.key) - 1; return 'check'; }
         if (q.type === 'table' && (e.key === '0' || e.key === '1') && t.dataset && t.dataset.r !== undefined) {
           const r = Number(t.dataset.r);
           q.work.cells[r] = Number(e.key);
@@ -8507,6 +8853,11 @@ THIS SOFTWARE.</pre>
           const out = lgEval(q.c, q.vals);
           return { correct: q.work.guess === out, html: `<p>The bulb ${out ? 'lights up' : 'stays off'}.</p>${lgWorking(q.c, q.vals)}` };
         }
+        if (q.type === 'expr') {
+          if (q.work.pick === null) return { invalid: 'Choose an expression first.' };
+          const correct = lgAQA(q.opts[q.work.pick]) === lgAQA(q.c);
+          return { correct, html: `<p>Read the circuit from the inputs to the bulb, writing each gate as you meet it: a dot for AND (A.B), + for OR (A + B), ⊕ for XOR (A ⊕ B) and a bar over anything that goes through a NOT gate.</p>${correct ? '' : `<p>You chose Q = ${lgAQA(q.opts[q.work.pick])}, which gives a different truth table.</p>`}` };
+        }
         if (q.work.cells.some((c) => c === null)) return { invalid: 'Fill in every row of the Q column first.' };
         const wrong = q.work.cells.filter((c, r) => c !== lgEval(q.c, rowVals(q.inputs, r))).length;
         return { correct: !wrong, html: wrong ? `<p>${wrong} row${wrong === 1 ? ' is' : 's are'} not right. The table now shows the correct values.</p>` : '<p>Every row is right.</p>' };
@@ -8521,33 +8872,37 @@ THIS SOFTWARE.</pre>
           if (way) q.work.vals = way;
           return { html: `<p>One way that works: ${valsText(q.inputs, q.work.vals)}.</p>${lgWorking(q.c, q.work.vals)}` };
         }
+        if (q.type === 'expr') return { head: `The answer: number ${q.opts.findIndex((o) => lgAQA(o) === lgAQA(q.c)) + 1}.`, html: '<p>Read the circuit from the inputs to the bulb, writing each gate as you meet it.</p>' };
         q.work.cells = q.work.cells.map((_, r) => lgEval(q.c, rowVals(q.inputs, r)));
         return { html: '<p>The table shows the correct values.</p>' };
       },
-      voteOptions: () => [['1', 'Lights up'], ['0', 'Stays off']],
-      voteAnswer: (q) => String(lgEval(q.c, q.vals)),
+      voteOptions: (q) => (q.type === 'expr' ? q.opts.map((_, i) => [String(i), String(i + 1)]) : [['1', 'Lights up'], ['0', 'Stays off']]),
+      voteAnswer: (q) => (q.type === 'expr' ? String(q.opts.findIndex((o) => lgAQA(o) === lgAQA(q.c))) : String(lgEval(q.c, q.vals))),
       hint(q) {
         const tips = {
           AND: 'An AND gate gives 1 only when both of its inputs are 1.',
           OR: 'An OR gate gives 1 when at least one of its inputs is 1.',
           NOT: 'A NOT gate flips its input: 1 becomes 0 and 0 becomes 1.',
+          XOR: 'An XOR gate gives 1 when exactly one of its inputs is 1.',
         };
+        if (q.type === 'expr') return 'Start at the inputs. Write each gate as you meet it: A.B for AND, A + B for OR, A ⊕ B for XOR, and a bar over anything that goes through a NOT gate.';
         return `${tips[q.c.op]} Work from the inputs towards the bulb.`;
       },
       points: () => 1,
       chip: (q) => lgExpr(q.c),
-      summary: (q) => `${{ light: q.target ? 'Light it' : 'Keep it off', predict: 'Predict', table: 'Truth table' }[q.type]}: Q = ${lgExpr(q.c)}`,
+      summary: (q) => `${{ light: q.target ? 'Light it' : 'Keep it off', predict: 'Predict', table: 'Truth table', expr: 'Expression' }[q.type]}: Q = ${lgExpr(q.c)}`,
       keysHint: (q) => ({
         light: 'Keyboard: press A, B or C to flip an input, then Enter to test.',
         predict: 'Keyboard: press 1 for lights up or 2 for stays off.',
         table: 'Keyboard: in the Q column, press 1 or 0 to fill each row.',
+        expr: 'Keyboard: press 1 to 4 to choose.',
       }[q.type]),
       preview: () => `<div class="lg-mini">${lgSVG(lAND(LG_A, LG_B), { vals: { A: 1, B: 1 }, showInputs: true, live: true, liveNow: true })}</div>`,
     },
 
     code: {
       titleHTML: 'Code <span class="hl c3">Shuffle</span>',
-      lede: 'The lines of a short Python program have been jumbled. Put them back in order so the program works.',
+      lede: 'The lines of a short program have been jumbled. Put them back in order so the program works, in AQA pseudo-code or Python.',
       noun: 'Program',
       plural: 'programs',
       maxPlayers: 4,
@@ -8558,40 +8913,42 @@ THIS SOFTWARE.</pre>
       classStyle: 'turns',
       tip: 'Set up each variable before the line that uses it.',
       options: [
+        { key: 'lang', label: 'Language', choices: [['aqa', 'AQA pseudo-code'], ['python', 'Python']] },
         { key: 'level', label: 'Programs', choices: [['1', 'Starter'], ['2', 'Developing'], ['3', 'Secure'], ['all', `All ${CODE_PROGRAMS.length}`]] },
         { key: 'indent', label: 'Indents', choices: [['given', 'Given'], ['set', 'You set them']] },
       ],
-      defaults: { level: '1', indent: 'given' },
+      defaults: { lang: 'aqa', level: '1', indent: 'given' },
       peopleHelp: 'Pairs work best. With more players, the roles pass along the list.',
       personNote: (i) => (i === 0 ? 'Drives first' : i === 1 ? 'Navigates first' : 'Joins the rotation'),
-      how(mode) {
+      how(mode, s) {
+        const lang = s.lang === 'python' ? 'Python' : 'AQA pseudo-code, the style used in AQA exam papers (for example x ← USERINPUT and FOR i ← 1 TO 5 … ENDFOR)';
         if (mode === 'groups') {
-          return ['Work in pairs on this computer. With more players, the roles pass along the list.',
+          return [`Work in pairs on this computer. The programs are in ${lang}.`,
             'The driver moves the lines. The navigator reads the code and says what to do. Only the driver touches the computer.',
             'Swap roles for every program.',
             'You get 3 checks per program and score points as a team.'];
         }
         if (mode === 'class') {
-          return ['Put this on the board and split the class into teams.',
+          return [`Put this on the board and split the class into teams. The programs are in ${lang}.`,
             'The team whose turn it is calls out the order of the lines while the teacher moves them.',
             'Press Check. A wrong order passes the program to the next team, who carry on from there.',
             'The team that gets it working scores the point.'];
         }
-        return ['Each puzzle is a short Python program with its lines jumbled.',
+        return [`Each puzzle is a short program in ${lang}, with its lines jumbled.`,
           'Drag a line to move it, or use its arrow buttons. If you set the indents yourself, use ⇤ and ⇥ too.',
           'You get 3 checks per program: 3 points for the first, 2 for the second, 1 for the third.',
-          'After a check, lines in the right place turn green.'];
+          'Each program practises a part of AQA GCSE Computer Science (3.1 and 3.2), shown with its goal.'];
       },
       count: (s) => CODE_PROGRAMS.filter((p) => s.level === 'all' || String(p.level) === s.level).length,
       makeQuestions(s) {
         return shuffle(CODE_PROGRAMS.filter((p) => s.level === 'all' || String(p.level) === s.level)).map((p) => {
-          const q = { pid: p.id, hard: s.indent === 'set' };
+          const q = { pid: p.id, hard: s.indent === 'set', lang: s.lang === 'python' ? 'python' : 'aqa' };
           codeReset(q);
           return q;
         });
       },
       reset: (q) => codeReset(q),
-      cardLabel: () => 'Put the lines in order',
+      cardLabel: (q) => `Put the lines in order · ${CODE_LANGS[q.lang === 'python' ? 'python' : 'aqa']}`,
       prompt: (q) => (q.hard ? 'Drag the lines into order and give each one the right indent.' : 'Drag the lines into the right order.'),
       board(q, ctx) {
         const p = codeProg(q);
@@ -8604,9 +8961,9 @@ THIS SOFTWARE.</pre>
           const tools = live
             ? `<span class="code-tools">${q.hard ? tool('indent', -1, 'Indent less', '⇤') + tool('indent', 1, 'Indent more', '⇥') : ''}${tool('move', -1, 'Move line up', '↑')}${tool('move', 1, 'Move line down', '↓')}</span>`
             : '';
-          return `<li class="code-line drag-row${mark}" id="cg-line-${lid}" data-line="${lid}" tabindex="${live ? 0 : -1}" aria-label="Line ${pos + 1}, indent ${ind}: ${esc(p.text[lid])}"><span class="code-num" aria-hidden="true">${pos + 1}</span><code class="code-text" style="--indent:${ind}">${pyHTML(p.text[lid])}</code>${tools}</li>`;
+          return `<li class="code-line drag-row${mark}" id="cg-line-${lid}" data-line="${lid}" tabindex="${live ? 0 : -1}" aria-label="Line ${pos + 1}, indent ${ind}: ${esc(p.text[lid])}"><span class="code-num" aria-hidden="true">${pos + 1}</span><code class="code-text" style="--indent:${ind}">${codeHTML(q, p.text[lid])}</code>${tools}</li>`;
         }).join('');
-        return `<div class="code"><p class="code-goal"><b>${esc(p.title)}.</b> ${esc(p.goal)}</p><ol class="code-list"${live ? ' data-live="1"' : ''} aria-label="Program lines">${lines}</ol></div>`;
+        return `<div class="code"><p class="code-goal"><b>${esc(p.title)}.</b> ${esc(p.goal)} <span class="code-spec">AQA ${esc(p.spec)}</span></p><ol class="code-list"${live ? ' data-live="1"' : ''} aria-label="Program lines">${lines}</ol></div>`;
       },
       controls: () => '<button type="button" class="btn-primary" data-act="check" id="cg-check">Check the program</button>',
       focusId: (q) => `cg-line-${q.work.order[0]}`,
@@ -8657,10 +9014,10 @@ THIS SOFTWARE.</pre>
         q.work.marks = q.work.order.map(() => true);
         return { html: '<p>This is the working program.</p>' };
       },
-      hint: (q) => `The first line is <code class="inline-code">${pyHTML(codeProg(q).text[0])}</code>`,
+      hint: (q) => `The first line is <code class="inline-code">${codeHTML(q, codeProg(q).text[0])}</code>`,
       points: (tries) => Math.max(0, 4 - tries),
       chip: (q) => codeProg(q).title,
-      summary: (q) => codeProg(q).title,
+      summary: (q) => `${codeProg(q).title} (${CODE_LANGS[q.lang === 'python' ? 'python' : 'aqa']})`,
       keysHint: (q) => `Keyboard: on a line, Alt + ↑ or ↓ moves it${q.hard ? ', and ← or → changes its indent' : ''}. Enter checks.`,
       preview: () => codePreview(),
     },
@@ -11421,6 +11778,8 @@ THIS SOFTWARE.</pre>
     if (sg) Object.assign(sg, { back: sg.back || sg.words.map(() => false), info: sg.info || {}, rule: sg.rule || '', again: sg.again || {}, hint: sg.hint || 0 });
     if (!state.sp.game && state.sp.view !== 'setup') state.sp.view = 'setup';
     if (state.sp.game && state.sp.game.phase === 'look') state.sp.game.phase = 'write';
+    const oldCode = state.cg.code && state.cg.code.run;
+    if (oldCode && oldCode.qs.some((q) => !q.lang || !CODE_BY_ID[q.pid])) { state.cg.code.run = null; state.cg.code.view = 'setup'; }
     Object.values(state.cg).forEach((g) => { if (!g.run && g.view !== 'setup') g.view = 'setup'; });
     if (!data || !data.state) {
       // A link ending in #computing or #binary opens straight to that subject or game.
