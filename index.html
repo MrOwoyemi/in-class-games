@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en-GB">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -44,6 +44,11 @@
     --sub-computing: #4f4392;
     --sub-history: #8a5a22;
     --sub-geography: #1d7373;
+    --sub-business: #3d5368;
+    --sub-childdev: #a3406d;
+    --sub-imedia: #a8481a;
+    --sub-mfl: #5d6b1f;
+    --sub-music: #7a2e5c;
     --on-cover: #ffffff;
     --label: #fcfcfa;
     --label-ink: #2443a6;
@@ -111,6 +116,11 @@
       --sub-computing: #574a96;
       --sub-history: #85602f;
       --sub-geography: #2a6b6b;
+      --sub-business: #4a5c70;
+      --sub-childdev: #9a4a6d;
+      --sub-imedia: #9c5226;
+      --sub-mfl: #5f6b2b;
+      --sub-music: #7a3a60;
       --label: #e9ecf1;
       --tok-str: #ffab8f;
       --tok-num: #d9a9ff;
@@ -164,6 +174,11 @@
     --sub-computing: #574a96;
     --sub-history: #85602f;
     --sub-geography: #2a6b6b;
+    --sub-business: #4a5c70;
+    --sub-childdev: #9a4a6d;
+    --sub-imedia: #9c5226;
+    --sub-mfl: #5f6b2b;
+    --sub-music: #7a3a60;
     --label: #e9ecf1;
     --tok-str: #ffab8f;
     --tok-num: #d9a9ff;
@@ -277,6 +292,11 @@
   .cover-computing { --cover: var(--sub-computing); }
   .cover-history { --cover: var(--sub-history); }
   .cover-geography { --cover: var(--sub-geography); }
+  .cover-business { --cover: var(--sub-business); }
+  .cover-childdev { --cover: var(--sub-childdev); }
+  .cover-imedia { --cover: var(--sub-imedia); }
+  .cover-mfl { --cover: var(--sub-mfl); }
+  .cover-music { --cover: var(--sub-music); }
 
   .shelf { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: minmax(0, 1fr); gap: 20px; }
   .shelf li { display: grid; grid-template-columns: minmax(0, 1fr); min-width: 0; }
@@ -1015,6 +1035,8 @@
   .web-svg .node.sel text, .web-svg .node.focus text, .web-svg .node.ok text { fill: var(--on-hl); }
   .web-svg .node.bad rect { fill: var(--wrong-wash); stroke: var(--wrong); stroke-width: 3; }
   .web-svg .node.gone { opacity: .55; }
+  .web-svg .node.locked:not(.focus) rect { stroke: var(--ink-soft); stroke-dasharray: 5 4; }
+  .web-svg .node.locked:not(.focus) text { fill: var(--ink-soft); }
   .web-svg .cross { stroke: var(--wrong); stroke-width: 3; }
   .web-svg .arrow { stroke: var(--ink-soft); stroke-width: 2.5; }
   .web-svg .arrow.ok { stroke: var(--right); stroke-width: 3; }
@@ -2117,9 +2139,20 @@ THIS SOFTWARE.</pre>
     { id: 'computing', name: 'Computing', blurb: 'AQA GCSE Computer Science: data, logic and programming', paper: 'squared', games: ['binary', 'logic', 'code'], exam: 'aqa' },
     { id: 'history', name: 'History', blurb: 'People, events and dates', paper: 'lined', games: ['timeline', 'who', 'source'], hidden: true },
     { id: 'geography', name: 'Geography', blurb: 'Places, maps and the planet', paper: 'lined', games: ['grid', 'pin', 'climate'], hidden: true },
+    // More subjects taught at the school, kept here for later. They have no games yet, so they're hidden too,
+    // and none has been checked against an exam board. (Mathematics and Computer Science are here already as
+    // Maths and Computing.)
+    { id: 'business', name: 'Business Studies', blurb: 'Business, enterprise and finance', paper: 'lined', games: [], hidden: true },
+    { id: 'childdev', name: 'Child Development', blurb: 'How children grow, develop and are cared for', paper: 'lined', games: [], hidden: true },
+    { id: 'imedia', name: 'Creative iMedia', blurb: 'Planning, designing and making media products', paper: 'squared', games: [], hidden: true },
+    // Modern Foreign Languages: Spanish (Years 7 and 8, Year 9 early entry, Year 10 and Year 11) and French (Year 11).
+    // The department's aims: confident, independent learners who can listen, speak, read and write in the language,
+    // with accurate grammar and pronunciation, through engaging lessons and lots of speaking activities.
+    { id: 'mfl', name: 'Modern Foreign Languages', blurb: 'Spanish and French', paper: 'lined', games: [], hidden: true },
+    { id: 'music', name: 'Music', blurb: 'Listening, performing and composing', paper: 'lined', games: [], hidden: true },
   ];
-  // History and Geography are hidden until they've been checked against an exam board.
-  // To show a subject again, remove `hidden: true` from it above.
+  // History and Geography are hidden until they've been checked against an exam board, and the subjects
+  // after them until they have games. To show a subject, remove `hidden: true` from it above.
   const SUBJECTS = ALL_SUBJECTS.filter((s) => !s.hidden);
   const GAMES = {
     // On your own, FizzBuzz has its own screen. In groups and as a class it runs on the shared game screen.
@@ -2250,7 +2283,7 @@ THIS SOFTWARE.</pre>
     binary: cgGame('binary', {
       title: 'Binary Switches',
       summary: 'A row of switches worth 128 down to 1. Convert between binary, decimal and hexadecimal, add up to three binary numbers, and apply logical shifts.',
-      skills: 'AQA 3.3: number bases, conversions and binary arithmetic',
+      skills: 'AQA 3.3.1, 3.3.2 and 3.3.4: number bases, conversions and binary arithmetic',
       time: '10 to 15 minutes',
       versions: {
         solo: 'Binary, decimal and hexadecimal conversions, binary addition and shifts, with worked answers and hints.',
@@ -2398,6 +2431,7 @@ THIS SOFTWARE.</pre>
   // state.screen: 'home' | 'subject' | 'game'. Each game keeps its own view, settings and progress.
   let state;
   let shownKey = null;
+  let shownPlace = null;
   let opening = false;
 
   // ================= Shared pieces =================
@@ -2465,6 +2499,62 @@ THIS SOFTWARE.</pre>
     const key = `${state.screen}:${state.subject}:${state.gameId}:${gameView}`;
     if (shownKey !== null && shownKey !== key) window.scrollTo(0, 0);
     shownKey = key;
+    const place = placeKey();
+    if (shownPlace !== null && shownPlace !== place) focusHeading();
+    shownPlace = place;
+    syncHistory(place);
+  }
+
+  // Where we are: 'home', 'subject:maths' or 'game:fizzbuzz'.
+  const placeKey = () => (state.screen === 'home' ? 'home' : state.screen === 'subject' ? `subject:${state.subject}` : `game:${state.gameId}`);
+  // A link ending in #computing or #binary means that subject or game.
+  function placeFromHash() {
+    const target = decodeURIComponent(location.hash.slice(1));
+    if (subjectById(target)) return `subject:${target}`;
+    if (Object.prototype.hasOwnProperty.call(GAMES, target) && subjectById(GAMES[target].subject)) return `game:${target}`;
+    return 'home';
+  }
+
+  // Each screen (home, a subject, a game) gets its own browser history entry, so the Back button
+  // (or a mouse's back button, or a swipe) steps back through the screens instead of leaving the site.
+  // A game keeps its place, so going back to it carries on where it was.
+  let restoringHistory = false;
+  function syncHistory(place) {
+    const [kind, id] = place.split(':');
+    const url = `${location.pathname}${location.search}${kind === 'home' ? '' : `#${id}`}`;
+    const cur = history.state;
+    try {
+      if (restoringHistory || !cur || !cur.icg) history.replaceState({ icg: place }, '', url);
+      else if (cur.icg !== place) history.pushState({ icg: place }, '', url);
+    } catch (e) { /* history isn't available here (for example in a sandboxed frame) */ }
+  }
+  function goToPlace(place) {
+    const [kind, id] = place.split(':');
+    if (kind === 'subject' && subjectById(id)) openSubject(id);
+    else if (kind === 'game' && GAMES[id] && subjectById(GAMES[id].subject)) openGame(id);
+    else goHome();
+  }
+  function onPopState(e) {
+    const place = e.state && e.state.icg ? e.state.icg : placeFromHash();
+    restoringHistory = true;
+    try {
+      if (place !== placeKey()) goToPlace(place);
+      else render();
+    } finally {
+      restoringHistory = false;
+    }
+  }
+
+  // After moving to another screen, put keyboard focus on its heading (unless the screen has already
+  // focused something, like an answer box), so keyboard and screen-reader users start at the top of it.
+  function focusHeading() {
+    const a = document.activeElement;
+    if (a && a !== document.body && a.getClientRects().length) return;
+    const screen = state.screen === 'home' ? $('home-view') : state.screen === 'subject' ? $('subject-view') : document.querySelector('.game-screen:not([hidden])');
+    const h = screen && screen.querySelector('h1');
+    if (!h) return;
+    h.setAttribute('tabindex', '-1');
+    h.focus({ preventScroll: true });
   }
 
   function renderCrumbs() {
@@ -2511,7 +2601,7 @@ THIS SOFTWARE.</pre>
     $('subject-title').textContent = s.name;
     $('subject-blurb').textContent = s.blurb;
     $('subject-notice').innerHTML = s.exam === 'aqa'
-      ? '<b>Based on AQA GCSE Computer Science (8525).</b> These games follow the AQA specification: number bases and binary arithmetic (3.3), Boolean logic (3.4.2), and algorithms and programming, using AQA pseudo-code (3.1 and 3.2). They aren’t produced or endorsed by AQA, so check against the latest specification on AQA’s website.'
+      ? '<b>Based on AQA GCSE Computer Science (8525).</b> These games follow the AQA specification: number bases and binary arithmetic (3.3.1, 3.3.2 and 3.3.4), Boolean logic (3.4.2), and algorithms and programming, using AQA pseudo-code (3.1 and 3.2). They aren’t produced or endorsed by AQA, so check against the latest specification on AQA’s website.'
       : '<b>Not matched to an exam board.</b> No exam board has been chosen and no exam board’s specification has been used, so the content follows general curriculum topics and may not match exactly what your course requires. Check it against your own specification before relying on it.';
 
     if (!n) {
@@ -2615,7 +2705,14 @@ THIS SOFTWARE.</pre>
       fly.remove();
       opening = false;
     };
-    const show = () => { if (state.screen !== 'subject' || state.subject !== id) openSubject(id); };
+    // Shows the subject once only. A later call (the safety net below) must not pull someone back
+    // to the subject after they've already opened one of its games.
+    let shown = false;
+    const show = () => {
+      if (shown) return;
+      shown = true;
+      if (state.screen !== 'subject' || state.subject !== id) openSubject(id);
+    };
 
     const vw = document.documentElement.clientWidth;
     const vh = window.innerHeight;
@@ -2699,7 +2796,9 @@ THIS SOFTWARE.</pre>
     : r.kind === 'prime' ? isPrime(n) : r.kind === 'square' ? isSquare(n) : n % r.n === 0);
   // Indexes of every rule the number fits, in rule order.
   const fitting = (rules, n) => rules.reduce((acc, r, i) => (ruleFits(r, n) ? acc.concat(i) : acc), []);
-  const ruleTag = (r) => (r.kind === 'digit' ? `has a ${r.n}` : r.kind === 'prime' ? 'prime' : r.kind === 'square' ? 'square' : `÷ ${r.n}`);
+  // "an 8", but "a 5".
+  const aOrAn = (n) => (/^(8|1[18](\d{3})*$)/.test(String(n)) ? 'an' : 'a');
+  const ruleTag = (r) => (r.kind === 'digit' ? `has ${aOrAn(r.n)} ${r.n}` : r.kind === 'prime' ? 'prime' : r.kind === 'square' ? 'square' : `÷ ${r.n}`);
   const ruleWhat = (r) => (r.kind === 'digit' ? `numbers with the digit ${r.n}` : r.kind === 'prime' ? 'prime numbers'
     : r.kind === 'square' ? 'square numbers' : `multiples of ${r.n}`);
   const answerText = (rules, idx, n) => (idx.length ? idx.map((i) => rules[i].word).join('') : String(n));
@@ -2713,7 +2812,7 @@ THIS SOFTWARE.</pre>
   function ruleCheck(r, n) {
     if (r.kind === 'digit') {
       const has = String(n).includes(String(r.n));
-      return { yes: has, eq: String(n), why: has ? `has a ${r.n} in it` : `no ${r.n} in it` };
+      return { yes: has, eq: String(n), why: has ? `has ${aOrAn(r.n)} ${r.n} in it` : `no ${r.n} in it` };
     }
     if (r.kind === 'prime') {
       if (n < 2) return { yes: false, eq: '1 = 1 × 1', why: 'a prime needs exactly two factors' };
@@ -3400,11 +3499,11 @@ THIS SOFTWARE.</pre>
     { id: 'r-double', name: 'Double letters', words: ['accommodate', 'address', 'aggressive', 'apparent', 'committee', 'embarrass', 'exaggerate', 'necessary', 'occurred', 'possession', 'recommend', 'successful', 'tomorrow', 'interrupt', 'opportunity', 'parallel'],
       rule: 'Many tricky words hide a double letter. Say the word slowly and count the doubles: ac-com-mo-date has two c’s and two m’s.' },
     { id: 'r-ie', name: 'ie and ei', words: ['believe', 'achieve', 'piece', 'field', 'receive', 'ceiling', 'deceive', 'weird', 'seize', 'protein', 'eight', 'weight', 'reign', 'neighbour', 'foreign', 'height'],
-      rule: 'i before e when it sounds like “ee” (believe), but e before i after c (receive). Rule-breakers include weird, seize and protein. Also, ei often says “ay”, as in eight and reign, and sometimes “eye”, as in height.' },
+      rule: 'i before e when it sounds like “ee” (believe), but e before i after c (receive). Rule-breakers include weird, seize, protein and foreign. Also, ei often says “ay”, as in eight and reign, and sometimes “eye”, as in height.' },
     { id: 'r-silent', name: 'Silent letters', words: ['answer', 'island', 'knowledge', 'Wednesday', 'knight', 'muscle', 'yacht', 'rhythm', 'listen', 'castle', 'thumb', 'climb', 'autumn', 'column', 'doubt', 'scissors'],
       rule: 'Some letters are written but not said. Say the word the way it’s spelt in your head: Wed-nes-day, k-now-ledge, autum-n.' },
     { id: 'r-able', name: '-able and -ible', words: ['available', 'comfortable', 'reasonable', 'dependable', 'enjoyable', 'valuable', 'adorable', 'noticeable', 'possible', 'terrible', 'horrible', 'visible', 'edible', 'incredible', 'responsible', 'audible'],
-      rule: 'If the ending comes off and leaves a whole word, it’s usually -able (depend-able), sometimes a word that has lost its final e (value → valuable, adore → adorable). If what’s left isn’t a word, it’s usually -ible (poss-ible).' },
+      rule: 'If the ending comes off and leaves a whole word, it’s usually -able (depend-able), sometimes a word that has lost its final e (value → valuable, adore → adorable). A soft c or g keeps its e, so it still sounds soft: notice → noticeable. If what’s left isn’t a word, it’s usually -ible (poss-ible).' },
     { id: 'r-ance', name: '-ance, -ant, -ence and -ent', words: ['appearance', 'assistance', 'importance', 'tolerance', 'hindrance', 'nuisance', 'relevant', 'observant', 'difference', 'confidence', 'existence', 'convenience', 'patience', 'innocent', 'excellent', 'independent'],
       rule: 'There’s no sure rule, so think of a relative: tolerate → tolerance, and words with an -ation relative usually take -ance. After a soft c or g it’s usually -ence: innocent, intelligence.' },
     { id: 'r-tion', name: '-tion, -sion and -cian', words: ['competition', 'explanation', 'mention', 'position', 'extension', 'decision', 'television', 'comprehension', 'discussion', 'permission', 'expression', 'profession', 'musician', 'magician', 'electrician', 'politician'],
@@ -3643,7 +3742,7 @@ THIS SOFTWARE.</pre>
     physical: ['to do with the body', 'Rugby is a very physical game.'],
     piece: ['a part of something', 'Can I have a piece of cake?'],
     plough: ['a farm tool for turning over soil', 'The farmer used a plough to prepare the field.'],
-    politician: ['someone who works in government, or wants to', 'The politician gave a speech.'],
+    politician: ['someone who is elected, or hopes to be elected, to help run a country or area', 'The politician gave a speech.'],
     popular: ['liked by many people', 'Pizza is a popular food.'],
     position: ['where something is, or a job', 'Mark the position of the treasure on the map.'],
     possess: ['to own or have', 'Do you possess a library card?'],
@@ -3819,8 +3918,21 @@ THIS SOFTWARE.</pre>
   };
 
   // Real words are never offered as wrong spellings (for example "women" when the word is "woman").
-  const SP_KNOWN = new Set([...SP_LISTS, ...SP_RULE_LISTS].flatMap((l) => l.words).concat(Object.keys(SP_INFO)).map((w) => w.toLowerCase()));
+  // As well as the words in the lists, these are real words that the slips below could make from a
+  // listed word (for example "strait" from "straight", "thou" from "though", "night" from "knight"),
+  // and American spellings ("center" from "centre"). A pupil who picks one hasn't misspelt anything.
+  const SP_REAL_WORDS = ('attache bough bout braise bus buy buys caste center compete decade determine draught earl favorite filed '
+    + 'fort hard hart head hear heat herd hopping impassible knit lean lighting limb lough lovey marvelous materiel minuet naught '
+    + 'neighbor night out overran poplar posses protean recant referred rein scissor size solder solider spacial strait therefor '
+    + 'thou topped trough weigh weir wight').split(' ');
+  const SP_KNOWN = new Set([...SP_LISTS, ...SP_RULE_LISTS].flatMap((l) => l.words).concat(Object.keys(SP_INFO), SP_REAL_WORDS).map((w) => w.toLowerCase()));
   const normWord = (w) => String(w).trim().replace(/[’‘`]/g, "'").toLowerCase();
+  // Words that always start with a capital letter, like February and Wednesday, from the built-in lists.
+  // They need the capital to be right, even in your own lists. Other words can be in either case.
+  const SP_PROPER = new Map([...SP_LISTS, ...SP_RULE_LISTS].flatMap((l) => l.words)
+    .filter((w) => w[0] !== w[0].toLowerCase()).map((w) => [w.toLowerCase(), w]));
+  const spNeedsCapital = (word, said) => SP_PROPER.has(normWord(word)) && String(said).trim()[0] !== SP_PROPER.get(normWord(word))[0];
+  const spRight = (said, word) => normWord(said) === normWord(word) && !spNeedsCapital(word, said);
   const escRe = (s) => String(s).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
   // ---------- saved lists and tricky words (kept on this computer) ----------
@@ -3873,7 +3985,7 @@ THIS SOFTWARE.</pre>
         if (!/^[A-Za-z][A-Za-z'-]{0,29}$/.test(p)) { if (!bad.includes(p)) bad.push(p); return; }
         const k = p.toLowerCase();
         if (m) info[k] = [m[2], ''];
-        if (!seen.has(k)) { seen.add(k); words.push(p); }
+        if (!seen.has(k)) { seen.add(k); words.push(SP_PROPER.get(k) || p); } // "february" becomes "February"
       });
     });
     return { words, bad, info };
@@ -4055,12 +4167,18 @@ THIS SOFTWARE.</pre>
     flush();
     return html;
   }
+  // Like align, but a missing capital (february for February) counts as a wrong letter.
+  function alignWord(word, said) {
+    const ops = align(word, said);
+    if (spNeedsCapital(word, said) && ops[0] && ops[0].type === 'match' && ops[0].ti === 0) ops[0] = { ...ops[0], type: 'sub' };
+    return ops;
+  }
   // The correct word, with the letters the player got wrong or left out highlighted.
-  const correctHTML = (word, said) => joinRuns(align(word, said)
+  const correctHTML = (word, said) => joinRuns(alignWord(word, said)
     .filter((o) => o.type !== 'extra')
     .map((o) => ({ ch: word[o.ti], cls: o.type === 'match' ? '' : 'hl c1' })));
   // The player's attempt, with wrong letters underlined, extra letters struck out and gaps marked.
-  const attemptHTML = (word, said) => joinRuns(align(word, said).map((o) => {
+  const attemptHTML = (word, said) => joinRuns(alignWord(word, said).map((o) => {
     if (o.type === 'match') return { ch: said[o.ai], cls: '' };
     if (o.type === 'sub') return { ch: said[o.ai], cls: 'letter-bad' };
     if (o.type === 'extra') return { ch: said[o.ai], cls: 'letter-bad extra' };
@@ -4390,14 +4508,14 @@ THIS SOFTWARE.</pre>
       $('sp-input').focus();
       return;
     }
-    spRecord(typed, normWord(typed) === normWord(g.words[g.i]));
+    spRecord(typed, spRight(typed, g.words[g.i]));
   }
 
   function spChoose(i) {
     const g = state.sp.game;
     if (!g || g.phase !== 'choose' || i >= g.options.length) return;
     g.chosen = i;
-    spRecord(g.options[i], normWord(g.options[i]) === normWord(g.words[g.i]));
+    spRecord(g.options[i], spRight(g.options[i], g.words[g.i]));
   }
 
   function spNext() {
@@ -4714,8 +4832,9 @@ THIS SOFTWARE.</pre>
   let cgAutoTimer = null;
   let cgTicker = null;
   let cgDrag = null;
+  let cgHeldKey = null; // the buzzer key just pressed, while it may still be held down
 
-  // ---------- Binary Switches (AQA GCSE 8525, 3.3.1 to 3.3.4) ----------
+  // ---------- Binary Switches (AQA GCSE 8525, 3.3.1, 3.3.2 and 3.3.4; 3.3.3, units of information, isn't covered) ----------
   // AQA wording: decimal (not denary), up to 8 bits (0 to 255, hex 00 to FF), adding up to three numbers
   // with no more than three 1s in a column and no overflow, and logical shifts.
   const binValues = (bits) => Array.from({ length: bits }, (_, i) => 2 ** (bits - 1 - i));
@@ -5139,7 +5258,7 @@ THIS SOFTWARE.</pre>
     const targets = codeTargets(p);
     let order;
     let guard = 0;
-    do { order = shuffle(ident.slice()); guard += 1; } while (guard < 30 && targets.some((t) => t.every((v, i) => v === order[i])));
+    do { order = shuffle(ident.slice()); guard += 1; } while (guard < 30 && targets.some((t) => t.every((v, i) => p.text[v] === p.text[order[i]])));
     q.work = { order, indents: q.hard ? new Array(ident.length).fill(0) : p.indents.slice(), marks: null };
   }
   function codeMove(q, lid, d) {
@@ -5419,7 +5538,7 @@ THIS SOFTWARE.</pre>
   const WEB_KEYS = Object.keys(WEBS);
   const ROLES = {
     producer: { name: 'a producer', text: 'Producers make their own food by photosynthesis' },
-    primary: { name: 'a primary consumer', text: 'Primary consumers eat only producers' },
+    primary: { name: 'a primary consumer', text: 'Primary consumers eat producers' },
     top: { name: 'a top predator', text: 'Nothing in the web eats a top predator' },
   };
   const webName = (web, id) => web.nodes[id][0];
@@ -5431,8 +5550,16 @@ THIS SOFTWARE.</pre>
   function webRole(web, role) {
     const ids = Object.keys(web.nodes);
     if (role === 'producer') return ids.filter((id) => !webFoods(web, id).length);
-    if (role === 'primary') return ids.filter((id) => { const f = webFoods(web, id); return f.length && f.every((x) => !webFoods(web, x).length); });
+    // An animal that eats a producer is a primary consumer, even if it eats animals too (like the duckling).
+    if (role === 'primary') return ids.filter((id) => webFoods(web, id).some((x) => !webFoods(web, x).length));
     return ids.filter((id) => webFoods(web, id).length && !webEaters(web, id).length);
+  }
+  // Primary consumers that also eat animals are secondary consumers as well.
+  function webBothNote(web) {
+    return webRole(web, 'primary').filter((id) => webFoods(web, id).some((x) => webFoods(web, x).length)).map((id) => {
+      const foods = listAnd(webFoods(web, id).map((x) => webName(web, x).toLowerCase()));
+      return ` The ${webName(web, id).toLowerCase()} ${webPlural(web, id) ? 'eat' : 'eats'} ${foods}, so ${webPlural(web, id) ? 'they’re' : 'it’s'} a primary consumer and a secondary consumer.`;
+    }).join('');
   }
   function webClues(web) {
     const ids = Object.keys(web.nodes);
@@ -5454,6 +5581,7 @@ THIS SOFTWARE.</pre>
     const clear = animals.filter(([x, dir]) => (dir === 'down' ? webFoods(web, x).length === 1 : webEaters(web, x).length === 1));
     return clear.length ? clear : animals.length ? animals : all;
   }
+  const WEB_LOCKED_NOTE = 'The ones with dashed edges can’t be removed: what would happen next isn’t clear-cut.';
   const webClear = (web, id) => webOptions(web, id).some(([x, dir]) => (dir === 'down' ? webFoods(web, x).length === 1 : webEaters(web, x).length === 1 && webFoods(web, x).length));
   function webRemove(q, id) {
     const web = WEBS[q.web];
@@ -5520,9 +5648,10 @@ THIS SOFTWARE.</pre>
       return `<line class="arrow ${mark}" x1="${(x1 + dx * t1).toFixed(1)}" y1="${(y1 + dy * t1).toFixed(1)}" x2="${(x2 - dx * t2).toFixed(1)}" y2="${(y2 - dy * t2).toFixed(1)}" marker-end="url(#${mid}-${mark})"/>`;
     }).join('');
     const nodes = Object.entries(web.nodes).map(([id, [name, x, y]]) => {
+      const live = o.clickable && o.gone !== id && (!o.canPick || o.canPick(id));
       const cls = ['node', o.sel === id ? 'sel' : '', o.gone === id ? 'gone' : '', o.focus === id ? 'focus' : '',
-        o.okSet && o.okSet.includes(id) ? 'ok' : '', o.bad === id ? 'bad' : '', o.clickable && o.gone !== id ? 'clickable' : ''].filter(Boolean).join(' ');
-      const attrs = o.clickable && o.gone !== id
+        o.okSet && o.okSet.includes(id) ? 'ok' : '', o.bad === id ? 'bad' : '', live ? 'clickable' : '', o.canPick && !o.canPick(id) ? 'locked' : ''].filter(Boolean).join(' ');
+      const attrs = live
         ? ` data-act="node" data-n="${id}" id="cg-node-${id}" tabindex="0" role="button" aria-pressed="${o.sel === id ? 'true' : 'false'}" aria-label="${esc(name)}"`
         : ` role="img" aria-label="${esc(name)}${o.gone === id ? ' (removed)' : ''}"`;
       return `<g class="${cls}" transform="translate(${x * 6.4} ${y * 4})"${attrs}><rect x="-56" y="-17" width="112" height="34" rx="10"/><text y="5">${esc(name)}</text>${o.gone === id ? '<line class="cross" x1="-50" y1="-13" x2="50" y2="13"/>' : ''}</g>`;
@@ -6301,6 +6430,7 @@ THIS SOFTWARE.</pre>
     do { next = (next + 1) % run.names.length; } while (w.out.includes(next));
     w.cur = next;
     run.left = q.speed;
+    cgRestartClock();
     cgRenderPlay();
     cgAfter();
   }
@@ -6437,6 +6567,7 @@ THIS SOFTWARE.</pre>
       if (w.k >= q.total) { ttEndDuel(q, run); return; }
       w.cur = w.k % run.names.length;
       run.left = q.speed;
+      cgRestartClock();
     }
     ttNext(q);
     cgRenderPlay();
@@ -6551,7 +6682,11 @@ THIS SOFTWARE.</pre>
       const left = nums.slice();
       used.forEach((u) => {
         const i = left.indexOf(u);
-        if (i < 0) fail(nums.includes(u) ? `You’ve used ${u} more times than you have it.` : `${u} isn’t one of your numbers.`);
+        if (i < 0) {
+          const have = nums.filter((x) => x === u).length;
+          fail(!have ? `${u} isn’t one of the numbers.` : have === 1 ? `There’s only one ${u}, so it can only be used once.`
+            : `There are only ${have} ${u}s, so ${u} can only be used ${have} times.`);
+        }
         left.splice(i, 1);
       });
       return { value, used };
@@ -6786,8 +6921,8 @@ THIS SOFTWARE.</pre>
     question: 'A question ends with a question mark.',
     exclaim: 'An exclamation mark shows strong feeling, such as surprise, excitement or anger, or a command said forcefully.',
     caps: 'Names of people, places, days and months start with a capital letter, and so does the word I.',
-    list: 'Use commas to separate the items in a list. There’s usually no comma before the final “and”.',
-    fronted: 'Put a comma after a fronted adverbial: words at the start of a sentence that say when, where or how something happened.',
+    list: 'Use commas to separate the items in a list. You don’t need a comma before the final “and”, but it isn’t wrong to put one there.',
+    fronted: 'Put a comma after a fronted adverbial: words at the start of a sentence that say when, where or how something happened. After a very short one some writers leave the comma out, but putting it in is always right.',
     clause: 'When a sentence starts with a subordinate clause (beginning with a word like when, if or although), put a comma after it.',
     parenthesis: 'Extra information dropped into a sentence goes between a pair of commas, brackets or dashes. Take it out and the sentence still makes sense.',
     address: 'Use a comma to separate the name of the person you are talking to: “Can you help me, Sam?”',
@@ -6982,7 +7117,7 @@ THIS SOFTWARE.</pre>
     ['simile', 'Her eyes sparkled like diamonds.', 'It compares her eyes to diamonds using “like”.'],
     ['simile', 'The old man was as wise as an owl.', 'It compares the man to an owl using “as … as”.'],
     ['simile', 'The lake was as smooth as glass.', 'It compares the lake to glass using “as … as”.'],
-    ['metaphor', 'The classroom was a zoo.', 'It says the classroom was a zoo, not just like one.'],
+    ['metaphor', 'The stars were diamonds in the night sky.', 'It says the stars were diamonds, without “like” or “as”.'],
     ['metaphor', 'Snow was a white blanket over the town.', 'It says the snow was a blanket, without “like” or “as”.'],
     ['metaphor', 'Her words were daggers.', 'It says her words were daggers, because they hurt.'],
     ['metaphor', 'The moon was a silver coin in the sky.', 'It says the moon was a coin, without “like” or “as”.'],
@@ -7019,8 +7154,8 @@ THIS SOFTWARE.</pre>
     ['repetition', 'Far, far away, beyond the hills, lived a dragon.', '“Far” is repeated to show just how far away it was.'],
     ['oxymoron', 'There was a deafening silence.', '“Deafening” and “silence” have opposite meanings.'],
     ['oxymoron', 'It was a bittersweet goodbye.', '“Bitter” and “sweet” have opposite meanings.'],
-    ['oxymoron', 'The film was seriously funny.', '“Seriously” and “funny” have opposite meanings.'],
-    ['oxymoron', 'The pizza was awfully good.', '“Awfully” and “good” have opposite meanings.'],
+    ['oxymoron', 'It was an open secret that she was leaving.', '“Open” and “secret” have opposite meanings.'],
+    ['oxymoron', 'The two friends sat alone together.', '“Alone” and “together” have opposite meanings.'],
     ['oxymoron', 'She gave a quiet scream.', '“Quiet” and “scream” have opposite meanings.'],
   ];
 
@@ -7070,7 +7205,7 @@ THIS SOFTWARE.</pre>
   }
   const SP_RELAY_LOOK = 5;
   function spCgReset(q) {
-    q.work = q.type === 'bee' ? { cur: 0, k: 0, out: [], shown: false, log: [], flash: null }
+    q.work = q.type === 'bee' ? { cur: 0, k: 0, out: [], shown: false, log: [], flash: null, undo: [] }
       : { typed: '', covered: q.give !== 'look', pick: null, said: '', right: false };
   }
   function spRelayControls(q) {
@@ -7100,6 +7235,9 @@ THIS SOFTWARE.</pre>
     const w = q.work;
     const word = q.words[w.k];
     const name = esc(run.names[w.cur]);
+    // Keep a copy of the bee as it was, so a spelling marked by mistake can be undone.
+    const snap = JSON.stringify({ work: { ...w, undo: [] }, scores: run.scores, results: run.results.length, streak: run.streak, best: run.best });
+    w.undo = (w.undo || []).concat(snap).slice(-10);
     w.log.push({ word, who: w.cur, ok });
     if (ok) run.scores[w.cur] += 1;
     else w.out.push(w.cur);
@@ -7124,6 +7262,22 @@ THIS SOFTWARE.</pre>
     speak(q.words[w.k]);
     return true;
   }
+  // Puts the bee back as it was before the last mark: the pupil is back in, with their word and score.
+  function spBeeUndo(q, run) {
+    const stack = q.work.undo || [];
+    if (!stack.length) return false;
+    const snap = JSON.parse(stack[stack.length - 1]);
+    q.work = { ...snap.work, undo: stack.slice(0, -1) };
+    run.scores = snap.scores;
+    run.results.length = snap.results;
+    run.streak = snap.streak;
+    run.best = snap.best;
+    run.feedback = null;
+    run.phase = 'answer';
+    return true;
+  }
+  const spBeeUndoHTML = (q) => (q.work.undo && q.work.undo.length
+    ? '<button type="button" class="btn-link" data-act="undo" id="cg-undo">Undo the last mark</button>' : '');
 
   // ---------- Punctuation Fix ----------
   const PF_MARK_NAMES = { ',': 'comma', '.': 'full stop', '?': 'question mark', '!': 'exclamation mark', ':': 'colon', ';': 'semicolon' };
@@ -7144,9 +7298,12 @@ THIS SOFTWARE.</pre>
     const last = toks.length - 1;
     const out = new Set();
     const variant = (fn) => { const copy = toks.map((t) => ({ ...t })); fn(copy); const s = pfJoin(copy); if (s !== item.t) out.add(s); };
+    // The comma after an opening phrase or clause is never just left out: after a short opener some
+    // writers leave it out, so that version wouldn't be clearly wrong.
+    const opener = item.r.some((k) => k === 'fronted' || k === 'clause') ? toks.findIndex((t) => t.mark === ',') : -1;
     toks.forEach((t, i) => {
       if (t.mark && i < last) {
-        variant((c) => { c[i].mark = ''; });
+        if (i !== opener) variant((c) => { c[i].mark = ''; });
         if (i + 1 < last && !toks[i + 1].mark) variant((c) => { c[i + 1].mark = c[i].mark; c[i].mark = ''; });
       }
     });
@@ -7193,7 +7350,9 @@ THIS SOFTWARE.</pre>
   function pfCheckPlace(q) {
     const w = q.work;
     const toks = pfTokens(q.t);
-    const marks = toks.map((t, i) => w.marks[i] === t.mark);
+    // In a list, a comma before the final "and" or "or" is fine too.
+    const listComma = (i) => q.r.includes('list') && !toks[i].mark && toks[i + 1] && ['and', 'or'].includes(toks[i + 1].word) && w.marks[i] === ',';
+    const marks = toks.map((t, i) => w.marks[i] === t.mark || listComma(i));
     const caps = toks.map((t, i) => !q.caps || w.caps[i] === /^[A-Z]/.test(t.word));
     w.result = { marks, caps };
     const wrong = marks.filter((x) => !x).length + caps.filter((x) => !x).length;
@@ -7357,8 +7516,10 @@ THIS SOFTWARE.</pre>
           <div class="answer-btns">
             <button type="button" class="answer-btn mark-ok" data-act="mark" data-ok="1" id="cg-mark-ok"><kbd class="key">Y</kbd><span>✓ Spelt right</span></button>
             <button type="button" class="answer-btn mark-no" data-act="mark" data-ok="0" id="cg-mark-no"><kbd class="key">N</kbd><span>✗ Slipped</span></button>
-          </div>`;
+          </div>${spBeeUndoHTML(q)}`;
       },
+      canUndo: (q) => q.type === 'bee' && Boolean(q.work.undo && q.work.undo.length),
+      undo: (q, run) => q.type === 'bee' && spBeeUndo(q, run),
       focusId(q) {
         if (q.type === 'bee') return q.work.shown ? 'cg-mark-ok' : 'cg-show';
         if (q.give === 'look' && !q.work.covered) return 'cg-cover';
@@ -7420,7 +7581,7 @@ THIS SOFTWARE.</pre>
         const said = q.give === 'spot' ? (w.pick === null ? '' : q.opts[w.pick]) : w.typed.trim();
         if (!said) return { invalid: q.give === 'spot' ? 'Pick a spelling first.' : 'Type the word first.' };
         w.said = said;
-        w.right = normWord(said) === normWord(q.word);
+        w.right = spRight(said, q.word);
         return { correct: w.right };
       },
       afterCheck(res, q, run) {
@@ -7541,7 +7702,7 @@ THIS SOFTWARE.</pre>
         if (act === 'pick') { w.pick = i; return 'check'; }
         return false;
       },
-      key(e, q) {
+      key(e, q, run) {
         if (e.altKey || e.key.length !== 1 && e.key !== 'Backspace' && e.key !== 'Delete') return false;
         const t = e.target;
         if (q.type === 'place') {
@@ -7553,7 +7714,9 @@ THIS SOFTWARE.</pre>
           q.work.result = null;
           return true;
         }
-        const k = '123'.includes(e.key) ? Number(e.key) - 1 : 'abc'.indexOf(e.key.toLowerCase());
+        // A, B and C pick an answer too, except in the buzzer race, where A is Player 1's buzzer key.
+        const letters = run && run.style === 'buzz' ? '' : 'abc';
+        const k = '123'.includes(e.key) ? Number(e.key) - 1 : letters ? letters.indexOf(e.key.toLowerCase()) : -1;
         if (k < 0 || k >= q.opts.length) return false;
         q.work.pick = k;
         return 'check';
@@ -8068,8 +8231,10 @@ THIS SOFTWARE.</pre>
       check(q) {
         const w = q.work;
         if (q.type === 'board') return w.shown ? { correct: w.rows.length > 0 } : { invalid: 'Show the answer first.' };
-        const typed = cleanRef(w.typed);
+        const typed = String(w.typed || '').trim();
         if (!typed) return { invalid: 'Type your answer first.' };
+        // Only a whole number counts: "4.8" or "5 6" isn't 48 or 56.
+        if (!/^\d+$/.test(typed)) return { invalid: 'Type a whole number, using digits only.' };
         return { correct: Number(typed) === w.a * w.b };
       },
       afterCheck(res, q, run) {
@@ -8166,7 +8331,7 @@ THIS SOFTWARE.</pre>
         }
         if (mode === 'class') {
           return ['Put this on the board and split the class into teams.',
-            `The numbers and target appear with a ${mins} countdown. Teams work it out on paper.`,
+            `The numbers and target appear with a ${s.think / 60}-minute countdown. Teams work it out on paper.`,
             'Then each team calls out its working, and the teacher types it in. The game checks it.',
             'The closest answer scores 1. Hitting the target exactly scores 2.'];
         }
@@ -8564,7 +8729,7 @@ THIS SOFTWARE.</pre>
         return [what,
           'Click a switch, or press its number key, to turn it on (1) or off (0). Type answers that aren’t switches.',
           'Press Check to see the working.',
-          'This follows AQA GCSE Computer Science, sections 3.3.1 to 3.3.4.'];
+          'This follows AQA GCSE Computer Science, sections 3.3.1, 3.3.2 and 3.3.4.'];
       },
       count: (s) => Number(s.rounds),
       makeQuestions(s) {
@@ -8995,10 +9160,12 @@ THIS SOFTWARE.</pre>
       check(q) {
         const p = codeProg(q);
         const order = q.work.order;
-        const indentOk = (lid) => !q.hard || q.work.indents[lid] === p.indents[lid];
+        // Compare what each line says and how far it's indented, not which card it is: some programs have
+        // two identical lines (two ENDFORs, or asking for the age twice), and either card can go in either place.
+        const indentOf = (lid) => (q.hard ? q.work.indents[lid] : p.indents[lid]);
         let best = null;
         codeTargets(p).forEach((t) => {
-          const ok = order.map((lid, pos) => lid === t[pos] && indentOk(lid));
+          const ok = order.map((lid, pos) => p.text[lid] === p.text[t[pos]] && indentOf(lid) === p.indents[t[pos]]);
           const count = ok.filter(Boolean).length;
           if (!best || count > best.count) best = { count, ok };
         });
@@ -9441,7 +9608,7 @@ THIS SOFTWARE.</pre>
         if (q.type === 'build') return 'Draw every arrow in the web. Click a food, then the animal that eats it.';
         if (q.type === 'role') return `Click ${ROLES[q.role].name} in this web.`;
         if (q.type === 'predict') return webQuestion(q);
-        return q.removed ? webQuestion(q) : 'Click a living thing on the board to remove it from the web.';
+        return q.removed ? webQuestion(q) : `Click a living thing on the board to remove it from the web. ${WEB_LOCKED_NOTE}`;
       },
       board(q, ctx) {
         const web = WEBS[q.web];
@@ -9455,6 +9622,7 @@ THIS SOFTWARE.</pre>
             gone: q.removed,
             focus: q.affected,
             clickable: ctx.interactive || ctx.phase === 'remove',
+            canPick: ctx.phase === 'remove' ? (id) => webClear(web, id) : null,
           });
           const clues = ctx.interactive
             ? `<p class="web-legend">Click a food, then the animal that eats it. Click the same pair again to remove that arrow.</p><ul class="clues">${webClues(web)}</ul>`
@@ -9466,7 +9634,7 @@ THIS SOFTWARE.</pre>
           return `<div class="web-wrap">${webSVG(q.web, { links: all, clickable: ctx.interactive, okSet: ok, bad: ctx.done && q.work.pick && !ok.includes(q.work.pick) ? q.work.pick : null })}</div>`;
         }
         if (q.type === 'predict') return `<div class="web-wrap">${webSVG(q.web, { links: all, gone: q.removed, focus: q.affected })}</div>`;
-        return `<div class="web-wrap">${webSVG(q.web, { links: all, gone: q.removed, focus: q.affected, clickable: ctx.phase === 'vote' })}</div>`;
+        return `<div class="web-wrap">${webSVG(q.web, { links: all, gone: q.removed, focus: q.affected, clickable: ctx.phase === 'vote', canPick: (id) => webClear(web, id) })}</div>`;
       },
       controls(q) {
         if (q.type === 'build') return '<button type="button" class="btn-primary" data-act="check" id="cg-check">Check the web</button>';
@@ -9494,7 +9662,8 @@ THIS SOFTWARE.</pre>
         if (run.phase === 'remove') {
           return `${run.msg ? `<p class="cg-note" role="status">${esc(run.msg)}</p>` : ''}
             <p class="cg-turn">${badge(q.remover)} removes a species</p>
-            <p class="prompt">Click any living thing in the web. ${badge(q.team)} then predicts what happens next.</p>`;
+            <p class="prompt">Click a living thing in the web. ${badge(q.team)} then predicts what happens next.</p>
+            <p class="hint">${WEB_LOCKED_NOTE}</p>`;
         }
         if (run.phase === 'predict') {
           return `<p class="cg-turn">${badge(q.team)} predicts</p>
@@ -9526,6 +9695,7 @@ THIS SOFTWARE.</pre>
       },
       phaseAct(act, el, q, run) {
         if (act === 'node' && (run.phase === 'remove' || run.phase === 'vote')) {
+          if (!webClear(WEBS[q.web], el.dataset.n)) return false; // no clear-cut answer, so it can't be removed
           webRemove(q, el.dataset.n);
           if (run.phase === 'remove') { run.phase = 'predict'; run.msg = ''; return 'phase'; }
           run.votes = run.names.map(() => null); // a new question, so clear the votes
@@ -9573,7 +9743,8 @@ THIS SOFTWARE.</pre>
         }
         if (q.type === 'role') {
           const ids = webRole(web, q.role);
-          return { correct: ids.includes(w.pick), html: `<p>${ROLES[q.role].text}. In this web: ${esc(listAnd(ids.map((id) => webName(web, id))))}.</p>` };
+          const both = q.role === 'primary' ? webBothNote(web) : '';
+          return { correct: ids.includes(w.pick), html: `<p>${ROLES[q.role].text}. In this web: ${esc(listAnd(ids.map((id) => webName(web, id))))}.${esc(both)}</p>` };
         }
         return { correct: w.pick === q.answer, html: `<p>${esc(webExplain(q))}</p>` };
       },
@@ -10793,6 +10964,7 @@ THIS SOFTWARE.</pre>
     const run = cgRun();
     run.phase = 'answer';
     if (cgD().onBegin) cgD().onBegin(run, cgQ());
+    cgRestartClock();
     cgRenderPlay();
     cgAfter();
   }
@@ -10971,7 +11143,9 @@ THIS SOFTWARE.</pre>
     } else if (run.style === 'buzz' || run.style === 'relay') {
       extra = run.phase === 'answer' ? '<span class="clock" id="cg-clock" role="timer"></span>' : '';
     } else if (run.timer) {
-      extra = `<span class="clock" id="cg-clock" role="timer"></span><button type="button" class="btn-small" data-act="pause" id="cg-pause">${run.paused ? 'Resume timer' : 'Pause timer'}</button>`;
+      // The pause button only while the clock is counting down (not once time's up or the answer is out).
+      const counting = (run.phase === 'answer' || run.phase === 'vote') && run.left > 0;
+      extra = `<span class="clock" id="cg-clock" role="timer"></span>${counting ? `<button type="button" class="btn-small" data-act="pause" id="cg-pause">${run.paused ? 'Resume timer' : 'Pause timer'}</button>` : ''}`;
     }
     $('cg-top-extra').innerHTML = extra;
     cgRenderClock();
@@ -11047,6 +11221,7 @@ THIS SOFTWARE.</pre>
         <p class="fb-head ${h.cls}">${h.text}</p>
         <div class="cg-explain">${run.feedback.html || ''}</div>
         <button type="button" class="btn-primary${cgAutoTimer !== null ? ' auto' : ''}" data-act="next" id="cg-next">${nextLabel}</button>
+        ${def.canUndo && def.canUndo(q, run) ? '<button type="button" class="btn-link" data-act="undo" id="cg-undo">Undo the last mark</button>' : ''}
       </div>`);
     } else if (run.phase === 'handover') {
       out.push(`<div class="handover">
@@ -11189,6 +11364,16 @@ THIS SOFTWARE.</pre>
       knockout: 'handover', room: 'answer', duel: 'handover', target: 'think', claim: 'answer', bee: 'answer',
     }[run.style];
     if (cgD().onQuestion) cgD().onQuestion(run, q); // e.g. start a sprint's clock
+    cgRestartClock();
+  }
+
+  // Starts the one-second clock afresh. Called whenever a countdown is reset (a new turn, a buzz),
+  // so the first second of the new countdown is a whole second, not whatever was left of the old one.
+  function cgRestartClock() {
+    clearInterval(cgTicker);
+    cgTicker = null;
+    const run = cgRun();
+    if (run && cgInPlay() && (run.timer || run.style === 'buzz' || cgD().tick)) cgTicker = setInterval(cgTick, 1000);
   }
 
   // Timers and keyboard focus after a new phase is drawn.
@@ -11225,7 +11410,8 @@ THIS SOFTWARE.</pre>
     }
     if (run.timer && !run.paused && (run.phase === 'answer' || run.phase === 'vote') && run.left > 0) {
       run.left -= 1;
-      cgRenderClock();
+      if (run.left === 0) cgRenderTop(); // time's up: the pause button goes
+      else cgRenderClock();
     }
   }
 
@@ -11235,6 +11421,7 @@ THIS SOFTWARE.</pre>
     run.active = p;
     run.phase = 'answer';
     run.left = ANSWER_SECONDS;
+    cgRestartClock();
     run.msg = '';
     cgRenderPlay();
     cgAfter();
@@ -11287,7 +11474,7 @@ THIS SOFTWARE.</pre>
       run.turn = nextTeam;
       run.msg = `Not quite. Over to ${run.names[nextTeam]}.`;
       if (cgTries(def, q) > 1) run.feedback = { ...res, partial: true }; // e.g. Code Shuffle shows which lines are right
-      if (run.timer) run.left = run.timer;
+      if (run.timer) { run.left = run.timer; cgRestartClock(); }
       cgRenderPlay();
       cgAfter();
       return;
@@ -11487,6 +11674,14 @@ THIS SOFTWARE.</pre>
       case 'buzz': cgBuzz(Number(el.dataset.p)); break;
       case 'begin': if (run.phase === 'handover') cgBeginTurn(); break;
       case 'hint': run.hint = true; cgQ().hinted = true; cgRenderPlay(); break;
+      case 'undo':
+        if (cgD().undo && cgD().undo(cgQ(), run)) {
+          clearTimeout(cgAutoTimer);
+          cgAutoTimer = null;
+          cgRenderPlay();
+          cgAfter();
+        }
+        break;
       case 'pause': run.paused = !run.paused; keepFocus($('cg-play'), cgRenderTop); break;
       case 'vote': {
         if (run.phase !== 'vote') return;
@@ -11529,9 +11724,16 @@ THIS SOFTWARE.</pre>
     const run = cgRun();
     const t = e.target;
     const typing = Boolean(t.closest && t.closest('input, textarea'));
+    // A buzzer key held down keeps repeating: those repeats mustn't answer the question, or type into its box.
+    if (cgHeldKey !== null && e.key.toLowerCase() === cgHeldKey) {
+      if (e.repeat) { e.preventDefault(); return; }
+      cgHeldKey = null;
+    }
+    // Held keys repeat, so ignore the repeats: one press, one buzz or one mark (for example Y or N in the spelling bee).
+    if (e.repeat && !typing && e.key.length === 1) return;
     if (run.style === 'buzz' && run.phase === 'buzz' && !typing && !e.altKey && e.key.length === 1) {
       const p = BUZZ_KEYS.slice(0, run.names.length).indexOf(e.key.toUpperCase());
-      if (p >= 0) { e.preventDefault(); cgBuzz(p); return; }
+      if (p >= 0) { e.preventDefault(); cgHeldKey = e.key.toLowerCase(); cgBuzz(p); return; }
     }
     if (cgCanInteract()) {
       const r = cgD().key(e, cgQ(), run);
@@ -11726,11 +11928,31 @@ THIS SOFTWARE.</pre>
       saveWho();
       render();
     });
+    window.addEventListener('popstate', onPopState);
+    window.addEventListener('pagehide', saveSession);
+    document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden') saveSession(); });
+    window.addEventListener('beforeunload', (e) => {
+      if (!groupGameUnderWay()) return;
+      e.preventDefault();
+      e.returnValue = '';
+    });
     fbBind();
     spBind();
     cgBind();
     if (canSpeak) { try { window.speechSynthesis.getVoices(); } catch (e) { /* ignore */ } } // starts loading voices
   }
+
+  // A game that's under way survives a refresh: the page keeps a copy of where everything is for
+  // this browser tab only (it's gone once the tab is closed).
+  const SESSION_STORE = 'icg-session';
+  function saveSession() {
+    try { sessionStorage.setItem(SESSION_STORE, JSON.stringify({ state })); } catch (e) { /* storage unavailable or full */ }
+  }
+  function loadSession() {
+    try { const v = JSON.parse(sessionStorage.getItem(SESSION_STORE)); return v && typeof v === 'object' && v.state ? v : {}; } catch (e) { return {}; }
+  }
+  // A group or class game that's under way: closing the tab would lose its scores, so the browser asks first.
+  const groupGameUnderWay = () => Object.values(state.cg).some((g) => g.view === 'play' && g.run && g.run.mode !== 'solo');
 
   function freshFb() { return { view: 'setup', setup: fbLoadSetup(), game: null }; }
   function freshSp() { return { view: 'setup', setup: spLoadSetup(), game: null }; }
@@ -11763,7 +11985,36 @@ THIS SOFTWARE.</pre>
   }
 
   function boot(data) {
-    state = restore(data && data.state) || freshState();
+    let restored = false;
+    try {
+      const saved = restore(data && data.state);
+      restored = Boolean(saved);
+      state = saved || freshState();
+      tidyState();
+    } catch (e) {
+      // A saved copy this version can't read: start afresh.
+      restored = false;
+      state = freshState();
+      tidyState();
+    }
+    // A link ending in #computing or #binary opens straight to that subject or game. After a refresh the
+    // link and the restored page agree, so nothing changes; any games under way are kept either way.
+    let fromLink = false;
+    const link = placeFromHash();
+    if (!restored || link !== placeKey()) {
+      const [kind, id] = link.split(':');
+      if (kind === 'subject') { state.screen = 'subject'; state.subject = id; }
+      else if (kind === 'game') { state.screen = 'game'; state.gameId = id; state.subject = GAMES[id].subject; fromLink = true; }
+      else state.screen = 'home';
+    }
+    bindEvents();
+    // A game from a link opens in the version chosen in "Who's playing?"; a restored game carries on as it was.
+    if (state.screen === 'game') GAMES[state.gameId].open(!fromLink);
+    else render();
+  }
+
+  // Brings a saved or fresh state up to date with this version of the page.
+  function tidyState() {
     // A FizzBuzz setup or game from before rule types and counting in steps.
     state.fb.setup = fbNormalise(state.fb.setup);
     const fg = state.fb.game;
@@ -11781,19 +12032,10 @@ THIS SOFTWARE.</pre>
     const oldCode = state.cg.code && state.cg.code.run;
     if (oldCode && oldCode.qs.some((q) => !q.lang || !CODE_BY_ID[q.pid])) { state.cg.code.run = null; state.cg.code.view = 'setup'; }
     Object.values(state.cg).forEach((g) => { if (!g.run && g.view !== 'setup') g.view = 'setup'; });
-    if (!data || !data.state) {
-      // A link ending in #computing or #binary opens straight to that subject or game.
-      const target = location.hash.slice(1);
-      if (subjectById(target)) { state.screen = 'subject'; state.subject = target; }
-      else if (GAMES[target] && subjectById(GAMES[target].subject)) { state.screen = 'game'; state.gameId = target; state.subject = GAMES[target].subject; }
-    }
-    bindEvents();
-    if (state.screen === 'game') GAMES[state.gameId].open(true);
-    else render();
   }
 
   if (typeof window.claude?.hot?.snapshot === 'function') window.claude.hot.snapshot(() => ({ state }));
-  window.claude?.hot?.ready ? window.claude.hot.ready(boot) : boot(window.claude?.hot?.data ?? {});
+  window.claude?.hot?.ready ? window.claude.hot.ready(boot) : boot(window.claude?.hot?.data ?? loadSession());
 })();
 </script>
 </body>

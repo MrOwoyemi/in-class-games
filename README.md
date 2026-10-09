@@ -25,13 +25,13 @@ It works best on a computer or interactive whiteboard. It also works on tablets 
 | Maths | FizzBuzz, Times Table Sprint, Hit the Target, Fraction Wall |
 | English | Spelling Challenge, Punctuation Fix, Homophone Hunt, Device Detective |
 | Science | Periodic Pairs, Label the Cell, Food Web Builder |
-| Computing (AQA 8525) | Binary Switches (3.3), Logic Gate Lights (3.4.2), Code Shuffle (3.1 and 3.2) |
+| Computing (AQA 8525) | Binary Switches (3.3.1, 3.3.2 and 3.3.4), Logic Gate Lights (3.4.2), Code Shuffle (3.1 and 3.2) |
 
 Several games let you add your own content, including your own spelling lists (which you can save) and lines from the book your class is reading.
 
 ## Privacy
 
-Everything runs in the web browser. Nothing anyone types, including pupils' names in the spelling bee, is sent anywhere. Saved word lists and practice records stay on the computer that made them. The page loads its fonts from Google Fonts.
+Everything runs in the web browser. Nothing anyone types, including pupils' names in the spelling bee, is sent anywhere. Saved word lists and practice records stay on the computer that made them, and a game that's under way is kept in its browser tab, so refreshing the page doesn't lose it. The page loads its fonts from Google Fonts.
 
 ## Using it without the internet
 
