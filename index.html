@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Educational In-Class Games</title>
-<meta name="description" content="Classroom games for Maths, English, Science, Computing, History and Geography. Every game can be played on your own, in groups, or as a whole class on the board.">
+<meta name="description" content="Classroom games for Maths, English, Science and Computing. Every game can be played on your own, in groups, or as a whole class on the board.">
 <meta property="og:title" content="Educational In-Class Games">
-<meta property="og:description" content="Classroom games for Maths, English, Science, Computing, History and Geography. Every game can be played on your own, in groups, or as a whole class on the board.">
+<meta property="og:description" content="Classroom games for Maths, English, Science and Computing. Every game can be played on your own, in groups, or as a whole class on the board.">
 <meta property="og:type" content="website">
 <meta name="theme-color" content="#2443a6">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect x='9' y='4' width='46' height='56' rx='6' fill='%232b56a6'/%3E%3Crect x='9' y='4' width='9' height='56' rx='4' fill='%23173f80'/%3E%3Crect x='24' y='15' width='24' height='14' rx='2' fill='%23fcfcfa'/%3E%3Cpath d='M28 20h16M28 24h10' stroke='%232443a6' stroke-width='2.4' stroke-linecap='round'/%3E%3C/svg%3E">
@@ -1502,6 +1502,12 @@
   .dv-card.bad { border-color: var(--wrong); background: var(--wrong-wash); }
   .dv-should { display: block; margin-top: 4px; font: 700 .8rem var(--font-body); color: var(--wrong); }
 
+  /* The exam board note on the home and subject pages */
+  .notice {
+    margin: 0; max-width: 78ch; padding: 12px 16px; border: 1.5px solid var(--line); border-left: 6px solid var(--hl-5);
+    border-radius: 10px; background: var(--card); color: var(--ink); line-height: 1.5;
+  }
+
   /* Footer: privacy note and credits (hidden while a game is being played) */
   .site-foot { margin-top: 56px; padding-top: 16px; border-top: 1px dashed var(--line); display: grid; gap: 8px; font-size: .9rem; color: var(--ink-soft); }
   .site-foot p { margin: 0; max-width: 72ch; }
@@ -1527,7 +1533,7 @@
     h1 { font-size: clamp(4rem, 6vw, 6.5rem); }
 
     /* Home and subject pages */
-    .shelf { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px; }
+    .shelf { grid-template-columns: repeat(var(--cols, 3), minmax(0, 1fr)); gap: 28px; }
     .book { min-height: 17rem; padding: 24px 24px 22px 46px; }
     .book-label { width: min(100%, 19rem); }
     .mini-book { width: 80px; height: 104px; }
@@ -1677,6 +1683,7 @@
         <h1 id="home-title">Educational <span class="hl c1">In-Class</span> Games</h1>
         <p class="lede">Quick games to play together as a class or on your own. Pick a subject to see its games.</p>
       </div>
+      <p class="notice" role="note"><b>Not matched to an exam board.</b> No exam board has been chosen and no exam board’s specification has been used, so the content follows general curriculum topics and may not match exactly what your course requires. Check it against your own specification before relying on it.</p>
       <ul class="shelf" id="subjects" aria-label="Subjects"></ul>
     </section>
 
@@ -1690,6 +1697,7 @@
           <p class="lede" id="subject-blurb"></p>
         </div>
       </header>
+      <p class="notice" role="note"><b>Not matched to an exam board.</b> No exam board has been chosen and no exam board’s specification has been used, so the content follows general curriculum topics and may not match exactly what your course requires. Check it against your own specification before relying on it.</p>
       <div class="game-list" id="game-list"></div>
       <button type="button" class="btn-link" data-nav="home">← All subjects</button>
     </section>
@@ -2029,10 +2037,11 @@
     </section>
 
     <footer class="site-foot">
+      <p><b>Not matched to an exam board.</b> No exam board’s specification has been used, so check the content against your own course.</p>
       <p><b>Private by design.</b> Everything runs in your web browser. Nothing you type, including pupils’ names, is sent anywhere, and saved word lists and scores stay on the computer you use.</p>
       <details>
         <summary>Credits and licences</summary>
-        <p>Map outlines in Pin the Place come from Natural Earth (public domain), via the world-atlas project, which is shared under this licence:</p>
+        <p>Map outlines for the Geography games come from Natural Earth (public domain), via the world-atlas project, which is shared under this licence:</p>
         <pre>Copyright 2013-2019 Michael Bostock
 
 Permission to use, copy, modify, and/or distribute this software for any purpose
@@ -2070,14 +2079,17 @@ THIS SOFTWARE.</pre>
   // ================= Subjects and their games =================
   // To add a game: give it an entry in GAMES, list its id in its subject's `games`,
   // and add a <section id="game-<id>" class="game-screen"> for it in the page.
-  const SUBJECTS = [
+  const ALL_SUBJECTS = [
     { id: 'maths', name: 'Maths', blurb: 'Number, patterns and problem solving', paper: 'squared', games: ['fizzbuzz', 'tables', 'target', 'fractions'] },
     { id: 'english', name: 'English', blurb: 'Reading, spelling and grammar', paper: 'lined', games: ['spelling', 'punctuation', 'homophones', 'devices'] },
     { id: 'science', name: 'Science', blurb: 'Biology, chemistry and physics', paper: 'squared', games: ['periodic', 'cell', 'foodweb'] },
     { id: 'computing', name: 'Computing', blurb: 'Algorithms, logic and code', paper: 'squared', games: ['binary', 'logic', 'code'] },
-    { id: 'history', name: 'History', blurb: 'People, events and dates', paper: 'lined', games: ['timeline', 'who', 'source'] },
-    { id: 'geography', name: 'Geography', blurb: 'Places, maps and the planet', paper: 'lined', games: ['grid', 'pin', 'climate'] },
+    { id: 'history', name: 'History', blurb: 'People, events and dates', paper: 'lined', games: ['timeline', 'who', 'source'], hidden: true },
+    { id: 'geography', name: 'Geography', blurb: 'Places, maps and the planet', paper: 'lined', games: ['grid', 'pin', 'climate'], hidden: true },
   ];
+  // History and Geography are hidden until they've been checked against an exam board.
+  // To show a subject again, remove `hidden: true` from it above.
+  const SUBJECTS = ALL_SUBJECTS.filter((s) => !s.hidden);
   const GAMES = {
     // On your own, FizzBuzz has its own screen. In groups and as a class it runs on the shared game screen.
     fizzbuzz: {
@@ -2441,6 +2453,7 @@ THIS SOFTWARE.</pre>
   }
 
   function renderHome() {
+    $('subjects').style.setProperty('--cols', SUBJECTS.length <= 4 ? SUBJECTS.length : 3);
     $('subjects').innerHTML = SUBJECTS.map((s) => {
       const n = s.games.length;
       return `
@@ -2532,7 +2545,7 @@ THIS SOFTWARE.</pre>
 
   function openGame(id) {
     const game = GAMES[id];
-    if (!game) return;
+    if (!game || !subjectById(game.subject)) return; // games in hidden subjects can't be opened
     leaveGame();
     state.screen = 'game';
     state.gameId = id;
@@ -11381,8 +11394,14 @@ THIS SOFTWARE.</pre>
     if (!MODES.some((m) => m.id === s.who)) s.who = loadWho();
     if (!s.cg) s.cg = {};
     Object.keys(CG_DEFS).forEach((id) => { if (!s.cg[id] || !s.cg[id].settings) s.cg[id] = cgFresh(id); });
-    if (!GAMES[s.gameId]) s.gameId = 'fizzbuzz';
-    if (!subjectById(s.subject)) s.subject = 'maths';
+    if (!GAMES[s.gameId] || !subjectById(GAMES[s.gameId].subject)) {
+      s.gameId = 'fizzbuzz';
+      if (s.screen === 'game') s.screen = 'home';
+    }
+    if (!subjectById(s.subject)) {
+      s.subject = 'maths';
+      if (s.screen === 'subject') s.screen = 'home';
+    }
     return s;
   }
 
@@ -11407,7 +11426,7 @@ THIS SOFTWARE.</pre>
       // A link ending in #computing or #binary opens straight to that subject or game.
       const target = location.hash.slice(1);
       if (subjectById(target)) { state.screen = 'subject'; state.subject = target; }
-      else if (GAMES[target]) { state.screen = 'game'; state.gameId = target; state.subject = GAMES[target].subject; }
+      else if (GAMES[target] && subjectById(GAMES[target].subject)) { state.screen = 'game'; state.gameId = target; state.subject = GAMES[target].subject; }
     }
     bindEvents();
     if (state.screen === 'game') GAMES[state.gameId].open(true);
