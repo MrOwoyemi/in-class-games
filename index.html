@@ -2432,7 +2432,8 @@ THIS SOFTWARE.</pre>
   let state;
   let shownKey = null;
   let shownPlace = null;
-  let opening = false;
+  let opening = false; // a book is opening or closing
+  let closing = null; // while a book is closing: stops the animation
 
   // ================= Shared pieces =================
   const markSVG = (ok) => (ok
@@ -2535,6 +2536,7 @@ THIS SOFTWARE.</pre>
     else goHome();
   }
   function onPopState(e) {
+    if (closing) closing(); // Back or Forward again while a book is closing: stop the animation where it is
     const place = e.state && e.state.icg ? e.state.icg : placeFromHash();
     restoringHistory = true;
     try {
@@ -2653,7 +2655,12 @@ THIS SOFTWARE.</pre>
     if (state.screen === 'game') GAMES[state.gameId].leave();
   }
 
+  // Back to the shelf: from a subject or a game, its book closes on the way.
   function goHome() {
+    if (state.screen !== 'home' && closeBook(state.subject)) return;
+    showHome();
+  }
+  function showHome() {
     leaveGame();
     state.screen = 'home';
     render();
@@ -2739,6 +2746,89 @@ THIS SOFTWARE.</pre>
     };
     grow.oncancel = () => { show(); finish(); };
     setTimeout(() => { if (!finished) { show(); finish(); } }, 2500); // safety net
+  }
+
+  // Opening in reverse: the subject's page fills the window, shrinks back into its book on the shelf,
+  // and the cover swings shut. Returns false (and does nothing) if it can't animate.
+  function closeBook(id) {
+    const s = subjectById(id);
+    if (!s || opening || prefersLessMotion() || typeof document.body.animate !== 'function') return false;
+    opening = true;
+    const from = placeKey();
+    const vw = document.documentElement.clientWidth;
+    const vh = window.innerHeight;
+    const fly = document.createElement('div');
+    fly.className = 'fly';
+    fly.setAttribute('aria-hidden', 'true');
+    // It catches clicks while it plays, so nothing underneath is clicked by mistake.
+    Object.assign(fly.style, { left: '0px', top: '0px', width: `${vw}px`, height: `${vh}px`, pointerEvents: 'auto' });
+    fly.innerHTML = `<div class="fly-page paper-${s.paper}" style="border-radius: 0"><span class="fly-title">${esc(s.name)}</span></div>`;
+    document.body.appendChild(fly);
+
+    let btn = null;
+    let finished = false;
+    const anims = [];
+    const finish = () => {
+      if (finished) return;
+      finished = true;
+      closing = null;
+      anims.forEach((a) => a.cancel());
+      fly.remove();
+      if (btn) btn.style.visibility = '';
+      opening = false;
+    };
+    closing = finish;
+
+    // The page fades in over the screen, then the shelf is drawn underneath it.
+    const fadeIn = fly.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 200, easing: 'ease-in', fill: 'forwards' });
+    anims.push(fadeIn);
+    fadeIn.onfinish = () => {
+      if (finished) return;
+      if (placeKey() !== from) { finish(); return; }
+      showHome();
+      btn = document.querySelector(`#subjects .book[data-subject="${id}"]`);
+      if (!btn) { finish(); return; }
+      btn.scrollIntoView({ block: 'nearest' }); // on a small screen the book may be further down the shelf
+      const r = btn.getBoundingClientRect();
+      btn.style.visibility = 'hidden';
+      const cover = document.createElement('div');
+      cover.className = 'fly-cover';
+      cover.innerHTML = `<div class="book cover-${s.id} fly-front">${btn.innerHTML}</div><div class="fly-back cover-${s.id}"></div>`;
+      fly.appendChild(cover);
+      anims.push(
+        fly.animate(
+          [
+            { left: '0px', top: '0px', width: `${vw}px`, height: `${vh}px` },
+            { left: `${r.left}px`, top: `${r.top}px`, width: `${r.width}px`, height: `${r.height}px` },
+          ],
+          { duration: 460, easing: 'cubic-bezier(.8, 0, .4, 1)', fill: 'forwards' },
+        ),
+        fly.querySelector('.fly-page').animate(
+          [{ borderRadius: '0px' }, { borderRadius: '4px 14px 14px 4px' }],
+          { duration: 460, fill: 'forwards' },
+        ),
+      );
+      const shut = cover.animate(
+        [{ transform: 'rotateY(-178deg)' }, { transform: 'rotateY(0deg)' }],
+        { duration: 650, delay: 260, easing: 'cubic-bezier(.75, 0, .45, .95)', fill: 'both' },
+      );
+      anims.push(shut);
+      shut.onfinish = () => { finish(); focusBook(); };
+    };
+    // Keyboard focus goes back to the book you came out of.
+    const focusBook = () => {
+      const book = state.screen === 'home' && document.querySelector(`#subjects .book[data-subject="${id}"]`);
+      const a = document.activeElement;
+      if (book && (!a || a === document.body || a.id === 'home-title')) book.focus({ preventScroll: true });
+    };
+    // Safety net, for when animations don't run (for example in a background tab).
+    setTimeout(() => {
+      if (finished) return;
+      if (placeKey() === from) showHome();
+      finish();
+      focusBook();
+    }, 2500);
+    return true;
   }
 
   // ================= FizzBuzz =================
@@ -11903,7 +11993,7 @@ THIS SOFTWARE.</pre>
   // Clicks on anything marked data-nav, data-subject or data-game move between screens.
   function onNavClick(e) {
     const el = e.target.closest('[data-nav], [data-subject], [data-game]');
-    if (!el) return;
+    if (!el || closing) return;
     if (el.dataset.nav === 'home') goHome();
     else if (el.dataset.game) openGame(el.dataset.game);
     else if (el.dataset.subject && el.classList.contains('book')) openBook(el, el.dataset.subject);
@@ -11912,7 +12002,7 @@ THIS SOFTWARE.</pre>
 
   // Each game decides which keys (and modifier keys) it uses.
   function onKey(e) {
-    if (state.screen !== 'game') return;
+    if (state.screen !== 'game' || closing) return;
     GAMES[state.gameId].onKey(e);
   }
 
