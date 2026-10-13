@@ -1,6 +1,6 @@
 # Educational In-Class Games
 
-Fourteen classroom games for Maths, English, Science and Computing. Every game has three versions:
+Classroom games for Maths, English, Science and Computing. Computing has a drop-down for each key stage: KS3 for Years 7 and 8, and KS4 for Years 9 to 11. Every game has three versions:
 
 - **On your own:** one pupil at a computer, with hints, explanations and a chance to practise mistakes.
 - **In groups:** players or teams share one computer, taking turns or using buzzer keys.
@@ -8,7 +8,7 @@ Fourteen classroom games for Maths, English, Science and Computing. Every game h
 
 **Play it here: https://mrowoyemi.github.io/in-class-games/**
 
-> **Exam boards.** The Computing games follow the [AQA GCSE Computer Science specification (8525)](https://www.aqa.org.uk/subjects/computer-science/gcse/computer-science-8525/specification), including AQA's wording, Boolean notation and pseudo-code. The Maths, English and Science games aren't matched to an exam board: they follow general curriculum topics and may not match exactly what your course requires, so check them against your own specification. This site isn't produced or endorsed by AQA or any other exam board.
+> **Exam boards.** Computing KS3 (Years 7 and 8) follows the [national curriculum for computing at key stage 3](https://www.gov.uk/government/publications/national-curriculum-in-england-computing-programmes-of-study/national-curriculum-in-england-computing-programmes-of-study). Computing KS4 (Years 9 to 11) follows the [AQA GCSE Computer Science specification (8525)](https://www.aqa.org.uk/subjects/computer-science/gcse/computer-science-8525/specification), including AQA's wording, Boolean notation and pseudo-code. The exceptions are Typing Trainer and the everyday online safety questions in Cyber Safe, which are general skills rather than part of the specification. The Maths, English and Science games aren't matched to an exam board: they follow general curriculum topics and may not match exactly what your course requires, so check them against your own specification. This site isn't produced or endorsed by AQA or any other exam board.
 
 ## Using it in class
 
@@ -25,13 +25,14 @@ It works best on a computer or interactive whiteboard. It also works on tablets 
 | Maths | FizzBuzz, Times Table Sprint, Hit the Target, Fraction Wall |
 | English | Spelling Challenge, Punctuation Fix, Homophone Hunt, Device Detective |
 | Science | Periodic Pairs, Label the Cell, Food Web Builder |
-| Computing (AQA 8525) | Binary Switches (3.3.1, 3.3.2 and 3.3.4), Logic Gate Lights (3.4.2), Code Shuffle (3.1 and 3.2) |
+| Computing KS3 (Years 7 and 8) | Binary Switches (binary and decimal, binary addition), Logic Gate Lights (AND, OR and NOT), Code Shuffle (Python), Cyber Safe (online safety), Typing Trainer |
+| Computing KS4 (Years 9 to 11, AQA 8525) | Binary Switches (3.3), Logic Gate Lights (3.4.2), Code Shuffle (3.1 and 3.2), Cyber Safe (3.6, plus online safety), Typing Trainer |
 
 Several games let you add your own content, including your own spelling lists (which you can save) and lines from the book your class is reading.
 
 ## Privacy
 
-Everything runs in the web browser. Nothing anyone types, including pupils' names in the spelling bee, is sent anywhere. Saved word lists and practice records stay on the computer that made them, and a game that's under way is kept in its browser tab, so refreshing the page doesn't lose it. The page loads its fonts from Google Fonts.
+Everything runs in the web browser. Nothing anyone types, including pupils' names in the spelling bee, is sent anywhere. Saved word lists, practice records and typing speeds stay on the computer that made them. The page loads its fonts from Google Fonts.
 
 ## Using it without the internet
 
