@@ -25,7 +25,7 @@ It works best on a computer or interactive whiteboard. It also works on tablets 
 | Maths | FizzBuzz, Times Table Sprint, Hit the Target, Fraction Wall |
 | English | Spelling Challenge, Punctuation Fix, Homophone Hunt, Device Detective |
 | Science | Periodic Pairs, Label the Cell, Food Web Builder |
-| Computing KS3 (Years 7 and 8) | Binary Switches (binary and decimal, binary addition), Logic Gate Lights (AND, OR and NOT), Code Shuffle (Python), Cyber Safe (online safety), Typing Trainer |
+| Computing KS3 (Years 7 and 8) | Cyber Safe (online safety, sources and copyright), Typing Trainer, Binary Switches (binary basics), Code Shuffle (Python, Year 7 and Year 8 programs) |
 | Computing KS4 (Years 9 to 11, AQA 8525) | Binary Switches (3.3), Logic Gate Lights (3.4.2), Code Shuffle (3.1 and 3.2), Cyber Safe (3.6, plus online safety), Typing Trainer |
 
 Several games let you add your own content, including your own spelling lists (which you can save) and lines from the book your class is reading.
