@@ -1,12 +1,12 @@
 <!doctype html>
-<html lang="en-GB">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Educational In-Class Games</title>
-<meta name="description" content="Classroom games for Maths, English, Science and Computing (AQA GCSE Computer Science). Every game can be played on your own, in groups, or as a whole class on the board.">
+<meta name="description" content="Classroom games for Maths, English, Science and Computing (key stage 3, and AQA GCSE Computer Science at key stage 4). Every game can be played on your own, in groups, or as a whole class on the board.">
 <meta property="og:title" content="Educational In-Class Games">
-<meta property="og:description" content="Classroom games for Maths, English, Science and Computing (AQA GCSE Computer Science). Every game can be played on your own, in groups, or as a whole class on the board.">
+<meta property="og:description" content="Classroom games for Maths, English, Science and Computing (key stage 3, and AQA GCSE Computer Science at key stage 4). Every game can be played on your own, in groups, or as a whole class on the board.">
 <meta property="og:type" content="website">
 <meta name="theme-color" content="#2443a6">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect x='9' y='4' width='46' height='56' rx='6' fill='%232b56a6'/%3E%3Crect x='9' y='4' width='9' height='56' rx='4' fill='%23173f80'/%3E%3Crect x='24' y='15' width='24' height='14' rx='2' fill='%23fcfcfa'/%3E%3Cpath d='M28 20h16M28 24h10' stroke='%232443a6' stroke-width='2.4' stroke-linecap='round'/%3E%3C/svg%3E">
@@ -44,11 +44,6 @@
     --sub-computing: #4f4392;
     --sub-history: #8a5a22;
     --sub-geography: #1d7373;
-    --sub-business: #3d5368;
-    --sub-childdev: #a3406d;
-    --sub-imedia: #a8481a;
-    --sub-mfl: #5d6b1f;
-    --sub-music: #7a2e5c;
     --on-cover: #ffffff;
     --label: #fcfcfa;
     --label-ink: #2443a6;
@@ -116,11 +111,6 @@
       --sub-computing: #574a96;
       --sub-history: #85602f;
       --sub-geography: #2a6b6b;
-      --sub-business: #4a5c70;
-      --sub-childdev: #9a4a6d;
-      --sub-imedia: #9c5226;
-      --sub-mfl: #5f6b2b;
-      --sub-music: #7a3a60;
       --label: #e9ecf1;
       --tok-str: #ffab8f;
       --tok-num: #d9a9ff;
@@ -174,11 +164,6 @@
     --sub-computing: #574a96;
     --sub-history: #85602f;
     --sub-geography: #2a6b6b;
-    --sub-business: #4a5c70;
-    --sub-childdev: #9a4a6d;
-    --sub-imedia: #9c5226;
-    --sub-mfl: #5f6b2b;
-    --sub-music: #7a3a60;
     --label: #e9ecf1;
     --tok-str: #ffab8f;
     --tok-num: #d9a9ff;
@@ -292,11 +277,6 @@
   .cover-computing { --cover: var(--sub-computing); }
   .cover-history { --cover: var(--sub-history); }
   .cover-geography { --cover: var(--sub-geography); }
-  .cover-business { --cover: var(--sub-business); }
-  .cover-childdev { --cover: var(--sub-childdev); }
-  .cover-imedia { --cover: var(--sub-imedia); }
-  .cover-mfl { --cover: var(--sub-mfl); }
-  .cover-music { --cover: var(--sub-music); }
 
   .shelf { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: minmax(0, 1fr); gap: 20px; }
   .shelf li { display: grid; grid-template-columns: minmax(0, 1fr); min-width: 0; }
@@ -1035,8 +1015,6 @@
   .web-svg .node.sel text, .web-svg .node.focus text, .web-svg .node.ok text { fill: var(--on-hl); }
   .web-svg .node.bad rect { fill: var(--wrong-wash); stroke: var(--wrong); stroke-width: 3; }
   .web-svg .node.gone { opacity: .55; }
-  .web-svg .node.locked:not(.focus) rect { stroke: var(--ink-soft); stroke-dasharray: 5 4; }
-  .web-svg .node.locked:not(.focus) text { fill: var(--ink-soft); }
   .web-svg .cross { stroke: var(--wrong); stroke-width: 3; }
   .web-svg .arrow { stroke: var(--ink-soft); stroke-width: 2.5; }
   .web-svg .arrow.ok { stroke: var(--right); stroke-width: 3; }
@@ -1550,6 +1528,109 @@
     background: var(--paper); color: var(--ink-soft); font-size: .8rem; font-weight: 700; white-space: nowrap;
   }
 
+  /* Cyber Safe: messages drawn like an email, a text, a chat, a pop-up or a web page */
+  .cy-board { width: 100%; display: grid; justify-items: center; gap: 14px; }
+  .cy-context { margin: 0; max-width: 36rem; color: var(--ink-soft); font-style: italic; text-align: center; }
+  .cy-msg { width: 100%; max-width: 36rem; overflow: hidden; border: 2px solid var(--line); border-radius: 14px; background: var(--card); color: var(--ink); text-align: left; line-height: 1.45; }
+  .cy-msg p { margin: 0; }
+  .cy-head { display: grid; gap: 4px; padding: 10px 14px; border-bottom: 1.5px solid var(--line); background: var(--paper); font-size: .95rem; overflow-wrap: anywhere; }
+  .cy-lab { display: inline-block; min-width: 4.6em; margin-right: 6px; color: var(--ink-soft); font-weight: 700; }
+  .cy-subject { font-weight: 700; }
+  .cy-msg.popup { border-color: var(--wrong); }
+  .cy-alert { border-bottom-color: var(--wrong); background: var(--wrong-wash); color: var(--wrong); font-weight: 800; letter-spacing: .02em; }
+  .cy-avatar { display: inline-block; width: 1.4em; height: 1.4em; margin-right: 8px; border-radius: 50%; background: var(--hl-4); vertical-align: middle; }
+  .cy-url { padding: 5px 12px; border: 1.5px solid var(--line); border-radius: 999px; background: var(--card); font: .9rem var(--font-code); }
+  .cy-body { display: grid; gap: 10px; padding: 12px 14px 14px; overflow-wrap: anywhere; }
+  .cy-title { font-size: 1.1rem; font-weight: 800; }
+  .cy-bubble { justify-self: start; max-width: 94%; display: grid; gap: 6px; padding: 10px 14px; border: 1.5px solid var(--line); border-radius: 16px 16px 16px 4px; background: var(--paper); }
+  .cy-fields { display: grid; gap: 6px; }
+  .cy-field { padding: 6px 10px; border: 1.5px dashed var(--line); border-radius: 8px; color: var(--ink-soft); }
+  .cy-btns { display: flex; flex-wrap: wrap; gap: 8px; }
+  .cy-fakebtn { justify-self: start; padding: 6px 14px; border-radius: 8px; background: var(--pen); color: var(--pen-ink); font-weight: 700; }
+  .cy-btns .cy-fakebtn:last-child { border: 1.5px solid var(--line); background: var(--card); color: var(--ink); }
+  .cy-linkline { color: var(--ink-soft); font: .85rem/1.4 var(--font-code); }
+  .cy-seg { padding: 1px 3px; border-radius: 4px; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
+  button.cy-seg {
+    display: inline; margin: 0; border: 0; background: none; color: inherit; font: inherit; text-align: left; cursor: pointer;
+    text-decoration: underline dotted var(--ink-soft); text-underline-offset: 4px;
+  }
+  button.cy-seg:hover { background: var(--wrong-wash); }
+  button.cy-seg[aria-pressed="true"], .cy-seg.flag { background: var(--hl-1); color: var(--on-hl); text-decoration: none; }
+  .cy-seg.found { background: var(--hl-3); color: var(--on-hl); }
+  .cy-seg.missed { background: var(--wrong-wash); outline: 2px dashed var(--wrong); outline-offset: 1px; }
+  .cy-seg.nope { text-decoration: line-through 2px var(--wrong); }
+  .cy-n { flex: none; display: inline-grid; place-items: center; width: 1.5em; height: 1.5em; margin-right: 5px; border-radius: 50%; background: var(--wrong); color: var(--card); font: 800 .72em/1 var(--font-body); vertical-align: .12em; }
+  .cy-reasons { margin: 6px 0 0; padding: 0; list-style: none; display: grid; gap: 6px; }
+  .cy-reasons li { display: flex; align-items: baseline; gap: 6px; }
+  .cy-reasons.ok li::before { content: "✓"; color: var(--right); font-weight: 800; }
+  .cy-scene { margin: 0; max-width: 42rem; font: 700 clamp(1.15rem, 2.4vw, 1.6rem)/1.45 var(--font-body); text-align: center; text-wrap: balance; }
+  .cy-opts { list-style: none; margin: 0; padding: 0; width: 100%; max-width: 46rem; display: grid; gap: 8px; }
+  .cy-opts li { display: flex; align-items: center; gap: 10px; padding: 8px 14px; border: 2px solid var(--line); border-radius: 12px; background: var(--card); font-weight: 700; text-align: left; }
+  .cy-opts li.ok { border-color: var(--right); box-shadow: 0 0 0 2px var(--right); }
+  .cy-opts li.dim { opacity: .45; }
+  .cy-opts.pw li span:last-child, .answer-list.pw .answer-btn span { font-family: var(--font-code); }
+  .cy-count { margin: 0; color: var(--ink-soft); font-weight: 700; }
+  .cy-mini { width: 100%; max-width: 20rem; font-size: .8rem; }
+  .cy-mini .cy-head, .cy-mini .cy-body { padding: 6px 10px; }
+
+  /* Typing Trainer: the line, the box you type in, your speed, and a keyboard coloured by finger */
+  /* Sized from the typing area's own width (cqi), so it fits the narrow boards in groups and as a class too. */
+  .ty { width: 100%; container-type: inline-size; display: grid; justify-items: center; gap: 12px; }
+  .ty-text { margin: 0; max-width: 100%; padding: 10px 14px; border-radius: 12px; background: var(--paper); font: 600 clamp(1.05rem, 4.4cqi, 1.9rem)/1.6 var(--font-code); white-space: pre-wrap; overflow-wrap: anywhere; }
+  .ty-text .ok { color: var(--right); }
+  .ty-text .bad { border-radius: 3px; background: var(--wrong-wash); color: var(--wrong); text-decoration: underline 2px; }
+  .ty-text .cur { box-shadow: inset 0 -3px 0 var(--pen); }
+  .ty-text .todo { color: var(--ink-soft); }
+  .ty-field { width: 100%; max-width: 44rem; }
+  .ty-input { width: 100%; padding: 10px 14px; border: 2px solid var(--line); border-radius: 12px; background: var(--card); color: var(--ink); font: 600 clamp(1.05rem, 2.2vw, 1.5rem) var(--font-code); }
+  .ty-input:focus { border-color: var(--pen); }
+  .ty-live { margin: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 20px; color: var(--ink-soft); font-weight: 700; }
+  .ty-live b { margin-right: 4px; color: var(--ink); font: 800 1.5rem/1 var(--font-display); font-variant-numeric: tabular-nums; }
+  .ty-kb { --c: var(--card); display: grid; justify-items: center; gap: .28em; font-size: min(.95rem, 2.4cqi); user-select: none; }
+  .ty-row { display: flex; gap: .28em; }
+  .ty-key {
+    position: relative; display: grid; place-items: center; min-width: 2.3em; height: 2.3em; padding: 0 .35em;
+    border: 1.5px solid var(--line); border-radius: .45em; color: var(--ink); font: 700 .95em/1 var(--font-code);
+    background: var(--card); background: color-mix(in srgb, var(--c) 40%, var(--card));
+  }
+  .ty-key.wide { min-width: 4.4em; }
+  .ty-key.space { min-width: 16em; }
+  .ty-key.bump::after { content: ""; position: absolute; bottom: .35em; left: 50%; width: .8em; height: 2px; margin-left: -.4em; border-radius: 1px; background: currentColor; }
+  .ty-key.next { border-color: var(--ink); background: var(--c); color: var(--on-hl); box-shadow: 0 0 0 3px var(--pen); transform: translateY(-2px); }
+  .ty-key.space.next { background: var(--hl-4); }
+  .ty-key.miss { border: 2.5px solid var(--wrong); }
+  .ty-kb.small { margin-top: 8px; font-size: .7rem; }
+  /* On a phone the keyboard would be too small to read (and the phone has its own), so it's left out. */
+  @container (max-width: 22rem) { .ty-kb, .ty-finger { display: none; } }
+  .ty-finger { margin: 0; min-height: 1.4em; color: var(--ink-soft); font-weight: 700; text-align: center; }
+  .ty-res { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+  .ty-res li { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+  .ty-best { color: var(--right); font-weight: 800; }
+  .grade-score small { font-size: .4em; }
+  .ty.mini { gap: 8px; }
+  .ty.mini .ty-text { padding: 4px 8px; font-size: .95rem; }
+  .ty.mini .ty-kb { font-size: .42rem; }
+  .is-class .ty-text { font-size: clamp(1.2rem, 5cqi, 2.4rem); }
+  .is-class .cy-msg { font-size: 1.15rem; }
+
+  /* Computing: a drop-down for each key stage */
+  .ks-drop { border: 2px solid var(--line); border-radius: 16px; background: var(--card); }
+  .ks-head {
+    display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 14px; padding: 16px 20px; border-radius: 14px;
+    list-style: none; cursor: pointer;
+  }
+  .ks-text { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 14px; }
+  .ks-head::-webkit-details-marker { display: none; }
+  .ks-head::after {
+    content: ""; width: .65em; height: .65em; margin: 0 4px;
+    border-right: 3px solid var(--ink); border-bottom: 3px solid var(--ink); transform: translateY(-3px) rotate(45deg); transition: transform .15s ease;
+  }
+  .ks-drop[open] > .ks-head::after { transform: translateY(2px) rotate(-135deg); }
+  .ks-head:hover { background: var(--paper); }
+  .ks-name { font: 800 clamp(1.4rem, 3vw, 1.9rem)/1.1 var(--font-display); }
+  .ks-meta { color: var(--ink-soft); font-weight: 700; }
+  .ks-body { display: grid; gap: 16px; padding: 0 16px 16px; }
+
   /* The exam board note on the home and subject pages */
   .notice {
     margin: 0; max-width: 78ch; padding: 12px 16px; border: 1.5px solid var(--line); border-left: 6px solid var(--hl-5);
@@ -1736,7 +1817,7 @@
         <h1 id="home-title">Educational <span class="hl c1">In-Class</span> Games</h1>
         <p class="lede">Quick games to play together as a class or on your own. Pick a subject to see its games.</p>
       </div>
-      <p class="notice" role="note"><b>Exam boards.</b> Computing follows the AQA GCSE Computer Science specification (8525). The other subjects aren’t matched to an exam board: they follow general curriculum topics and may not match exactly what your course requires, so check them against your own specification. This site isn’t produced or endorsed by any exam board.</p>
+      <p class="notice" role="note"><b>Exam boards.</b> In Computing, key stage 4 (Years 9 to 11) follows the AQA GCSE Computer Science specification (8525), apart from typing practice and everyday online safety, and key stage 3 (Years 7 and 8) follows the national curriculum for computing. The other subjects aren’t matched to an exam board: they follow general curriculum topics and may not match exactly what your course requires, so check them against your own specification. This site isn’t produced or endorsed by any exam board.</p>
       <ul class="shelf" id="subjects" aria-label="Subjects"></ul>
     </section>
 
@@ -2090,7 +2171,7 @@
     </section>
 
     <footer class="site-foot">
-      <p><b>Exam boards.</b> Computing follows AQA GCSE Computer Science (8525). The other subjects aren’t matched to an exam board, so check them against your own course. Not produced or endorsed by any exam board.</p>
+      <p><b>Exam boards.</b> In Computing, key stage 4 follows AQA GCSE Computer Science (8525), apart from typing practice and everyday online safety, and key stage 3 follows the national curriculum. The other subjects aren’t matched to an exam board, so check them against your own course. Not produced or endorsed by any exam board.</p>
       <p><b>Private by design.</b> Everything runs in your web browser. Nothing you type, including pupils’ names, is sent anywhere, and saved word lists and scores stay on the computer you use.</p>
       <details>
         <summary>Credits and licences</summary>
@@ -2136,23 +2217,18 @@ THIS SOFTWARE.</pre>
     { id: 'maths', name: 'Maths', blurb: 'Number, patterns and problem solving', paper: 'squared', games: ['fizzbuzz', 'tables', 'target', 'fractions'] },
     { id: 'english', name: 'English', blurb: 'Reading, spelling and grammar', paper: 'lined', games: ['spelling', 'punctuation', 'homophones', 'devices'] },
     { id: 'science', name: 'Science', blurb: 'Biology, chemistry and physics', paper: 'squared', games: ['periodic', 'cell', 'foodweb'] },
-    { id: 'computing', name: 'Computing', blurb: 'AQA GCSE Computer Science: data, logic and programming', paper: 'squared', games: ['binary', 'logic', 'code'], exam: 'aqa' },
+    // Computing has a drop-down for each key stage: KS3 is Years 7 and 8 (national curriculum), KS4 is Years 9 to 11 (AQA GCSE).
+    { id: 'computing', name: 'Computing', years: '7 to 11', blurb: 'Key stages 3 and 4: binary, logic, programming, online safety and typing', paper: 'squared',
+      stages: [
+        { id: 'ks3', short: 'KS3', name: 'Key stage 3', years: 'Years 7 and 8', note: 'National curriculum', games: ['binary3', 'logic3', 'code3', 'cyber3', 'typing'] },
+        { id: 'ks4', short: 'KS4', name: 'Key stage 4', years: 'Years 9 to 11', note: 'AQA GCSE (8525)', games: ['binary', 'logic', 'code', 'cyber', 'typing'] },
+      ] },
     { id: 'history', name: 'History', blurb: 'People, events and dates', paper: 'lined', games: ['timeline', 'who', 'source'], hidden: true },
     { id: 'geography', name: 'Geography', blurb: 'Places, maps and the planet', paper: 'lined', games: ['grid', 'pin', 'climate'], hidden: true },
-    // More subjects taught at the school, kept here for later. They have no games yet, so they're hidden too,
-    // and none has been checked against an exam board. (Mathematics and Computer Science are here already as
-    // Maths and Computing.)
-    { id: 'business', name: 'Business Studies', blurb: 'Business, enterprise and finance', paper: 'lined', games: [], hidden: true },
-    { id: 'childdev', name: 'Child Development', blurb: 'How children grow, develop and are cared for', paper: 'lined', games: [], hidden: true },
-    { id: 'imedia', name: 'Creative iMedia', blurb: 'Planning, designing and making media products', paper: 'squared', games: [], hidden: true },
-    // Modern Foreign Languages: Spanish (Years 7 and 8, Year 9 early entry, Year 10 and Year 11) and French (Year 11).
-    // The department's aims: confident, independent learners who can listen, speak, read and write in the language,
-    // with accurate grammar and pronunciation, through engaging lessons and lots of speaking activities.
-    { id: 'mfl', name: 'Modern Foreign Languages', blurb: 'Spanish and French', paper: 'lined', games: [], hidden: true },
-    { id: 'music', name: 'Music', blurb: 'Listening, performing and composing', paper: 'lined', games: [], hidden: true },
   ];
-  // History and Geography are hidden until they've been checked against an exam board, and the subjects
-  // after them until they have games. To show a subject, remove `hidden: true` from it above.
+  // History and Geography are hidden until they've been checked against an exam board.
+  // To show a subject again, remove `hidden: true` from it above.
+  ALL_SUBJECTS.forEach((s) => { if (s.stages) s.games = [...new Set(s.stages.flatMap((st) => st.games))]; });
   const SUBJECTS = ALL_SUBJECTS.filter((s) => !s.hidden);
   const GAMES = {
     // On your own, FizzBuzz has its own screen. In groups and as a class it runs on the shared game screen.
@@ -2283,7 +2359,7 @@ THIS SOFTWARE.</pre>
     binary: cgGame('binary', {
       title: 'Binary Switches',
       summary: 'A row of switches worth 128 down to 1. Convert between binary, decimal and hexadecimal, add up to three binary numbers, and apply logical shifts.',
-      skills: 'AQA 3.3.1, 3.3.2 and 3.3.4: number bases, conversions and binary arithmetic',
+      skills: 'AQA 3.3: number bases, conversions and binary arithmetic',
       time: '10 to 15 minutes',
       versions: {
         solo: 'Binary, decimal and hexadecimal conversions, binary addition and shifts, with worked answers and hints.',
@@ -2311,6 +2387,73 @@ THIS SOFTWARE.</pre>
         solo: '20 programs from starter to secure, including linear search and bubble sort, with 3 checks for each.',
         groups: 'Pair programming: one player drives, the other navigates, and you swap every program.',
         class: 'Jumbled code on the board. Teams call out the order while the teacher moves the lines.',
+      },
+    }),
+    cyber: cgGame('cyber', {
+      title: 'Cyber Safe',
+      summary: 'Find the warning signs in scam emails, texts and pop-ups. Match situations to cyber security terms like phishing, blagging and pharming, and choose the safest thing to do online.',
+      skills: 'AQA 3.6: cyber security, plus everyday online safety',
+      time: '10 to 15 minutes',
+      versions: {
+        solo: 'Click the warning signs in scam messages, decide what’s safe, and name the threat, with the reason after every answer.',
+        groups: 'A buzzer race on one computer: first to buzz answers, and a wrong answer lets the others buzz.',
+        class: 'A message or situation on the board. Teams vote safe or scam, or pick the best answer, then the reveal explains why.',
+      },
+    }),
+    typing: cgGame('typing', {
+      title: 'Typing Trainer',
+      summary: 'Touch-typing practice, from the home row up to sentences, computing words and Python code. A keyboard shows which finger to use, and you see your speed and accuracy as you type.',
+      skills: 'Keyboard skills: touch typing, speed and accuracy',
+      time: '5 to 15 minutes',
+      versions: {
+        solo: 'Type line by line, with the next key and finger shown. See your words a minute, your accuracy and the keys to practise.',
+        groups: 'Head-to-head: players take turns to type the same line. The fastest with at least 90% accuracy wins it.',
+        class: 'Typing relay: each team sends a typist up for every line, while the class watches the speed on the board.',
+      },
+    }),
+    // Computing KS3 (Years 7 and 8)
+    binary3: cgGame('binary3', {
+      title: 'Binary Switches',
+      summary: 'A row of switches worth 8, 4, 2 and 1, or 128 down to 1. Turn decimal numbers into binary, read binary numbers, and add two binary numbers.',
+      skills: 'Binary and decimal, and binary addition',
+      time: '10 to 15 minutes',
+      versions: {
+        solo: 'Converting between binary and decimal, and binary addition, with worked answers and hints.',
+        groups: 'A buzzer race on one computer: first to buzz answers, and a wrong answer lets the others buzz.',
+        class: 'Human binary: pupils at the front are the switches and the class tells them which to flip.',
+      },
+    }),
+    logic3: cgGame('logic3', {
+      title: 'Logic Gate Lights',
+      summary: 'Circuits of AND, OR and NOT gates. Light the bulb, predict whether it lights up, and fill in truth tables.',
+      skills: 'AND, OR and NOT gates, and truth tables',
+      time: '10 to 15 minutes',
+      versions: {
+        solo: 'Light the bulb, predict it and fill in truth tables, with one or two gates.',
+        groups: 'Each player controls their own inputs. Agree first, because you get one test per circuit.',
+        class: 'A circuit on the board. Teams vote on whether the bulb will light up.',
+      },
+    }),
+    code3: cgGame('code3', {
+      title: 'Code Shuffle',
+      summary: 'The lines of a short Python program are jumbled. Drag them back into order. Programs use variables, selection, loops and lists, and include a linear search and a bubble sort.',
+      skills: 'Programming in Python, including searching and sorting',
+      time: '10 to 20 minutes',
+      versions: {
+        solo: '20 Python programs from starter to secure, with 3 checks for each.',
+        groups: 'Pair programming: one player drives, the other navigates, and you swap every program.',
+        class: 'Jumbled code on the board. Teams call out the order while the teacher moves the lines.',
+      },
+    }),
+    cyber3: cgGame('cyber3', {
+      title: 'Cyber Safe',
+      summary: 'Find the warning signs in scam emails, texts and pop-ups, choose strong passwords, and decide the safest thing to do when something worries you online.',
+      skills: 'Staying safe online: scams, passwords, privacy and reporting concerns',
+      time: '10 to 15 minutes',
+      versions: {
+        solo: 'Click the warning signs in scam messages, decide what’s safe, and choose what to do, with the reason after every answer.',
+        groups: 'A buzzer race on one computer: first to buzz answers, and a wrong answer lets the others buzz.',
+        class: 'A message or situation on the board. Teams vote safe or scam, or pick the best answer, then the reveal explains why.',
       },
     }),
     periodic: cgGame('periodic', {
@@ -2426,14 +2569,26 @@ THIS SOFTWARE.</pre>
     }),
   };
   const subjectById = (id) => SUBJECTS.find((s) => s.id === id);
+  // The subject a game was opened from, or its own.
+  const gameSubject = (id) => { const here = subjectById(state.subject); return here && here.games.includes(id) ? here : subjectById(GAMES[id].subject); };
+  // A game's key stage in Computing: the drop-down it was opened from (Typing Trainer is in both), or the first that has it.
+  const stageOf = (s, id) => (s && s.stages ? s.stages.find((st) => st.id === state.stage && st.games.includes(id)) || s.stages.find((st) => st.games.includes(id)) : null);
+  const placeTitle = (s, st) => (st ? `${s.name} ${st.short}` : s.name); // Computing KS3
+  // Which key stage drop-downs are open, remembered on this computer.
+  const STAGE_STORE = 'eicg:stages';
+  function loadStages() {
+    try { const v = JSON.parse(localStorage.getItem(STAGE_STORE)); return Array.isArray(v) ? v.filter((x) => typeof x === 'string') : []; } catch (e) { return []; }
+  }
+  function saveStages() {
+    try { localStorage.setItem(STAGE_STORE, JSON.stringify(openStages)); } catch (e) { /* storage unavailable */ }
+  }
+  let openStages = loadStages();
   const gamesLabel = (n) => (n === 1 ? '1 game' : `${n} games`);
 
   // state.screen: 'home' | 'subject' | 'game'. Each game keeps its own view, settings and progress.
   let state;
   let shownKey = null;
-  let shownPlace = null;
-  let opening = false; // a book is opening or closing
-  let closing = null; // while a book is closing: stops the animation
+  let opening = false;
 
   // ================= Shared pieces =================
   const markSVG = (ok) => (ok
@@ -2500,63 +2655,6 @@ THIS SOFTWARE.</pre>
     const key = `${state.screen}:${state.subject}:${state.gameId}:${gameView}`;
     if (shownKey !== null && shownKey !== key) window.scrollTo(0, 0);
     shownKey = key;
-    const place = placeKey();
-    if (shownPlace !== null && shownPlace !== place) focusHeading();
-    shownPlace = place;
-    syncHistory(place);
-  }
-
-  // Where we are: 'home', 'subject:maths' or 'game:fizzbuzz'.
-  const placeKey = () => (state.screen === 'home' ? 'home' : state.screen === 'subject' ? `subject:${state.subject}` : `game:${state.gameId}`);
-  // A link ending in #computing or #binary means that subject or game.
-  function placeFromHash() {
-    const target = decodeURIComponent(location.hash.slice(1));
-    if (subjectById(target)) return `subject:${target}`;
-    if (Object.prototype.hasOwnProperty.call(GAMES, target) && subjectById(GAMES[target].subject)) return `game:${target}`;
-    return 'home';
-  }
-
-  // Each screen (home, a subject, a game) gets its own browser history entry, so the Back button
-  // (or a mouse's back button, or a swipe) steps back through the screens instead of leaving the site.
-  // A game keeps its place, so going back to it carries on where it was.
-  let restoringHistory = false;
-  function syncHistory(place) {
-    const [kind, id] = place.split(':');
-    const url = `${location.pathname}${location.search}${kind === 'home' ? '' : `#${id}`}`;
-    const cur = history.state;
-    try {
-      if (restoringHistory || !cur || !cur.icg) history.replaceState({ icg: place }, '', url);
-      else if (cur.icg !== place) history.pushState({ icg: place }, '', url);
-    } catch (e) { /* history isn't available here (for example in a sandboxed frame) */ }
-  }
-  function goToPlace(place) {
-    const [kind, id] = place.split(':');
-    if (kind === 'subject' && subjectById(id)) openSubject(id);
-    else if (kind === 'game' && GAMES[id] && subjectById(GAMES[id].subject)) openGame(id);
-    else goHome();
-  }
-  function onPopState(e) {
-    if (closing) closing(); // Back or Forward again while a book is closing: stop the animation where it is
-    const place = e.state && e.state.icg ? e.state.icg : placeFromHash();
-    restoringHistory = true;
-    try {
-      if (place !== placeKey()) goToPlace(place);
-      else render();
-    } finally {
-      restoringHistory = false;
-    }
-  }
-
-  // After moving to another screen, put keyboard focus on its heading (unless the screen has already
-  // focused something, like an answer box), so keyboard and screen-reader users start at the top of it.
-  function focusHeading() {
-    const a = document.activeElement;
-    if (a && a !== document.body && a.getClientRects().length) return;
-    const screen = state.screen === 'home' ? $('home-view') : state.screen === 'subject' ? $('subject-view') : document.querySelector('.game-screen:not([hidden])');
-    const h = screen && screen.querySelector('h1');
-    if (!h) return;
-    h.setAttribute('tabindex', '-1');
-    h.focus({ preventScroll: true });
   }
 
   function renderCrumbs() {
@@ -2568,8 +2666,9 @@ THIS SOFTWARE.</pre>
       parts.push(`<span class="crumb-current" aria-current="page">${esc(subjectById(state.subject).name)}</span>`);
     } else {
       const game = GAMES[state.gameId];
-      const subject = subjectById(game.subject);
-      parts.push(`<button type="button" class="crumb" data-subject="${subject.id}">${esc(subject.name)}</button>`);
+      const subject = gameSubject(state.gameId);
+      const st = stageOf(subject, state.gameId);
+      parts.push(`<button type="button" class="crumb" data-subject="${subject.id}"${st ? ` data-stage="${st.id}"` : ''}>${esc(placeTitle(subject, st))}</button>`);
       parts.push(`<span class="crumb-current" aria-current="page">${esc(game.title)}</span>`);
     }
     nav.innerHTML = parts.join('<span class="sep" aria-hidden="true">›</span>');
@@ -2578,12 +2677,13 @@ THIS SOFTWARE.</pre>
   function renderHome() {
     $('subjects').style.setProperty('--cols', SUBJECTS.length <= 4 ? SUBJECTS.length : 3);
     $('subjects').innerHTML = SUBJECTS.map((s) => {
-      const n = s.games.length;
+      const n = s.stages ? s.stages.reduce((sum, st) => sum + st.games.length, 0) : s.games.length;
       return `
         <li>
-          <button type="button" class="book cover-${s.id}" data-subject="${s.id}" aria-label="${esc(s.name)}, ${n ? gamesLabel(n) : 'no games yet'}">
+          <button type="button" class="book cover-${s.id}" data-subject="${s.id}" aria-label="${esc(s.name)}${s.years ? `, Years ${esc(s.years)}` : ''}, ${n ? gamesLabel(n) : 'no games yet'}">
             <span class="book-label">
               <span class="label-row"><span class="label-key">Subject</span><span class="label-val">${esc(s.name)}</span></span>
+              ${s.years ? `<span class="label-row"><span class="label-key">Years</span><span class="label-val">${esc(s.years)}</span></span>` : ''}
               <span class="label-row"><span class="label-key">Games</span><span class="label-val${n ? '' : ' none'}">${n || 'None yet'}</span></span>
             </span>
             <span class="book-foot">
@@ -2595,16 +2695,22 @@ THIS SOFTWARE.</pre>
     }).join('');
   }
 
+  const NO_BOARD_NOTICE = '<b>Not matched to an exam board.</b> No exam board has been chosen and no exam board’s specification has been used, so the content follows general curriculum topics and may not match exactly what your course requires. Check it against your own specification before relying on it.';
+  const STAGE_NOTICES = {
+    ks3: '<b>The national curriculum.</b> These games follow the national curriculum for computing in England at key stage 3: binary numbers, including converting between binary and decimal and binary addition; simple Boolean logic (AND, OR and NOT); programming in Python, including searching and sorting; and using technology safely, including how to report concerns. Typing Trainer is a general keyboard skill. There’s no exam board at key stage 3: the GCSE versions of these games are under key stage 4.',
+    ks4: '<b>Based on AQA GCSE Computer Science (8525).</b> These games follow the AQA specification: number bases and binary arithmetic (3.3), Boolean logic (3.4.2), algorithms and programming using AQA pseudo-code (3.1 and 3.2), and cyber security (3.6). Typing Trainer and the everyday online safety questions in Cyber Safe are general skills, not part of the specification. The games aren’t produced or endorsed by AQA, so check against the latest specification on AQA’s website.',
+  };
+
   function renderSubject() {
     const s = subjectById(state.subject);
     const n = s.games.length;
     $('subject-book').className = `mini-book cover-${s.id}`;
-    $('subject-count').textContent = n ? `Subject · ${gamesLabel(n)}` : 'Subject';
+    $('subject-count').textContent = s.stages ? `Subject · Years ${s.years} · ${s.stages.map((st) => st.short).join(' and ')}` : n ? `Subject · ${gamesLabel(n)}` : 'Subject';
     $('subject-title').textContent = s.name;
     $('subject-blurb').textContent = s.blurb;
-    $('subject-notice').innerHTML = s.exam === 'aqa'
-      ? '<b>Based on AQA GCSE Computer Science (8525).</b> These games follow the AQA specification: number bases and binary arithmetic (3.3.1, 3.3.2 and 3.3.4), Boolean logic (3.4.2), and algorithms and programming, using AQA pseudo-code (3.1 and 3.2). They aren’t produced or endorsed by AQA, so check against the latest specification on AQA’s website.'
-      : '<b>Not matched to an exam board.</b> No exam board has been chosen and no exam board’s specification has been used, so the content follows general curriculum topics and may not match exactly what your course requires. Check it against your own specification before relying on it.';
+    // A subject split into key stages has a note for each one, inside its drop-down.
+    $('subject-notice').hidden = Boolean(s.stages);
+    $('subject-notice').innerHTML = s.stages ? '' : NO_BOARD_NOTICE;
 
     if (!n) {
       const others = SUBJECTS.filter((x) => x.games.length);
@@ -2616,71 +2722,84 @@ THIS SOFTWARE.</pre>
         </div>`;
       return;
     }
-    const who = state.who;
-    $('game-list').innerHTML = s.games.map((id) => {
-      const g = GAMES[id];
-      const note = g.progress();
-      const has = g.modes.includes(who);
-      const vpills = MODES.map((m) => {
-        const on = g.modes.includes(m.id);
-        return `<span class="vpill${on ? '' : ' off'}${m.id === who ? ' is-on' : ''}">${on ? '✓ ' : ''}${esc(m.label)}${on ? '' : ' (planned)'}</span>`;
-      }).join('');
-      const versionText = has ? g.versions[who] : 'not ready yet. You can play it on your own for now.';
-      return `
-        <article class="game-card">
-          <div class="game-art paper-${g.paper}" aria-hidden="true">${g.preview()}</div>
-          <div class="game-body">
-            <p class="eyebrow">${esc(s.name)} game</p>
-            <h2>${esc(g.title)}</h2>
-            <p class="game-summary">${esc(g.summary)}</p>
-            <dl class="meta">
-              <div><dt>Practises</dt><dd>${esc(g.skills)}</dd></div>
-              <div><dt>Players</dt><dd>${esc(g.players)}</dd></div>
-              <div><dt>Time</dt><dd>${esc(g.time)}</dd></div>
-            </dl>
-            <div class="versions">
-              <div class="vpills" aria-label="Versions">${vpills}</div>
-              <p class="version-note"><b>${esc(modeLabel(who))}:</b> ${esc(versionText)}</p>
-            </div>
-            <div class="game-actions">
-              <button type="button" class="btn-primary" data-game="${g.id}">${note ? 'Carry on with' : 'Play'} ${esc(g.title)}${!note && !has ? ' on your own' : ''}</button>
-              ${note ? `<span class="progress-note">${esc(note)}</span>` : ''}
-            </div>
+    if (s.stages) {
+      $('game-list').innerHTML = s.stages.map((st) => `
+        <details class="ks-drop" id="ks-${st.id}" data-stage="${st.id}"${openStages.includes(st.id) ? ' open' : ''}>
+          <summary class="ks-head">
+            <span class="ks-text"><span class="ks-name">${esc(st.name)}</span><span class="ks-meta">${esc(st.years)} · ${esc(st.note)} · ${gamesLabel(st.games.length)}</span></span>
+          </summary>
+          <div class="ks-body">
+            <p class="notice" role="note">${STAGE_NOTICES[st.id]}</p>
+            <div class="game-list">${st.games.map((id) => gameCardHTML(GAMES[id], s, st)).join('')}</div>
           </div>
-        </article>`;
+        </details>`).join('');
+      return;
+    }
+    $('game-list').innerHTML = s.games.map((id) => gameCardHTML(GAMES[id], s, null)).join('');
+  }
+
+  // A game's card on a subject page. stage: the key stage drop-down it's in, if the subject has them.
+  function gameCardHTML(g, s, stage) {
+    const who = state.who;
+    const note = g.progress();
+    const has = g.modes.includes(who);
+    const vpills = MODES.map((m) => {
+      const on = g.modes.includes(m.id);
+      return `<span class="vpill${on ? '' : ' off'}${m.id === who ? ' is-on' : ''}">${on ? '✓ ' : ''}${esc(m.label)}${on ? '' : ' (planned)'}</span>`;
     }).join('');
+    const versionText = has ? g.versions[who] : 'not ready yet. You can play it on your own for now.';
+    return `
+      <article class="game-card">
+        <div class="game-art paper-${g.paper}" aria-hidden="true">${g.preview()}</div>
+        <div class="game-body">
+          <p class="eyebrow">${esc(placeTitle(s, stage))} game</p>
+          <h2>${esc(g.title)}</h2>
+          <p class="game-summary">${esc(g.summary)}</p>
+          <dl class="meta">
+            <div><dt>Practises</dt><dd>${esc(g.skills)}</dd></div>
+            <div><dt>Players</dt><dd>${esc(g.players)}</dd></div>
+            <div><dt>Time</dt><dd>${esc(g.time)}</dd></div>
+          </dl>
+          <div class="versions">
+            <div class="vpills" aria-label="Versions">${vpills}</div>
+            <p class="version-note"><b>${esc(modeLabel(who))}:</b> ${esc(versionText)}</p>
+          </div>
+          <div class="game-actions">
+            <button type="button" class="btn-primary" data-game="${g.id}"${stage ? ` data-stage="${stage.id}"` : ''}>${note ? 'Carry on with' : 'Play'} ${esc(g.title)}${!note && !has ? ' on your own' : ''}</button>
+            ${note ? `<span class="progress-note">${esc(note)}</span>` : ''}
+          </div>
+        </div>
+      </article>`;
   }
 
   function leaveGame() {
     if (state.screen === 'game') GAMES[state.gameId].leave();
   }
 
-  // Back to the shelf: from a subject or a game, its book closes on the way.
   function goHome() {
-    if (state.screen !== 'home' && closeBook(state.subject)) return;
-    showHome();
-  }
-  function showHome() {
     leaveGame();
     state.screen = 'home';
     render();
   }
 
-  function openSubject(id) {
+  // stage: open that key stage's drop-down (when coming back from one of its games).
+  function openSubject(id, stage) {
     if (!subjectById(id)) return;
     leaveGame();
+    if (stage && !openStages.includes(stage)) { openStages.push(stage); saveStages(); }
     state.screen = 'subject';
     state.subject = id;
     render();
   }
 
-  function openGame(id) {
+  function openGame(id, stage) {
     const game = GAMES[id];
     if (!game || !subjectById(game.subject)) return; // games in hidden subjects can't be opened
     leaveGame();
     state.screen = 'game';
     state.gameId = id;
-    state.subject = game.subject;
+    state.subject = gameSubject(id).id;
+    if (stage) state.stage = stage;
     game.open();
   }
 
@@ -2712,14 +2831,7 @@ THIS SOFTWARE.</pre>
       fly.remove();
       opening = false;
     };
-    // Shows the subject once only. A later call (the safety net below) must not pull someone back
-    // to the subject after they've already opened one of its games.
-    let shown = false;
-    const show = () => {
-      if (shown) return;
-      shown = true;
-      if (state.screen !== 'subject' || state.subject !== id) openSubject(id);
-    };
+    const show = () => { if (state.screen !== 'subject' || state.subject !== id) openSubject(id); };
 
     const vw = document.documentElement.clientWidth;
     const vh = window.innerHeight;
@@ -2746,89 +2858,6 @@ THIS SOFTWARE.</pre>
     };
     grow.oncancel = () => { show(); finish(); };
     setTimeout(() => { if (!finished) { show(); finish(); } }, 2500); // safety net
-  }
-
-  // Opening in reverse: the subject's page fills the window, shrinks back into its book on the shelf,
-  // and the cover swings shut. Returns false (and does nothing) if it can't animate.
-  function closeBook(id) {
-    const s = subjectById(id);
-    if (!s || opening || prefersLessMotion() || typeof document.body.animate !== 'function') return false;
-    opening = true;
-    const from = placeKey();
-    const vw = document.documentElement.clientWidth;
-    const vh = window.innerHeight;
-    const fly = document.createElement('div');
-    fly.className = 'fly';
-    fly.setAttribute('aria-hidden', 'true');
-    // It catches clicks while it plays, so nothing underneath is clicked by mistake.
-    Object.assign(fly.style, { left: '0px', top: '0px', width: `${vw}px`, height: `${vh}px`, pointerEvents: 'auto' });
-    fly.innerHTML = `<div class="fly-page paper-${s.paper}" style="border-radius: 0"><span class="fly-title">${esc(s.name)}</span></div>`;
-    document.body.appendChild(fly);
-
-    let btn = null;
-    let finished = false;
-    const anims = [];
-    const finish = () => {
-      if (finished) return;
-      finished = true;
-      closing = null;
-      anims.forEach((a) => a.cancel());
-      fly.remove();
-      if (btn) btn.style.visibility = '';
-      opening = false;
-    };
-    closing = finish;
-
-    // The page fades in over the screen, then the shelf is drawn underneath it.
-    const fadeIn = fly.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 200, easing: 'ease-in', fill: 'forwards' });
-    anims.push(fadeIn);
-    fadeIn.onfinish = () => {
-      if (finished) return;
-      if (placeKey() !== from) { finish(); return; }
-      showHome();
-      btn = document.querySelector(`#subjects .book[data-subject="${id}"]`);
-      if (!btn) { finish(); return; }
-      btn.scrollIntoView({ block: 'nearest' }); // on a small screen the book may be further down the shelf
-      const r = btn.getBoundingClientRect();
-      btn.style.visibility = 'hidden';
-      const cover = document.createElement('div');
-      cover.className = 'fly-cover';
-      cover.innerHTML = `<div class="book cover-${s.id} fly-front">${btn.innerHTML}</div><div class="fly-back cover-${s.id}"></div>`;
-      fly.appendChild(cover);
-      anims.push(
-        fly.animate(
-          [
-            { left: '0px', top: '0px', width: `${vw}px`, height: `${vh}px` },
-            { left: `${r.left}px`, top: `${r.top}px`, width: `${r.width}px`, height: `${r.height}px` },
-          ],
-          { duration: 460, easing: 'cubic-bezier(.8, 0, .4, 1)', fill: 'forwards' },
-        ),
-        fly.querySelector('.fly-page').animate(
-          [{ borderRadius: '0px' }, { borderRadius: '4px 14px 14px 4px' }],
-          { duration: 460, fill: 'forwards' },
-        ),
-      );
-      const shut = cover.animate(
-        [{ transform: 'rotateY(-178deg)' }, { transform: 'rotateY(0deg)' }],
-        { duration: 650, delay: 260, easing: 'cubic-bezier(.75, 0, .45, .95)', fill: 'both' },
-      );
-      anims.push(shut);
-      shut.onfinish = () => { finish(); focusBook(); };
-    };
-    // Keyboard focus goes back to the book you came out of.
-    const focusBook = () => {
-      const book = state.screen === 'home' && document.querySelector(`#subjects .book[data-subject="${id}"]`);
-      const a = document.activeElement;
-      if (book && (!a || a === document.body || a.id === 'home-title')) book.focus({ preventScroll: true });
-    };
-    // Safety net, for when animations don't run (for example in a background tab).
-    setTimeout(() => {
-      if (finished) return;
-      if (placeKey() === from) showHome();
-      finish();
-      focusBook();
-    }, 2500);
-    return true;
   }
 
   // ================= FizzBuzz =================
@@ -2886,9 +2915,7 @@ THIS SOFTWARE.</pre>
     : r.kind === 'prime' ? isPrime(n) : r.kind === 'square' ? isSquare(n) : n % r.n === 0);
   // Indexes of every rule the number fits, in rule order.
   const fitting = (rules, n) => rules.reduce((acc, r, i) => (ruleFits(r, n) ? acc.concat(i) : acc), []);
-  // "an 8", but "a 5".
-  const aOrAn = (n) => (/^(8|1[18](\d{3})*$)/.test(String(n)) ? 'an' : 'a');
-  const ruleTag = (r) => (r.kind === 'digit' ? `has ${aOrAn(r.n)} ${r.n}` : r.kind === 'prime' ? 'prime' : r.kind === 'square' ? 'square' : `÷ ${r.n}`);
+  const ruleTag = (r) => (r.kind === 'digit' ? `has a ${r.n}` : r.kind === 'prime' ? 'prime' : r.kind === 'square' ? 'square' : `÷ ${r.n}`);
   const ruleWhat = (r) => (r.kind === 'digit' ? `numbers with the digit ${r.n}` : r.kind === 'prime' ? 'prime numbers'
     : r.kind === 'square' ? 'square numbers' : `multiples of ${r.n}`);
   const answerText = (rules, idx, n) => (idx.length ? idx.map((i) => rules[i].word).join('') : String(n));
@@ -2902,7 +2929,7 @@ THIS SOFTWARE.</pre>
   function ruleCheck(r, n) {
     if (r.kind === 'digit') {
       const has = String(n).includes(String(r.n));
-      return { yes: has, eq: String(n), why: has ? `has ${aOrAn(r.n)} ${r.n} in it` : `no ${r.n} in it` };
+      return { yes: has, eq: String(n), why: has ? `has a ${r.n} in it` : `no ${r.n} in it` };
     }
     if (r.kind === 'prime') {
       if (n < 2) return { yes: false, eq: '1 = 1 × 1', why: 'a prime needs exactly two factors' };
@@ -3589,11 +3616,11 @@ THIS SOFTWARE.</pre>
     { id: 'r-double', name: 'Double letters', words: ['accommodate', 'address', 'aggressive', 'apparent', 'committee', 'embarrass', 'exaggerate', 'necessary', 'occurred', 'possession', 'recommend', 'successful', 'tomorrow', 'interrupt', 'opportunity', 'parallel'],
       rule: 'Many tricky words hide a double letter. Say the word slowly and count the doubles: ac-com-mo-date has two c’s and two m’s.' },
     { id: 'r-ie', name: 'ie and ei', words: ['believe', 'achieve', 'piece', 'field', 'receive', 'ceiling', 'deceive', 'weird', 'seize', 'protein', 'eight', 'weight', 'reign', 'neighbour', 'foreign', 'height'],
-      rule: 'i before e when it sounds like “ee” (believe), but e before i after c (receive). Rule-breakers include weird, seize, protein and foreign. Also, ei often says “ay”, as in eight and reign, and sometimes “eye”, as in height.' },
+      rule: 'i before e when it sounds like “ee” (believe), but e before i after c (receive). Rule-breakers include weird, seize and protein. Also, ei often says “ay”, as in eight and reign, and sometimes “eye”, as in height.' },
     { id: 'r-silent', name: 'Silent letters', words: ['answer', 'island', 'knowledge', 'Wednesday', 'knight', 'muscle', 'yacht', 'rhythm', 'listen', 'castle', 'thumb', 'climb', 'autumn', 'column', 'doubt', 'scissors'],
       rule: 'Some letters are written but not said. Say the word the way it’s spelt in your head: Wed-nes-day, k-now-ledge, autum-n.' },
     { id: 'r-able', name: '-able and -ible', words: ['available', 'comfortable', 'reasonable', 'dependable', 'enjoyable', 'valuable', 'adorable', 'noticeable', 'possible', 'terrible', 'horrible', 'visible', 'edible', 'incredible', 'responsible', 'audible'],
-      rule: 'If the ending comes off and leaves a whole word, it’s usually -able (depend-able), sometimes a word that has lost its final e (value → valuable, adore → adorable). A soft c or g keeps its e, so it still sounds soft: notice → noticeable. If what’s left isn’t a word, it’s usually -ible (poss-ible).' },
+      rule: 'If the ending comes off and leaves a whole word, it’s usually -able (depend-able), sometimes a word that has lost its final e (value → valuable, adore → adorable). If what’s left isn’t a word, it’s usually -ible (poss-ible).' },
     { id: 'r-ance', name: '-ance, -ant, -ence and -ent', words: ['appearance', 'assistance', 'importance', 'tolerance', 'hindrance', 'nuisance', 'relevant', 'observant', 'difference', 'confidence', 'existence', 'convenience', 'patience', 'innocent', 'excellent', 'independent'],
       rule: 'There’s no sure rule, so think of a relative: tolerate → tolerance, and words with an -ation relative usually take -ance. After a soft c or g it’s usually -ence: innocent, intelligence.' },
     { id: 'r-tion', name: '-tion, -sion and -cian', words: ['competition', 'explanation', 'mention', 'position', 'extension', 'decision', 'television', 'comprehension', 'discussion', 'permission', 'expression', 'profession', 'musician', 'magician', 'electrician', 'politician'],
@@ -3832,7 +3859,7 @@ THIS SOFTWARE.</pre>
     physical: ['to do with the body', 'Rugby is a very physical game.'],
     piece: ['a part of something', 'Can I have a piece of cake?'],
     plough: ['a farm tool for turning over soil', 'The farmer used a plough to prepare the field.'],
-    politician: ['someone who is elected, or hopes to be elected, to help run a country or area', 'The politician gave a speech.'],
+    politician: ['someone who works in government, or wants to', 'The politician gave a speech.'],
     popular: ['liked by many people', 'Pizza is a popular food.'],
     position: ['where something is, or a job', 'Mark the position of the treasure on the map.'],
     possess: ['to own or have', 'Do you possess a library card?'],
@@ -4008,21 +4035,8 @@ THIS SOFTWARE.</pre>
   };
 
   // Real words are never offered as wrong spellings (for example "women" when the word is "woman").
-  // As well as the words in the lists, these are real words that the slips below could make from a
-  // listed word (for example "strait" from "straight", "thou" from "though", "night" from "knight"),
-  // and American spellings ("center" from "centre"). A pupil who picks one hasn't misspelt anything.
-  const SP_REAL_WORDS = ('attache bough bout braise bus buy buys caste center compete decade determine draught earl favorite filed '
-    + 'fort hard hart head hear heat herd hopping impassible knit lean lighting limb lough lovey marvelous materiel minuet naught '
-    + 'neighbor night out overran poplar posses protean recant referred rein scissor size solder solider spacial strait therefor '
-    + 'thou topped trough weigh weir wight').split(' ');
-  const SP_KNOWN = new Set([...SP_LISTS, ...SP_RULE_LISTS].flatMap((l) => l.words).concat(Object.keys(SP_INFO), SP_REAL_WORDS).map((w) => w.toLowerCase()));
+  const SP_KNOWN = new Set([...SP_LISTS, ...SP_RULE_LISTS].flatMap((l) => l.words).concat(Object.keys(SP_INFO)).map((w) => w.toLowerCase()));
   const normWord = (w) => String(w).trim().replace(/[’‘`]/g, "'").toLowerCase();
-  // Words that always start with a capital letter, like February and Wednesday, from the built-in lists.
-  // They need the capital to be right, even in your own lists. Other words can be in either case.
-  const SP_PROPER = new Map([...SP_LISTS, ...SP_RULE_LISTS].flatMap((l) => l.words)
-    .filter((w) => w[0] !== w[0].toLowerCase()).map((w) => [w.toLowerCase(), w]));
-  const spNeedsCapital = (word, said) => SP_PROPER.has(normWord(word)) && String(said).trim()[0] !== SP_PROPER.get(normWord(word))[0];
-  const spRight = (said, word) => normWord(said) === normWord(word) && !spNeedsCapital(word, said);
   const escRe = (s) => String(s).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
   // ---------- saved lists and tricky words (kept on this computer) ----------
@@ -4075,7 +4089,7 @@ THIS SOFTWARE.</pre>
         if (!/^[A-Za-z][A-Za-z'-]{0,29}$/.test(p)) { if (!bad.includes(p)) bad.push(p); return; }
         const k = p.toLowerCase();
         if (m) info[k] = [m[2], ''];
-        if (!seen.has(k)) { seen.add(k); words.push(SP_PROPER.get(k) || p); } // "february" becomes "February"
+        if (!seen.has(k)) { seen.add(k); words.push(p); }
       });
     });
     return { words, bad, info };
@@ -4257,18 +4271,12 @@ THIS SOFTWARE.</pre>
     flush();
     return html;
   }
-  // Like align, but a missing capital (february for February) counts as a wrong letter.
-  function alignWord(word, said) {
-    const ops = align(word, said);
-    if (spNeedsCapital(word, said) && ops[0] && ops[0].type === 'match' && ops[0].ti === 0) ops[0] = { ...ops[0], type: 'sub' };
-    return ops;
-  }
   // The correct word, with the letters the player got wrong or left out highlighted.
-  const correctHTML = (word, said) => joinRuns(alignWord(word, said)
+  const correctHTML = (word, said) => joinRuns(align(word, said)
     .filter((o) => o.type !== 'extra')
     .map((o) => ({ ch: word[o.ti], cls: o.type === 'match' ? '' : 'hl c1' })));
   // The player's attempt, with wrong letters underlined, extra letters struck out and gaps marked.
-  const attemptHTML = (word, said) => joinRuns(alignWord(word, said).map((o) => {
+  const attemptHTML = (word, said) => joinRuns(align(word, said).map((o) => {
     if (o.type === 'match') return { ch: said[o.ai], cls: '' };
     if (o.type === 'sub') return { ch: said[o.ai], cls: 'letter-bad' };
     if (o.type === 'extra') return { ch: said[o.ai], cls: 'letter-bad extra' };
@@ -4598,14 +4606,14 @@ THIS SOFTWARE.</pre>
       $('sp-input').focus();
       return;
     }
-    spRecord(typed, spRight(typed, g.words[g.i]));
+    spRecord(typed, normWord(typed) === normWord(g.words[g.i]));
   }
 
   function spChoose(i) {
     const g = state.sp.game;
     if (!g || g.phase !== 'choose' || i >= g.options.length) return;
     g.chosen = i;
-    spRecord(g.options[i], spRight(g.options[i], g.words[g.i]));
+    spRecord(g.options[i], normWord(g.options[i]) === normWord(g.words[g.i]));
   }
 
   function spNext() {
@@ -4922,9 +4930,8 @@ THIS SOFTWARE.</pre>
   let cgAutoTimer = null;
   let cgTicker = null;
   let cgDrag = null;
-  let cgHeldKey = null; // the buzzer key just pressed, while it may still be held down
 
-  // ---------- Binary Switches (AQA GCSE 8525, 3.3.1, 3.3.2 and 3.3.4; 3.3.3, units of information, isn't covered) ----------
+  // ---------- Binary Switches (AQA GCSE 8525, 3.3.1 to 3.3.4) ----------
   // AQA wording: decimal (not denary), up to 8 bits (0 to 255, hex 00 to FF), adding up to three numbers
   // with no more than three 1s in a column and no overflow, and logical shifts.
   const binValues = (bits) => Array.from({ length: bits }, (_, i) => 2 ** (bits - 1 - i));
@@ -4943,6 +4950,8 @@ THIS SOFTWARE.</pre>
     arith: ['add', 'shift'],
   };
   BIN_KINDS.all = [...BIN_KINDS.basics, ...BIN_KINDS.hex, ...BIN_KINDS.arith];
+  BIN_KINDS.add = ['add']; // key stage 3
+  BIN_KINDS.ks3 = ['make', 'read', 'add'];
   // Questions answered with the switches; the others are typed.
   const binUsesSwitches = (q) => ['make', 'hex2bin', 'add', 'shift'].includes(q.kind);
   const binShifted = (q) => (q.dir === 'left' ? (q.target << q.places) & (2 ** q.bits - 1) : q.target >> q.places);
@@ -5039,13 +5048,15 @@ THIS SOFTWARE.</pre>
       ${q.nums.map((n, i) => row(i ? '+' : '', toBits(n, q.bits))).join('')}
     </div>`;
   }
-  function binPreview() {
-    const values = binValues(8);
-    const bits = toBits(164, 8);
+  // ks3: 4 switches and no hexadecimal.
+  function binPreview(ks3) {
+    const n = ks3 ? 4 : 8;
+    const values = binValues(n);
+    const bits = toBits(ks3 ? 13 : 164, n);
     return `
-      <div class="bin mini" style="--bits:8">
+      <div class="bin mini" style="--bits:${n}">
         <div class="bin-row">${bits.map((b, i) => `<span class="bit${b ? ' on' : ''}"><span class="bit-value">${values[i]}</span><span class="bit-lamp"></span><span class="bit-digit">${b}</span></span>`).join('')}</div>
-        <p class="bin-string">1010 0100 = 164 = A4</p>
+        <p class="bin-string">${ks3 ? '1101 = 13' : '1010 0100 = 164 = A4'}</p>
       </div>`;
   }
 
@@ -5138,16 +5149,48 @@ THIS SOFTWARE.</pre>
     return null;
   }
   // Every gate worked out in order, from the inputs to the bulb.
-  function lgWorking(tree, vals) {
+  // words: write each gate as AND, OR and NOT (key stage 3) instead of AQA's symbols.
+  function lgWorking(tree, vals, words) {
     const steps = [];
     const walk = (node) => {
       if (node.op === 'IN') return;
       walk(node.a);
       if (node.b) walk(node.b);
-      steps.push(`<li><span class="eq">${lgAQA(node)}</span><span class="verdict">= ${lgEval(node, vals)}</span></li>`);
+      steps.push(`<li><span class="eq">${words ? esc(lgExpr(node)) : lgAQA(node)}</span><span class="verdict">= ${lgEval(node, vals)}</span></li>`);
     };
     walk(tree);
     return `<p>With ${valsText(lgInputs(tree).sort(), vals)}:</p><ul class="working">${steps.join('')}</ul>`;
+  }
+  // Questions for a game. Key stage 3 (ks3) has AND, OR and NOT only, one or two gates,
+  // no Boolean expression questions, and expressions written in words.
+  function lgMake(s, mode, ks3) {
+    const levels = s.level === 'mix' ? (ks3 ? ['1', '2'] : ['1', '2', '3']) : [s.level];
+    const pool = levels.flatMap((l) => LG_CIRCUITS[l]).filter((c) => !ks3 || !JSON.stringify(c).includes('XOR'));
+    const circuits = [];
+    let deck = [];
+    for (let k = 0; k < Number(s.rounds); k += 1) {
+      if (!deck.length) deck = shuffle(pool.slice());
+      circuits.push(JSON.parse(JSON.stringify(deck.pop())));
+    }
+    if (s.level === 'mix') circuits.sort((a, b) => lgGates(a) - lgGates(b)); // easier circuits first
+    const kinds = ks3 ? ['light', 'predict', 'table'] : ['light', 'predict', 'table', 'expr'];
+    return circuits.map((c, k) => {
+      let type = mode === 'groups' ? 'light' : s.types === 'mix' ? kinds[k % kinds.length] : s.types;
+      if (mode === 'class') type = ks3 ? 'predict' : s.classTypes === 'mix' ? (k % 2 ? 'expr' : 'predict') : s.classTypes === 'expr' ? 'expr' : 'predict';
+      // A one-input circuit (NOT A) can't give four different expressions, so swap in one of the same size.
+      if (type === 'expr' && lgInputs(c).length < 2) {
+        const two = pool.filter((p) => lgInputs(p).length > 1);
+        const same = two.filter((p) => lgGates(p) === lgGates(c));
+        c = JSON.parse(JSON.stringify(shuffle(same.length ? same : two)[0]));
+      }
+      const q = { type, c, inputs: lgInputs(c).sort() };
+      if (ks3) q.words = true;
+      if (type === 'expr') q.opts = lgExprOptions(c);
+      if (type === 'light') q.target = Math.random() < (mode === 'groups' ? 0.65 : 0.8) ? 1 : 0;
+      if (type === 'predict') q.vals = Object.fromEntries(q.inputs.map((n) => [n, Math.random() < 0.5 ? 1 : 0]));
+      lgReset(q);
+      return q;
+    });
   }
   function lgReset(q) {
     if (q.type === 'light') q.work = { vals: Object.fromEntries(q.inputs.map((k) => [k, 0])) };
@@ -5348,7 +5391,7 @@ THIS SOFTWARE.</pre>
     const targets = codeTargets(p);
     let order;
     let guard = 0;
-    do { order = shuffle(ident.slice()); guard += 1; } while (guard < 30 && targets.some((t) => t.every((v, i) => p.text[v] === p.text[order[i]])));
+    do { order = shuffle(ident.slice()); guard += 1; } while (guard < 30 && targets.some((t) => t.every((v, i) => v === order[i])));
     q.work = { order, indents: q.hard ? new Array(ident.length).fill(0) : p.indents.slice(), marks: null };
   }
   function codeMove(q, lid, d) {
@@ -5381,9 +5424,628 @@ THIS SOFTWARE.</pre>
   const pyHTML = (text) => tokenHTML(text, PY_TOKENS);
   const aqaHTML = (text) => tokenHTML(text, AQA_TOKENS);
   const codeHTML = (q, text) => (q.lang === 'python' ? pyHTML(text) : aqaHTML(text));
-  function codePreview() {
-    const lines = [['FOR i ← 10 TO 1 STEP -1', 0, ''], ["OUTPUT 'Lift off!'", 0, ' dragging'], ['OUTPUT i', 1, ''], ['ENDFOR', 0, '']];
-    return `<ol class="code-list mini">${lines.map(([t, ind, cls], i) => `<li class="code-line${cls}"><span class="code-num">${i + 1}</span><code class="code-text" style="--indent:${ind}">${aqaHTML(t)}</code></li>`).join('')}</ol>`;
+  function codePreview(python) {
+    const lines = python
+      ? [['for i in range(10, 0, -1):', 0, ''], ['print("Lift off!")', 0, ' dragging'], ['print(i)', 1, '']]
+      : [['FOR i ← 10 TO 1 STEP -1', 0, ''], ["OUTPUT 'Lift off!'", 0, ' dragging'], ['OUTPUT i', 1, ''], ['ENDFOR', 0, '']];
+    return `<ol class="code-list mini">${lines.map(([t, ind, cls], i) => `<li class="code-line${cls}"><span class="code-num">${i + 1}</span><code class="code-text" style="--indent:${ind}">${python ? pyHTML(t) : aqaHTML(t)}</code></li>`).join('')}</ol>`;
+  }
+
+  // ---------- Cyber Safe (AQA GCSE 8525, 3.6, plus everyday online safety) ----------
+  // Messages to judge (and, on your own, to find the warning signs in), cyber security terms to match
+  // to situations, ways to protect against threats, and what to do in everyday situations online.
+  // Every name, web address and phone number is made up. 07700 900xxx numbers are set aside for fiction.
+  // A message is a list of rows. Each row is a list of parts: [text] or [text, why it's a warning sign].
+  const CY_MSGS = [
+    { id: 'parcel', title: 'Parcel fee email', kind: 'email', scam: true,
+      context: 'This email arrives on a Saturday morning.',
+      from: [['ParcelPoint Delivery '], ['<parcelpoint.uk@mailbox-free.net>', 'The address is a free email account, not ParcelPoint’s own web address.']],
+      subject: [['URGENT: your parcel is on hold!!', 'Capital letters and “!!” are there to make you panic.']],
+      body: [
+        [['Dear customer,', 'A company that really had your parcel would use your name.']],
+        [['We tried to deliver your parcel today, but there is an unpaid fee of £1.45.']],
+        [['Pay within 12 hours or your parcel will be sent back.', 'A short deadline stops you taking time to think or check.']],
+      ],
+      button: 'Pay £1.45 now',
+      link: [['Link goes to: parcelpoint-redelivery.pay-help.co', 'The link goes to a different website, not ParcelPoint’s own. A small fee seems harmless, but the real aim is to get your card details.']],
+      sign: [['Thanks, the ParcelPoint team']] },
+    { id: 'bank', title: 'Bank text', kind: 'sms', scam: true,
+      context: 'You get this text on your phone.',
+      from: [['07700 900461', 'Banks don’t text you from an ordinary mobile number.']],
+      body: [
+        [['Northgate Bank: we have stopped a payment of £249.99 from your account.']],
+        [['If this wasn’t you, reply with the 6-digit code we just sent you to cancel it.', 'Never share a security code. A real bank will never ask you for one.']],
+        [['Do this within 30 minutes to keep your money safe.', 'Rushing you is a pressure trick.']],
+      ] },
+    { id: 'gems', title: 'Free gems message', kind: 'dm', scam: true,
+      context: 'A message arrives in the chat of an online game you play.',
+      from: [['GameVerse_Support_Official2', 'Real support teams don’t message you from a player account with extra numbers on the end.']],
+      body: [
+        [['Hey, hope you’re enjoying the new update.']],
+        [['Congrats!! You’ve been picked to get 5,000 free gems.', 'If it sounds too good to be true, it probably is.']],
+        [['Just log in with your username and password at gameverse-free-gems.net', 'It wants your login on a different website. The real game would never ask for this.']],
+        [['The offer ends at midnight!', 'A deadline is there to rush you.']],
+      ] },
+    { id: 'popup', title: 'Virus warning pop-up', kind: 'popup', scam: true,
+      context: 'You’re watching cartoons on a website when this pops up.',
+      head: [['WARNING: VIRUS DETECTED', 'Big red capital letters are there to scare you into acting fast.']],
+      body: [
+        [['This website has scanned your device and found 5 viruses.', 'A website can’t scan your device for viruses. This is made up to frighten you.']],
+        [['Your photos and files will be deleted in 0:59.', 'A countdown is a pressure trick.']],
+      ],
+      buttons: [[['Download SpeedyClean to remove them', 'Downloading software from a pop-up could install malware, like a trojan.']], [['Close']]] },
+    { id: 'school', title: 'School IT email', kind: 'email', scam: true,
+      context: 'This arrives in your school email account.',
+      from: [['Westbrook Academy IT '], ['<westbrook.it.desk@quickmail-online.com>', 'This isn’t the school’s own email address. It’s a free email account.']],
+      subject: [['Your school email will be closed today', 'Threatening to close your account is a way to rush you.']],
+      body: [
+        [['Dear student,', 'Your school knows your name and would use it.']],
+        [['Your mailbox is over its limit.']],
+        [['To keep you’re account,', 'Spelling mistakes, like “you’re” for “your”, are common in scam emails.'], [' reply with your username and password.', 'No real IT team will ever ask for your password.']],
+      ],
+      sign: [['Kind regards, IT Support']] },
+    { id: 'login', title: 'Bank sign-in page', kind: 'web', scam: true,
+      context: 'A link in an email opened this page.',
+      url: [['northgate-bank.account-check.co/sign-in', 'The web address isn’t the bank’s own website, even though it has the bank’s name in it.']],
+      head: [['Northgate Bank: secure sign in']],
+      body: [
+        [['Your account has been locked. Sign in now to unlock it.', 'Saying your account is locked is a trick to make you act without thinking.']],
+        [['Enter your card number, your full PIN and your password.', 'Banks never ask for your full PIN online, and never all of these on one page.']],
+      ],
+      fields: ['Card number', 'PIN', 'Password'],
+      button: 'Sign in' },
+    { id: 'prize', title: 'Prize email', kind: 'email', scam: true,
+      context: 'This email arrives in your personal inbox.',
+      from: [['Prize Team '], ['<winners@lucky-prize-draw.biz>', 'You don’t know this sender, and the address isn’t a company you’ve heard of.']],
+      subject: [['Congratulations, you’ve WON!', 'Big promises are there to excite you so you don’t stop and think.']],
+      body: [
+        [['Hello lucky winner,', 'They don’t know your name, because they sent this to lots of people.']],
+        [['You have been chosen to win a brand-new laptop.', 'You didn’t enter a competition, so you can’t have won one.']],
+        [['To claim it, just pay £2.99 for delivery with your card details.', 'Asking you to pay to get a prize is a scam. Real prizes are free.']],
+      ],
+      sign: [['Best wishes, the Prize Team']] },
+    { id: 'changed', title: 'Password changed email', kind: 'email', scam: false,
+      context: 'You changed your GameVerse password a minute ago. Then this arrives.',
+      from: [['GameVerse '], ['<no-reply@gameverse.com>']],
+      subject: [['Your password was changed']],
+      body: [
+        [['Hi Sam,']],
+        [['You changed your GameVerse password today at 16:42. If this was you, you don’t need to do anything.']],
+        [['If it wasn’t you, open the GameVerse app yourself and go to Settings, then Security.']],
+      ],
+      ok: ['You were expecting it, because you’d just changed your password.', 'It uses your name and comes from the game’s own address.', 'It doesn’t ask for your password, a code or money.', 'It tells you to open the app yourself, instead of giving you a link to click.'] },
+    { id: 'confirm', title: 'Confirm your email', kind: 'email', scam: false,
+      context: 'You’ve just signed up to the CodeCraft Club website with your email address.',
+      from: [['CodeCraft Club '], ['<hello@codecraftclub.org>']],
+      subject: [['Please confirm your email address']],
+      body: [
+        [['Hi Sam, thanks for joining CodeCraft Club.']],
+        [['Click the button to confirm that this is your email address. If you didn’t sign up, you can ignore this email.']],
+      ],
+      button: 'Confirm my email',
+      link: [['Link goes to: codecraftclub.org/confirm']],
+      ok: ['You were expecting it, because you’d just signed up.', 'The link goes to the club’s own website.', 'It doesn’t ask for your password, a code or money.', 'Email confirmations like this are a real security measure: they check that an email address belongs to the person signing up.'] },
+    { id: 'trip', title: 'School trip text', kind: 'sms', scam: false,
+      context: 'Your school sends texts to remind pupils and parents about events.',
+      from: [['Westbrook Academy']],
+      body: [
+        [['Reminder: the Year 9 trip to the science museum leaves at 8:30am on Friday. Please bring a packed lunch. No reply needed.']],
+      ],
+      ok: ['It matches something you already know about: the trip.', 'It doesn’t ask for money, a password or personal details.', 'There’s no link to click and no reply needed.'] },
+  ];
+  const CY_MSG_BY_ID = Object.fromEntries(CY_MSGS.map((m) => [m.id, m]));
+
+  // The cyber security words in AQA 3.6, with what each one means.
+  const CY_TERMS = {
+    phishing: { name: 'Phishing', def: 'tricking people into giving away private information, often by email or text message.' },
+    blagging: { name: 'Blagging (pretexting)', def: 'making up a believable story to get someone to give information or do something they normally wouldn’t.' },
+    shouldering: { name: 'Shouldering (shoulder surfing)', def: 'watching over someone’s shoulder to see private information, like a PIN.' },
+    pharming: { name: 'Pharming', def: 'secretly sending a website’s visitors to a fake copy of the website.' },
+    virus: { name: 'Computer virus', def: 'malware that attaches itself to files or programs, and spreads when they’re shared and opened.' },
+    trojan: { name: 'Trojan', def: 'malware disguised as something useful or fun, so people install it themselves.' },
+    spyware: { name: 'Spyware', def: 'malware that secretly records what you do, like the keys you press, and sends it to someone else.' },
+    weak: { name: 'Weak or default passwords', def: 'passwords that are easy to guess, or the password a device came with, which anyone can look up.' },
+    removable: { name: 'Removable media', def: 'USB sticks and other portable storage, which can bring malware in or carry data out.' },
+    unpatched: { name: 'Unpatched or outdated software', def: 'software without the latest updates, so security holes that have been fixed are still open.' },
+    access: { name: 'Misconfigured access rights', def: 'people being able to see or change data they shouldn’t, because permissions are set up wrongly.' },
+    pentest: { name: 'Penetration testing', def: 'trying to break into a system on purpose, with permission, to find weaknesses before criminals do.' },
+  };
+
+  // Situations to match to a term. The first option is the answer (the options are shuffled when shown).
+  const CY_THREATS = [
+    { id: 't-phish', terms: ['phishing', 'pharming', 'blagging', 'spyware'],
+      scene: 'An email that looks like it’s from your bank asks you to click a link and type in your login details.',
+      hint: 'How did they get in touch, and what do they want?',
+      why: 'It’s a fake message that tries to get private information, so it’s phishing. Pharming is different: you type the right address and still end up on a fake site.' },
+    { id: 't-blag', terms: ['blagging', 'phishing', 'shouldering', 'pharming'],
+      scene: 'Someone rings the school office. They say they’re from the IT company, make up a story about an urgent repair, and ask for the admin password.',
+      hint: 'They’ve invented a story to get what they want.',
+      why: 'Making up a believable story to get information is blagging, also called pretexting. It’s a form of social engineering: tricking a person rather than a computer.' },
+    { id: 't-shoulder', terms: ['shouldering', 'blagging', 'spyware', 'phishing'],
+      scene: 'At a cash machine, a stranger stands close behind you and watches you type your PIN.',
+      hint: 'Where is the stranger standing?',
+      why: 'Watching someone type private information is shouldering, or shoulder surfing. Cover the keypad and check who’s around.' },
+    { id: 't-pharm', terms: ['pharming', 'phishing', 'virus', 'access'],
+      scene: 'You type your bank’s correct web address, but you end up on a fake copy of the bank’s website.',
+      hint: 'You did nothing wrong: you typed the right address.',
+      why: 'Sending people to a fake website even when they type the right address is pharming. Phishing needs you to click a fake link; pharming doesn’t.' },
+    { id: 't-virus', terms: ['virus', 'trojan', 'spyware', 'removable'],
+      scene: 'A program attaches itself to files. When the files are shared and opened on other computers, it copies itself and spreads.',
+      hint: 'It spreads by attaching itself to files.',
+      why: 'Malware that attaches to files and spreads when they’re shared and opened is a computer virus.' },
+    { id: 't-trojan', terms: ['trojan', 'virus', 'phishing', 'unpatched'],
+      scene: 'You download a free game from an unofficial website. The game works, but it also secretly installs software that lets a criminal control your computer.',
+      hint: 'It pretended to be something you wanted.',
+      why: 'Malware disguised as something useful or fun, so you install it yourself, is a trojan. It’s named after the wooden horse in the Greek story.' },
+    { id: 't-spy', terms: ['spyware', 'virus', 'shouldering', 'pharming'],
+      scene: 'Hidden software on a laptop secretly records every key the user presses and sends it to a criminal.',
+      hint: 'It secretly watches what the user does.',
+      why: 'Software that secretly records what you do and sends it to someone else is spyware. One that records key presses is called a keylogger.' },
+    { id: 't-weak', terms: ['weak', 'access', 'unpatched', 'blagging'],
+      scene: 'A new school webcam still uses the password it came with: admin. Anyone can look that password up online.',
+      hint: 'Think about the password.',
+      why: 'A device that still has the password it came with has a default password, which anyone can find. Change it to a strong one straight away.' },
+    { id: 't-usb', terms: ['removable', 'shouldering', 'phishing', 'access'],
+      scene: 'A USB memory stick labelled “Exam answers” is left in a corridor. A pupil plugs it into a school computer to see what’s on it.',
+      hint: 'How could the threat get into the school’s computer?',
+      why: 'USB sticks and other removable media can carry malware into a system, or carry data out. Never plug in a memory stick you’ve found.' },
+    { id: 't-patch', terms: ['unpatched', 'weak', 'removable', 'pharming'],
+      scene: 'A computer hasn’t installed any updates for two years, so criminals can use security holes that were fixed long ago.',
+      hint: 'What hasn’t the computer been doing?',
+      why: 'Software without its updates (patches) still has known security holes. Automatic updates fix them as soon as possible.' },
+    { id: 't-access', terms: ['access', 'weak', 'spyware', 'unpatched'],
+      scene: 'Every pupil’s account can open and change the folder that holds staff reports and pupils’ grades.',
+      hint: 'Who is allowed to do what?',
+      why: 'Pupils being able to change data they shouldn’t even see means the access rights are set up wrongly: misconfigured access rights.' },
+    { id: 't-pentest', terms: ['pentest', 'blagging', 'phishing', 'access'],
+      scene: 'A school pays a security company to try to break into its network, with permission, to find weak spots before criminals do.',
+      hint: 'This one isn’t a threat. They’re testing the school’s defences.',
+      why: 'Trying to break in on purpose, with permission, to find weaknesses is penetration testing. Testers may pretend to be an insider who has some login details, or an outsider who has none.' },
+  ];
+
+  // Ways to protect against threats: AQA 3.6.3, and how to protect against social engineering and malware.
+  const CY_PROTECT = [
+    { id: 'p-bio', a: 'Biometrics, like a fingerprint or face scan', opts: ['CAPTCHA', 'Email confirmation', 'Automatic software updates'],
+      scene: 'You want to stop anyone who finds your lost phone from opening it.',
+      hint: 'Use something about you that nobody else has.',
+      why: 'Biometric measures check something about your body, like your fingerprint or face, which is hard for someone else to copy. A strong PIN or password helps too.' },
+    { id: 'p-captcha', a: 'CAPTCHA', opts: ['Biometrics, like a fingerprint or face scan', 'Email confirmation', 'Automatic software updates'],
+      scene: 'A website keeps getting thousands of fake sign-ups, made by computer programs instead of people.',
+      hint: 'You need a test that people can pass but programs can’t.',
+      why: 'A CAPTCHA is a test that’s easy for people but hard for computer programs, like picking out every picture with a bus in it.' },
+    { id: 'p-email', a: 'Email confirmation', opts: ['CAPTCHA', 'Biometrics, like a fingerprint or face scan', 'Automatic software updates'],
+      scene: 'A website wants to check that the email address someone signs up with really belongs to them.',
+      hint: 'Only the owner of the address can read what’s sent to it.',
+      why: 'The website emails a link or code to the address. Only the person who can read that inbox can confirm it, so it proves the address is theirs.' },
+    { id: 'p-update', a: 'Automatic software updates', opts: ['CAPTCHA', 'Email confirmation', 'Biometrics, like a fingerprint or face scan'],
+      scene: 'A company wants every computer to get security fixes as soon as they’re released.',
+      hint: 'The fixes need to arrive without anyone remembering to install them.',
+      why: 'Automatic updates install security fixes (patches) as soon as they’re released, so known holes are closed quickly.' },
+    { id: 'p-pass', a: 'Rules for strong passwords, and locking the account after several wrong tries', opts: ['Email confirmation', 'Automatic software updates', 'Letting pupils share one account'],
+      scene: 'A school wants to make it harder for someone to guess their way into pupils’ accounts.',
+      hint: 'Think about what someone guessing would be trying to guess.',
+      why: 'A good password system makes passwords hard to guess and stops anyone having lots of tries: for example by asking for long passwords and locking the account after several wrong ones.' },
+    { id: 'p-malware', a: 'Install anti-malware software, keep everything updated, and only download from trusted places', opts: ['Turn the screen off when you leave the room', 'Use the same password everywhere', 'Plug in any USB stick you find to check it'],
+      scene: 'How can you protect a computer against malware?',
+      hint: 'Malware has to get onto the computer somehow.',
+      why: 'Anti-malware software finds and removes malware. Updates close the holes it uses, and trusted downloads stop you installing a trojan by accident.' },
+    { id: 'p-shoulder', a: 'Cover the keypad with your hand and check who’s nearby', opts: ['Type your PIN as fast as you can', 'Choose a longer username', 'Turn on automatic updates'],
+      scene: 'How can you protect yourself against shouldering at a cash machine?',
+      hint: 'Shouldering means someone watching.',
+      why: 'If nobody can see what you type, shouldering can’t work. Covering the keypad and checking who’s around is the simplest protection.' },
+    { id: 'p-phish', a: 'Don’t click the link. Open the website or app yourself to check.', opts: ['Click the link, but only type your username', 'Reply and ask whether it’s real', 'Forward it to your friends to warn them'],
+      scene: 'An email asks you to “confirm your account” by clicking a link. What’s the safest thing to do?',
+      hint: 'How could you check without trusting anything in the email?',
+      why: 'Going to the website or app yourself means you can’t be sent to a fake one. Replying only goes to the scammer, and forwarding spreads the scam.' },
+    { id: 'p-blag', a: 'Train staff to check who callers really are before giving out any information', opts: ['Put a CAPTCHA on the phone line', 'Turn on automatic updates', 'Buy faster computers'],
+      scene: 'How can a company protect its staff against blagging?',
+      hint: 'Blagging tricks people, not computers.',
+      why: 'Social engineering targets people, so training is the protection: staff learn to check who someone is, for example by calling them back on a number they already know.' },
+  ];
+
+  // Everyday situations online (not part of the AQA specification). The first option is the answer.
+  const CY_ACTIONS = [
+    { id: 'a-address', opts: ['Don’t share it. Block and report them, and tell an adult you trust.', 'Send it, because they’re being kind', 'Give them your school’s address instead', 'Ask for their address first'],
+      scene: 'Someone you only know from an online game asks for your home address so they can post you a prize.',
+      hint: 'Would you give your address to a stranger in the street?',
+      why: 'Never share where you live or go to school with someone you only know online. People aren’t always who they say they are.' },
+    { id: 'a-group', opts: ['Don’t join in. Save the messages, report them, and tell an adult you trust.', 'Join in, so they don’t pick on you next', 'Reply with something unkind about them', 'Leave the chat and say nothing to anyone'],
+      scene: 'A group chat starts posting unkind comments about someone in your class.',
+      hint: 'What would help the person being picked on?',
+      why: 'Joining in or staying silent lets it carry on. Screenshots help an adult sort it out, and reporting can get the messages removed.' },
+    { id: 'a-share', opts: ['Say no. Don’t share passwords, even with friends.', 'Share it, as long as they’re a good friend', 'Share it, then change it next month', 'Send it in a private message so nobody else sees'],
+      scene: 'A friend asks for your password so they can collect your rewards in a game.',
+      hint: 'What could happen if you fall out, or their account gets hacked?',
+      why: 'Anyone with your password can do anything you can, including things you’d never do. Keep passwords to yourself.' },
+    { id: 'a-photo', opts: ['Don’t post it, or crop out your uniform and anything that shows where you live', 'Post it publicly so more people see it', 'Add your street name so friends can visit', 'Post it, then delete it tomorrow'],
+      scene: 'You’re about to post a photo of yourself in your school uniform, outside your house.',
+      hint: 'What could a stranger work out from the photo?',
+      why: 'A uniform, house number or street sign can show where you live or go to school. Anything you post can be saved or copied, even if you delete it later.' },
+    { id: 'a-torch', opts: ['Say no. Only allow what an app needs to work.', 'Say yes, because apps always need it', 'Say yes, but only at night', 'Let it see your contacts too'],
+      scene: 'A torch app asks to see your location all the time.',
+      hint: 'Does a torch need to know where you are?',
+      why: 'A torch doesn’t need your location. Apps that ask for more than they need may be collecting your data.' },
+    { id: 'a-chain', opts: ['Ignore it and delete it. It’s a chain message.', 'Send it to ten friends just in case', 'Reply asking them not to delete your account', 'Post it publicly to warn everyone'],
+      scene: 'A message says your account will be deleted unless you send it to ten friends.',
+      hint: 'Could a message really delete your account?',
+      why: 'Chain messages use threats to spread. Nothing happens if you ignore them, and forwarding just passes the worry on.' },
+    { id: 'a-secret', opts: ['Say no, and tell an adult you trust. Asking you to keep secrets is a warning sign.', 'Agree, as long as it’s quick', 'Agree, but keep your camera off', 'Keep it secret, but tell one friend'],
+      scene: 'Someone you’ve met online, but never in real life, asks you to video chat and to keep it secret.',
+      hint: 'Why might someone want it kept secret?',
+      why: 'Someone who asks you to keep secrets from the adults who look after you is a warning sign. Telling a trusted adult is never getting anyone into trouble: it keeps you safe.' },
+    { id: 'a-nasty', opts: ['Don’t reply. Take a screenshot, block them, and talk to an adult you trust.', 'Reply with something nastier', 'Delete it and tell nobody', 'Share it so everyone can see what they said'],
+      scene: 'You get a nasty message that upsets you.',
+      hint: 'What would help an adult sort it out?',
+      why: 'Replying can make things worse. A screenshot is evidence, blocking stops more messages, and talking to someone helps you feel better.' },
+    { id: 'a-fake', opts: ['Check it on a trusted news website before sharing it', 'Share it quickly before it gets deleted', 'Believe it, because lots of people have liked it', 'Comment that it’s fake without checking'],
+      scene: 'You see a shocking post, and you’re not sure it’s true.',
+      hint: 'Do lots of likes make something true?',
+      why: 'False stories spread fast because people share without checking. A trusted news website can tell you if it’s real.' },
+    { id: 'a-logout', opts: ['Log out of every account before you leave', 'Just close the browser window', 'Stay logged in for the next person', 'Turn the screen off'],
+      scene: 'You’ve finished using a computer in the school library.',
+      hint: 'What could the next person do on that computer?',
+      why: 'Closing the window may leave you logged in. The next person could read your messages or post as you, so always log out.' },
+  ];
+
+  // Passwords. The first option is the answer.
+  const CY_PASSWORDS = [
+    { id: 'pw-1', ask: 'Which password is strongest?', opts: ['kettle-planet-orange', 'password123', 'Sam2012', 'Fluffy!1'],
+      hint: 'Longer is stronger, and it shouldn’t be about you.',
+      why: 'Three random words make a long password that’s still easy to remember, and the UK’s National Cyber Security Centre recommends them. password123 is one of the most common passwords, Sam2012 is a name and a year someone could find out, and Fluffy!1 is short and looks like a pet’s name.' },
+    { id: 'pw-2', ask: 'Which password is strongest?', opts: ['cactus-violin-sandwich', 'qwerty', 'Liverpool1', 'BlueDog'],
+      hint: 'Which one would take longest to guess?',
+      why: 'Long passwords made of random words are hardest to guess. qwerty is the top row of the keyboard, and a football team or a pet is easy to guess from what people post online.' },
+    { id: 'pw-3', ask: 'Which is the best habit?', opts: ['Use a different password for every important account', 'Use the same strong password everywhere', 'Write your password on a note stuck to the screen', 'Change one number at the end each month'],
+      hint: 'What happens to your other accounts if one password leaks?',
+      why: 'If a website leaks your password, criminals try it on other sites. A different password for each account stops one leak unlocking everything. A password manager can remember them for you.' },
+  ];
+
+  const CY_KIND_LABEL = { flags: 'Spot the warning signs', safe: 'Safe or scam?', threat: 'Name the threat', protect: 'Best protection', action: 'What should you do?', password: 'Passwords' };
+  const CY_TOPICS = { cyber: ['msg', 'threat', 'protect', 'password'], online: ['msg', 'action', 'password'] };
+  CY_TOPICS.both = ['msg', 'threat', 'protect', 'action', 'password'];
+
+  // The question's options, in the order shown (shuffled once, when the question is made).
+  function cyItem(q) {
+    if (q.type === 'threat') return CY_THREATS.find((x) => x.id === q.id);
+    if (q.type === 'protect') return CY_PROTECT.find((x) => x.id === q.id);
+    if (q.type === 'action') return CY_ACTIONS.find((x) => x.id === q.id);
+    if (q.type === 'password') return CY_PASSWORDS.find((x) => x.id === q.id);
+    return CY_MSG_BY_ID[q.id];
+  }
+  function cyAllOpts(type, item) {
+    if (type === 'threat') return item.terms.map((t) => CY_TERMS[t].name);
+    if (type === 'protect') return [item.a, ...item.opts];
+    return item.opts.slice();
+  }
+  const cyAnswer = (q) => cyAllOpts(q.type, cyItem(q))[0];
+  const cyIsChoice = (q) => ['threat', 'protect', 'action', 'password'].includes(q.type);
+  const cyAsk = (q) => (q.type === 'threat' ? 'Which cyber security term matches?' : q.type === 'protect' ? 'Which is the best protection?'
+    : q.type === 'action' ? 'What’s the best thing to do?' : q.type === 'password' ? cyItem(q).ask : '');
+
+  // Questions for a game: messages, then the other kinds, dealt round-robin so the kinds mix.
+  function cyMakeQuestions(s, mode) {
+    const kinds = CY_TOPICS[s.topics] || CY_TOPICS.both;
+    const decks = kinds.map((k) => {
+      if (k === 'msg') {
+        return shuffle(CY_MSGS.map((m) => ({ type: mode === 'solo' && m.scam && Math.random() < 0.5 ? 'flags' : 'safe', id: m.id })));
+      }
+      const list = { threat: CY_THREATS, protect: CY_PROTECT, action: CY_ACTIONS, password: CY_PASSWORDS }[k];
+      return shuffle(list.map((x) => ({ type: k, id: x.id })));
+    });
+    const want = Number(s.rounds);
+    const out = [];
+    while (out.length < want && decks.some((d) => d.length)) {
+      shuffle(decks.slice()).forEach((d) => { if (d.length && out.length < want) out.push(d.pop()); });
+    }
+    return out.map((q) => {
+      if (cyIsChoice(q)) q.order = shuffle(cyAllOpts(q.type, cyItem(q)).map((_, i) => i));
+      cyReset(q);
+      return q;
+    });
+  }
+  const cyCount = (s) => Math.min(Number(s.rounds), (CY_TOPICS[s.topics] || CY_TOPICS.both)
+    .reduce((n, k) => n + { msg: CY_MSGS.length, threat: CY_THREATS.length, protect: CY_PROTECT.length, action: CY_ACTIONS.length, password: CY_PASSWORDS.length }[k], 0));
+  const cyOpts = (q) => { const all = cyAllOpts(q.type, cyItem(q)); return q.order.map((i) => all[i]); };
+  function cyReset(q) { q.work = { pick: null, sel: [] }; }
+
+  // Every part of a message in reading order, so parts can be picked and numbered.
+  function cyParts(m) {
+    const rows = [m.from, m.subject, m.url, m.head, ...(m.body || []), ...(m.buttons || []), m.link, m.sign].filter(Boolean);
+    return rows.flat();
+  }
+  const cyFlags = (m) => cyParts(m).map((p, k) => (p[1] ? k : -1)).filter((k) => k >= 0);
+
+  // The message, drawn like an email, a text, a chat message, a pop-up or a web page.
+  //   pick:  each part is a button, for clicking the warning signs (sel: the parts picked so far)
+  //   marks: the warning signs are highlighted and numbered
+  //   judge: with marks, also show which warning signs were found or missed, and wrong picks
+  function cyMsgHTML(m, o = {}) {
+    const parts = cyParts(m);
+    const flags = cyFlags(m);
+    const sel = o.sel || [];
+    const seg = (p) => {
+      const i = parts.indexOf(p);
+      const [text, why] = p;
+      if (o.pick) return `<button type="button" class="cy-seg" data-act="seg" data-k="${i}" id="cg-seg-${i}" aria-pressed="${sel.includes(i)}">${esc(text)}</button>`;
+      let cls = '';
+      if (o.marks && why) cls = !o.judge ? ' flag' : sel.includes(i) ? ' found' : ' missed';
+      else if (o.marks && o.judge && sel.includes(i)) cls = ' nope';
+      const num = o.marks && why ? `<span class="cy-n">${flags.indexOf(i) + 1}</span>` : '';
+      const sr = o.judge && why ? `<span class="sr">${sel.includes(i) ? ' (warning sign you found)' : ' (warning sign you missed)'}</span>`
+        : o.judge && sel.includes(i) ? '<span class="sr"> (not a warning sign)</span>' : '';
+      return `<span class="cy-seg${cls}">${num}${esc(text)}${sr}</span>`;
+    };
+    const row = (r) => r.map(seg).join('');
+    const kind = m.kind;
+    let head = '';
+    if (kind === 'email') head = `<div class="cy-head"><p><span class="cy-lab">From</span>${row(m.from)}</p><p class="cy-subject"><span class="cy-lab">Subject</span>${row(m.subject)}</p></div>`;
+    else if (kind === 'sms') head = `<div class="cy-head"><p><span class="cy-lab">Text from</span>${row(m.from)}</p></div>`;
+    else if (kind === 'dm') head = `<div class="cy-head"><p><span class="cy-avatar" aria-hidden="true"></span>${row(m.from)}</p></div>`;
+    else if (kind === 'popup') head = `<div class="cy-head cy-alert"><p>${row(m.head)}</p></div>`;
+    else if (kind === 'web') head = `<div class="cy-head"><p class="cy-url"><span class="sr">Web address: </span>${row(m.url)}</p></div>`;
+    const lines = [];
+    if (kind === 'web') lines.push(`<p class="cy-title">${row(m.head)}</p>`);
+    const body = (m.body || []).map((r) => `<p>${row(r)}</p>`).join('');
+    lines.push(kind === 'sms' || kind === 'dm' ? `<div class="cy-bubble">${body}</div>` : body);
+    if (m.fields) lines.push(`<div class="cy-fields">${m.fields.map((f) => `<span class="cy-field">${esc(f)}</span>`).join('')}</div>`);
+    if (m.buttons) lines.push(`<div class="cy-btns">${m.buttons.map((b) => `<p class="cy-fakebtn">${row(b)}</p>`).join('')}</div>`);
+    else if (m.button) lines.push(`<p class="cy-fakebtn" aria-hidden="true">${esc(m.button)}</p>`);
+    if (m.link) lines.push(`<p class="cy-linkline">${row(m.link)}</p>`);
+    if (m.sign) lines.push(`<p>${row(m.sign)}</p>`);
+    return `<div class="cy-msg ${kind}" role="group" aria-label="${esc(m.title)}">${head}<div class="cy-body">${lines.join('')}</div></div>`;
+  }
+
+  // Why it's a scam (each warning sign, numbered to match the message), or why it's safe.
+  function cyReasonsHTML(m) {
+    if (!m.scam) return `<p>Why it’s safe:</p><ul class="cy-reasons ok">${m.ok.map((r) => `<li>${esc(r)}</li>`).join('')}</ul>`;
+    const parts = cyParts(m);
+    return `<p>The warning signs:</p><ol class="cy-reasons">${cyFlags(m).map((k, n) => `<li><span class="cy-n">${n + 1}</span><span>${esc(parts[k][1])}</span></li>`).join('')}</ol>`;
+  }
+  // The explanation after a choice question.
+  function cyWhyHTML(q) {
+    const item = cyItem(q);
+    const term = q.type === 'threat' ? CY_TERMS[item.terms[0]] : null;
+    return `<p>${esc(item.why)}</p>${term ? `<p class="hint"><b>${esc(term.name)}:</b> ${esc(term.def)}</p>` : ''}`;
+  }
+  function cyPreview() {
+    return `<div class="cy-mini">${cyMsgHTML({ kind: 'email', title: 'Scam email',
+      from: [['ParcelPoint '], ['<parcelpoint.uk@mailbox-free.net>', 'x']],
+      subject: [['URGENT: your parcel is on hold!!', 'x']],
+      body: [[['Pay within 12 hours or it goes back.', 'x']]] }, { marks: true })}</div>`;
+  }
+
+  // ---------- Typing Trainer (keyboard skills; not part of the AQA specification) ----------
+  // Lessons build up from the home row. The word lessons make lines only from keys learnt so far.
+  // The keyboard is a UK layout, coloured by the finger that presses each key.
+  const TY_LESSONS = {
+    home: { label: 'Home row', keys: 'asdfghjkl' },
+    top: { label: 'Home and top rows', keys: 'asdfghjklqwertyuiop' },
+    bottom: { label: 'Bottom row', must: 'zxcvbnm' },
+    words: { label: 'All letters' },
+    sentences: { label: 'Sentences' },
+    computing: { label: 'Computing words' },
+    code: { label: 'Python code' },
+  };
+  const TY_HOME_WORDS = 'a as ask asks add adds all alas dad dads sad lad lads had has hall halls half flask flasks glad lass dash flash slash shall salad salads gala galas lag lags gag gags hash sash fall falls gall jags'.split(' ');
+  const TY_WORDS = ('the and you that was for are with his they this have from one had word but not what all were when your can said there use each which she how their will other about out many then them these some her would make like him into time has look two more write see number way could people than first water been call who now find long down day did get come made may part over new sound take only little work know place year live back give most very after thing our just name good great where help through much before line right too mean old any same tell boy follow came want show also around form three small set put end does another well large must big even such because turn here why ask went men read need land different home move try kind hand picture again change off play spell air away animal house point page letter mother answer found study still learn should world high every near add food between own below country plant last school father keep tree never start city earth eyes light thought head under story saw left few while along might close something seem next hard open example begin life always those both paper together got group often run important until children side feet car mile night walk white sea began grow took river four carry state once book hear stop without second later miss idea enough eat face watch far really almost let above girl sometimes mountain cut young talk soon list song being leave family quiz jump zebra box fox quick lazy jazz exit maze vex wax zoo prize size zero' +
+    ' dog fish quiet power tower happy yellow purple orange spoon kettle rocket planet garden island jacket window pencil puzzle bridge castle').split(' ');
+  const TY_SENTENCES = [
+    'The quick brown fox jumps over the lazy dog.',
+    'Never share your password, even with a friend.',
+    'A byte is made up of eight bits.',
+    'Think before you click on a link in an email.',
+    'Save your work often, and keep a backup.',
+    'Sphinx of black quartz, judge my vow.',
+    'The CPU fetches, decodes and executes instructions.',
+    'Use three random words to make a strong password.',
+    'Hexadecimal uses the digits 0 to 9 and the letters A to F.',
+    'An algorithm is a set of steps that solves a problem.',
+    'Log out when you finish using a shared computer.',
+    'Is the web address spelt correctly? Check it first!',
+    'Rest your fingers on the home row before you start.',
+    'My favourite lesson on a Friday is computing.',
+    'We walked to the park, ate lunch and played football.',
+    'How many bits are in a nibble? There are four.',
+    'Robots, rockets and robins all begin with the letter R.',
+    'Update your apps so that security holes get fixed.',
+    'Shouldering means watching someone type their PIN.',
+    'The library opens at 8:30am and closes at 4pm.',
+    'Don\'t reply to messages from people you don\'t know.',
+    'In binary, 1010 is the same as 10 in decimal.',
+    'Two plus two is four, and four times four is sixteen.',
+    'She sells sea shells on the sea shore.',
+    'Keep calm, sit up straight and look at the screen.',
+  ];
+  const TY_COMPUTING = ('algorithm decomposition abstraction variable constant iteration selection sequence subroutine parameter array record string integer Boolean binary decimal hexadecimal bit byte nibble pixel resolution compression protocol router network malware phishing pharming blagging CPU RAM ROM cache register storage database query SQL field table Unicode ASCII CAPTCHA biometrics trojan spyware virus encryption bandwidth input output').split(' ');
+  const TY_CODE = [
+    'print("Hello, world!")',
+    'name = input("What is your name? ")',
+    'for i in range(10):',
+    'if score >= 50:',
+    'total = total + number',
+    'while guess != secret:',
+    'numbers = [4, 8, 15, 16, 23, 42]',
+    'def area(width, height):',
+    'return width * height',
+    'count = len(word)',
+    'print("You scored", score, "out of 10")',
+    'age = int(input("Age: "))',
+    'if age < 11 or age > 18:',
+    'for letter in "binary":',
+    'answer = 7 * 6',
+    'found = False',
+    'if name == "Ada":',
+    'print(numbers[0])',
+  ];
+
+  function tyWordsFor(lesson) {
+    const L = TY_LESSONS[lesson];
+    const all = [...new Set([...TY_HOME_WORDS, ...TY_WORDS])];
+    if (L.keys) return all.filter((w) => [...w].every((c) => L.keys.includes(c)));
+    if (L.must) return TY_WORDS.filter((w) => [...w].some((c) => L.must.includes(c)));
+    return TY_WORDS;
+  }
+  // A line of random words, about `len` characters long, with no word twice in a row.
+  function tyWordLine(words, len) {
+    const out = [];
+    let n = 0;
+    for (let guard = 0; n < len && guard < 200; guard += 1) {
+      const w = words[Math.floor(Math.random() * words.length)];
+      if (out.length && out[out.length - 1] === w) continue;
+      out.push(w);
+      n += w.length + 1;
+    }
+    return out.join(' ');
+  }
+  function tyLines(lesson, count) {
+    if (lesson === 'sentences') return shuffle(TY_SENTENCES.slice()).slice(0, count);
+    if (lesson === 'code') return shuffle(TY_CODE.slice()).slice(0, count);
+    const words = lesson === 'computing' ? TY_COMPUTING : tyWordsFor(lesson);
+    return Array.from({ length: count }, () => tyWordLine(words, lesson === 'home' ? 34 : 42));
+  }
+
+  // The keyboard (UK layout). Fingers: 1 little, 2 ring, 3 middle, 4 index, on the left (L) or right (R) hand.
+  const TY_ROWS = [
+    ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '='],
+    ['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', '[', ']'],
+    ['a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';', '\'', '#'],
+    ['\\', 'z', 'x', 'c', 'v', 'b', 'n', 'm', ',', '.', '/'],
+  ];
+  const TY_SHIFTED = { '!': '1', '"': '2', '£': '3', $: '4', '%': '5', '^': '6', '&': '7', '*': '8', '(': '9', ')': '0', _: '-', '+': '=',
+    '{': '[', '}': ']', ':': ';', '@': '\'', '~': '#', '|': '\\', '<': ',', '>': '.', '?': '/' };
+  const TY_FINGER = {};
+  [['L1', '1qaz\\'], ['L2', '2wsx'], ['L3', '3edc'], ['L4', '45rtfgvb'], ['R4', '67yuhjnm'], ['R3', '8ik,'], ['R2', '9ol.'], ['R1', '0-=p[];\'#/']]
+    .forEach(([f, keys]) => [...keys].forEach((k) => { TY_FINGER[k] = f; }));
+  const TY_FINGER_NAME = { 1: 'little finger', 2: 'ring finger', 3: 'middle finger', 4: 'index finger' };
+  const TY_FINGER_COLOUR = { 1: 'c2', 2: 'c4', 3: 'c3', 4: 'c1' };
+  const tyKeyFor = (ch) => (ch === ' ' ? { key: ' ', shift: false } : /[A-Z]/.test(ch) ? { key: ch.toLowerCase(), shift: true }
+    : TY_SHIFTED[ch] ? { key: TY_SHIFTED[ch], shift: true } : { key: ch, shift: false });
+  const tyHand = (k) => ((TY_FINGER[k] || 'L')[0] === 'L' ? 'left' : 'right');
+  const tyFingerName = (k) => `${tyHand(k)} ${TY_FINGER_NAME[(TY_FINGER[k] || 'L4')[1]]}`;
+  const tyKeyLabel = (k) => ({ ' ': 'Space', '\'': '\'', '\\': '\\' }[k] || k.toUpperCase());
+
+  // next: the character to type next (it and its Shift key light up); miss: keys got wrong, to practise.
+  function tyKeyboardHTML(next, miss) {
+    const want = next === null || next === undefined ? null : tyKeyFor(next);
+    // Touch typists press Shift with the other hand from the key.
+    const shiftOn = want && want.shift ? (tyHand(want.key) === 'left' ? 'R' : 'L') : '';
+    const missed = {};
+    Object.entries(miss || {}).forEach(([c, n]) => { const k = tyKeyFor(c).key; missed[k] = (missed[k] || 0) + n; });
+    const key = (k) => {
+      const f = TY_FINGER[k];
+      const cls = ['ty-key', f ? TY_FINGER_COLOUR[f[1]] : '', want && want.key === k ? 'next' : '', missed[k] ? 'miss' : '', k === 'f' || k === 'j' ? 'bump' : ''];
+      return `<span class="${cls.filter(Boolean).join(' ')}">${esc(tyKeyLabel(k))}</span>`;
+    };
+    const shift = (side) => `<span class="ty-key wide c2${shiftOn === side ? ' next' : ''}">Shift</span>`;
+    const rows = TY_ROWS.map((r, i) => `<div class="ty-row r${i}">${i === 3 ? shift('L') : ''}${r.map(key).join('')}${i === 3 ? shift('R') : ''}</div>`);
+    rows.push(`<div class="ty-row r4"><span class="ty-key space${want && want.key === ' ' ? ' next' : ''}${missed[' '] ? ' miss' : ''}">Space</span></div>`);
+    return rows.join('');
+  }
+  function tyFingerText(next) {
+    if (next === null || next === undefined) return '';
+    if (next === ' ') return 'Next: Space, with your thumb.';
+    const k = tyKeyFor(next);
+    const key = esc(tyKeyLabel(k.key));
+    const shown = /[a-z]/.test(next) ? `the ${key} key` : /[A-Z]/.test(next) ? `capital ${key}`
+      : esc(next === '"' ? 'speech marks (")' : next === '\'' ? 'an apostrophe (\')' : next);
+    if (!k.shift) return `Next: ${shown}, with your ${tyFingerName(k.key)}.`;
+    const other = tyHand(k.key) === 'left' ? 'right' : 'left';
+    return `Next: ${shown}. Hold Shift with your ${other} little finger, and press ${key} with your ${tyFingerName(k.key)}.`;
+  }
+
+  // Typing: every key press counts towards accuracy, even ones fixed later with Backspace.
+  function tyFresh() { return { typed: '', prev: '', start: 0, end: 0, keys: 0, errs: 0, miss: {} }; }
+  function tyStep(w, text, now, t) {
+    const prev = w.prev;
+    let same = 0;
+    while (same < prev.length && same < now.length && prev[same] === now[same]) same += 1;
+    for (let i = same; i < now.length; i += 1) {
+      w.keys += 1;
+      if (now[i] !== text[i]) {
+        w.errs += 1;
+        if (i < text.length) w.miss[text[i]] = (w.miss[text[i]] || 0) + 1;
+      }
+    }
+    if (!w.start && now.length) w.start = t;
+    w.prev = now;
+    w.typed = now;
+    w.end = now.length >= text.length ? t : 0;
+  }
+  // Words a minute counts five characters as a word, and only characters typed right.
+  function tyStats(w, text, t) {
+    const ms = w.start ? Math.max(1, (w.end || t) - w.start) : 0;
+    const correct = [...w.typed].filter((c, i) => c === text[i]).length;
+    return {
+      wpm: ms ? Math.round(correct / 5 / (ms / 60000)) : 0,
+      acc: w.keys ? Math.round(((w.keys - w.errs) / w.keys) * 100) : 100,
+      ms, correct, keys: w.keys, errs: w.errs,
+    };
+  }
+  const TY_PASS = 90; // accuracy (%) needed for a line to count
+  function tyLineHTML(text, typed) {
+    return [...text].map((c, i) => {
+      const cls = i < typed.length ? (typed[i] === c ? 'ok' : 'bad') : i === typed.length ? 'cur' : 'todo';
+      return `<span class="${cls}">${esc(c)}</span>`;
+    }).join('');
+  }
+  function tyLiveHTML(q) {
+    const w = q.work;
+    const st = tyStats(w, q.text, Date.now());
+    const ready = w.start && (st.ms > 2000 || w.typed.length >= 8);
+    return `<span><b>${ready ? st.wpm : '–'}</b> wpm</span><span><b>${st.acc}%</b> accuracy</span><span><b>${w.typed.length}</b> of ${q.text.length} typed</span>`;
+  }
+  // Redraws just the line, the numbers and the keyboard as you type (the box you type in stays put).
+  function tyLive(q) {
+    if (typeof document === 'undefined') return;
+    const w = q.work;
+    const set = (id, html) => { const el = document.getElementById(id); if (el) el.innerHTML = html; };
+    set('ty-text', tyLineHTML(q.text, w.typed));
+    set('ty-live', tyLiveHTML(q));
+    if (q.kb) {
+      set('ty-kb', tyKeyboardHTML(q.text[w.typed.length] ?? null));
+      set('ty-finger', tyFingerText(q.text[w.typed.length] ?? null));
+    }
+  }
+  // The keys got wrong most often (a and A are the same key).
+  const tyMissList = (miss) => [...new Set(Object.entries(miss).sort((a, b) => b[1] - a[1])
+    .map(([c]) => (c === ' ' ? 'Space' : c === '\'' ? 'apostrophe' : c.toUpperCase())))].slice(0, 6);
+
+  // Personal bests for each lesson, kept on this computer (lines typed with at least 90% accuracy).
+  const TY_STORE = 'typing-trainer:best';
+  function tyBests() { try { return JSON.parse(localStorage.getItem(TY_STORE)) || {}; } catch (e) { return {}; } }
+  function tySaveBest(lesson, wpm) {
+    try {
+      const b = tyBests();
+      if (wpm <= (b[lesson] || 0)) return false;
+      b[lesson] = wpm;
+      localStorage.setItem(TY_STORE, JSON.stringify(b));
+      return true;
+    } catch (e) { return false; }
+  }
+
+  // Head-to-head and relay: everyone has typed the line, so the fastest with 90% accuracy wins it.
+  function tyEndRace(q, run) {
+    const res = q.work.res;
+    const fair = res.filter((r) => r.acc >= TY_PASS);
+    const pool = fair.length ? fair : res;
+    const by = fair.length ? 'wpm' : 'acc';
+    const top = Math.max(...pool.map((r) => r[by]));
+    const winners = pool.filter((r) => r[by] === top).map((r) => r.who);
+    winners.forEach((t) => { run.scores[t] += 1; });
+    const names = winners.map((t) => esc(run.names[t]));
+    const order = res.slice().sort((a, b) => (b.acc >= TY_PASS) - (a.acc >= TY_PASS) || b.wpm - a.wpm);
+    cgDone({
+      correct: true,
+      winners,
+      head: winners.length === 1 ? `${names[0]} wins the line!` : `A draw between ${listAnd(names)}!`,
+      html: `<ol class="ty-res">${order.map((r) => `<li><span class="badge ${cgColour(run, r.who)}">${esc(run.names[r.who])}</span><span><b>${r.wpm}</b> wpm, ${r.acc}%${r.acc >= TY_PASS ? '' : ' (under 90%)'}</span></li>`).join('')}</ol>
+        ${fair.length ? '' : '<p>Nobody reached 90% accuracy, so the most accurate typist wins.</p>'}`,
+      note: res.map((r) => `${run.names[r.who]} ${r.wpm} wpm, ${r.acc}%`).join('; '),
+    }, null, 0);
+  }
+  function tyPreview() {
+    const text = 'sad lad has a flask';
+    return `<div class="ty mini"><p class="ty-text">${tyLineHTML(text, 'sad lad ha')}</p><div class="ty-kb">${tyKeyboardHTML('s')}</div></div>`;
   }
 
   // ---------- Periodic Pairs ----------
@@ -5628,7 +6290,7 @@ THIS SOFTWARE.</pre>
   const WEB_KEYS = Object.keys(WEBS);
   const ROLES = {
     producer: { name: 'a producer', text: 'Producers make their own food by photosynthesis' },
-    primary: { name: 'a primary consumer', text: 'Primary consumers eat producers' },
+    primary: { name: 'a primary consumer', text: 'Primary consumers eat only producers' },
     top: { name: 'a top predator', text: 'Nothing in the web eats a top predator' },
   };
   const webName = (web, id) => web.nodes[id][0];
@@ -5640,16 +6302,8 @@ THIS SOFTWARE.</pre>
   function webRole(web, role) {
     const ids = Object.keys(web.nodes);
     if (role === 'producer') return ids.filter((id) => !webFoods(web, id).length);
-    // An animal that eats a producer is a primary consumer, even if it eats animals too (like the duckling).
-    if (role === 'primary') return ids.filter((id) => webFoods(web, id).some((x) => !webFoods(web, x).length));
+    if (role === 'primary') return ids.filter((id) => { const f = webFoods(web, id); return f.length && f.every((x) => !webFoods(web, x).length); });
     return ids.filter((id) => webFoods(web, id).length && !webEaters(web, id).length);
-  }
-  // Primary consumers that also eat animals are secondary consumers as well.
-  function webBothNote(web) {
-    return webRole(web, 'primary').filter((id) => webFoods(web, id).some((x) => webFoods(web, x).length)).map((id) => {
-      const foods = listAnd(webFoods(web, id).map((x) => webName(web, x).toLowerCase()));
-      return ` The ${webName(web, id).toLowerCase()} ${webPlural(web, id) ? 'eat' : 'eats'} ${foods}, so ${webPlural(web, id) ? 'they’re' : 'it’s'} a primary consumer and a secondary consumer.`;
-    }).join('');
   }
   function webClues(web) {
     const ids = Object.keys(web.nodes);
@@ -5671,7 +6325,6 @@ THIS SOFTWARE.</pre>
     const clear = animals.filter(([x, dir]) => (dir === 'down' ? webFoods(web, x).length === 1 : webEaters(web, x).length === 1));
     return clear.length ? clear : animals.length ? animals : all;
   }
-  const WEB_LOCKED_NOTE = 'The ones with dashed edges can’t be removed: what would happen next isn’t clear-cut.';
   const webClear = (web, id) => webOptions(web, id).some(([x, dir]) => (dir === 'down' ? webFoods(web, x).length === 1 : webEaters(web, x).length === 1 && webFoods(web, x).length));
   function webRemove(q, id) {
     const web = WEBS[q.web];
@@ -5738,10 +6391,9 @@ THIS SOFTWARE.</pre>
       return `<line class="arrow ${mark}" x1="${(x1 + dx * t1).toFixed(1)}" y1="${(y1 + dy * t1).toFixed(1)}" x2="${(x2 - dx * t2).toFixed(1)}" y2="${(y2 - dy * t2).toFixed(1)}" marker-end="url(#${mid}-${mark})"/>`;
     }).join('');
     const nodes = Object.entries(web.nodes).map(([id, [name, x, y]]) => {
-      const live = o.clickable && o.gone !== id && (!o.canPick || o.canPick(id));
       const cls = ['node', o.sel === id ? 'sel' : '', o.gone === id ? 'gone' : '', o.focus === id ? 'focus' : '',
-        o.okSet && o.okSet.includes(id) ? 'ok' : '', o.bad === id ? 'bad' : '', live ? 'clickable' : '', o.canPick && !o.canPick(id) ? 'locked' : ''].filter(Boolean).join(' ');
-      const attrs = live
+        o.okSet && o.okSet.includes(id) ? 'ok' : '', o.bad === id ? 'bad' : '', o.clickable && o.gone !== id ? 'clickable' : ''].filter(Boolean).join(' ');
+      const attrs = o.clickable && o.gone !== id
         ? ` data-act="node" data-n="${id}" id="cg-node-${id}" tabindex="0" role="button" aria-pressed="${o.sel === id ? 'true' : 'false'}" aria-label="${esc(name)}"`
         : ` role="img" aria-label="${esc(name)}${o.gone === id ? ' (removed)' : ''}"`;
       return `<g class="${cls}" transform="translate(${x * 6.4} ${y * 4})"${attrs}><rect x="-56" y="-17" width="112" height="34" rx="10"/><text y="5">${esc(name)}</text>${o.gone === id ? '<line class="cross" x1="-50" y1="-13" x2="50" y2="13"/>' : ''}</g>`;
@@ -6520,7 +7172,6 @@ THIS SOFTWARE.</pre>
     do { next = (next + 1) % run.names.length; } while (w.out.includes(next));
     w.cur = next;
     run.left = q.speed;
-    cgRestartClock();
     cgRenderPlay();
     cgAfter();
   }
@@ -6657,7 +7308,6 @@ THIS SOFTWARE.</pre>
       if (w.k >= q.total) { ttEndDuel(q, run); return; }
       w.cur = w.k % run.names.length;
       run.left = q.speed;
-      cgRestartClock();
     }
     ttNext(q);
     cgRenderPlay();
@@ -6772,11 +7422,7 @@ THIS SOFTWARE.</pre>
       const left = nums.slice();
       used.forEach((u) => {
         const i = left.indexOf(u);
-        if (i < 0) {
-          const have = nums.filter((x) => x === u).length;
-          fail(!have ? `${u} isn’t one of the numbers.` : have === 1 ? `There’s only one ${u}, so it can only be used once.`
-            : `There are only ${have} ${u}s, so ${u} can only be used ${have} times.`);
-        }
+        if (i < 0) fail(nums.includes(u) ? `You’ve used ${u} more times than you have it.` : `${u} isn’t one of your numbers.`);
         left.splice(i, 1);
       });
       return { value, used };
@@ -7011,8 +7657,8 @@ THIS SOFTWARE.</pre>
     question: 'A question ends with a question mark.',
     exclaim: 'An exclamation mark shows strong feeling, such as surprise, excitement or anger, or a command said forcefully.',
     caps: 'Names of people, places, days and months start with a capital letter, and so does the word I.',
-    list: 'Use commas to separate the items in a list. You don’t need a comma before the final “and”, but it isn’t wrong to put one there.',
-    fronted: 'Put a comma after a fronted adverbial: words at the start of a sentence that say when, where or how something happened. After a very short one some writers leave the comma out, but putting it in is always right.',
+    list: 'Use commas to separate the items in a list. There’s usually no comma before the final “and”.',
+    fronted: 'Put a comma after a fronted adverbial: words at the start of a sentence that say when, where or how something happened.',
     clause: 'When a sentence starts with a subordinate clause (beginning with a word like when, if or although), put a comma after it.',
     parenthesis: 'Extra information dropped into a sentence goes between a pair of commas, brackets or dashes. Take it out and the sentence still makes sense.',
     address: 'Use a comma to separate the name of the person you are talking to: “Can you help me, Sam?”',
@@ -7207,7 +7853,7 @@ THIS SOFTWARE.</pre>
     ['simile', 'Her eyes sparkled like diamonds.', 'It compares her eyes to diamonds using “like”.'],
     ['simile', 'The old man was as wise as an owl.', 'It compares the man to an owl using “as … as”.'],
     ['simile', 'The lake was as smooth as glass.', 'It compares the lake to glass using “as … as”.'],
-    ['metaphor', 'The stars were diamonds in the night sky.', 'It says the stars were diamonds, without “like” or “as”.'],
+    ['metaphor', 'The classroom was a zoo.', 'It says the classroom was a zoo, not just like one.'],
     ['metaphor', 'Snow was a white blanket over the town.', 'It says the snow was a blanket, without “like” or “as”.'],
     ['metaphor', 'Her words were daggers.', 'It says her words were daggers, because they hurt.'],
     ['metaphor', 'The moon was a silver coin in the sky.', 'It says the moon was a coin, without “like” or “as”.'],
@@ -7244,8 +7890,8 @@ THIS SOFTWARE.</pre>
     ['repetition', 'Far, far away, beyond the hills, lived a dragon.', '“Far” is repeated to show just how far away it was.'],
     ['oxymoron', 'There was a deafening silence.', '“Deafening” and “silence” have opposite meanings.'],
     ['oxymoron', 'It was a bittersweet goodbye.', '“Bitter” and “sweet” have opposite meanings.'],
-    ['oxymoron', 'It was an open secret that she was leaving.', '“Open” and “secret” have opposite meanings.'],
-    ['oxymoron', 'The two friends sat alone together.', '“Alone” and “together” have opposite meanings.'],
+    ['oxymoron', 'The film was seriously funny.', '“Seriously” and “funny” have opposite meanings.'],
+    ['oxymoron', 'The pizza was awfully good.', '“Awfully” and “good” have opposite meanings.'],
     ['oxymoron', 'She gave a quiet scream.', '“Quiet” and “scream” have opposite meanings.'],
   ];
 
@@ -7295,7 +7941,7 @@ THIS SOFTWARE.</pre>
   }
   const SP_RELAY_LOOK = 5;
   function spCgReset(q) {
-    q.work = q.type === 'bee' ? { cur: 0, k: 0, out: [], shown: false, log: [], flash: null, undo: [] }
+    q.work = q.type === 'bee' ? { cur: 0, k: 0, out: [], shown: false, log: [], flash: null }
       : { typed: '', covered: q.give !== 'look', pick: null, said: '', right: false };
   }
   function spRelayControls(q) {
@@ -7325,9 +7971,6 @@ THIS SOFTWARE.</pre>
     const w = q.work;
     const word = q.words[w.k];
     const name = esc(run.names[w.cur]);
-    // Keep a copy of the bee as it was, so a spelling marked by mistake can be undone.
-    const snap = JSON.stringify({ work: { ...w, undo: [] }, scores: run.scores, results: run.results.length, streak: run.streak, best: run.best });
-    w.undo = (w.undo || []).concat(snap).slice(-10);
     w.log.push({ word, who: w.cur, ok });
     if (ok) run.scores[w.cur] += 1;
     else w.out.push(w.cur);
@@ -7352,22 +7995,6 @@ THIS SOFTWARE.</pre>
     speak(q.words[w.k]);
     return true;
   }
-  // Puts the bee back as it was before the last mark: the pupil is back in, with their word and score.
-  function spBeeUndo(q, run) {
-    const stack = q.work.undo || [];
-    if (!stack.length) return false;
-    const snap = JSON.parse(stack[stack.length - 1]);
-    q.work = { ...snap.work, undo: stack.slice(0, -1) };
-    run.scores = snap.scores;
-    run.results.length = snap.results;
-    run.streak = snap.streak;
-    run.best = snap.best;
-    run.feedback = null;
-    run.phase = 'answer';
-    return true;
-  }
-  const spBeeUndoHTML = (q) => (q.work.undo && q.work.undo.length
-    ? '<button type="button" class="btn-link" data-act="undo" id="cg-undo">Undo the last mark</button>' : '');
 
   // ---------- Punctuation Fix ----------
   const PF_MARK_NAMES = { ',': 'comma', '.': 'full stop', '?': 'question mark', '!': 'exclamation mark', ':': 'colon', ';': 'semicolon' };
@@ -7388,12 +8015,9 @@ THIS SOFTWARE.</pre>
     const last = toks.length - 1;
     const out = new Set();
     const variant = (fn) => { const copy = toks.map((t) => ({ ...t })); fn(copy); const s = pfJoin(copy); if (s !== item.t) out.add(s); };
-    // The comma after an opening phrase or clause is never just left out: after a short opener some
-    // writers leave it out, so that version wouldn't be clearly wrong.
-    const opener = item.r.some((k) => k === 'fronted' || k === 'clause') ? toks.findIndex((t) => t.mark === ',') : -1;
     toks.forEach((t, i) => {
       if (t.mark && i < last) {
-        if (i !== opener) variant((c) => { c[i].mark = ''; });
+        variant((c) => { c[i].mark = ''; });
         if (i + 1 < last && !toks[i + 1].mark) variant((c) => { c[i + 1].mark = c[i].mark; c[i].mark = ''; });
       }
     });
@@ -7440,9 +8064,7 @@ THIS SOFTWARE.</pre>
   function pfCheckPlace(q) {
     const w = q.work;
     const toks = pfTokens(q.t);
-    // In a list, a comma before the final "and" or "or" is fine too.
-    const listComma = (i) => q.r.includes('list') && !toks[i].mark && toks[i + 1] && ['and', 'or'].includes(toks[i + 1].word) && w.marks[i] === ',';
-    const marks = toks.map((t, i) => w.marks[i] === t.mark || listComma(i));
+    const marks = toks.map((t, i) => w.marks[i] === t.mark);
     const caps = toks.map((t, i) => !q.caps || w.caps[i] === /^[A-Z]/.test(t.word));
     w.result = { marks, caps };
     const wrong = marks.filter((x) => !x).length + caps.filter((x) => !x).length;
@@ -7606,10 +8228,8 @@ THIS SOFTWARE.</pre>
           <div class="answer-btns">
             <button type="button" class="answer-btn mark-ok" data-act="mark" data-ok="1" id="cg-mark-ok"><kbd class="key">Y</kbd><span>✓ Spelt right</span></button>
             <button type="button" class="answer-btn mark-no" data-act="mark" data-ok="0" id="cg-mark-no"><kbd class="key">N</kbd><span>✗ Slipped</span></button>
-          </div>${spBeeUndoHTML(q)}`;
+          </div>`;
       },
-      canUndo: (q) => q.type === 'bee' && Boolean(q.work.undo && q.work.undo.length),
-      undo: (q, run) => q.type === 'bee' && spBeeUndo(q, run),
       focusId(q) {
         if (q.type === 'bee') return q.work.shown ? 'cg-mark-ok' : 'cg-show';
         if (q.give === 'look' && !q.work.covered) return 'cg-cover';
@@ -7671,7 +8291,7 @@ THIS SOFTWARE.</pre>
         const said = q.give === 'spot' ? (w.pick === null ? '' : q.opts[w.pick]) : w.typed.trim();
         if (!said) return { invalid: q.give === 'spot' ? 'Pick a spelling first.' : 'Type the word first.' };
         w.said = said;
-        w.right = spRight(said, q.word);
+        w.right = normWord(said) === normWord(q.word);
         return { correct: w.right };
       },
       afterCheck(res, q, run) {
@@ -7792,7 +8412,7 @@ THIS SOFTWARE.</pre>
         if (act === 'pick') { w.pick = i; return 'check'; }
         return false;
       },
-      key(e, q, run) {
+      key(e, q) {
         if (e.altKey || e.key.length !== 1 && e.key !== 'Backspace' && e.key !== 'Delete') return false;
         const t = e.target;
         if (q.type === 'place') {
@@ -7804,9 +8424,7 @@ THIS SOFTWARE.</pre>
           q.work.result = null;
           return true;
         }
-        // A, B and C pick an answer too, except in the buzzer race, where A is Player 1's buzzer key.
-        const letters = run && run.style === 'buzz' ? '' : 'abc';
-        const k = '123'.includes(e.key) ? Number(e.key) - 1 : letters ? letters.indexOf(e.key.toLowerCase()) : -1;
+        const k = '123'.includes(e.key) ? Number(e.key) - 1 : 'abc'.indexOf(e.key.toLowerCase());
         if (k < 0 || k >= q.opts.length) return false;
         q.work.pick = k;
         return 'check';
@@ -8321,10 +8939,8 @@ THIS SOFTWARE.</pre>
       check(q) {
         const w = q.work;
         if (q.type === 'board') return w.shown ? { correct: w.rows.length > 0 } : { invalid: 'Show the answer first.' };
-        const typed = String(w.typed || '').trim();
+        const typed = cleanRef(w.typed);
         if (!typed) return { invalid: 'Type your answer first.' };
-        // Only a whole number counts: "4.8" or "5 6" isn't 48 or 56.
-        if (!/^\d+$/.test(typed)) return { invalid: 'Type a whole number, using digits only.' };
         return { correct: Number(typed) === w.a * w.b };
       },
       afterCheck(res, q, run) {
@@ -8421,7 +9037,7 @@ THIS SOFTWARE.</pre>
         }
         if (mode === 'class') {
           return ['Put this on the board and split the class into teams.',
-            `The numbers and target appear with a ${s.think / 60}-minute countdown. Teams work it out on paper.`,
+            `The numbers and target appear with a ${mins} countdown. Teams work it out on paper.`,
             'Then each team calls out its working, and the teacher types it in. The game checks it.',
             'The closest answer scores 1. Hitting the target exactly scores 2.'];
         }
@@ -8819,7 +9435,7 @@ THIS SOFTWARE.</pre>
         return [what,
           'Click a switch, or press its number key, to turn it on (1) or off (0). Type answers that aren’t switches.',
           'Press Check to see the working.',
-          'This follows AQA GCSE Computer Science, sections 3.3.1, 3.3.2 and 3.3.4.'];
+          'This follows AQA GCSE Computer Science, sections 3.3.1 to 3.3.4.'];
       },
       count: (s) => Number(s.rounds),
       makeQuestions(s) {
@@ -9011,33 +9627,7 @@ THIS SOFTWARE.</pre>
           'This follows AQA GCSE Computer Science, section 3.4.2.'];
       },
       count: (s) => Number(s.rounds),
-      makeQuestions(s, mode) {
-        const pool = s.level === 'mix' ? [...LG_CIRCUITS[1], ...LG_CIRCUITS[2], ...LG_CIRCUITS[3]] : LG_CIRCUITS[s.level];
-        const circuits = [];
-        let deck = [];
-        for (let k = 0; k < Number(s.rounds); k += 1) {
-          if (!deck.length) deck = shuffle(pool.slice());
-          circuits.push(JSON.parse(JSON.stringify(deck.pop())));
-        }
-        if (s.level === 'mix') circuits.sort((a, b) => lgGates(a) - lgGates(b)); // easier circuits first
-        const kinds = ['light', 'predict', 'table', 'expr'];
-        return circuits.map((c, k) => {
-          let type = mode === 'groups' ? 'light' : s.types === 'mix' ? kinds[k % 4] : s.types;
-          if (mode === 'class') type = s.classTypes === 'mix' ? (k % 2 ? 'expr' : 'predict') : s.classTypes === 'expr' ? 'expr' : 'predict';
-          // A one-input circuit (NOT A) can't give four different expressions, so swap in one of the same size.
-          if (type === 'expr' && lgInputs(c).length < 2) {
-            const two = pool.filter((p) => lgInputs(p).length > 1);
-            const same = two.filter((p) => lgGates(p) === lgGates(c));
-            c = JSON.parse(JSON.stringify(shuffle(same.length ? same : two)[0]));
-          }
-          const q = { type, c, inputs: lgInputs(c).sort() };
-          if (type === 'expr') q.opts = lgExprOptions(c);
-          if (type === 'light') q.target = Math.random() < (mode === 'groups' ? 0.65 : 0.8) ? 1 : 0;
-          if (type === 'predict') q.vals = Object.fromEntries(q.inputs.map((n) => [n, Math.random() < 0.5 ? 1 : 0]));
-          lgReset(q);
-          return q;
-        });
-      },
+      makeQuestions: (s, mode) => lgMake(s, mode, false),
       reset: (q) => lgReset(q),
       cardLabel: (q) => ({ light: q.target ? 'Light the bulb' : 'Keep the bulb off', predict: 'Predict the bulb', table: 'Truth table', expr: 'Boolean expression' }[q.type]),
       prompt(q, run) {
@@ -9056,7 +9646,7 @@ THIS SOFTWARE.</pre>
         const right = q.type === 'expr' ? q.opts.findIndex((o) => lgAQA(o) === lgAQA(q.c)) : -1;
         const opts = q.type === 'expr' && ctx.run && ctx.run.mode === 'class'
           ? `<ol class="lg-opts">${q.opts.map((o, i) => `<li class="${ctx.done ? (i === right ? 'ok' : 'dim') : ''}"><span class="hp-num">${i + 1}</span>Q = ${lgAQA(o)}</li>`).join('')}</ol>` : '';
-        const expr = ctx.done || q.type === 'table' ? `<p class="lg-expr">Q = ${lgAQA(q.c)} <span class="lg-words">In words: ${esc(lgExpr(q.c))}</span></p>` : '';
+        const expr = ctx.done || q.type === 'table' ? `<p class="lg-expr">Q = ${q.words ? esc(lgExpr(q.c)) : `${lgAQA(q.c)} <span class="lg-words">In words: ${esc(lgExpr(q.c))}</span>`}</p>` : '';
         return `<div class="lg-wrap">${svg}${table}</div>${opts}${expr}`;
       },
       controls(q) {
@@ -9101,12 +9691,12 @@ THIS SOFTWARE.</pre>
         if (q.type === 'light') {
           const correct = lgEval(q.c, q.work.vals) === q.target;
           const way = correct ? null : lgFind(q.c, q.inputs, q.target);
-          return { correct, html: `${lgWorking(q.c, q.work.vals)}${way ? `<p>One way that works: ${valsText(q.inputs, way)}.</p>` : ''}` };
+          return { correct, html: `${lgWorking(q.c, q.work.vals, q.words)}${way ? `<p>One way that works: ${valsText(q.inputs, way)}.</p>` : ''}` };
         }
         if (q.type === 'predict') {
           if (q.work.guess === null) return { invalid: 'Choose an answer first.' };
           const out = lgEval(q.c, q.vals);
-          return { correct: q.work.guess === out, html: `<p>The bulb ${out ? 'lights up' : 'stays off'}.</p>${lgWorking(q.c, q.vals)}` };
+          return { correct: q.work.guess === out, html: `<p>The bulb ${out ? 'lights up' : 'stays off'}.</p>${lgWorking(q.c, q.vals, q.words)}` };
         }
         if (q.type === 'expr') {
           if (q.work.pick === null) return { invalid: 'Choose an expression first.' };
@@ -9120,12 +9710,12 @@ THIS SOFTWARE.</pre>
       reveal(q) {
         if (q.type === 'predict') {
           const out = lgEval(q.c, q.vals);
-          return { head: `The bulb ${out ? 'lights up!' : 'stays off.'}`, html: lgWorking(q.c, q.vals) };
+          return { head: `The bulb ${out ? 'lights up!' : 'stays off.'}`, html: lgWorking(q.c, q.vals, q.words) };
         }
         if (q.type === 'light') {
           const way = lgFind(q.c, q.inputs, q.target);
           if (way) q.work.vals = way;
-          return { html: `<p>One way that works: ${valsText(q.inputs, q.work.vals)}.</p>${lgWorking(q.c, q.work.vals)}` };
+          return { html: `<p>One way that works: ${valsText(q.inputs, q.work.vals)}.</p>${lgWorking(q.c, q.work.vals, q.words)}` };
         }
         if (q.type === 'expr') return { head: `The answer: number ${q.opts.findIndex((o) => lgAQA(o) === lgAQA(q.c)) + 1}.`, html: '<p>Read the circuit from the inputs to the bulb, writing each gate as you meet it.</p>' };
         q.work.cells = q.work.cells.map((_, r) => lgEval(q.c, rowVals(q.inputs, r)));
@@ -9218,7 +9808,7 @@ THIS SOFTWARE.</pre>
             : '';
           return `<li class="code-line drag-row${mark}" id="cg-line-${lid}" data-line="${lid}" tabindex="${live ? 0 : -1}" aria-label="Line ${pos + 1}, indent ${ind}: ${esc(p.text[lid])}"><span class="code-num" aria-hidden="true">${pos + 1}</span><code class="code-text" style="--indent:${ind}">${codeHTML(q, p.text[lid])}</code>${tools}</li>`;
         }).join('');
-        return `<div class="code"><p class="code-goal"><b>${esc(p.title)}.</b> ${esc(p.goal)} <span class="code-spec">AQA ${esc(p.spec)}</span></p><ol class="code-list"${live ? ' data-live="1"' : ''} aria-label="Program lines">${lines}</ol></div>`;
+        return `<div class="code"><p class="code-goal"><b>${esc(p.title)}.</b> ${esc(p.goal)} ${q.ks3 ? '' : `<span class="code-spec">AQA ${esc(p.spec)}</span>`}</p><ol class="code-list"${live ? ' data-live="1"' : ''} aria-label="Program lines">${lines}</ol></div>`;
       },
       controls: () => '<button type="button" class="btn-primary" data-act="check" id="cg-check">Check the program</button>',
       focusId: (q) => `cg-line-${q.work.order[0]}`,
@@ -9250,12 +9840,10 @@ THIS SOFTWARE.</pre>
       check(q) {
         const p = codeProg(q);
         const order = q.work.order;
-        // Compare what each line says and how far it's indented, not which card it is: some programs have
-        // two identical lines (two ENDFORs, or asking for the age twice), and either card can go in either place.
-        const indentOf = (lid) => (q.hard ? q.work.indents[lid] : p.indents[lid]);
+        const indentOk = (lid) => !q.hard || q.work.indents[lid] === p.indents[lid];
         let best = null;
         codeTargets(p).forEach((t) => {
-          const ok = order.map((lid, pos) => p.text[lid] === p.text[t[pos]] && indentOf(lid) === p.indents[t[pos]]);
+          const ok = order.map((lid, pos) => lid === t[pos] && indentOk(lid));
           const count = ok.filter(Boolean).length;
           if (!best || count > best.count) best = { count, ok };
         });
@@ -9277,6 +9865,346 @@ THIS SOFTWARE.</pre>
       summary: (q) => `${codeProg(q).title} (${CODE_LANGS[q.lang === 'python' ? 'python' : 'aqa']})`,
       keysHint: (q) => `Keyboard: on a line, Alt + ↑ or ↓ moves it${q.hard ? ', and ← or → changes its indent' : ''}. Enter checks.`,
       preview: () => codePreview(),
+    },
+
+    cyber: {
+      titleHTML: 'Cyber <span class="hl c4">Safe</span>',
+      lede: 'Spot the warning signs in scam messages, name cyber security threats, and choose the safest thing to do online.',
+      noun: 'Question',
+      plural: 'questions',
+      maxPlayers: 4,
+      maxTries: 1,
+      triesFor: (q) => (q.type === 'flags' ? 2 : 1),
+      maxPoints: 1,
+      autoNext: false,
+      groupStyle: 'buzz',
+      classStyle: 'vote',
+      tip: 'Stop and think: who is it from, what do they want, and are they rushing you?',
+      options: [
+        { key: 'topics', label: 'Topics', choices: [['both', 'Everything'], ['cyber', 'Cyber security (AQA 3.6)'], ['online', 'Staying safe online']] },
+        { key: 'rounds', label: 'How many', choices: [['8', '8'], ['12', '12'], ['20', '20']] },
+      ],
+      defaults: { topics: 'both', rounds: '12' },
+      peopleHelp: '2 to 4 players share this computer. Each has a buzzer key.',
+      personNote: (i) => `Buzzer key: ${BUZZ_KEYS[i]}`,
+      how(mode, s) {
+        const what = s.topics === 'online' ? 'scam messages and everyday situations online'
+          : s.topics === 'cyber' ? 'scam messages, cyber security threats and how to protect against them'
+            : 'scam messages, cyber security threats, and everyday situations online';
+        if (mode === 'groups') {
+          return ['Buzzer race: 2 to 4 players share this computer, each with a buzzer key.',
+            `Everyone sees the same question: ${what}.`,
+            'Buzz in when you know the answer. A right answer scores 1, and a wrong one lets the others buzz.',
+            'After each one, the answer is explained.'];
+        }
+        if (mode === 'class') {
+          return ['Put this on the board and split the class into teams.',
+            `Each question is ${what}. Read it together.`,
+            'Each team decides: safe or scam, or 1, 2, 3 or 4. Click each team’s choice, then press Reveal.',
+            'Every team that was right scores. The reveal shows the warning signs or explains the answer.'];
+        }
+        return [`The questions are ${what}.`,
+          'Some messages ask you to click every warning sign. You get two checks for those.',
+          'After every answer, you’ll see why. A hint is there if you’re stuck.',
+          s.topics === 'online' ? 'These are everyday online safety skills, not part of the AQA specification.'
+            : 'The cyber security words come from AQA GCSE Computer Science, section 3.6.'];
+      },
+      count: (s) => cyCount(s),
+      makeQuestions: (s, mode) => cyMakeQuestions(s, mode),
+      reset: (q) => cyReset(q),
+      clearAttempt: (q) => cyReset(q),
+      cardLabel: (q) => CY_KIND_LABEL[q.type],
+      prompt(q, run) {
+        const vote = run.style === 'vote' && run.phase !== 'done';
+        if (q.type === 'flags') return 'Click every warning sign in the message, then press Check.';
+        if (q.type === 'safe') return vote ? 'Is this safe, or a scam? Each team decides.' : 'Is this message safe, or a scam?';
+        return vote ? `${cyAsk(q)} Each team picks 1 to ${cyOpts(q).length}.` : cyAsk(q);
+      },
+      board(q, ctx) {
+        if (!cyIsChoice(q)) {
+          const m = cyItem(q);
+          const opts = q.type === 'flags'
+            ? (ctx.done ? { marks: true, judge: true, sel: q.work.sel } : { pick: ctx.interactive, sel: q.work.sel })
+            : { marks: ctx.done && m.scam };
+          return `<div class="cy-board"><p class="cy-context">${esc(m.context)}</p>${cyMsgHTML(m, opts)}</div>`;
+        }
+        const item = cyItem(q);
+        const answer = cyAnswer(q);
+        const list = ctx.run.style === 'solo' && !ctx.done ? '' : `<ol class="cy-opts${q.type === 'password' ? ' pw' : ''}">${cyOpts(q).map((o, i) => `<li class="${ctx.done ? (o === answer ? 'ok' : 'dim') : ''}"><span class="hp-num">${i + 1}</span><span>${esc(o)}</span></li>`).join('')}</ol>`;
+        const scene = item.scene ? `<p class="cy-scene">${esc(item.scene)}</p>` : `<p class="cy-scene">${esc(item.ask)}</p>`;
+        return `<div class="cy-board">${scene}${list}</div>`;
+      },
+      controls(q) {
+        if (q.type === 'flags') {
+          const n = q.work.sel.length;
+          return `<p class="cy-count" role="status">${n ? `${n} part${n === 1 ? '' : 's'} picked` : 'Nothing picked yet'}</p>
+            <button type="button" class="btn-primary" data-act="check" id="cg-check">Check</button>`;
+        }
+        if (q.type === 'safe') {
+          return `<div class="answer-btns">${['Safe', 'Scam'].map((l, i) => `<button type="button" class="answer-btn" data-act="pick" data-i="${i}" id="cg-pick-${i}"><kbd class="key">${i + 1}</kbd><span>${l}</span></button>`).join('')}</div>`;
+        }
+        return `<div class="answer-list${q.type === 'password' ? ' pw' : ''}">${cyOpts(q).map((o, i) => `<button type="button" class="answer-btn" data-act="pick" data-i="${i}" id="cg-pick-${i}"><kbd class="key">${i + 1}</kbd><span>${esc(o)}</span></button>`).join('')}</div>`;
+      },
+      focusId: (q) => (q.type === 'flags' ? 'cg-seg-0' : 'cg-pick-0'),
+      act(act, el, q) {
+        if (act === 'seg' && q.type === 'flags') {
+          const k = Number(el.dataset.k);
+          q.work.sel = q.work.sel.includes(k) ? q.work.sel.filter((x) => x !== k) : [...q.work.sel, k];
+          return true;
+        }
+        if (act === 'pick' && q.type !== 'flags') { q.work.pick = Number(el.dataset.i); return 'check'; }
+        return false;
+      },
+      key(e, q) {
+        if (e.altKey || q.type === 'flags') return false;
+        const n = q.type === 'safe' ? 2 : cyOpts(q).length;
+        if (!/^[1-9]$/.test(e.key) || Number(e.key) > n) return false;
+        q.work.pick = Number(e.key) - 1;
+        return 'check';
+      },
+      check(q) {
+        const w = q.work;
+        if (q.type === 'flags') {
+          if (!w.sel.length) return { invalid: 'Click the parts that look suspicious first.' };
+          const m = cyItem(q);
+          const flags = cyFlags(m);
+          const found = flags.filter((k) => w.sel.includes(k)).length;
+          const wrong = w.sel.filter((k) => !flags.includes(k)).length;
+          if (found === flags.length && !wrong) return { correct: true, html: `<p>You found all ${flags.length} warning signs.</p>${cyReasonsHTML(m)}` };
+          return { correct: false, html: `You found ${found} of ${flags.length} warning signs${wrong ? `, and ${wrong} of the parts you picked ${wrong === 1 ? 'is' : 'are'} fine` : ''}.` };
+        }
+        if (w.pick === null) return { invalid: 'Choose an answer first.' };
+        if (q.type === 'safe') {
+          const m = cyItem(q);
+          return { correct: (w.pick === 1) === m.scam, html: `<p><b>${m.scam ? 'It’s a scam.' : 'It’s safe.'}</b></p>${cyReasonsHTML(m)}` };
+        }
+        return { correct: cyOpts(q)[w.pick] === cyAnswer(q), html: `<p><b>The answer: ${esc(cyAnswer(q))}</b></p>${cyWhyHTML(q)}` };
+      },
+      reveal(q) {
+        if (q.type === 'flags') return { html: cyReasonsHTML(cyItem(q)) };
+        if (q.type === 'safe') return { head: cyItem(q).scam ? 'It’s a scam.' : 'It’s safe.', html: cyReasonsHTML(cyItem(q)) };
+        return { head: `The answer is ${cyOpts(q).indexOf(cyAnswer(q)) + 1}.`, html: `<p><b>${esc(cyAnswer(q))}</b></p>${cyWhyHTML(q)}` };
+      },
+      voteOptions: (q) => (q.type === 'safe' ? [['safe', 'Safe'], ['scam', 'Scam']] : cyOpts(q).map((_, i) => [String(i + 1), String(i + 1)])),
+      voteAnswer: (q) => (q.type === 'safe' ? (cyItem(q).scam ? 'scam' : 'safe') : String(cyOpts(q).indexOf(cyAnswer(q)) + 1)),
+      hint(q) {
+        if (q.type === 'flags') return 'Look at who it’s from, what it wants you to do, and whether it’s rushing you. Most messages have 3 or 4 warning signs.';
+        if (q.type === 'safe') return 'Ask yourself: does it want money, a password or a code? Is it rushing me? Was I expecting it?';
+        return esc(cyItem(q).hint);
+      },
+      points: () => 1,
+      chip(q) {
+        if (!cyIsChoice(q)) return cyItem(q).title;
+        if (q.type === 'threat') return CY_TERMS[cyItem(q).terms[0]].name;
+        return { protect: 'Protection', action: 'Staying safe', password: 'Passwords' }[q.type];
+      },
+      summary(q) {
+        const item = cyItem(q);
+        if (!cyIsChoice(q)) return `${item.title}: ${item.scam ? 'a scam' : 'safe'}`;
+        if (q.type === 'password') return `${item.ask} ${cyAnswer(q)}`;
+        return `${item.scene} ${cyAnswer(q)}`;
+      },
+      keysHint(q) {
+        if (q.type === 'flags') return 'Keyboard: Tab to a part and press Enter to pick it.';
+        if (q.type === 'safe') return 'Keyboard: press 1 for safe or 2 for scam.';
+        return `Keyboard: press 1 to ${cyOpts(q).length}.`;
+      },
+      preview: () => cyPreview(),
+    },
+
+    typing: {
+      titleHTML: 'Typing <span class="hl c1">Trainer</span>',
+      lede: 'Learn to type without looking at the keys. Start on the home row, then build up to sentences and code.',
+      noun: 'Line',
+      plural: 'lines',
+      maxPlayers: 4,
+      maxTries: 1,
+      maxPoints: 1,
+      autoNext: false,
+      groupStyle: 'duel',
+      classStyle: 'duel',
+      noTimer: true,
+      noScoreline: true,
+      tip: 'Keep your eyes on the screen, and let each finger look after its own keys.',
+      options: [
+        { key: 'lesson', label: 'Lesson', choices: Object.entries(TY_LESSONS).map(([k, l]) => [k, l.label]) },
+        { key: 'lines', label: 'How many lines', modes: ['solo'], choices: [['5', '5'], ['10', '10']] },
+        { key: 'rounds', label: 'How many lines', modes: ['groups', 'class'], choices: [['3', '3'], ['5', '5']] },
+        { key: 'kb', label: 'Keyboard', choices: [['show', 'Show which finger'], ['hide', 'Hide it']] },
+      ],
+      defaults: { lesson: 'home', lines: '5', rounds: '3', kb: 'show' },
+      peopleHelp: '2 to 4 players share this computer and take turns to type.',
+      personNote: (i) => (i === 0 ? 'Types first' : ''),
+      how(mode) {
+        if (mode === 'groups') {
+          return ['Head-to-head: 2 to 4 players share this computer and take turns.',
+            'Everyone types the same line. The clock starts when you press your first key.',
+            'The fastest typist with at least 90% accuracy wins the line and scores 1.',
+            'The keyboard is a UK layout. Swap seats quickly between turns.'];
+        }
+        if (mode === 'class') {
+          return ['Typing relay: put this on the board and split the class into teams.',
+            'For each line, every team sends a typist to the keyboard, one after another.',
+            'The class watches the speed and accuracy on the board. The fastest typist with at least 90% accuracy wins the line for their team.',
+            'Send a different typist each line, so everyone gets a go.'];
+        }
+        return ['Type each line exactly as it’s shown, with the same capitals, spaces and punctuation.',
+          'The keyboard shows the next key, coloured by the finger to use. Rest your fingers on the home row, and feel for the bumps on F and J.',
+          'Watch your speed in words a minute (wpm) and your accuracy. Aim for 90% accuracy first, then speed.',
+          'This is a general keyboard skill. The keyboard is a UK layout.'];
+      },
+      count: (s) => Number(s.lines),
+      makeQuestions(s, mode, names) {
+        const kb = s.kb !== 'hide';
+        if (mode === 'solo') return tyLines(s.lesson, Number(s.lines)).map((text) => ({ type: 'line', text, lesson: s.lesson, kb, work: tyFresh() }));
+        // Each line, everyone has a turn. Who goes first moves round, so nobody always goes first.
+        return tyLines(s.lesson, Number(s.rounds)).map((text, r) => {
+          const order = names.map((_, i) => (i + r) % names.length);
+          return { type: 'race', text, lesson: s.lesson, kb, order, work: { ...tyFresh(), turn: 0, cur: order[0], res: [] } };
+        });
+      },
+      reset(q) {
+        q.work = q.type === 'race' ? { ...tyFresh(), turn: 0, cur: q.order[0], res: [] } : tyFresh();
+      },
+      onType(q) {
+        const w = q.work;
+        // Pasted (or filled in by the browser): it has to be typed, so put the box back.
+        if (w.typed.length - w.prev.length > 3) {
+          w.typed = w.prev;
+          const box = typeof document === 'undefined' ? null : document.getElementById('cg-read');
+          if (box) box.value = w.prev;
+          return;
+        }
+        tyStep(w, q.text, w.typed, Date.now());
+        if (q.work.typed.length >= q.text.length) cgCheck();
+        else tyLive(q);
+      },
+      cardLabel: (q) => TY_LESSONS[q.lesson].label,
+      activeIdx: (run, q) => (q.type === 'race' ? q.work.cur : null),
+      progressLabel: (run) => `Line ${Math.min(run.i + 1, run.qs.length)} of ${run.qs.length}`,
+      turnText: (run, q, badge) => (q.type === 'race' ? `${badge(q.work.cur)} is typing` : ''),
+      prompt: () => 'Type the line exactly, with the same capitals, spaces and punctuation.',
+      board(q, ctx) {
+        const w = q.work;
+        if (ctx.done) {
+          const marks = q.type === 'line' ? tyLineHTML(q.text, w.typed) : esc(q.text);
+          return `<div class="ty"><p class="ty-text">${marks}</p>${q.type === 'line' && q.kb && Object.keys(w.miss).length ? `<div class="ty-kb" aria-hidden="true">${tyKeyboardHTML(null, w.miss)}</div><p class="ty-finger">Keys you missed are outlined in red.</p>` : ''}</div>`;
+        }
+        const next = q.text[w.typed.length] ?? null;
+        const live = ctx.interactive;
+        return `<div class="ty">
+          <p class="ty-text" id="ty-text">${tyLineHTML(q.text, live ? w.typed : '')}</p>
+          <label class="ty-field" for="cg-read"><span class="sr">Type the line here</span>
+            <input id="cg-read" class="ty-input" type="text" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" maxlength="${q.text.length}" value="${esc(live ? w.typed : '')}"${live ? '' : ' disabled'}>
+          </label>
+          <p class="ty-live" id="ty-live">${tyLiveHTML(q)}</p>
+          ${q.kb ? `<div class="ty-kb" id="ty-kb" aria-hidden="true">${tyKeyboardHTML(next)}</div><p class="ty-finger" id="ty-finger">${tyFingerText(next)}</p>` : ''}
+        </div>`;
+      },
+      controls: (q) => (q.type === 'line' ? '<button type="button" class="btn-ghost" data-act="restart" id="ty-restart">Start this line again</button>' : ''),
+      focusId: () => 'cg-read',
+      // Between turns: the next typist gets ready, and sees the scores for this line so far.
+      panel(run, q, badge) {
+        if (q.type !== 'race' || run.phase !== 'handover') return null;
+        const w = q.work;
+        const so = w.res.length ? `<ol class="ty-res">${w.res.map((r) => `<li>${badge(r.who)}<span><b>${r.wpm}</b> wpm, ${r.acc}%</span></li>`).join('')}</ol>` : '';
+        return `<div class="handover">
+          <p class="handover-title">${w.turn ? 'Next typist' : `Line ${run.i + 1}`}</p>
+          <p>${badge(w.cur)}${run.mode === 'class' ? ': send someone up to the keyboard.' : ', it’s your turn.'}</p>
+          <p>Read the line first. The clock starts when you press your first key.</p>
+          ${so}
+          <button type="button" class="btn-primary" data-act="begin" id="cg-begin">Ready</button>
+        </div>`;
+      },
+      act(act, el, q) {
+        if (act !== 'restart' || q.type !== 'line') return false;
+        q.work = tyFresh();
+        pendingFocus = 'cg-read';
+        return true;
+      },
+      key: () => false,
+      check(q) {
+        const w = q.work;
+        if (w.typed.length < q.text.length) return { invalid: 'Keep typing to the end of the line.' };
+        const st = tyStats(w, q.text, Date.now());
+        w.result = st;
+        if (q.type === 'race') return { correct: true, stats: st };
+        const best = st.acc >= TY_PASS && tySaveBest(q.lesson, st.wpm);
+        const missed = tyMissList(w.miss);
+        return {
+          correct: st.acc >= TY_PASS,
+          html: `<p><b>${st.wpm}</b> words a minute, <b>${st.acc}%</b> accuracy.</p>
+            ${st.acc < TY_PASS ? '<p>Slow down a little: aim for 90% accuracy first, then speed.</p>' : ''}
+            ${missed.length ? `<p>Keys to practise: ${esc(listAnd(missed))}.</p>` : '<p>No mistakes!</p>'}
+            ${best ? '<p class="ty-best">That’s your fastest for this lesson on this computer!</p>' : ''}`,
+          note: `${st.wpm} wpm, ${st.acc}% accuracy`,
+        };
+      },
+      // In a race, record this typist's turn, then hand over to the next one (or finish the line).
+      afterCheck(res, q, run) {
+        if (q.type !== 'race') return false;
+        const w = q.work;
+        w.res.push({ who: w.cur, wpm: res.stats.wpm, acc: res.stats.acc });
+        w.turn += 1;
+        if (w.turn >= q.order.length) { tyEndRace(q, run); return true; }
+        Object.assign(w, tyFresh());
+        w.cur = q.order[w.turn];
+        run.phase = 'handover';
+        cgRenderPlay();
+        cgAfter();
+        return true;
+      },
+      reveal: () => ({ html: '' }),
+      hint: () => 'Rest your fingers on the home row: A S D F for your left hand, and J K L ; for your right. Feel for the bumps on F and J, and use the finger shown on the keyboard.',
+      points: () => 1,
+      chip: (q) => (q.work.result ? `${q.work.result.wpm} wpm` : 'Line'),
+      summary: (q) => q.text,
+      keysHint: (q) => `Type in the box. The line finishes when you reach the end, and Backspace fixes mistakes${q.type === 'line' ? '' : ' (they still count against accuracy)'}.`,
+      // On your own: speed and accuracy over all the lines typed.
+      report(run) {
+        if (run.style !== 'solo') return null;
+        const lines = run.results.map((r) => run.qs[r.qi].work.result).filter(Boolean);
+        if (!lines.length) return '<div class="report"><div class="report-body"><p class="comment">No lines typed yet. Have a go!</p></div></div>';
+        const ms = lines.reduce((n, l) => n + l.ms, 0);
+        const wpm = Math.round(lines.reduce((n, l) => n + l.correct, 0) / 5 / (ms / 60000));
+        const keys = lines.reduce((n, l) => n + l.keys, 0);
+        const acc = keys ? Math.round(((keys - lines.reduce((n, l) => n + l.errs, 0)) / keys) * 100) : 100;
+        const top = Math.max(...lines.map((l) => l.wpm));
+        const lesson = run.qs[0].lesson;
+        const best = tyBests()[lesson];
+        const comment = acc >= 95 ? 'Accurate typing! Now try to go a little faster.' : acc >= TY_PASS ? 'Good accuracy. Keep your eyes on the screen, not the keys.' : 'Slow down a little: accuracy first, then speed.';
+        return `
+          <div class="report${acc >= TY_PASS ? ' good' : ''}">
+            <div class="grade"><svg viewBox="0 0 220 120" aria-hidden="true"><path d="${GRADE_PATH}"/></svg><span class="grade-score">${wpm}<small> wpm</small></span></div>
+            <div class="report-body">
+              <p class="comment">${esc(comment)}</p>
+              <p class="result-note">${lines.length} line${lines.length === 1 ? '' : 's'} of ${TY_LESSONS[lesson].label.toLowerCase()}${best ? `. Your best for this lesson on this computer: ${best} wpm` : ''}.</p>
+              <dl class="stats">
+                <div><dt>Accuracy</dt><dd>${acc}%</dd></div>
+                <div><dt>Fastest line</dt><dd>${top} wpm</dd></div>
+                <div><dt>Lines</dt><dd>${lines.length}</dd></div>
+              </dl>
+            </div>
+          </div>`;
+      },
+      // The keys to practise (on your own), or each typist's speeds (in groups and as a class).
+      resultsExtra(run) {
+        if (run.style === 'solo') {
+          const miss = {};
+          run.results.forEach((r) => Object.entries(run.qs[r.qi].work.miss).forEach(([c, n]) => { miss[c] = (miss[c] || 0) + n; }));
+          if (!Object.keys(miss).length) return '';
+          return `<h2>Keys to practise</h2><p class="help">${esc(listAnd(tyMissList(miss)))}. These are outlined in red.</p><div class="ty-kb small" aria-hidden="true">${tyKeyboardHTML(null, miss)}</div>`;
+        }
+        const turns = run.qs.slice(0, run.i + 1).flatMap((q) => q.work.res);
+        if (!turns.length) return '';
+        const rows = run.names.map((n, i) => {
+          const mine = turns.filter((t) => t.who === i);
+          if (!mine.length) return '';
+          return `<li><span class="badge ${cgColour(run, i)}">${esc(n)}</span><span>Fastest <b>${Math.max(...mine.map((t) => t.wpm))}</b> wpm · average accuracy ${Math.round(mine.reduce((s, t) => s + t.acc, 0) / mine.length)}%</span></li>`;
+        }).join('');
+        return `<h2>Speeds</h2><ol class="ty-res">${rows}</ol>`;
+      },
+      preview: () => tyPreview(),
     },
 
     periodic: {
@@ -9698,7 +10626,7 @@ THIS SOFTWARE.</pre>
         if (q.type === 'build') return 'Draw every arrow in the web. Click a food, then the animal that eats it.';
         if (q.type === 'role') return `Click ${ROLES[q.role].name} in this web.`;
         if (q.type === 'predict') return webQuestion(q);
-        return q.removed ? webQuestion(q) : `Click a living thing on the board to remove it from the web. ${WEB_LOCKED_NOTE}`;
+        return q.removed ? webQuestion(q) : 'Click a living thing on the board to remove it from the web.';
       },
       board(q, ctx) {
         const web = WEBS[q.web];
@@ -9712,7 +10640,6 @@ THIS SOFTWARE.</pre>
             gone: q.removed,
             focus: q.affected,
             clickable: ctx.interactive || ctx.phase === 'remove',
-            canPick: ctx.phase === 'remove' ? (id) => webClear(web, id) : null,
           });
           const clues = ctx.interactive
             ? `<p class="web-legend">Click a food, then the animal that eats it. Click the same pair again to remove that arrow.</p><ul class="clues">${webClues(web)}</ul>`
@@ -9724,7 +10651,7 @@ THIS SOFTWARE.</pre>
           return `<div class="web-wrap">${webSVG(q.web, { links: all, clickable: ctx.interactive, okSet: ok, bad: ctx.done && q.work.pick && !ok.includes(q.work.pick) ? q.work.pick : null })}</div>`;
         }
         if (q.type === 'predict') return `<div class="web-wrap">${webSVG(q.web, { links: all, gone: q.removed, focus: q.affected })}</div>`;
-        return `<div class="web-wrap">${webSVG(q.web, { links: all, gone: q.removed, focus: q.affected, clickable: ctx.phase === 'vote', canPick: (id) => webClear(web, id) })}</div>`;
+        return `<div class="web-wrap">${webSVG(q.web, { links: all, gone: q.removed, focus: q.affected, clickable: ctx.phase === 'vote' })}</div>`;
       },
       controls(q) {
         if (q.type === 'build') return '<button type="button" class="btn-primary" data-act="check" id="cg-check">Check the web</button>';
@@ -9752,8 +10679,7 @@ THIS SOFTWARE.</pre>
         if (run.phase === 'remove') {
           return `${run.msg ? `<p class="cg-note" role="status">${esc(run.msg)}</p>` : ''}
             <p class="cg-turn">${badge(q.remover)} removes a species</p>
-            <p class="prompt">Click a living thing in the web. ${badge(q.team)} then predicts what happens next.</p>
-            <p class="hint">${WEB_LOCKED_NOTE}</p>`;
+            <p class="prompt">Click any living thing in the web. ${badge(q.team)} then predicts what happens next.</p>`;
         }
         if (run.phase === 'predict') {
           return `<p class="cg-turn">${badge(q.team)} predicts</p>
@@ -9785,7 +10711,6 @@ THIS SOFTWARE.</pre>
       },
       phaseAct(act, el, q, run) {
         if (act === 'node' && (run.phase === 'remove' || run.phase === 'vote')) {
-          if (!webClear(WEBS[q.web], el.dataset.n)) return false; // no clear-cut answer, so it can't be removed
           webRemove(q, el.dataset.n);
           if (run.phase === 'remove') { run.phase = 'predict'; run.msg = ''; return 'phase'; }
           run.votes = run.names.map(() => null); // a new question, so clear the votes
@@ -9833,8 +10758,7 @@ THIS SOFTWARE.</pre>
         }
         if (q.type === 'role') {
           const ids = webRole(web, q.role);
-          const both = q.role === 'primary' ? webBothNote(web) : '';
-          return { correct: ids.includes(w.pick), html: `<p>${ROLES[q.role].text}. In this web: ${esc(listAnd(ids.map((id) => webName(web, id))))}.${esc(both)}</p>` };
+          return { correct: ids.includes(w.pick), html: `<p>${ROLES[q.role].text}. In this web: ${esc(listAnd(ids.map((id) => webName(web, id))))}.</p>` };
         }
         return { correct: w.pick === q.answer, html: `<p>${esc(webExplain(q))}</p>` };
       },
@@ -10944,6 +11868,93 @@ THIS SOFTWARE.</pre>
     },
   };
 
+  // ---------- Computing, key stage 3 (Years 7 and 8): the KS3 versions of the GCSE games ----------
+  // The national curriculum for computing at key stage 3: converting between binary and decimal and
+  // binary addition, simple Boolean logic (AND, OR and NOT), programming in a text-based language
+  // (Python here), searching and sorting, and using technology safely and securely.
+  // Each reuses its GCSE game with KS3 content and wording. Typing Trainer is in both key stages as it is.
+  CG_DEFS.binary3 = {
+    ...CG_DEFS.binary,
+    lede: 'Each switch is worth double the one to its right. Turn decimal numbers into binary, read binary numbers, and add them.',
+    tip: 'Add up the place values of the switches that are on.',
+    options: [
+      { key: 'kind', label: 'Questions', choices: [['basics', 'Binary and decimal'], ['add', 'Adding binary'], ['ks3', 'Both']] },
+      { key: 'bits', label: 'Switches', choices: [['4', '4 bits (up to 15)'], ['8', '8 bits (up to 255)']] },
+      { key: 'rounds', label: 'How many', choices: [['10', '10'], ['20', '20']] },
+    ],
+    defaults: { kind: 'basics', bits: '4', rounds: '10' },
+    how(mode, s) {
+      const steps = CG_DEFS.binary.how(mode, { ...s, kind: 'basics' });
+      if (mode === 'class') return steps;
+      steps[0] = {
+        basics: 'Turn decimal numbers into binary with the switches, and read binary as decimal.',
+        add: 'Add two binary numbers. When a column adds up to 2 or more, carry 1 to the next column.',
+        ks3: 'A mix of converting between binary and decimal, and adding two binary numbers.',
+      }[s.kind];
+      if (mode === 'solo') steps[3] = 'This covers binary from the key stage 3 national curriculum: converting between binary and decimal, and binary addition.';
+      return steps;
+    },
+    makeQuestions(s) {
+      const bits = Number(s.bits);
+      const kinds = BIN_KINDS[s.kind] || BIN_KINDS.basics;
+      const used = new Set();
+      let deck = [];
+      return Array.from({ length: Number(s.rounds) }, () => {
+        if (!deck.length) deck = shuffle(kinds.slice());
+        const kind = deck.pop();
+        let q = binQuestion(kind, bits, used);
+        // Adding three numbers is GCSE work, so key stage 3 adds two.
+        for (let k = 0; kind === 'add' && q.nums.length > 2 && k < 50; k += 1) q = binQuestion(kind, bits, used);
+        binReset(q);
+        return q;
+      });
+    },
+    preview: () => binPreview(true),
+  };
+
+  CG_DEFS.logic3 = {
+    ...CG_DEFS.logic,
+    lede: 'AND, OR and NOT gates decide whether the bulb lights up. Switch the inputs, predict the bulb, and fill in truth tables.',
+    options: [
+      { key: 'level', label: 'Circuits', choices: [['1', 'One gate'], ['2', 'Two gates'], ['mix', 'A mix']] },
+      { key: 'types', label: 'Questions', modes: ['solo'], choices: [['mix', 'A mix'], ['light', 'Light the bulb'], ['predict', 'Predict the bulb'], ['table', 'Truth tables']] },
+      { key: 'rounds', label: 'How many', choices: [['8', '8'], ['12', '12']] },
+    ],
+    defaults: { level: 'mix', types: 'mix', classTypes: 'predict', rounds: '8' },
+    how(mode, s) {
+      if (mode !== 'solo') return CG_DEFS.logic.how(mode, { ...s, classTypes: 'predict' }).map((t) => t.replace(/ Expressions use AQA notation.*$/, ''));
+      return ['Questions mix three kinds: light the bulb, predict the bulb, and fill in a truth table.',
+        'Click an input, or press its letter, to switch it between 1 and 0.',
+        'AND gives 1 when both inputs are 1. OR gives 1 when at least one input is 1. NOT flips its input.',
+        'This covers simple Boolean logic (AND, OR and NOT) from the key stage 3 national curriculum.'];
+    },
+    makeQuestions: (s, mode) => lgMake(s, mode, true),
+  };
+
+  CG_DEFS.code3 = {
+    ...CG_DEFS.code,
+    lede: 'The lines of a short Python program have been jumbled. Put them back in order so the program works.',
+    options: CG_DEFS.code.options.filter((o) => o.key !== 'lang'),
+    defaults: { lang: 'python', level: '1', indent: 'given' },
+    how: (mode, s) => CG_DEFS.code.how(mode, { ...s, lang: 'python' })
+      .map((t) => t.replace('Each program practises a part of AQA GCSE Computer Science (3.1 and 3.2), shown with its goal.',
+        'Each program comes with its goal. They use variables, selection, loops and lists, and include a linear search and a bubble sort.')),
+    makeQuestions: (s) => CG_DEFS.code.makeQuestions({ ...s, lang: 'python' }).map((q) => Object.assign(q, { ks3: true })),
+    preview: () => codePreview(true),
+  };
+
+  CG_DEFS.cyber3 = {
+    ...CG_DEFS.cyber,
+    lede: 'Spot the warning signs in scam messages, keep your passwords and privacy safe, and choose the safest thing to do online.',
+    options: CG_DEFS.cyber.options.filter((o) => o.key !== 'topics'),
+    defaults: { topics: 'online', rounds: '12' },
+    how: (mode, s) => CG_DEFS.cyber.how(mode, { ...s, topics: 'online' })
+      .map((t) => t.replace('These are everyday online safety skills, not part of the AQA specification.',
+        'This covers using technology safely from the key stage 3 national curriculum, including protecting your privacy and knowing how to report concerns.')),
+    count: (s) => cyCount({ ...s, topics: 'online' }),
+    makeQuestions: (s, mode) => cyMakeQuestions({ ...s, topics: 'online' }, mode),
+  };
+
   // The game-registry entry shared by the three Computing games (they share one screen).
   function cgGame(id, info) {
     return {
@@ -11054,7 +12065,6 @@ THIS SOFTWARE.</pre>
     const run = cgRun();
     run.phase = 'answer';
     if (cgD().onBegin) cgD().onBegin(run, cgQ());
-    cgRestartClock();
     cgRenderPlay();
     cgAfter();
   }
@@ -11089,7 +12099,7 @@ THIS SOFTWARE.</pre>
     const s = cgS();
     const def = cgD();
     const mode = s.view === 'setup' || !s.run ? s.mode : s.run.mode;
-    $('cg-eyebrow').textContent = `${subjectById(GAMES[state.gameId].subject).name} game · ${modeLabel(mode)}`;
+    $('cg-eyebrow').textContent = `${placeTitle(gameSubject(state.gameId), stageOf(gameSubject(state.gameId), state.gameId))} game · ${modeLabel(mode)}`;
     $('cg-title').innerHTML = def.titleHTML;
     $('cg-lede').textContent = def.lede;
   }
@@ -11233,9 +12243,7 @@ THIS SOFTWARE.</pre>
     } else if (run.style === 'buzz' || run.style === 'relay') {
       extra = run.phase === 'answer' ? '<span class="clock" id="cg-clock" role="timer"></span>' : '';
     } else if (run.timer) {
-      // The pause button only while the clock is counting down (not once time's up or the answer is out).
-      const counting = (run.phase === 'answer' || run.phase === 'vote') && run.left > 0;
-      extra = `<span class="clock" id="cg-clock" role="timer"></span>${counting ? `<button type="button" class="btn-small" data-act="pause" id="cg-pause">${run.paused ? 'Resume timer' : 'Pause timer'}</button>` : ''}`;
+      extra = `<span class="clock" id="cg-clock" role="timer"></span><button type="button" class="btn-small" data-act="pause" id="cg-pause">${run.paused ? 'Resume timer' : 'Pause timer'}</button>`;
     }
     $('cg-top-extra').innerHTML = extra;
     cgRenderClock();
@@ -11311,7 +12319,6 @@ THIS SOFTWARE.</pre>
         <p class="fb-head ${h.cls}">${h.text}</p>
         <div class="cg-explain">${run.feedback.html || ''}</div>
         <button type="button" class="btn-primary${cgAutoTimer !== null ? ' auto' : ''}" data-act="next" id="cg-next">${nextLabel}</button>
-        ${def.canUndo && def.canUndo(q, run) ? '<button type="button" class="btn-link" data-act="undo" id="cg-undo">Undo the last mark</button>' : ''}
       </div>`);
     } else if (run.phase === 'handover') {
       out.push(`<div class="handover">
@@ -11454,16 +12461,6 @@ THIS SOFTWARE.</pre>
       knockout: 'handover', room: 'answer', duel: 'handover', target: 'think', claim: 'answer', bee: 'answer',
     }[run.style];
     if (cgD().onQuestion) cgD().onQuestion(run, q); // e.g. start a sprint's clock
-    cgRestartClock();
-  }
-
-  // Starts the one-second clock afresh. Called whenever a countdown is reset (a new turn, a buzz),
-  // so the first second of the new countdown is a whole second, not whatever was left of the old one.
-  function cgRestartClock() {
-    clearInterval(cgTicker);
-    cgTicker = null;
-    const run = cgRun();
-    if (run && cgInPlay() && (run.timer || run.style === 'buzz' || cgD().tick)) cgTicker = setInterval(cgTick, 1000);
   }
 
   // Timers and keyboard focus after a new phase is drawn.
@@ -11500,8 +12497,7 @@ THIS SOFTWARE.</pre>
     }
     if (run.timer && !run.paused && (run.phase === 'answer' || run.phase === 'vote') && run.left > 0) {
       run.left -= 1;
-      if (run.left === 0) cgRenderTop(); // time's up: the pause button goes
-      else cgRenderClock();
+      cgRenderClock();
     }
   }
 
@@ -11511,7 +12507,6 @@ THIS SOFTWARE.</pre>
     run.active = p;
     run.phase = 'answer';
     run.left = ANSWER_SECONDS;
-    cgRestartClock();
     run.msg = '';
     cgRenderPlay();
     cgAfter();
@@ -11564,7 +12559,7 @@ THIS SOFTWARE.</pre>
       run.turn = nextTeam;
       run.msg = `Not quite. Over to ${run.names[nextTeam]}.`;
       if (cgTries(def, q) > 1) run.feedback = { ...res, partial: true }; // e.g. Code Shuffle shows which lines are right
-      if (run.timer) { run.left = run.timer; cgRestartClock(); }
+      if (run.timer) run.left = run.timer;
       cgRenderPlay();
       cgAfter();
       return;
@@ -11764,14 +12759,6 @@ THIS SOFTWARE.</pre>
       case 'buzz': cgBuzz(Number(el.dataset.p)); break;
       case 'begin': if (run.phase === 'handover') cgBeginTurn(); break;
       case 'hint': run.hint = true; cgQ().hinted = true; cgRenderPlay(); break;
-      case 'undo':
-        if (cgD().undo && cgD().undo(cgQ(), run)) {
-          clearTimeout(cgAutoTimer);
-          cgAutoTimer = null;
-          cgRenderPlay();
-          cgAfter();
-        }
-        break;
       case 'pause': run.paused = !run.paused; keepFocus($('cg-play'), cgRenderTop); break;
       case 'vote': {
         if (run.phase !== 'vote') return;
@@ -11814,16 +12801,9 @@ THIS SOFTWARE.</pre>
     const run = cgRun();
     const t = e.target;
     const typing = Boolean(t.closest && t.closest('input, textarea'));
-    // A buzzer key held down keeps repeating: those repeats mustn't answer the question, or type into its box.
-    if (cgHeldKey !== null && e.key.toLowerCase() === cgHeldKey) {
-      if (e.repeat) { e.preventDefault(); return; }
-      cgHeldKey = null;
-    }
-    // Held keys repeat, so ignore the repeats: one press, one buzz or one mark (for example Y or N in the spelling bee).
-    if (e.repeat && !typing && e.key.length === 1) return;
     if (run.style === 'buzz' && run.phase === 'buzz' && !typing && !e.altKey && e.key.length === 1) {
       const p = BUZZ_KEYS.slice(0, run.names.length).indexOf(e.key.toUpperCase());
-      if (p >= 0) { e.preventDefault(); cgHeldKey = e.key.toLowerCase(); cgBuzz(p); return; }
+      if (p >= 0) { e.preventDefault(); cgBuzz(p); return; }
     }
     if (cgCanInteract()) {
       const r = cgD().key(e, cgQ(), run);
@@ -11993,16 +12973,16 @@ THIS SOFTWARE.</pre>
   // Clicks on anything marked data-nav, data-subject or data-game move between screens.
   function onNavClick(e) {
     const el = e.target.closest('[data-nav], [data-subject], [data-game]');
-    if (!el || closing) return;
+    if (!el) return;
     if (el.dataset.nav === 'home') goHome();
-    else if (el.dataset.game) openGame(el.dataset.game);
+    else if (el.dataset.game) openGame(el.dataset.game, el.dataset.stage);
     else if (el.dataset.subject && el.classList.contains('book')) openBook(el, el.dataset.subject);
-    else if (el.dataset.subject) openSubject(el.dataset.subject);
+    else if (el.dataset.subject) openSubject(el.dataset.subject, el.dataset.stage);
   }
 
   // Each game decides which keys (and modifier keys) it uses.
   function onKey(e) {
-    if (state.screen !== 'game' || closing) return;
+    if (state.screen !== 'game') return;
     GAMES[state.gameId].onKey(e);
   }
 
@@ -12011,6 +12991,13 @@ THIS SOFTWARE.</pre>
     $('crumbs').addEventListener('click', onNavClick);
     $('home-view').addEventListener('click', onNavClick);
     $('subject-view').addEventListener('click', onNavClick);
+    // Remember which key stage drop-downs are open (toggle doesn't bubble, so listen as it goes down).
+    $('subject-view').addEventListener('toggle', (e) => {
+      const d = e.target;
+      if (!(d instanceof HTMLDetailsElement) || !d.dataset.stage) return;
+      openStages = openStages.filter((x) => x !== d.dataset.stage).concat(d.open ? [d.dataset.stage] : []);
+      saveStages();
+    }, true);
     document.addEventListener('keydown', onKey);
     $('who-switch').addEventListener('change', (e) => {
       if (e.target.name !== 'who') return;
@@ -12018,31 +13005,11 @@ THIS SOFTWARE.</pre>
       saveWho();
       render();
     });
-    window.addEventListener('popstate', onPopState);
-    window.addEventListener('pagehide', saveSession);
-    document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden') saveSession(); });
-    window.addEventListener('beforeunload', (e) => {
-      if (!groupGameUnderWay()) return;
-      e.preventDefault();
-      e.returnValue = '';
-    });
     fbBind();
     spBind();
     cgBind();
     if (canSpeak) { try { window.speechSynthesis.getVoices(); } catch (e) { /* ignore */ } } // starts loading voices
   }
-
-  // A game that's under way survives a refresh: the page keeps a copy of where everything is for
-  // this browser tab only (it's gone once the tab is closed).
-  const SESSION_STORE = 'icg-session';
-  function saveSession() {
-    try { sessionStorage.setItem(SESSION_STORE, JSON.stringify({ state })); } catch (e) { /* storage unavailable or full */ }
-  }
-  function loadSession() {
-    try { const v = JSON.parse(sessionStorage.getItem(SESSION_STORE)); return v && typeof v === 'object' && v.state ? v : {}; } catch (e) { return {}; }
-  }
-  // A group or class game that's under way: closing the tab would lose its scores, so the browser asks first.
-  const groupGameUnderWay = () => Object.values(state.cg).some((g) => g.view === 'play' && g.run && g.run.mode !== 'solo');
 
   function freshFb() { return { view: 'setup', setup: fbLoadSetup(), game: null }; }
   function freshSp() { return { view: 'setup', setup: spLoadSetup(), game: null }; }
@@ -12075,36 +13042,7 @@ THIS SOFTWARE.</pre>
   }
 
   function boot(data) {
-    let restored = false;
-    try {
-      const saved = restore(data && data.state);
-      restored = Boolean(saved);
-      state = saved || freshState();
-      tidyState();
-    } catch (e) {
-      // A saved copy this version can't read: start afresh.
-      restored = false;
-      state = freshState();
-      tidyState();
-    }
-    // A link ending in #computing or #binary opens straight to that subject or game. After a refresh the
-    // link and the restored page agree, so nothing changes; any games under way are kept either way.
-    let fromLink = false;
-    const link = placeFromHash();
-    if (!restored || link !== placeKey()) {
-      const [kind, id] = link.split(':');
-      if (kind === 'subject') { state.screen = 'subject'; state.subject = id; }
-      else if (kind === 'game') { state.screen = 'game'; state.gameId = id; state.subject = GAMES[id].subject; fromLink = true; }
-      else state.screen = 'home';
-    }
-    bindEvents();
-    // A game from a link opens in the version chosen in "Who's playing?"; a restored game carries on as it was.
-    if (state.screen === 'game') GAMES[state.gameId].open(!fromLink);
-    else render();
-  }
-
-  // Brings a saved or fresh state up to date with this version of the page.
-  function tidyState() {
+    state = restore(data && data.state) || freshState();
     // A FizzBuzz setup or game from before rule types and counting in steps.
     state.fb.setup = fbNormalise(state.fb.setup);
     const fg = state.fb.game;
@@ -12122,10 +13060,19 @@ THIS SOFTWARE.</pre>
     const oldCode = state.cg.code && state.cg.code.run;
     if (oldCode && oldCode.qs.some((q) => !q.lang || !CODE_BY_ID[q.pid])) { state.cg.code.run = null; state.cg.code.view = 'setup'; }
     Object.values(state.cg).forEach((g) => { if (!g.run && g.view !== 'setup') g.view = 'setup'; });
+    if (!data || !data.state) {
+      // A link ending in #computing or #binary opens straight to that subject or game.
+      const target = location.hash.slice(1);
+      if (subjectById(target)) { state.screen = 'subject'; state.subject = target; }
+      else if (GAMES[target] && subjectById(GAMES[target].subject)) { state.screen = 'game'; state.gameId = target; state.subject = GAMES[target].subject; }
+    }
+    bindEvents();
+    if (state.screen === 'game') GAMES[state.gameId].open(true);
+    else render();
   }
 
   if (typeof window.claude?.hot?.snapshot === 'function') window.claude.hot.snapshot(() => ({ state }));
-  window.claude?.hot?.ready ? window.claude.hot.ready(boot) : boot(window.claude?.hot?.data ?? loadSession());
+  window.claude?.hot?.ready ? window.claude.hot.ready(boot) : boot(window.claude?.hot?.data ?? {});
 })();
 </script>
 </body>
