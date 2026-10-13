@@ -2220,8 +2220,18 @@ THIS SOFTWARE.</pre>
     // Computing has a drop-down for each key stage: KS3 is Years 7 and 8 (national curriculum), KS4 is Years 9 to 11 (AQA GCSE).
     { id: 'computing', name: 'Computing', years: '7 to 11', blurb: 'Key stages 3 and 4: binary, logic, programming, online safety and typing', paper: 'squared',
       stages: [
-        { id: 'ks3', short: 'KS3', name: 'Key stage 3', years: 'Years 7 and 8', note: 'National curriculum', games: ['binary3', 'logic3', 'code3', 'cyber3', 'typing'] },
-        { id: 'ks4', short: 'KS4', name: 'Key stage 4', years: 'Years 9 to 11', note: 'AQA GCSE (8525)', games: ['binary', 'logic', 'code', 'cyber', 'typing'] },
+        { id: 'ks3', short: 'KS3', name: 'Key stage 3', years: 'Years 7 and 8', note: 'National curriculum', games: ['cyber3', 'typing', 'binary3', 'code3'],
+          fits: {
+            cyber3: 'Year 7: E-safety, and choosing images and sources (copyright, credibility and plagiarism). Year 8: staying safe in a digital world.',
+            typing: 'Keyboard skills for any topic, such as creating documents in Year 7 digital literacy and IT.',
+            binary3: 'Year 7: Computer Systems (binary basics).',
+            code3: 'Year 7: Programming (Edublocks and Python). Year 8: Programming in Python, including making code robust.',
+          } },
+        { id: 'ks4', short: 'KS4', name: 'Key stage 4', years: 'Years 9 to 11', note: 'AQA GCSE (8525)', games: ['binary', 'logic', 'code', 'cyber', 'typing'],
+          fits: {
+            binary: 'Year 9: data representation (number bases, binary addition and shifts).',
+            code: 'Year 9: algorithmic thinking and coding in Python.',
+          } },
       ] },
     { id: 'history', name: 'History', blurb: 'People, events and dates', paper: 'lined', games: ['timeline', 'who', 'source'], hidden: true },
     { id: 'geography', name: 'Geography', blurb: 'Places, maps and the planet', paper: 'lined', games: ['grid', 'pin', 'climate'], hidden: true },
@@ -2411,49 +2421,38 @@ THIS SOFTWARE.</pre>
         class: 'Typing relay: each team sends a typist up for every line, while the class watches the speed on the board.',
       },
     }),
-    // Computing KS3 (Years 7 and 8)
-    binary3: cgGame('binary3', {
-      title: 'Binary Switches',
-      summary: 'A row of switches worth 8, 4, 2 and 1, or 128 down to 1. Turn decimal numbers into binary, read binary numbers, and add two binary numbers.',
-      skills: 'Binary and decimal, and binary addition',
-      time: '10 to 15 minutes',
-      versions: {
-        solo: 'Converting between binary and decimal, and binary addition, with worked answers and hints.',
-        groups: 'A buzzer race on one computer: first to buzz answers, and a wrong answer lets the others buzz.',
-        class: 'Human binary: pupils at the front are the switches and the class tells them which to flip.',
-      },
-    }),
-    logic3: cgGame('logic3', {
-      title: 'Logic Gate Lights',
-      summary: 'Circuits of AND, OR and NOT gates. Light the bulb, predict whether it lights up, and fill in truth tables.',
-      skills: 'AND, OR and NOT gates, and truth tables',
-      time: '10 to 15 minutes',
-      versions: {
-        solo: 'Light the bulb, predict it and fill in truth tables, with one or two gates.',
-        groups: 'Each player controls their own inputs. Agree first, because you get one test per circuit.',
-        class: 'A circuit on the board. Teams vote on whether the bulb will light up.',
-      },
-    }),
-    code3: cgGame('code3', {
-      title: 'Code Shuffle',
-      summary: 'The lines of a short Python program are jumbled. Drag them back into order. Programs use variables, selection, loops and lists, and include a linear search and a bubble sort.',
-      skills: 'Programming in Python, including searching and sorting',
-      time: '10 to 20 minutes',
-      versions: {
-        solo: '20 Python programs from starter to secure, with 3 checks for each.',
-        groups: 'Pair programming: one player drives, the other navigates, and you swap every program.',
-        class: 'Jumbled code on the board. Teams call out the order while the teacher moves the lines.',
-      },
-    }),
+    // Computing, key stage 3 (Years 7 and 8)
     cyber3: cgGame('cyber3', {
       title: 'Cyber Safe',
-      summary: 'Find the warning signs in scam emails, texts and pop-ups, choose strong passwords, and decide the safest thing to do when something worries you online.',
-      skills: 'Staying safe online: scams, passwords, privacy and reporting concerns',
+      summary: 'Find the warning signs in scam emails, texts and pop-ups, choose strong passwords, decide the safest thing to do online, and choose images and sources you can trust and use.',
+      skills: 'Staying safe online, copyright, plagiarism and checking sources',
       time: '10 to 15 minutes',
       versions: {
         solo: 'Click the warning signs in scam messages, decide what’s safe, and choose what to do, with the reason after every answer.',
         groups: 'A buzzer race on one computer: first to buzz answers, and a wrong answer lets the others buzz.',
         class: 'A message or situation on the board. Teams vote safe or scam, or pick the best answer, then the reveal explains why.',
+      },
+    }),
+    binary3: cgGame('binary3', {
+      title: 'Binary Switches',
+      summary: 'A row of switches worth 8, 4, 2 and 1, or 128 down to 1. Turn decimal numbers into binary, and read binary numbers as decimal.',
+      skills: 'Binary basics: binary and decimal',
+      time: '10 to 15 minutes',
+      versions: {
+        solo: 'Turn decimal numbers into binary and read binary numbers, with worked answers and hints.',
+        groups: 'A buzzer race on one computer: first to buzz answers, and a wrong answer lets the others buzz.',
+        class: 'Human binary: pupils at the front are the switches and the class tells them which to flip.',
+      },
+    }),
+    code3: cgGame('code3', {
+      title: 'Code Shuffle',
+      summary: 'The lines of a short Python program are jumbled. Drag them back into order. Programs use input and output, variables, selection, loops and functions, and check what the user types.',
+      skills: 'Programming in Python: sequence, selection, iteration and robust code',
+      time: '10 to 20 minutes',
+      versions: {
+        solo: 'Python programs for Year 7 and Year 8, with 3 checks for each.',
+        groups: 'Pair programming: one player drives, the other navigates, and you swap every program.',
+        class: 'Jumbled code on the board. Teams call out the order while the teacher moves the lines.',
       },
     }),
     periodic: cgGame('periodic', {
@@ -2697,7 +2696,7 @@ THIS SOFTWARE.</pre>
 
   const NO_BOARD_NOTICE = '<b>Not matched to an exam board.</b> No exam board has been chosen and no exam board’s specification has been used, so the content follows general curriculum topics and may not match exactly what your course requires. Check it against your own specification before relying on it.';
   const STAGE_NOTICES = {
-    ks3: '<b>The national curriculum.</b> These games follow the national curriculum for computing in England at key stage 3: binary numbers, including converting between binary and decimal and binary addition; simple Boolean logic (AND, OR and NOT); programming in Python, including searching and sorting; and using technology safely, including how to report concerns. Typing Trainer is a general keyboard skill. There’s no exam board at key stage 3: the GCSE versions of these games are under key stage 4.',
+    ks3: '<b>Years 7 and 8.</b> These games follow a Year 7 and 8 curriculum map based on the national curriculum for computing at key stage 3: staying safe online and choosing images and sources responsibly, binary basics, and programming in Python, including making code robust. Typing Trainer is a general keyboard skill. Binary addition, lists, searching, sorting and logic gates come later, so they’re under key stage 4. There’s no exam board at key stage 3.',
     ks4: '<b>Based on AQA GCSE Computer Science (8525).</b> These games follow the AQA specification: number bases and binary arithmetic (3.3), Boolean logic (3.4.2), algorithms and programming using AQA pseudo-code (3.1 and 3.2), and cyber security (3.6). Typing Trainer and the everyday online safety questions in Cyber Safe are general skills, not part of the specification. The games aren’t produced or endorsed by AQA, so check against the latest specification on AQA’s website.',
   };
 
@@ -2757,6 +2756,7 @@ THIS SOFTWARE.</pre>
           <p class="game-summary">${esc(g.summary)}</p>
           <dl class="meta">
             <div><dt>Practises</dt><dd>${esc(g.skills)}</dd></div>
+            ${stage && stage.fits && stage.fits[g.id] ? `<div><dt>Curriculum map</dt><dd>${esc(stage.fits[g.id])}</dd></div>` : ''}
             <div><dt>Players</dt><dd>${esc(g.players)}</dd></div>
             <div><dt>Time</dt><dd>${esc(g.time)}</dd></div>
           </dl>
@@ -4950,8 +4950,6 @@ THIS SOFTWARE.</pre>
     arith: ['add', 'shift'],
   };
   BIN_KINDS.all = [...BIN_KINDS.basics, ...BIN_KINDS.hex, ...BIN_KINDS.arith];
-  BIN_KINDS.add = ['add']; // key stage 3
-  BIN_KINDS.ks3 = ['make', 'read', 'add'];
   // Questions answered with the switches; the others are typed.
   const binUsesSwitches = (q) => ['make', 'hex2bin', 'add', 'shift'].includes(q.kind);
   const binShifted = (q) => (q.dir === 'left' ? (q.target << q.places) & (2 ** q.bits - 1) : q.target >> q.places);
@@ -5149,23 +5147,21 @@ THIS SOFTWARE.</pre>
     return null;
   }
   // Every gate worked out in order, from the inputs to the bulb.
-  // words: write each gate as AND, OR and NOT (key stage 3) instead of AQA's symbols.
-  function lgWorking(tree, vals, words) {
+  function lgWorking(tree, vals) {
     const steps = [];
     const walk = (node) => {
       if (node.op === 'IN') return;
       walk(node.a);
       if (node.b) walk(node.b);
-      steps.push(`<li><span class="eq">${words ? esc(lgExpr(node)) : lgAQA(node)}</span><span class="verdict">= ${lgEval(node, vals)}</span></li>`);
+      steps.push(`<li><span class="eq">${lgAQA(node)}</span><span class="verdict">= ${lgEval(node, vals)}</span></li>`);
     };
     walk(tree);
     return `<p>With ${valsText(lgInputs(tree).sort(), vals)}:</p><ul class="working">${steps.join('')}</ul>`;
   }
-  // Questions for a game. Key stage 3 (ks3) has AND, OR and NOT only, one or two gates,
-  // no Boolean expression questions, and expressions written in words.
-  function lgMake(s, mode, ks3) {
-    const levels = s.level === 'mix' ? (ks3 ? ['1', '2'] : ['1', '2', '3']) : [s.level];
-    const pool = levels.flatMap((l) => LG_CIRCUITS[l]).filter((c) => !ks3 || !JSON.stringify(c).includes('XOR'));
+  // The circuits and question kinds for a game.
+  function lgMake(s, mode) {
+    const levels = s.level === 'mix' ? ['1', '2', '3'] : [s.level];
+    const pool = levels.flatMap((l) => LG_CIRCUITS[l]);
     const circuits = [];
     let deck = [];
     for (let k = 0; k < Number(s.rounds); k += 1) {
@@ -5173,10 +5169,10 @@ THIS SOFTWARE.</pre>
       circuits.push(JSON.parse(JSON.stringify(deck.pop())));
     }
     if (s.level === 'mix') circuits.sort((a, b) => lgGates(a) - lgGates(b)); // easier circuits first
-    const kinds = ks3 ? ['light', 'predict', 'table'] : ['light', 'predict', 'table', 'expr'];
+    const kinds = ['light', 'predict', 'table', 'expr'];
     return circuits.map((c, k) => {
       let type = mode === 'groups' ? 'light' : s.types === 'mix' ? kinds[k % kinds.length] : s.types;
-      if (mode === 'class') type = ks3 ? 'predict' : s.classTypes === 'mix' ? (k % 2 ? 'expr' : 'predict') : s.classTypes === 'expr' ? 'expr' : 'predict';
+      if (mode === 'class') type = s.classTypes === 'mix' ? (k % 2 ? 'expr' : 'predict') : s.classTypes === 'expr' ? 'expr' : 'predict';
       // A one-input circuit (NOT A) can't give four different expressions, so swap in one of the same size.
       if (type === 'expr' && lgInputs(c).length < 2) {
         const two = pool.filter((p) => lgInputs(p).length > 1);
@@ -5184,7 +5180,6 @@ THIS SOFTWARE.</pre>
         c = JSON.parse(JSON.stringify(shuffle(same.length ? same : two)[0]));
       }
       const q = { type, c, inputs: lgInputs(c).sort() };
-      if (ks3) q.words = true;
       if (type === 'expr') q.opts = lgExprOptions(c);
       if (type === 'light') q.target = Math.random() < (mode === 'groups' ? 0.65 : 0.8) ? 1 : 0;
       if (type === 'predict') q.vals = Object.fromEntries(q.inputs.map((n) => [n, Math.random() < 0.5 ? 1 : 0]));
@@ -5700,9 +5695,40 @@ THIS SOFTWARE.</pre>
       why: 'If a website leaks your password, criminals try it on other sites. A different password for each account stops one leak unlocking everything. A password manager can remember them for you.' },
   ];
 
-  const CY_KIND_LABEL = { flags: 'Spot the warning signs', safe: 'Safe or scam?', threat: 'Name the threat', protect: 'Best protection', action: 'What should you do?', password: 'Passwords' };
+  // Choosing images and sources: copyright, plagiarism and checking information (key stage 3; not part of
+  // the AQA specification). The first option is the answer.
+  const CY_SOURCES = [
+    { id: 's-photo', opts: ['Only if you have permission, for example a Creative Commons licence, and you credit the creator', 'Yes: anything online is free to use', 'Yes, as long as you change the colours', 'Yes, as long as you don’t sell the poster'],
+      scene: 'You find a great photo in an image search for your poster. Can you use it?',
+      hint: 'Who owns a photo that someone else took?',
+      why: 'Photos and other work online usually belong to the person who made them: this is called copyright. Use images you have permission to use, such as ones with a Creative Commons licence or from a free image library, and say who made them.' },
+    { id: 's-plagiarism', opts: ['Copying someone else’s work and passing it off as your own', 'Using a spell checker on your work', 'Writing about the same topic as a friend', 'Quoting a source and saying where it came from'],
+      scene: 'What is plagiarism?',
+      hint: 'Think about whose work it really is.',
+      why: 'Plagiarism is presenting someone else’s words, ideas or work as if they were yours. Quoting a source and saying where it came from is the honest way to use it.' },
+    { id: 's-quote', opts: ['Put it in quotation marks and say which website it came from', 'Change a few of the words', 'Copy it, but change the font', 'Mix it with a paragraph from another website'],
+      scene: 'You want to use a paragraph from a website in your homework. How do you do it without plagiarising?',
+      hint: 'How would a reader know the words aren’t yours?',
+      why: 'Quotation marks show the words are someone else’s, and naming the source gives them credit. Changing a few words is still plagiarism. Better still, put the ideas in your own words and still say where they came from.' },
+    { id: 's-reliable', opts: ['A museum’s website, written by experts and updated recently', 'A post by an account with no name', 'A page that is trying to sell you something', 'A comment under a video'],
+      scene: 'You’re researching the Romans for homework. Which source is most likely to be reliable?',
+      hint: 'Who wrote it, and why?',
+      why: 'Check who wrote it, why they wrote it, and when. Experts with nothing to sell are more likely to be accurate than an anonymous post or an advert.' },
+    { id: 's-check', opts: ['See if two or three other trusted websites say the same', 'Believe it if it’s the top search result', 'Believe it if lots of people have liked it', 'Believe it if it has lots of numbers in it'],
+      scene: 'How can you check whether something you read online is true?',
+      hint: 'One website on its own might be wrong.',
+      why: 'Search results, likes and statistics can all be wrong or made up. If several trusted sources agree, it’s much more likely to be true.' },
+    { id: 's-cc', opts: ['How you’re allowed to reuse someone’s work, for example as long as you credit them', 'That the work is a scam', 'That you can never use the work', 'That the work was made by a computer'],
+      scene: 'You see a Creative Commons licence on a photo. What does it tell you?',
+      hint: 'It’s about what you’re allowed to do with the photo.',
+      why: 'A Creative Commons licence is the creator’s permission to reuse their work, as long as you follow its rules. Most ask you to credit them, and some don’t allow changes or selling.' },
+  ];
+
+  const CY_KIND_LABEL = { flags: 'Spot the warning signs', safe: 'Safe or scam?', threat: 'Name the threat', protect: 'Best protection', action: 'What should you do?', password: 'Passwords', source: 'Sources and copyright' };
   const CY_TOPICS = { cyber: ['msg', 'threat', 'protect', 'password'], online: ['msg', 'action', 'password'] };
   CY_TOPICS.both = ['msg', 'threat', 'protect', 'action', 'password'];
+  CY_TOPICS.sources = ['source']; // key stage 3
+  CY_TOPICS.ks3 = ['msg', 'action', 'password', 'source'];
 
   // The question's options, in the order shown (shuffled once, when the question is made).
   function cyItem(q) {
@@ -5710,6 +5736,7 @@ THIS SOFTWARE.</pre>
     if (q.type === 'protect') return CY_PROTECT.find((x) => x.id === q.id);
     if (q.type === 'action') return CY_ACTIONS.find((x) => x.id === q.id);
     if (q.type === 'password') return CY_PASSWORDS.find((x) => x.id === q.id);
+    if (q.type === 'source') return CY_SOURCES.find((x) => x.id === q.id);
     return CY_MSG_BY_ID[q.id];
   }
   function cyAllOpts(type, item) {
@@ -5718,9 +5745,9 @@ THIS SOFTWARE.</pre>
     return item.opts.slice();
   }
   const cyAnswer = (q) => cyAllOpts(q.type, cyItem(q))[0];
-  const cyIsChoice = (q) => ['threat', 'protect', 'action', 'password'].includes(q.type);
+  const cyIsChoice = (q) => ['threat', 'protect', 'action', 'password', 'source'].includes(q.type);
   const cyAsk = (q) => (q.type === 'threat' ? 'Which cyber security term matches?' : q.type === 'protect' ? 'Which is the best protection?'
-    : q.type === 'action' ? 'What’s the best thing to do?' : q.type === 'password' ? cyItem(q).ask : '');
+    : q.type === 'action' ? 'What’s the best thing to do?' : q.type === 'password' ? cyItem(q).ask : q.type === 'source' ? 'Choose the best answer.' : '');
 
   // Questions for a game: messages, then the other kinds, dealt round-robin so the kinds mix.
   function cyMakeQuestions(s, mode) {
@@ -5729,7 +5756,7 @@ THIS SOFTWARE.</pre>
       if (k === 'msg') {
         return shuffle(CY_MSGS.map((m) => ({ type: mode === 'solo' && m.scam && Math.random() < 0.5 ? 'flags' : 'safe', id: m.id })));
       }
-      const list = { threat: CY_THREATS, protect: CY_PROTECT, action: CY_ACTIONS, password: CY_PASSWORDS }[k];
+      const list = { threat: CY_THREATS, protect: CY_PROTECT, action: CY_ACTIONS, password: CY_PASSWORDS, source: CY_SOURCES }[k];
       return shuffle(list.map((x) => ({ type: k, id: x.id })));
     });
     const want = Number(s.rounds);
@@ -5744,7 +5771,7 @@ THIS SOFTWARE.</pre>
     });
   }
   const cyCount = (s) => Math.min(Number(s.rounds), (CY_TOPICS[s.topics] || CY_TOPICS.both)
-    .reduce((n, k) => n + { msg: CY_MSGS.length, threat: CY_THREATS.length, protect: CY_PROTECT.length, action: CY_ACTIONS.length, password: CY_PASSWORDS.length }[k], 0));
+    .reduce((n, k) => n + { msg: CY_MSGS.length, threat: CY_THREATS.length, protect: CY_PROTECT.length, action: CY_ACTIONS.length, password: CY_PASSWORDS.length, source: CY_SOURCES.length }[k], 0));
   const cyOpts = (q) => { const all = cyAllOpts(q.type, cyItem(q)); return q.order.map((i) => all[i]); };
   function cyReset(q) { q.work = { pick: null, sel: [] }; }
 
@@ -9627,7 +9654,7 @@ THIS SOFTWARE.</pre>
           'This follows AQA GCSE Computer Science, section 3.4.2.'];
       },
       count: (s) => Number(s.rounds),
-      makeQuestions: (s, mode) => lgMake(s, mode, false),
+      makeQuestions: (s, mode) => lgMake(s, mode),
       reset: (q) => lgReset(q),
       cardLabel: (q) => ({ light: q.target ? 'Light the bulb' : 'Keep the bulb off', predict: 'Predict the bulb', table: 'Truth table', expr: 'Boolean expression' }[q.type]),
       prompt(q, run) {
@@ -9646,7 +9673,7 @@ THIS SOFTWARE.</pre>
         const right = q.type === 'expr' ? q.opts.findIndex((o) => lgAQA(o) === lgAQA(q.c)) : -1;
         const opts = q.type === 'expr' && ctx.run && ctx.run.mode === 'class'
           ? `<ol class="lg-opts">${q.opts.map((o, i) => `<li class="${ctx.done ? (i === right ? 'ok' : 'dim') : ''}"><span class="hp-num">${i + 1}</span>Q = ${lgAQA(o)}</li>`).join('')}</ol>` : '';
-        const expr = ctx.done || q.type === 'table' ? `<p class="lg-expr">Q = ${q.words ? esc(lgExpr(q.c)) : `${lgAQA(q.c)} <span class="lg-words">In words: ${esc(lgExpr(q.c))}</span>`}</p>` : '';
+        const expr = ctx.done || q.type === 'table' ? `<p class="lg-expr">Q = ${lgAQA(q.c)} <span class="lg-words">In words: ${esc(lgExpr(q.c))}</span></p>` : '';
         return `<div class="lg-wrap">${svg}${table}</div>${opts}${expr}`;
       },
       controls(q) {
@@ -9691,12 +9718,12 @@ THIS SOFTWARE.</pre>
         if (q.type === 'light') {
           const correct = lgEval(q.c, q.work.vals) === q.target;
           const way = correct ? null : lgFind(q.c, q.inputs, q.target);
-          return { correct, html: `${lgWorking(q.c, q.work.vals, q.words)}${way ? `<p>One way that works: ${valsText(q.inputs, way)}.</p>` : ''}` };
+          return { correct, html: `${lgWorking(q.c, q.work.vals)}${way ? `<p>One way that works: ${valsText(q.inputs, way)}.</p>` : ''}` };
         }
         if (q.type === 'predict') {
           if (q.work.guess === null) return { invalid: 'Choose an answer first.' };
           const out = lgEval(q.c, q.vals);
-          return { correct: q.work.guess === out, html: `<p>The bulb ${out ? 'lights up' : 'stays off'}.</p>${lgWorking(q.c, q.vals, q.words)}` };
+          return { correct: q.work.guess === out, html: `<p>The bulb ${out ? 'lights up' : 'stays off'}.</p>${lgWorking(q.c, q.vals)}` };
         }
         if (q.type === 'expr') {
           if (q.work.pick === null) return { invalid: 'Choose an expression first.' };
@@ -9710,12 +9737,12 @@ THIS SOFTWARE.</pre>
       reveal(q) {
         if (q.type === 'predict') {
           const out = lgEval(q.c, q.vals);
-          return { head: `The bulb ${out ? 'lights up!' : 'stays off.'}`, html: lgWorking(q.c, q.vals, q.words) };
+          return { head: `The bulb ${out ? 'lights up!' : 'stays off.'}`, html: lgWorking(q.c, q.vals) };
         }
         if (q.type === 'light') {
           const way = lgFind(q.c, q.inputs, q.target);
           if (way) q.work.vals = way;
-          return { html: `<p>One way that works: ${valsText(q.inputs, q.work.vals)}.</p>${lgWorking(q.c, q.work.vals, q.words)}` };
+          return { html: `<p>One way that works: ${valsText(q.inputs, q.work.vals)}.</p>${lgWorking(q.c, q.work.vals)}` };
         }
         if (q.type === 'expr') return { head: `The answer: number ${q.opts.findIndex((o) => lgAQA(o) === lgAQA(q.c)) + 1}.`, html: '<p>Read the circuit from the inputs to the bulb, writing each gate as you meet it.</p>' };
         q.work.cells = q.work.cells.map((_, r) => lgEval(q.c, rowVals(q.inputs, r)));
@@ -9996,7 +10023,7 @@ THIS SOFTWARE.</pre>
       chip(q) {
         if (!cyIsChoice(q)) return cyItem(q).title;
         if (q.type === 'threat') return CY_TERMS[cyItem(q).terms[0]].name;
-        return { protect: 'Protection', action: 'Staying safe', password: 'Passwords' }[q.type];
+        return { protect: 'Protection', action: 'Staying safe', password: 'Passwords', source: 'Sources' }[q.type];
       },
       summary(q) {
         const item = cyItem(q);
@@ -11869,90 +11896,84 @@ THIS SOFTWARE.</pre>
   };
 
   // ---------- Computing, key stage 3 (Years 7 and 8): the KS3 versions of the GCSE games ----------
-  // The national curriculum for computing at key stage 3: converting between binary and decimal and
-  // binary addition, simple Boolean logic (AND, OR and NOT), programming in a text-based language
-  // (Python here), searching and sorting, and using technology safely and securely.
-  // Each reuses its GCSE game with KS3 content and wording. Typing Trainer is in both key stages as it is.
+  // Matched to the Year 7 and 8 curriculum maps: staying safe online, and choosing images and sources
+  // (Y7 E-safety and IT & digital literacy, Y8 physical computing); binary basics (Y7 Computer Systems);
+  // and programming in Python, including robust code (Y7 Edublocks–Python, Y8 Python).
+  // Binary addition, lists, string handling, random numbers, DIV and MOD, searching, sorting and logic gates
+  // start in Year 9, so they're only in key stage 4. Typing Trainer is in both key stages as it is.
   CG_DEFS.binary3 = {
     ...CG_DEFS.binary,
-    lede: 'Each switch is worth double the one to its right. Turn decimal numbers into binary, read binary numbers, and add them.',
+    lede: 'Each switch is worth double the one to its right. Turn decimal numbers into binary, and read binary numbers.',
     tip: 'Add up the place values of the switches that are on.',
     options: [
-      { key: 'kind', label: 'Questions', choices: [['basics', 'Binary and decimal'], ['add', 'Adding binary'], ['ks3', 'Both']] },
       { key: 'bits', label: 'Switches', choices: [['4', '4 bits (up to 15)'], ['8', '8 bits (up to 255)']] },
       { key: 'rounds', label: 'How many', choices: [['10', '10'], ['20', '20']] },
     ],
     defaults: { kind: 'basics', bits: '4', rounds: '10' },
     how(mode, s) {
       const steps = CG_DEFS.binary.how(mode, { ...s, kind: 'basics' });
-      if (mode === 'class') return steps;
-      steps[0] = {
-        basics: 'Turn decimal numbers into binary with the switches, and read binary as decimal.',
-        add: 'Add two binary numbers. When a column adds up to 2 or more, carry 1 to the next column.',
-        ks3: 'A mix of converting between binary and decimal, and adding two binary numbers.',
-      }[s.kind];
-      if (mode === 'solo') steps[3] = 'This covers binary from the key stage 3 national curriculum: converting between binary and decimal, and binary addition.';
+      if (mode === 'solo') steps[3] = 'This covers binary basics from Year 7: reading binary numbers and turning decimal numbers into binary.';
       return steps;
     },
-    makeQuestions(s) {
-      const bits = Number(s.bits);
-      const kinds = BIN_KINDS[s.kind] || BIN_KINDS.basics;
-      const used = new Set();
-      let deck = [];
-      return Array.from({ length: Number(s.rounds) }, () => {
-        if (!deck.length) deck = shuffle(kinds.slice());
-        const kind = deck.pop();
-        let q = binQuestion(kind, bits, used);
-        // Adding three numbers is GCSE work, so key stage 3 adds two.
-        for (let k = 0; kind === 'add' && q.nums.length > 2 && k < 50; k += 1) q = binQuestion(kind, bits, used);
-        binReset(q);
-        return q;
-      });
-    },
+    makeQuestions: (s) => CG_DEFS.binary.makeQuestions({ ...s, kind: 'basics' }),
     preview: () => binPreview(true),
   };
 
-  CG_DEFS.logic3 = {
-    ...CG_DEFS.logic,
-    lede: 'AND, OR and NOT gates decide whether the bulb lights up. Switch the inputs, predict the bulb, and fill in truth tables.',
-    options: [
-      { key: 'level', label: 'Circuits', choices: [['1', 'One gate'], ['2', 'Two gates'], ['mix', 'A mix']] },
-      { key: 'types', label: 'Questions', modes: ['solo'], choices: [['mix', 'A mix'], ['light', 'Light the bulb'], ['predict', 'Predict the bulb'], ['table', 'Truth tables']] },
-      { key: 'rounds', label: 'How many', choices: [['8', '8'], ['12', '12']] },
-    ],
-    defaults: { level: 'mix', types: 'mix', classTypes: 'predict', rounds: '8' },
-    how(mode, s) {
-      if (mode !== 'solo') return CG_DEFS.logic.how(mode, { ...s, classTypes: 'predict' }).map((t) => t.replace(/ Expressions use AQA notation.*$/, ''));
-      return ['Questions mix three kinds: light the bulb, predict the bulb, and fill in a truth table.',
-        'Click an input, or press its letter, to switch it between 1 and 0.',
-        'AND gives 1 when both inputs are 1. OR gives 1 when at least one input is 1. NOT flips its input.',
-        'This covers simple Boolean logic (AND, OR and NOT) from the key stage 3 national curriculum.'];
-    },
-    makeQuestions: (s, mode) => lgMake(s, mode, true),
-  };
-
+  // Code Shuffle programs for each year: Year 7 is input and output, variables, selection, loops and
+  // functions; Year 8 adds loops that keep going until something happens, and checking input (robust code).
+  const CODE_KS3 = { y7: ['hello', 'area', 'pass', 'countdown', 'times', 'subroutine'], y8: ['guess', 'age', 'password', 'login', 'quiz'] };
+  CODE_KS3.all = [...CODE_KS3.y7, ...CODE_KS3.y8];
   CG_DEFS.code3 = {
     ...CG_DEFS.code,
     lede: 'The lines of a short Python program have been jumbled. Put them back in order so the program works.',
-    options: CG_DEFS.code.options.filter((o) => o.key !== 'lang'),
-    defaults: { lang: 'python', level: '1', indent: 'given' },
+    options: [
+      { key: 'level', label: 'Programs', choices: [['y7', 'Year 7'], ['y8', 'Year 8'], ['all', `All ${CODE_KS3.all.length}`]] },
+      CG_DEFS.code.options.find((o) => o.key === 'indent'),
+    ],
+    defaults: { lang: 'python', level: 'y7', indent: 'given' },
     how: (mode, s) => CG_DEFS.code.how(mode, { ...s, lang: 'python' })
       .map((t) => t.replace('Each program practises a part of AQA GCSE Computer Science (3.1 and 3.2), shown with its goal.',
-        'Each program comes with its goal. They use variables, selection, loops and lists, and include a linear search and a bubble sort.')),
-    makeQuestions: (s) => CG_DEFS.code.makeQuestions({ ...s, lang: 'python' }).map((q) => Object.assign(q, { ks3: true })),
+        'Each program comes with its goal. Year 7 programs use input and output, variables, selection, loops and functions. Year 8 adds checking what the user types, to make code robust.')),
+    count: (s) => (CODE_KS3[s.level] || CODE_KS3.y7).length,
+    makeQuestions(s) {
+      return shuffle((CODE_KS3[s.level] || CODE_KS3.y7).slice()).map((pid) => {
+        const q = { pid, hard: s.indent === 'set', lang: 'python', ks3: true };
+        codeReset(q);
+        return q;
+      });
+    },
     preview: () => codePreview(true),
   };
 
   CG_DEFS.cyber3 = {
     ...CG_DEFS.cyber,
-    lede: 'Spot the warning signs in scam messages, keep your passwords and privacy safe, and choose the safest thing to do online.',
-    options: CG_DEFS.cyber.options.filter((o) => o.key !== 'topics'),
-    defaults: { topics: 'online', rounds: '12' },
-    how: (mode, s) => CG_DEFS.cyber.how(mode, { ...s, topics: 'online' })
-      .map((t) => t.replace('These are everyday online safety skills, not part of the AQA specification.',
-        'This covers using technology safely from the key stage 3 national curriculum, including protecting your privacy and knowing how to report concerns.')),
-    count: (s) => cyCount({ ...s, topics: 'online' }),
-    makeQuestions: (s, mode) => cyMakeQuestions({ ...s, topics: 'online' }, mode),
+    lede: 'Spot the warning signs in scam messages, keep your passwords and privacy safe, and choose images and sources you can trust and use.',
+    options: [
+      { key: 'topics', label: 'Topics', choices: [['ks3', 'Everything'], ['online', 'Staying safe online'], ['sources', 'Sources and copyright']] },
+      CG_DEFS.cyber.options.find((o) => o.key === 'rounds'),
+    ],
+    defaults: { topics: 'ks3', rounds: '12' },
+    how(mode, s) {
+      const what = { online: 'scam messages and everyday situations online', sources: 'choosing images and sources: copyright, plagiarism and checking information' }[s.topics]
+        || 'scam messages, everyday situations online, and choosing images and sources';
+      if (mode === 'groups') {
+        return ['Buzzer race: 2 to 4 players share this computer, each with a buzzer key.',
+          `Everyone sees the same question: ${what}.`,
+          'Buzz in when you know the answer. A right answer scores 1, and a wrong one lets the others buzz.',
+          'After each one, the answer is explained.'];
+      }
+      if (mode === 'class') {
+        return ['Put this on the board and split the class into teams.',
+          `Each question is about ${what}. Read it together.`,
+          'Each team decides: safe or scam, or 1, 2, 3 or 4. Click each team’s choice, then press Reveal.',
+          'Every team that was right scores. The reveal shows the warning signs or explains the answer.'];
+      }
+      return [`The questions are about ${what}.`,
+        s.topics === 'sources' ? 'Pick the best answer each time.' : 'Some messages ask you to click every warning sign. You get two checks for those.',
+        'After every answer, you’ll see why. A hint is there if you’re stuck.',
+        'This covers E-safety and choosing images and sources from Year 7, and staying safe in a digital world from Year 8.'];
+    },
+    preview: () => cyPreview(),
   };
 
   // The game-registry entry shared by the three Computing games (they share one screen).
