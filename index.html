@@ -351,6 +351,24 @@
     box-shadow: inset -16px 0 0 var(--spine);
   }
 
+  /* Turning a page: a copy of the screen turns over like a book page, hinged on the left */
+  .turn { position: fixed; inset: 0; z-index: 100; overflow: hidden; perspective: 2400px; }
+  .turn-face, .turn-back {
+    position: absolute; inset: 0; overflow: hidden;
+    background-color: var(--paper);
+    background-image:
+      linear-gradient(var(--grid) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+  .turn-face[data-paper="lined"], .turn-back[data-paper="lined"] { background-image: linear-gradient(var(--grid) 1px, transparent 1px); background-size: 100% 30px; }
+  .turn-leaf { position: absolute; inset: 0; transform-origin: left center; transform-style: preserve-3d; }
+  .turn-front, .turn-back { -webkit-backface-visibility: hidden; backface-visibility: hidden; }
+  .turn-back { transform: rotateY(180deg); }
+  .turn-shade { position: absolute; inset: 0; pointer-events: none; opacity: 0; background: linear-gradient(to left, rgb(0 0 0 / .3), rgb(0 0 0 / .08) 55%, transparent); }
+  .turn-shade.back { background: linear-gradient(to right, rgb(0 0 0 / .3), rgb(0 0 0 / .08) 55%, transparent); }
+  .turn-cast { position: absolute; inset: 0; opacity: 0; pointer-events: none; background: linear-gradient(to right, rgb(0 0 0 / .22), transparent 45%); }
+
   /* ---------- Subject page ---------- */
   .subject-head { display: flex; align-items: center; gap: 20px; }
   .mini-book {
@@ -2621,8 +2639,8 @@ THIS SOFTWARE.</pre>
   let state;
   let shownKey = null;
   let shownPlace = null;
-  let opening = false; // a book is opening or closing
-  let closing = null; // while a book is closing: stops the animation
+  let opening = false; // a book is opening or closing, or a page is turning
+  let animating = null; // while a book closes or a page turns: stops the animation
 
   // ================= Shared pieces =================
   const markSVG = (ok) => (ok
@@ -2677,7 +2695,7 @@ THIS SOFTWARE.</pre>
     // Games can share one screen (most do), and FizzBuzz switches screens with its version,
     // so show the active game's screen and hide every other one.
     const activeSection = game ? game.section || `game-${game.id}` : '';
-    document.querySelectorAll('.game-screen').forEach((el) => { el.hidden = el.id !== activeSection; });
+    app.querySelectorAll('.game-screen').forEach((el) => { el.hidden = el.id !== activeSection; });
     renderWho();
     document.body.dataset.paper = game ? game.paper : state.screen === 'subject' ? subjectById(state.subject).paper : 'squared';
     renderCrumbs();
@@ -2720,12 +2738,12 @@ THIS SOFTWARE.</pre>
   }
   function goToPlace(place) {
     const [kind, id] = place.split(':');
-    if (kind === 'subject' && subjectById(id)) openSubject(id);
-    else if (kind === 'game' && GAMES[id] && subjectById(GAMES[id].subject)) openGame(id);
+    if (kind === 'subject' && subjectById(id)) turnToSubject(id);
+    else if (kind === 'game' && GAMES[id] && subjectById(GAMES[id].subject)) turnToGame(id);
     else goHome();
   }
   function onPopState(e) {
-    if (closing) closing(); // Back or Forward again while a book is closing: stop the animation where it is
+    if (animating) animating(); // Back or Forward again mid-animation: stop it where it is
     const place = e.state && e.state.icg ? e.state.icg : placeFromHash();
     restoringHistory = true;
     try {
@@ -2741,7 +2759,7 @@ THIS SOFTWARE.</pre>
   function focusHeading() {
     const a = document.activeElement;
     if (a && a !== document.body && a.getClientRects().length) return;
-    const screen = state.screen === 'home' ? $('home-view') : state.screen === 'subject' ? $('subject-view') : document.querySelector('.game-screen:not([hidden])');
+    const screen = state.screen === 'home' ? $('home-view') : state.screen === 'subject' ? $('subject-view') : $('app').querySelector('.game-screen:not([hidden])');
     const h = screen && screen.querySelector('h1');
     if (!h) return;
     h.setAttribute('tabindex', '-1');
@@ -2900,6 +2918,26 @@ THIS SOFTWARE.</pre>
     game.open();
   }
 
+  // From a subject's page, a game opens with a page turn; from anywhere else it just opens.
+  function turnToGame(id, stage) {
+    if (state.screen === 'subject' && GAMES[id] && subjectById(GAMES[id].subject)) turnPage(true, () => openGame(id, stage));
+    else openGame(id, stage);
+  }
+  // From a game, going back to its subject turns the page back.
+  function turnToSubject(id, stage) {
+    if (state.screen === 'game' && subjectById(id)) turnPage(false, () => openSubject(id, stage));
+    else openSubject(id, stage);
+  }
+
+  // Runs fn when an animation finishes, or once its time is up if that's sooner: a browser that isn't
+  // drawing (a background tab) never reports the finish, and a slow computer can report it late.
+  function afterAnim(anim, ms, fn) {
+    let done = false;
+    const go = () => { if (!done) { done = true; fn(); } };
+    anim.onfinish = go;
+    setTimeout(go, ms + 120);
+  }
+
   // Swings the clicked book's cover open, zooms into its first page, then shows the subject.
   function openBook(btn, id) {
     if (opening) return;
@@ -2954,14 +2992,95 @@ THIS SOFTWARE.</pre>
       ],
       { duration: 460, delay: 400, easing: 'cubic-bezier(.6, 0, .2, 1)', fill: 'forwards' },
     );
-    grow.onfinish = () => {
+    afterAnim(grow, 860, () => {
       show();
       const fade = fly.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 240, easing: 'ease-out', fill: 'forwards' });
-      fade.onfinish = finish;
+      afterAnim(fade, 240, finish);
       fade.oncancel = finish;
-    };
+    });
     grow.oncancel = () => { show(); finish(); };
     setTimeout(() => { if (!finished) { show(); finish(); } }, 2500); // safety net
+  }
+
+  // A copy of the screen as it looks now, for a page that's turning: the paper, with the page at the
+  // same place it's scrolled to. Its form fields are renamed so they can't join the real page's radio groups.
+  function screenCopy() {
+    const app = $('app');
+    const r = app.getBoundingClientRect();
+    const copy = app.cloneNode(true);
+    copy.removeAttribute('id');
+    copy.querySelectorAll('[hidden]').forEach((el) => el.remove());
+    copy.querySelectorAll('[name]').forEach((el) => el.setAttribute('name', `copy-${el.getAttribute('name')}`));
+    Object.assign(copy.style, { position: 'absolute', left: `${r.left}px`, top: `${r.top}px`, width: `${r.width}px`, margin: '0' });
+    const face = document.createElement('div');
+    face.className = 'turn-face';
+    face.dataset.paper = document.body.dataset.paper || 'squared';
+    face.style.backgroundPosition = `${-window.scrollX}px ${-window.scrollY}px`; // the paper's lines line up with the page's
+    face.appendChild(copy);
+    face.inert = true;
+    return face;
+  }
+
+  // Turning a page between a subject and one of its games. Forwards (opening a game), the subject's page
+  // turns over to the left like a book page and the game is underneath. Backwards, the subject's page turns
+  // back over the top of the game. change() switches screens; it runs straight away, under the turning page.
+  function turnPage(forward, change) {
+    if (opening || prefersLessMotion() || typeof document.body.animate !== 'function') { change(); return; }
+    opening = true;
+    const turn = document.createElement('div');
+    turn.className = 'turn';
+    turn.setAttribute('aria-hidden', 'true'); // it catches clicks while it plays; the copies inside can't be focused
+    // Backwards, the game stays in view (as a copy) until the subject's page has turned over it.
+    const under = forward ? null : screenCopy();
+    const before = forward ? screenCopy() : null;
+    change();
+    const leafFace = forward ? before : screenCopy();
+    leafFace.classList.add('turn-front');
+    const leaf = document.createElement('div');
+    leaf.className = 'turn-leaf';
+    const back = document.createElement('div');
+    back.className = 'turn-back';
+    back.dataset.paper = leafFace.dataset.paper;
+    const frontShade = document.createElement('div');
+    frontShade.className = 'turn-shade';
+    const backShade = document.createElement('div');
+    backShade.className = 'turn-shade back';
+    leafFace.appendChild(frontShade);
+    back.appendChild(backShade);
+    leaf.append(leafFace, back);
+    const cast = document.createElement('div');
+    cast.className = 'turn-cast';
+    if (under) turn.appendChild(under);
+    turn.append(cast, leaf);
+    document.body.appendChild(turn);
+
+    let finished = false;
+    const anims = [];
+    const finish = () => {
+      if (finished) return;
+      finished = true;
+      animating = null;
+      anims.forEach((a) => a.cancel());
+      turn.remove();
+      opening = false;
+    };
+    animating = finish;
+    const ms = 720;
+    const flat = 'rotateY(0deg)';
+    const over = 'rotateY(-180deg)';
+    const flip = leaf.animate(
+      [{ transform: forward ? flat : over }, { transform: forward ? over : flat }],
+      { duration: ms, easing: forward ? 'cubic-bezier(.45, .05, .25, 1)' : 'cubic-bezier(.6, 0, .4, 1)', fill: 'forwards' },
+    );
+    // The page darkens as it turns away from the light, and casts a shadow on the page underneath.
+    const half = { duration: ms / 2, fill: 'both' };
+    anims.push(
+      flip,
+      frontShade.animate([{ opacity: forward ? 0 : 1 }, { opacity: forward ? 1 : 0 }], forward ? { ...half, easing: 'ease-in' } : { ...half, delay: ms / 2, easing: 'ease-out' }),
+      backShade.animate([{ opacity: forward ? 1 : 0 }, { opacity: forward ? 0 : 1 }], forward ? { ...half, delay: ms / 2, easing: 'ease-out' } : { ...half, easing: 'ease-in' }),
+      cast.animate([{ opacity: 0 }, { opacity: 1, offset: 0.45 }, { opacity: 0 }], { duration: ms, fill: 'forwards' }),
+    );
+    afterAnim(flip, ms, finish);
   }
 
   // Opening in reverse: the subject's page fills the window, shrinks back into its book on the shelf,
@@ -2987,22 +3106,22 @@ THIS SOFTWARE.</pre>
     const finish = () => {
       if (finished) return;
       finished = true;
-      closing = null;
+      animating = null;
       anims.forEach((a) => a.cancel());
       fly.remove();
       if (btn) btn.style.visibility = '';
       opening = false;
     };
-    closing = finish;
+    animating = finish;
 
     // The page fades in over the screen, then the shelf is drawn underneath it.
     const fadeIn = fly.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 200, easing: 'ease-in', fill: 'forwards' });
     anims.push(fadeIn);
-    fadeIn.onfinish = () => {
+    afterAnim(fadeIn, 200, () => {
       if (finished) return;
       if (placeKey() !== from) { finish(); return; }
       showHome();
-      btn = document.querySelector(`#subjects .book[data-subject="${id}"]`);
+      btn = $('subjects').querySelector(`.book[data-subject="${id}"]`);
       if (!btn) { finish(); return; }
       btn.scrollIntoView({ block: 'nearest' }); // on a small screen the book may be further down the shelf
       const r = btn.getBoundingClientRect();
@@ -3029,11 +3148,15 @@ THIS SOFTWARE.</pre>
         { duration: 650, delay: 260, easing: 'cubic-bezier(.75, 0, .45, .95)', fill: 'both' },
       );
       anims.push(shut);
-      shut.onfinish = () => { finish(); focusBook(); };
-    };
+      afterAnim(shut, 260 + 650, () => {
+        if (finished) return;
+        finish();
+        focusBook();
+      });
+    });
     // Keyboard focus goes back to the book you came out of.
     const focusBook = () => {
-      const book = state.screen === 'home' && document.querySelector(`#subjects .book[data-subject="${id}"]`);
+      const book = state.screen === 'home' && $('subjects').querySelector(`.book[data-subject="${id}"]`);
       const a = document.activeElement;
       if (book && (!a || a === document.body || a.id === 'home-title')) book.focus({ preventScroll: true });
     };
@@ -12298,6 +12421,7 @@ THIS SOFTWARE.</pre>
   }
 
   function cgStopTimers() {
+    cgHeldKey = null;
     clearTimeout(cgAutoTimer);
     cgAutoTimer = null;
     clearInterval(cgTicker);
@@ -13286,16 +13410,16 @@ THIS SOFTWARE.</pre>
   // Clicks on anything marked data-nav, data-subject or data-game move between screens.
   function onNavClick(e) {
     const el = e.target.closest('[data-nav], [data-subject], [data-game]');
-    if (!el || closing) return;
+    if (!el || animating) return;
     if (el.dataset.nav === 'home') goHome();
-    else if (el.dataset.game) openGame(el.dataset.game, el.dataset.stage);
+    else if (el.dataset.game) turnToGame(el.dataset.game, el.dataset.stage);
     else if (el.dataset.subject && el.classList.contains('book')) openBook(el, el.dataset.subject);
-    else if (el.dataset.subject) openSubject(el.dataset.subject, el.dataset.stage);
+    else if (el.dataset.subject) turnToSubject(el.dataset.subject, el.dataset.stage);
   }
 
   // Each game decides which keys (and modifier keys) it uses.
   function onKey(e) {
-    if (state.screen !== 'game' || closing) return;
+    if (state.screen !== 'game' || animating) return;
     GAMES[state.gameId].onKey(e);
   }
 
