@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Educational In-Class Games</title>
-<meta name="description" content="Classroom games for Maths, English, Science and Computing (key stage 3, and AQA GCSE Computer Science at key stage 4). Every game can be played on your own, in groups, or as a whole class on the board.">
+<meta name="description" content="Classroom games for Maths, English (Eduqas GCSE English Language), Science and Computing (key stage 3, and AQA GCSE Computer Science at key stage 4). Every game can be played on your own, in groups, or as a whole class on the board.">
 <meta property="og:title" content="Educational In-Class Games">
-<meta property="og:description" content="Classroom games for Maths, English, Science and Computing (key stage 3, and AQA GCSE Computer Science at key stage 4). Every game can be played on your own, in groups, or as a whole class on the board.">
+<meta property="og:description" content="Classroom games for Maths, English (Eduqas GCSE English Language), Science and Computing (key stage 3, and AQA GCSE Computer Science at key stage 4). Every game can be played on your own, in groups, or as a whole class on the board.">
 <meta property="og:type" content="website">
 <meta name="theme-color" content="#2443a6">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect x='9' y='4' width='46' height='56' rx='6' fill='%232b56a6'/%3E%3Crect x='9' y='4' width='9' height='56' rx='4' fill='%23173f80'/%3E%3Crect x='24' y='15' width='24' height='14' rx='2' fill='%23fcfcfa'/%3E%3Cpath d='M28 20h16M28 24h10' stroke='%232443a6' stroke-width='2.4' stroke-linecap='round'/%3E%3C/svg%3E">
@@ -1857,7 +1857,7 @@
         <h1 id="home-title">Educational <span class="hl c1">In-Class</span> Games</h1>
         <p class="lede">Quick games to play together as a class or on your own. Pick a subject to see its games.</p>
       </div>
-      <p class="notice" role="note"><b>Exam boards.</b> In Computing, key stage 4 (Years 9 to 11) follows the AQA GCSE Computer Science specification (8525), apart from typing practice and everyday online safety, and key stage 3 (Years 7 and 8) follows the national curriculum for computing. The other subjects aren’t matched to an exam board: they follow general curriculum topics and may not match exactly what your course requires, so check them against your own specification. This site isn’t produced or endorsed by any exam board.</p>
+      <p class="notice" role="note"><b>Exam boards.</b> In Computing, key stage 4 (Years 9 to 11) follows the AQA GCSE Computer Science specification (8525), apart from typing practice and everyday online safety, and key stage 3 (Years 7 and 8) follows the national curriculum for computing. The English games are matched to WJEC Eduqas GCSE English Language (C700QS), which the English department uses. Maths and Science aren’t matched to an exam board: they follow general curriculum topics and may not match exactly what your course requires, so check them against your own specification. This site isn’t produced or endorsed by any exam board.</p>
       <ul class="shelf" id="subjects" aria-label="Subjects"></ul>
     </section>
 
@@ -2211,7 +2211,7 @@
     </section>
 
     <footer class="site-foot">
-      <p><b>Exam boards.</b> In Computing, key stage 4 follows AQA GCSE Computer Science (8525), apart from typing practice and everyday online safety, and key stage 3 follows the national curriculum. The other subjects aren’t matched to an exam board, so check them against your own course. Not produced or endorsed by any exam board.</p>
+      <p><b>Exam boards.</b> In Computing, key stage 4 follows AQA GCSE Computer Science (8525), apart from typing practice and everyday online safety, and key stage 3 follows the national curriculum. English is matched to Eduqas GCSE English Language (C700QS). Maths and Science aren’t matched to an exam board, so check them against your own course. Not produced or endorsed by any exam board.</p>
       <p><b>Private by design.</b> Everything runs in your web browser. Nothing you type, including pupils’ names, is sent anywhere, and saved word lists and scores stay on the computer you use.</p>
       <details>
         <summary>Credits and licences</summary>
@@ -2255,7 +2255,8 @@ THIS SOFTWARE.</pre>
   // and add a <section id="game-<id>" class="game-screen"> for it in the page.
   const ALL_SUBJECTS = [
     { id: 'maths', name: 'Maths', blurb: 'Number, patterns and problem solving', paper: 'squared', games: ['fizzbuzz', 'tables', 'target', 'fractions'] },
-    { id: 'english', name: 'English', blurb: 'Reading, spelling and grammar', paper: 'lined', games: ['spelling', 'punctuation', 'homophones', 'devices'] },
+    // English GCSE is with WJEC Eduqas: English Language (C700QS) and English Literature (C720QS).
+    { id: 'english', name: 'English', blurb: 'Reading, spelling and grammar', paper: 'lined', games: ['spelling', 'punctuation', 'homophones', 'devices'], exam: 'eduqas' },
     { id: 'science', name: 'Science', blurb: 'Biology, chemistry and physics', paper: 'squared', games: ['periodic', 'cell', 'foodweb'] },
     // Computing has a drop-down for each key stage: KS3 is Years 7 and 8 (national curriculum), KS4 is Years 9 to 11 (AQA GCSE).
     { id: 'computing', name: 'Computing', years: '7 to 11', blurb: 'Key stages 3 and 4: binary, logic, programming, online safety and typing', paper: 'squared',
@@ -2330,7 +2331,7 @@ THIS SOFTWARE.</pre>
         class: 'Spelling bee: type in the pupils’ names. Each pupil hears a word and spells it aloud, and anyone who slips is out.',
       },
       summary: 'Practise tricky words with a meaning and an example sentence for each one. Use the national curriculum lists, lists by spelling rule, or your own saved lists.',
-      skills: 'Spelling patterns, rules and tricky words',
+      skills: 'Eduqas AO6: spelling patterns, rules and tricky words',
       players: 'On your own, in groups or as a class',
       time: '5 to 15 minutes',
       get section() { return spOnCg() ? 'game-cg' : 'game-spelling'; },
@@ -2347,7 +2348,7 @@ THIS SOFTWARE.</pre>
       paper: 'lined',
       title: 'Punctuation Fix',
       summary: 'Put commas, full stops, capital letters and other marks back into sentences, and choose the right apostrophes and speech marks. The rule is explained after each mistake.',
-      skills: 'Commas, apostrophes, speech marks and sentence punctuation',
+      skills: 'Eduqas AO6: commas, apostrophes, speech marks and sentence punctuation',
       time: '10 to 15 minutes',
       versions: {
         solo: 'Fix each sentence by clicking where the marks go, with the rule explained after a mistake.',
@@ -2360,7 +2361,7 @@ THIS SOFTWARE.</pre>
       paper: 'lined',
       title: 'Homophone Hunt',
       summary: 'Fill the gap with the right sound-alike: there, their or they’re; to, too or two; and 25 more sets. See what each word means after every answer.',
-      skills: 'Homophones and commonly confused words',
+      skills: 'Eduqas AO6: homophones and commonly confused words',
       time: '5 to 15 minutes',
       versions: {
         solo: 'Fill the gap in each sentence, then see what every word in the set means.',
@@ -2372,8 +2373,8 @@ THIS SOFTWARE.</pre>
       subject: 'english',
       paper: 'lined',
       title: 'Device Detective',
-      summary: 'Spot the simile, metaphor, personification, alliteration and five more devices in lines of writing. Add lines from the book your class is reading.',
-      skills: 'Literary devices and their effects',
+      summary: 'Spot the simile, metaphor, personification, alliteration and seven more devices in lines of writing, including the rhetorical devices Eduqas names. Add lines from the book your class is reading.',
+      skills: 'Eduqas AO2: literary and rhetorical devices, using subject terminology',
       time: '10 to 15 minutes',
       versions: {
         solo: 'Name the device in each line, with an explanation after every answer.',
@@ -2805,6 +2806,10 @@ THIS SOFTWARE.</pre>
   }
 
   const NO_BOARD_NOTICE = '<b>Not matched to an exam board.</b> No exam board has been chosen and no exam board’s specification has been used, so the content follows general curriculum topics and may not match exactly what your course requires. Check it against your own specification before relying on it.';
+  // Subjects matched to an exam board (Computing's are by key stage, below).
+  const BOARD_NOTICES = {
+    eduqas: '<b>English GCSE: Eduqas.</b> These games practise skills that WJEC Eduqas GCSE English Language (C700QS) rewards. Spelling Challenge, Punctuation Fix and Homophone Hunt practise accurate spelling, punctuation and vocabulary (AO6, 20% of the marks, assessed in both writing sections), which also earn marks in Eduqas English Literature (AO4). Device Detective practises the subject terminology for analysing language (AO2), including the rhetorical devices the specification names: rhetorical questions, antithesis and parenthesis. Punctuation Fix uses the national curriculum’s grammar terms, which the specification refers to. Eduqas doesn’t publish spelling lists, so the word lists are the national curriculum’s. The games aren’t produced or endorsed by Eduqas, so check against the latest specification on Eduqas’s website.',
+  };
   const STAGE_NOTICES = {
     ks3: '<b>Years 7 and 8.</b> These games follow a Year 7 and 8 curriculum map based on the national curriculum for computing at key stage 3: staying safe online and choosing images and sources responsibly, binary basics, and programming in Python, including making code robust. Typing Trainer is a general keyboard skill. Binary addition, lists, searching, sorting and logic gates come later, so they’re under key stage 4. There’s no exam board at key stage 3.',
     ks4: '<b>Based on AQA GCSE Computer Science (8525).</b> These games follow the AQA specification: number bases and binary arithmetic (3.3.1, 3.3.2 and 3.3.4), Boolean logic (3.4.2), algorithms and programming using AQA pseudo-code (3.1 and 3.2), and cyber security (3.6). Typing Trainer and the everyday online safety questions in Cyber Safe are general skills, not part of the specification. The games aren’t produced or endorsed by AQA, so check against the latest specification on AQA’s website.',
@@ -2819,7 +2824,7 @@ THIS SOFTWARE.</pre>
     $('subject-blurb').textContent = s.blurb;
     // A subject split into key stages has a note for each one, inside its drop-down.
     $('subject-notice').hidden = Boolean(s.stages);
-    $('subject-notice').innerHTML = s.stages ? '' : NO_BOARD_NOTICE;
+    $('subject-notice').innerHTML = s.stages ? '' : BOARD_NOTICES[s.exam] || NO_BOARD_NOTICE;
 
     if (!n) {
       const others = SUBJECTS.filter((x) => x.games.length);
@@ -8212,6 +8217,9 @@ THIS SOFTWARE.</pre>
     rhetorical: { name: 'Rhetorical question', what: 'asks a question for effect, not to get an answer.' },
     repetition: { name: 'Repetition', what: 'repeats a word or phrase to make it stand out.' },
     oxymoron: { name: 'Oxymoron', what: 'puts two words with opposite meanings side by side.' },
+    // Eduqas GCSE English Language names these two, with rhetorical questions, as rhetorical devices to use.
+    antithesis: { name: 'Antithesis', what: 'sets two contrasting ideas against each other, often in matching phrases.' },
+    parenthesis: { name: 'Parenthesis', what: 'drops an extra thought or piece of information into a sentence, between brackets, dashes or a pair of commas.' },
   };
   // Likely mix-ups, offered as the wrong choices.
   const DV_CONFUSE = {
@@ -8219,7 +8227,8 @@ THIS SOFTWARE.</pre>
     personification: ['metaphor', 'simile', 'onomatopoeia'], alliteration: ['onomatopoeia', 'repetition', 'rhetorical'],
     onomatopoeia: ['alliteration', 'personification', 'repetition'], hyperbole: ['metaphor', 'simile', 'oxymoron'],
     rhetorical: ['repetition', 'hyperbole', 'personification'], repetition: ['alliteration', 'rhetorical', 'hyperbole'],
-    oxymoron: ['hyperbole', 'metaphor', 'alliteration'],
+    oxymoron: ['antithesis', 'hyperbole', 'alliteration'], antithesis: ['oxymoron', 'personification', 'simile'],
+    parenthesis: ['rhetorical', 'repetition', 'alliteration'],
   };
   // [device, line, why]
   const DV_LINES = [
@@ -8268,6 +8277,16 @@ THIS SOFTWARE.</pre>
     ['oxymoron', 'It was an open secret that she was leaving.', '“Open” and “secret” have opposite meanings.'],
     ['oxymoron', 'The two friends sat alone together.', '“Alone” and “together” have opposite meanings.'],
     ['oxymoron', 'She gave a quiet scream.', '“Quiet” and “scream” have opposite meanings.'],
+    ['antithesis', 'To err is human; to forgive, divine.', '“Err” (make mistakes) is set against “forgive”, and “human” against “divine”.'],
+    ['antithesis', 'Many are called, but few are chosen.', '“Many” is set against “few”, and “called” against “chosen”.'],
+    ['antithesis', 'Trouble is easy to get into but hard to get out of.', '“Easy” is set against “hard”, and “into” against “out of”.'],
+    ['antithesis', 'Her words were gentle, but her actions were cruel.', '“Words” is set against “actions”, and “gentle” against “cruel”.'],
+    ['antithesis', 'The winners cheered loudly while the losers sat in silence.', '“Winners” is set against “losers”, and cheering against silence.'],
+    ['parenthesis', 'My brother – who never tidies anything – won a prize for the neatest bedroom.', 'The words between the dashes are an extra thought dropped into the sentence.'],
+    ['parenthesis', 'The exam (the longest of the year) was finally over.', 'The words in brackets add extra information. Take them out and the sentence still makes sense.'],
+    ['parenthesis', 'Our village, which hardly anyone has heard of, won the best-kept garden award.', 'The words between the commas add extra information about the village.'],
+    ['parenthesis', 'The storm – and it was a fierce one – knocked down three trees.', 'The words between the dashes add an extra comment about the storm.'],
+    ['parenthesis', 'Mrs Patel (who used to be a chef) made the best cakes at the fair.', 'The words in brackets add extra information about Mrs Patel.'],
   ];
 
   // ================= English games =================
@@ -8955,7 +8974,7 @@ THIS SOFTWARE.</pre>
         { key: 'lines', label: 'Lines', choices: [['built', 'Built-in lines'], ['both', 'Built-in and your own'], ['mine', 'Only your own']] },
         { key: 'custom', type: 'textarea', label: 'Your own lines', showIf: (s) => s.lines !== 'built',
           placeholder: 'simile: The sea was as flat as a pancake.\nmetaphor: The playground was a battlefield.',
-          help: 'One per line: the device, a colon, then the line. Use simile, metaphor, personification, alliteration, onomatopoeia, hyperbole, rhetorical question, repetition or oxymoron.' },
+          help: 'One per line: the device, a colon, then the line. Use simile, metaphor, personification, alliteration, onomatopoeia, hyperbole, rhetorical question, repetition, oxymoron, antithesis or parenthesis.' },
         { key: 'rounds', label: 'How many', modes: ['solo', 'class'], choices: [['8', '8'], ['12', '12']] },
         { key: 'stacks', label: 'Stacks for each team', modes: ['groups'], choices: [['1', '1'], ['2', '2']] },
       ],

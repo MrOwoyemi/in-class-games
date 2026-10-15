@@ -8,7 +8,7 @@ Classroom games for Maths, English, Science and Computing. Computing has a drop-
 
 **Play it here: https://mrowoyemi.github.io/in-class-games/**
 
-> **Exam boards.** Computing KS3 (Years 7 and 8) follows the [national curriculum for computing at key stage 3](https://www.gov.uk/government/publications/national-curriculum-in-england-computing-programmes-of-study/national-curriculum-in-england-computing-programmes-of-study). Computing KS4 (Years 9 to 11) follows the [AQA GCSE Computer Science specification (8525)](https://www.aqa.org.uk/subjects/computer-science/gcse/computer-science-8525/specification), including AQA's wording, Boolean notation and pseudo-code. The exceptions are Typing Trainer and the everyday online safety questions in Cyber Safe, which are general skills rather than part of the specification. The Maths, English and Science games aren't matched to an exam board: they follow general curriculum topics and may not match exactly what your course requires, so check them against your own specification. This site isn't produced or endorsed by AQA or any other exam board.
+> **Exam boards.** Computing KS3 (Years 7 and 8) follows the [national curriculum for computing at key stage 3](https://www.gov.uk/government/publications/national-curriculum-in-england-computing-programmes-of-study/national-curriculum-in-england-computing-programmes-of-study). Computing KS4 (Years 9 to 11) follows the [AQA GCSE Computer Science specification (8525)](https://www.aqa.org.uk/subjects/computer-science/gcse/computer-science-8525/specification), including AQA's wording, Boolean notation and pseudo-code. The exceptions are Typing Trainer and the everyday online safety questions in Cyber Safe, which are general skills rather than part of the specification. The English games are matched to [WJEC Eduqas GCSE English Language (C700QS)](https://www.eduqas.co.uk/qualifications/english-language-gcse/), which the English department uses: spelling, punctuation and vocabulary (AO6) and the subject terminology for analysing language (AO2), including the rhetorical devices the specification names. The word lists are the national curriculum's, as Eduqas doesn't publish spelling lists. The Maths and Science games aren't matched to an exam board: they follow general curriculum topics and may not match exactly what your course requires, so check them against your own specification. This site isn't produced or endorsed by AQA, Eduqas or any other exam board.
 
 ## Using it in class
 
@@ -23,7 +23,7 @@ It works best on a computer or interactive whiteboard. It also works on tablets 
 | Subject | Games |
 |---|---|
 | Maths | FizzBuzz, Times Table Sprint, Hit the Target, Fraction Wall |
-| English | Spelling Challenge, Punctuation Fix, Homophone Hunt, Device Detective |
+| English (Eduqas C700QS) | Spelling Challenge (AO6), Punctuation Fix (AO6), Homophone Hunt (AO6), Device Detective (AO2) |
 | Science | Periodic Pairs, Label the Cell, Food Web Builder |
 | Computing KS3 (Years 7 and 8) | Cyber Safe (online safety, sources and copyright), Typing Trainer, Binary Switches (binary basics), Code Shuffle (Python, Year 7 and Year 8 programs) |
 | Computing KS4 (Years 9 to 11, AQA 8525) | Binary Switches (3.3.1, 3.3.2 and 3.3.4), Logic Gate Lights (3.4.2), Code Shuffle (3.1 and 3.2), Cyber Safe (3.6, plus online safety), Typing Trainer |
