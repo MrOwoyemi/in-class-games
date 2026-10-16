@@ -1653,7 +1653,7 @@
   .is-class .ty-text { font-size: clamp(1.2rem, 5cqi, 2.4rem); }
   .is-class .cy-msg { font-size: 1.15rem; }
 
-  /* Guess the Logo: a logo on white (as it would be printed), under a grid of coloured tiles */
+  /* Guess the Logo: a logo on white (as it would be printed), under a grid of blue tiles */
   .lgo-board { width: 100%; display: grid; justify-items: center; gap: 14px; text-align: center; }
   .lgo-frame {
     position: relative; width: min(100%, 20rem); aspect-ratio: 1; overflow: hidden;
@@ -1661,7 +1661,7 @@
   }
   .lgo-frame img { position: absolute; inset: 10%; width: 80%; height: 80%; object-fit: contain; }
   .lgo-tiles { position: absolute; inset: 0; display: grid; grid-template-columns: repeat(var(--side), 1fr); grid-template-rows: repeat(var(--side), 1fr); }
-  .lgo-tile { background: var(--c); border: 2px solid var(--card); }
+  .lgo-tile { background: var(--hl-4); border: 2px solid var(--card); }
   .lgo-tile.off { opacity: 0; }
   .lgo-tile.just { animation: lgo-lift .6s ease-out both; }
   @keyframes lgo-lift { from { opacity: 1; transform: none; } to { opacity: 0; transform: scale(.4) rotate(12deg); } }
@@ -6598,7 +6598,7 @@ THIS SOFTWARE.</pre>
     const last = q.order[w.shown - 1];
     const tiles = q.order.map((_, i) => {
       const gone = ctx.done || off.has(i);
-      return `<span class="lgo-tile c${(i % 5) + 1}${gone ? ' off' : ''}${!ctx.done && i === last ? ' just' : ''}"></span>`;
+      return `<span class="lgo-tile${gone ? ' off' : ''}${!ctx.done && i === last ? ' just' : ''}"></span>`;
     }).join('');
     const label = ctx.done ? `The ${q.name} logo` : `A logo with ${w.shown} of ${q.tiles} tiles lifted`;
     return `<div class="lgo-board">
