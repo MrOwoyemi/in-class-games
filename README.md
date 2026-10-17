@@ -41,20 +41,24 @@ Download `index.html` from this page (click it, then the download button) and op
 
 ## Credits
 
-The logos in Guess the Logo are trademarks of their owners. They're shown only so pupils can practise recognising brands. Google, McDonald's, YouTube, Nike and Apple come from the original Year 7 slides. The other 21 come from Wikimedia Commons, where they're marked as public domain (the TikTok logo is CC0):
+The logos in Guess the Logo are trademarks of their owners. They're shown only so pupils can practise recognising brands. All 26 come from Wikimedia Commons, where they're marked as public domain (the TikTok logo is CC0):
 
 - Adidas: [Adidas 2022 logo.svg](https://commons.wikimedia.org/wiki/File:Adidas_2022_logo.svg)
 - Amazon: [Amazon icon.svg](https://commons.wikimedia.org/wiki/File:Amazon_icon.svg)
-- Google Chrome: [Google Chrome icon (February 2022).svg](https://commons.wikimedia.org/wiki/File:Google_Chrome_icon_(February_2022).svg)
+- Apple: [Apple logo black.svg](https://commons.wikimedia.org/wiki/File:Apple_logo_black.svg)
 - Deliveroo: [Deliveroo logo.svg](https://commons.wikimedia.org/wiki/File:Deliveroo_logo.svg) (cropped to the kangaroo)
 - Domino’s: [Domino's pizza logo.svg](https://commons.wikimedia.org/wiki/File:Domino%27s_pizza_logo.svg)
 - Facebook: [Facebook f logo (2019).svg](https://commons.wikimedia.org/wiki/File:Facebook_f_logo_(2019).svg)
+- Google: [Google Favicon 2025.svg](https://commons.wikimedia.org/wiki/File:Google_Favicon_2025.svg)
+- Google Chrome: [Google Chrome icon (February 2022).svg](https://commons.wikimedia.org/wiki/File:Google_Chrome_icon_(February_2022).svg)
 - Instagram: [Instagram logo 2016.svg](https://commons.wikimedia.org/wiki/File:Instagram_logo_2016.svg)
 - Mastercard: [Mastercard 2019 logo.svg](https://commons.wikimedia.org/wiki/File:Mastercard_2019_logo.svg)
+- McDonald's: [McDonald's Golden Arches.svg](https://commons.wikimedia.org/wiki/File:McDonald%27s_Golden_Arches.svg)
 - Microsoft: [Microsoft logo.svg](https://commons.wikimedia.org/wiki/File:Microsoft_logo.svg)
 - Netflix: [Netflix 2016 N logo.svg](https://commons.wikimedia.org/wiki/File:Netflix_2016_N_logo.svg)
+- Nike: [Logo NIKE.svg](https://commons.wikimedia.org/wiki/File:Logo_NIKE.svg)
 - Nintendo Switch: [Nintendo Switch logo.svg](https://commons.wikimedia.org/wiki/File:Nintendo_Switch_logo.svg) (cropped to the symbol)
-- Pepsi: [Pepsi logo 2014.svg](https://commons.wikimedia.org/wiki/File:Pepsi_logo_2014.svg) (cropped to the globe)
+- Pepsi: [Pepsi 2023.svg](https://commons.wikimedia.org/wiki/File:Pepsi_2023.svg)
 - Pinterest: [Pinterest-logo.png](https://commons.wikimedia.org/wiki/File:Pinterest-logo.png)
 - PlayStation: [PlayStation logo.svg](https://commons.wikimedia.org/wiki/File:PlayStation_logo.svg)
 - Spotify: [Spotify App Logo.svg](https://commons.wikimedia.org/wiki/File:Spotify_App_Logo.svg)
@@ -64,5 +68,6 @@ The logos in Guess the Logo are trademarks of their owners. They're shown only s
 - WhatsApp: [WhatsApp.svg](https://commons.wikimedia.org/wiki/File:WhatsApp.svg)
 - X (Twitter): [X logo 2023.svg](https://commons.wikimedia.org/wiki/File:X_logo_2023.svg)
 - Xbox: [Xbox one logo.svg](https://commons.wikimedia.org/wiki/File:Xbox_one_logo.svg)
+- YouTube: [YouTube full-color icon (2024).svg](https://commons.wikimedia.org/wiki/File:YouTube_full-color_icon_(2024).svg)
 
 The page includes map outlines from [Natural Earth](https://www.naturalearthdata.com/) (public domain), via the [world-atlas](https://github.com/topojson/world-atlas) project (ISC licence, copyright 2013–2019 Michael Bostock). The full licence text is in the page's footer, under "Credits and licences".
