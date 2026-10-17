@@ -2,7 +2,7 @@
 <html lang="en-GB">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, interactive-widget=resizes-content">
 <title>Educational In-Class Games</title>
 <meta name="description" content="Classroom games for Maths, English (Eduqas GCSE English Language), Science, Computing (key stage 3, and AQA GCSE Computer Science at key stage 4) and Creative iMedia. Every game can be played on your own, in groups, or as a whole class on the board.">
 <meta property="og:title" content="Educational In-Class Games">
@@ -24,6 +24,7 @@
     --ink: #1a2540;
     --ink-soft: #57627a;
     --line: #c7d1df;
+    --field-line: #78849a; /* the edge of a text box: at least 3:1 against the page */
     --margin: #e27a73;
     --pen: #2443a6;
     --pen-deep: #172d73;
@@ -97,6 +98,8 @@
       --ink: #e8ecf5;
       --ink-soft: #9ca8c0;
       --line: #2e3a55;
+      --field-line: #627293;
+      --label-soft: #59637d;
       --margin: #a8504b;
       --pen: #8fa8ff;
       --pen-deep: #4b5fa8;
@@ -155,6 +158,8 @@
     --ink: #e8ecf5;
     --ink-soft: #9ca8c0;
     --line: #2e3a55;
+    --field-line: #627293;
+    --label-soft: #59637d;
     --margin: #a8504b;
     --pen: #8fa8ff;
     --pen-deep: #4b5fa8;
@@ -229,6 +234,7 @@
   button:disabled { cursor: not-allowed; }
   :focus-visible { outline: 3px solid var(--pen); outline-offset: 2px; }
   .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .main-area { display: contents; } /* a landmark for screen readers; the layout is as if it weren't there */
 
   .page {
     min-height: 100%; display: flex; flex-direction: column;
@@ -370,7 +376,10 @@
   .turn-cast { position: absolute; inset: 0; opacity: 0; pointer-events: none; background: linear-gradient(to right, rgb(0 0 0 / .22), transparent 45%); }
 
   /* ---------- Subject page ---------- */
-  .subject-head { display: flex; align-items: center; gap: 20px; }
+  .subject-head { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; }
+  .subject-head .masthead-text { min-width: 0; }
+  h1, h2 { overflow-wrap: break-word; }
+  @media (max-width: 380px) { h1 { font-size: clamp(2.2rem, 12vw, 3rem); } }
   .mini-book {
     flex: none; position: relative; width: 64px; height: 84px;
     background: var(--cover); border-radius: 3px 8px 8px 3px;
@@ -416,7 +425,9 @@
 
   /* ---------- Shared game pieces ---------- */
   .game-screen { flex: 1; min-height: 0; display: flex; flex-direction: column; gap: 32px; }
-  .page[data-game-view="play"] .game-masthead, .page[data-game-view="results"] .game-masthead { display: none; }
+  .page[data-game-view="play"] .game-masthead, .page[data-game-view="results"] .game-masthead {
+    position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap;
+  }
 
   /* Buttons */
   .btn-primary {
@@ -520,7 +531,7 @@
     font: 700 1rem/1 var(--font-hand); color: var(--wrong);
   }
   .chip.current { border-style: dashed; border-color: var(--pen); background: transparent; color: var(--pen); }
-  .chip.unreached { opacity: .45; border-style: dotted; }
+  .chip.unreached { color: var(--ink-soft); border-style: dotted; }
   .legend { margin: 0; font-size: .9rem; color: var(--ink-soft); }
   .key-text {
     margin: 0; padding: 12px 14px; overflow-wrap: anywhere;
@@ -557,7 +568,7 @@
   .field { display: inline-flex; align-items: center; gap: 8px; }
   .field label { color: var(--ink-soft); white-space: nowrap; }
   .num-input, .word-input {
-    min-height: 44px; padding: 6px 10px; border: 1.5px solid var(--line); border-radius: 8px;
+    min-height: 44px; padding: 6px 10px; border: 1.5px solid var(--field-line); border-radius: 8px;
     background: var(--paper); color: var(--ink); font-weight: 700; font-size: 1.1rem;
   }
   .num-input { width: 4.6em; font-variant-numeric: tabular-nums; }
@@ -669,7 +680,7 @@
   .choice-sample { color: var(--ink-soft); font-size: .85rem; font-style: italic; overflow-wrap: anywhere; }
   .text-area {
     width: 100%; min-height: 7rem; padding: 10px 12px; resize: vertical;
-    border: 1.5px solid var(--line); border-radius: 10px; background: var(--card); color: var(--ink);
+    border: 1.5px solid var(--field-line); border-radius: 10px; background: var(--card); color: var(--ink);
     font: 400 1.05rem/1.5 var(--font-body);
   }
   .text-area[aria-invalid="true"] { border-color: var(--wrong); background: var(--wrong-wash); }
@@ -722,7 +733,7 @@
   .spell-form { display: grid; gap: 12px; }
   .spell-input {
     width: 100%; min-height: 3.6rem; padding: 8px 16px;
-    border: 2px solid var(--line); border-radius: 12px; background: var(--paper); color: var(--ink);
+    border: 2px solid var(--field-line); border-radius: 12px; background: var(--paper); color: var(--ink);
     font: 700 1.8rem/1.2 var(--font-body); letter-spacing: .06em;
   }
   .spell-input:focus { border-color: var(--pen); }
@@ -834,7 +845,8 @@
     padding: 10px 12px; background: var(--paper); border: 2px solid transparent; border-radius: 12px;
   }
   .score-row.is-turn { border-color: var(--pen); background: var(--card); }
-  .score-row.is-out { opacity: .5; }
+  .score-row.is-out .score-name, .score-row.is-out .score-num { color: var(--ink-soft); }
+  .score-row.is-out .score-name { text-decoration: line-through; }
   .score-name { min-width: 0; overflow-wrap: anywhere; font-weight: 700; }
   .score-num { font: 800 1.8rem/1 var(--font-display); font-variant-numeric: tabular-nums; }
   .score-adjust { grid-column: 1 / -1; display: flex; justify-content: flex-end; gap: 6px; }
@@ -923,10 +935,12 @@
     display: flex; align-items: center; gap: 10px; min-height: 2.8rem; padding: 4px 6px 4px 0;
     background: var(--paper); border: 1.5px solid var(--line); border-radius: 10px;
   }
-  [data-live] > .drag-row { cursor: grab; touch-action: none; }
+  [data-live] > .drag-row { cursor: grab; touch-action: pan-y; }
+  [data-live] > .drag-row .code-num { touch-action: none; }
+  @media (pointer: coarse) { [data-live] > .drag-row .code-num::after { content: " ⠿"; } }
   .drag-row.dragging { position: relative; z-index: 2; cursor: grabbing; background: var(--card); border-color: var(--pen); box-shadow: 0 10px 22px -10px var(--lift); }
   .code-line.ok { border: 2px solid var(--right); }
-  .code-line.bad { border: 2px solid var(--wrong); background: var(--wrong-wash); }
+  .code-line.bad { border: 2px dashed var(--wrong); background: var(--wrong-wash); }
   .code-num { flex: none; width: 2.2rem; text-align: right; color: var(--ink-soft); font: 400 .85rem var(--font-code); }
   .code-text {
     flex: 1; min-width: 0; padding-left: calc(var(--indent, 0) * 2.4ch);
@@ -995,6 +1009,7 @@
   /* Label the Cell */
   .cell-wrap { width: 100%; display: grid; justify-items: center; gap: 14px; }
   .cell-svg { width: 100%; max-width: 46rem; height: auto; max-height: 60cqh; overflow: visible; }
+  .slot:focus-visible, .web-svg .node:focus-visible, .sw:focus-visible, .lgo-frame:focus-visible { outline: 3px solid var(--pen); outline-offset: 3px; border-radius: 6px; }
   .c-cyto { fill: var(--cell-cyto); }
   .c-mem { stroke: var(--ink); stroke-width: 3; }
   .c-wall { fill: var(--cell-wall); stroke: var(--ink); stroke-width: 2; }
@@ -1017,7 +1032,7 @@
   .slot.clickable:hover rect, .slot:focus-visible rect { stroke: var(--pen); stroke-width: 3; }
   .slot:focus { outline: none; }
   .slot.ok rect { stroke: var(--right); stroke-width: 3; stroke-dasharray: none; }
-  .slot.bad rect { fill: var(--wrong-wash); stroke: var(--wrong); stroke-width: 3; stroke-dasharray: none; }
+  .slot.bad rect { fill: var(--wrong-wash); stroke: var(--wrong); stroke-width: 3; stroke-dasharray: 6 4; }
   .slot.flag rect { stroke: var(--wrong); stroke-width: 3; stroke-dasharray: 7 3; }
   .slot.flag text { fill: var(--wrong); }
   .slot.focus rect { fill: var(--hl-1); stroke: var(--on-hl); stroke-dasharray: none; }
@@ -1051,7 +1066,7 @@
   .web-svg .node.focus rect { fill: var(--hl-4); stroke: var(--on-hl); }
   .web-svg .node.ok rect { fill: var(--hl-3); stroke: var(--on-hl); }
   .web-svg .node.sel text, .web-svg .node.focus text, .web-svg .node.ok text { fill: var(--on-hl); }
-  .web-svg .node.bad rect { fill: var(--wrong-wash); stroke: var(--wrong); stroke-width: 3; }
+  .web-svg .node.bad rect { fill: var(--wrong-wash); stroke: var(--wrong); stroke-width: 3; stroke-dasharray: 6 4; }
   .web-svg .node.gone { opacity: .55; }
   .web-svg .node.locked:not(.focus) rect { stroke: var(--ink-soft); stroke-dasharray: 5 4; }
   .web-svg .node.locked:not(.focus) text { fill: var(--ink-soft); }
@@ -1426,7 +1441,7 @@
     background: var(--paper); border: 1.5px solid var(--line); border-radius: 12px;
   }
   .fw-order-row.ok { border: 2px solid var(--right); }
-  .fw-order-row.bad { border: 2px solid var(--wrong); background: var(--wrong-wash); }
+  .fw-order-row.bad { border: 2px dashed var(--wrong); background: var(--wrong-wash); }
   .fw-order-frac { padding: 2px 8px; border-radius: 8px; box-shadow: inset 0 -.3em 0 var(--c); font: 800 1.5rem var(--font-display); }
   .fw-opt .frac { font-size: 1.3rem; }
   .fw-chain { font-size: 1.4rem; font-weight: 800; }
@@ -1474,7 +1489,7 @@
   .pf-word { padding: 0 .08em; border: 0; border-radius: 6px; background: none; color: inherit; font: inherit; }
   button.pf-word { cursor: pointer; text-decoration: underline dotted var(--line) 2px; text-underline-offset: .22em; }
   button.pf-word:hover { background: var(--paper); text-decoration-color: var(--pen); }
-  .pf-word.bad { background: var(--wrong-wash); color: var(--wrong); }
+  .pf-word.bad { background: var(--wrong-wash); color: var(--wrong); text-decoration: underline wavy; text-underline-offset: 3px; }
   .pf-slot {
     display: inline-grid; place-items: center; min-width: .75em; height: 1.3em; margin: 0 .03em; padding: 0 .06em; vertical-align: -.12em;
     border: 0; border-radius: 5px; background: none; color: var(--pen); font: inherit; line-height: 1;
@@ -1483,7 +1498,7 @@
   button.pf-slot:hover { background: var(--paper); border-bottom-color: var(--pen); }
   button.pf-slot:focus-visible, button.pf-word:focus-visible { outline: 3px solid var(--pen); outline-offset: 1px; }
   .pf-slot.on { font-weight: 800; }
-  .pf-slot.bad { background: var(--wrong-wash); color: var(--wrong); border-bottom-color: var(--wrong); }
+  .pf-slot.bad { background: var(--wrong-wash); color: var(--wrong); border-bottom-color: var(--wrong); outline: 2px dashed var(--wrong); outline-offset: 1px; }
   .pf-slot.fixed { color: var(--right); }
   span.pf-slot { min-width: 0; margin: 0; padding: 0; } /* shown, not editable: hug the word */
   .pf-choices { list-style: none; margin: 0; padding: 0; width: 100%; max-width: 44rem; display: grid; gap: 10px; }
@@ -1540,7 +1555,23 @@
   button.dv-card { cursor: pointer; }
   .dv-card.is-sel { border-color: var(--pen); box-shadow: 0 0 0 2px var(--pen); background: var(--paper); }
   .dv-card.ok { border-color: var(--right); box-shadow: 0 0 0 1.5px var(--right); }
-  .dv-card.bad { border-color: var(--wrong); background: var(--wrong-wash); }
+  .dv-card.bad { border-color: var(--wrong); border-style: dashed; background: var(--wrong-wash); }
+
+  /* Right and wrong are never shown by colour alone: marked rows and cards get a ✓ or ✗ badge too,
+     and wrong ones a dashed edge. */
+  .code-line.ok, .code-line.bad, .fw-order-row.ok, .fw-order-row.bad, .tl-row.ok, .tl-row.bad,
+  .dv-card.ok, .dv-card.bad, .pf-choice.ok, .pf-choice.bad, .pick-chip.ok, .pick-chip.bad { position: relative; }
+  .code-line.ok::after, .fw-order-row.ok::after, .tl-row.ok::after, .dv-card.ok::after, .pf-choice.ok::after, .pick-chip.ok::after,
+  .code-line.bad::after, .fw-order-row.bad::after, .tl-row.bad::after, .dv-card.bad::after, .pf-choice.bad::after, .pick-chip.bad::after {
+    position: absolute; top: -9px; right: -9px; z-index: 1; display: grid; place-items: center;
+    width: 22px; height: 22px; border-radius: 50%; font: 800 13px/1 var(--font-body); color: #fff; pointer-events: none;
+  }
+  .code-line.ok::after, .fw-order-row.ok::after, .tl-row.ok::after, .dv-card.ok::after, .pf-choice.ok::after, .pick-chip.ok::after { content: "✓"; background: var(--right); }
+  .code-line.bad::after, .fw-order-row.bad::after, .tl-row.bad::after, .dv-card.bad::after, .pf-choice.bad::after, .pick-chip.bad::after { content: "✗"; background: var(--wrong); }
+  .svg-badge circle { stroke: var(--card); stroke-width: 2; }
+  .svg-badge.ok circle { fill: var(--right); }
+  .svg-badge.bad circle { fill: var(--wrong); }
+  .svg-badge text { fill: #fff; font: 800 13px var(--font-body); text-anchor: middle; }
   .dv-should { display: block; margin-top: 4px; font: 700 .8rem var(--font-body); color: var(--wrong); }
 
   /* Computing (AQA): a bar over anything that goes through NOT, the XOR gate, sums, shifts and spec labels */
@@ -1661,7 +1692,7 @@
   }
   .lgo-frame img { position: absolute; inset: 10%; width: 80%; height: 80%; object-fit: contain; }
   .lgo-tiles { position: absolute; inset: 0; display: grid; grid-template-columns: repeat(var(--side), 1fr); grid-template-rows: repeat(var(--side), 1fr); }
-  .lgo-tile { background: var(--hl-4); border: 2px solid var(--card); }
+  .lgo-tile { background: var(--sub-maths); border: 2px solid var(--card); } /* the site's blue: 7:1 against the white behind the logo */
   .lgo-tile.off { opacity: 0; }
   .lgo-tile.just { animation: lgo-lift .6s ease-out both; }
   @keyframes lgo-lift { from { opacity: 1; transform: none; } to { opacity: 0; transform: scale(.4) rotate(12deg); } }
@@ -1721,7 +1752,21 @@
   .is-class .fbx-who { font-size: 2rem; }
   .is-class .fw-tag { font-size: 1.5rem; }
   .is-class .prompt { font-size: 1.5rem; }
-  .is-class .code-text { font-size: 1.3rem; }
+  .is-class .code-text { font-size: 1.45rem; }
+  .is-class .code-goal { font-size: 1.35rem; }
+  .is-class .cy-opts li { font-size: 1.5rem; }
+  .is-class .hp-num { font-size: .85em; }
+  .is-class .bit-value { font-size: clamp(1.2rem, 3.2cqw, 2rem); }
+  .is-class .fbx-rules { font-size: 1.4rem; }
+  .is-class .fw-cell { font-size: clamp(1rem, 2.8cqw, 1.6rem); }
+  .is-class .score-name { font-size: 1.35rem; }
+  .is-class .web-svg, .is-class .cell-svg, .is-class .circuit { max-width: none; max-height: 72cqh; }
+  /* On the board, the food web's boxes and words are bigger (the boxes still fit between their neighbours). */
+  .is-class .web-svg .node rect { x: -70px; y: -21px; width: 140px; height: 42px; }
+  .is-class .web-svg .node text { font-size: 18px; transform: translateY(1px); }
+  .is-class .slot text { font-size: 18px; }
+  .is-class .slot text.long { font-size: 15px; } /* "Permanent vacuole" still fits its box */
+  .is-class .gate text { font-size: 14px; }
   .is-class .tt th, .is-class .tt td { font-size: 1.4rem; }
 
   /* ---------- Computer screens: use the whole window ---------- */
@@ -1858,6 +1903,26 @@
     .shelf { grid-template-columns: repeat(var(--cols, 3), minmax(0, 1fr)); }
   }
 
+  @media (max-height: 800px) and (min-width: 1000px) {
+    .is-class .cg-card { padding: 40px 18px 18px; }
+    .is-class .composer, .is-class .cg-side { gap: 8px; }
+    .is-class .keys-hint { display: none; } /* the board's keys are shown on the buttons themselves */
+  }
+  @media (max-height: 500px) {
+    .page { padding-block: 8px 24px; }
+    .topbar { margin-bottom: 8px; min-height: 0; }
+    .play-top { gap: 6px 16px; margin-bottom: 4px; }
+    .progress { gap: 2px; }
+  }
+  @media (max-width: 600px) {
+    .web-wrap, .cell-wrap, .lg-wrap, .fw-wrap { overflow-x: auto; justify-items: start; }
+    .web-svg, .cell-svg { min-width: 560px; }
+    .circuit { min-width: 420px; }
+    .fwall { min-width: 520px; }
+    .fw-cell { font-size: .8rem; }
+    button.pf-slot { min-width: 24px; }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { animation: none !important; transition: none !important; }
   }
@@ -1867,6 +1932,7 @@
 
 <div class="page" id="app" data-screen="home" data-game-view="" data-playing="no">
   <div class="sheet">
+    <p class="sr" id="live" role="status" aria-live="polite"></p>
     <header class="topbar">
       <nav class="crumbs" id="crumbs" aria-label="You are here" hidden></nav>
       <div class="who" id="who-switch">
@@ -1880,14 +1946,15 @@
       <button type="button" class="btn-small fs-btn" id="fs-btn" aria-pressed="false">Full screen</button>
     </header>
 
+    <main class="main-area">
     <!-- Home: pick a subject -->
     <section id="home-view" class="view" aria-labelledby="home-title">
       <div class="masthead-text">
         <p class="eyebrow">Games for the classroom</p>
         <h1 id="home-title">Educational <span class="hl c1">In-Class</span> Games</h1>
-        <p class="lede">Quick games to play together as a class or on your own. Pick a subject to see its games.</p>
+        <p class="lede">Quick games to play on your own, in groups or as a whole class. Pick a subject to see its games.</p>
       </div>
-      <p class="notice" role="note"><b>Exam boards.</b> In Computing, key stage 4 (Years 9 to 11) follows the AQA GCSE Computer Science specification (8525), apart from typing practice and everyday online safety, and key stage 3 (Years 7 and 8) follows the national curriculum for computing. The English games are matched to WJEC Eduqas GCSE English Language (C700QS), which the English department uses. Creative iMedia links to OCR Cambridge Nationals (J834), unit R094. Maths and Science aren’t matched to an exam board: they follow general curriculum topics and may not match exactly what your course requires, so check them against your own specification. This site isn’t produced or endorsed by any exam board.</p>
+      <p class="notice" role="note"><b>Exam boards.</b> In Computing, key stage 4 (Years 9 to 11) follows the AQA GCSE Computer Science specification (8525), apart from typing practice and everyday online safety, and key stage 3 (Years 7 and 8) follows the national curriculum for computing. The English games are matched to WJEC Eduqas GCSE English Language (C700QS), which the English department uses. Guess the Logo supports the teaching of OCR Cambridge Nationals in Creative iMedia (J834), unit R094, topic area 1 (1.1). Maths and Science aren’t matched to an exam board: they follow general curriculum topics and may not match exactly what your course requires, so check them against your own specification. This site isn’t produced or endorsed by any exam board.</p>
       <ul class="shelf" id="subjects" aria-label="Subjects"></ul>
     </section>
 
@@ -1964,6 +2031,10 @@
             <div class="pills" role="radiogroup" aria-labelledby="fb-speed-label" id="fb-speed"></div>
           </div>
           <p class="help">In a speed round each number has a time limit. Run out of time and it counts as a slip.</p>
+          <div class="option-row">
+            <span class="option-label" id="fb-auto-label">After a right answer</span>
+            <div class="pills" role="radiogroup" aria-labelledby="fb-auto-label" id="fb-auto"></div>
+          </div>
         </section>
 
         <section class="block rulebook" aria-labelledby="sum-title">
@@ -2006,7 +2077,7 @@
             <div class="word-buttons" id="word-buttons" role="group" aria-label="Words to say"></div>
 
             <div class="answer-controls" id="answer-controls">
-              <p class="hint">Tap every word that fits. Tap none to say the number.</p>
+              <p class="hint">Choose every word that fits. Choose none to say the number.</p>
               <div class="say-row">
                 <span class="say-label">You’ll say</span>
                 <span class="say-value" id="say-value"></span>
@@ -2015,7 +2086,7 @@
               <p class="keys-hint" id="keys-hint"></p>
             </div>
 
-            <div class="feedback" id="feedback" aria-live="polite" hidden>
+            <div class="feedback" id="feedback" hidden>
               <p class="fb-head" id="fb-head"></p>
               <ul class="working" id="working"></ul>
               <button type="button" class="btn-primary" id="next-btn">Next number</button>
@@ -2130,6 +2201,10 @@
             <span class="option-label" id="sp-comeback-label">Missed words</span>
             <div class="pills" id="sp-comebacks" role="radiogroup" aria-labelledby="sp-comeback-label"></div>
           </div>
+          <div class="option-row">
+            <span class="option-label" id="sp-auto-label">After a right answer</span>
+            <div class="pills" id="sp-auto" role="radiogroup" aria-labelledby="sp-auto-label"></div>
+          </div>
         </section>
 
         <button type="submit" class="btn-primary btn-start" id="sp-start">Start spelling</button>
@@ -2172,7 +2247,7 @@
               <button type="button" class="btn-link" id="sp-hint-btn">Show a hint</button>
               <div class="hint-box" id="sp-hint-box" aria-live="polite" hidden></div>
             </div>
-            <div class="feedback" id="sp-feedback" aria-live="polite" hidden>
+            <div class="feedback" id="sp-feedback" hidden>
               <p class="fb-head" id="sp-fb-head"></p>
               <div class="compare" id="sp-compare"></div>
               <div class="sp-info" id="sp-info"></div>
@@ -2239,13 +2314,16 @@
       <section id="cg-play" class="view play-layout cg-layout" aria-label="Game" hidden></section>
       <section id="cg-results" class="view results-layout" aria-label="Results" hidden></section>
     </section>
+    </main>
 
     <footer class="site-foot">
-      <p><b>Exam boards.</b> In Computing, key stage 4 follows AQA GCSE Computer Science (8525), apart from typing practice and everyday online safety, and key stage 3 follows the national curriculum. English is matched to Eduqas GCSE English Language (C700QS). Creative iMedia links to OCR Cambridge Nationals (J834). Maths and Science aren’t matched to an exam board, so check them against your own course. Not produced or endorsed by any exam board.</p>
-      <p><b>Private by design.</b> Everything runs in your web browser. Nothing you type, including pupils’ names, is sent anywhere, and saved word lists and scores stay on the computer you use.</p>
+      <p><b>Exam boards.</b> In Computing, key stage 4 follows AQA GCSE Computer Science (8525), apart from typing practice and everyday online safety, and key stage 3 follows the national curriculum. English is matched to Eduqas GCSE English Language (C700QS). Guess the Logo supports the teaching of OCR Creative iMedia (J834), unit R094. Maths and Science aren’t matched to an exam board, so check them against your own course. Not produced or endorsed by any exam board.</p>
+      <p><button type="button" class="btn-small" id="keys-btn" aria-pressed="true">Single-key shortcuts: on</button>
+        Games can be played with single keys, like 1 to 4, Y and N, and the buzzer keys A, L, V and P. Turn them off if they get pressed by accident (for example with speech-input software); buttons and the Enter key still work.</p>
+      <p><b>Private by design.</b> Everything runs in your web browser. Nothing you type, including pupils’ names, is sent anywhere, and saved word lists, scores and your own logos stay on the computer you use.</p>
       <details>
         <summary>Credits and licences</summary>
-        <p>The logos in Guess the Logo are trademarks of their owners. They’re shown only so pupils can practise recognising brands. Most of the pictures come from Wikimedia Commons, where they’re marked as public domain (the TikTok logo is CC0).</p>
+        <p>The logos in Guess the Logo are trademarks of their owners. They’re shown only so pupils can practise recognising brands. All 26 come from Wikimedia Commons, where they’re marked as public domain (the TikTok logo is CC0).</p>
         <p>Map outlines for the Geography games come from Natural Earth (public domain), via the world-atlas project, which is shared under this licence:</p>
         <pre>Copyright 2013-2019 Michael Bostock
 
@@ -2277,7 +2355,14 @@ THIS SOFTWARE.</pre>
     }
     return arr;
   };
-  const AUTO_MS = 1300; // pause after a right answer before moving on
+  const AUTO_MS = 1300; // pause after a right answer before moving on, if "Move on by itself" is chosen
+  // After a right answer On your own: wait for Next (the default, so there's time to read why), or move on
+  // by itself. One setting for every game, kept on this computer; never moves on by itself with reduced motion.
+  const AUTO_STORE = 'eicg:auto';
+  const AUTO_CHOICES = [['off', 'Wait for Next'], ['on', 'Move on by itself']];
+  const autoPref = () => { try { return localStorage.getItem(AUTO_STORE) === 'on' ? 'on' : 'off'; } catch (e) { return 'off'; } };
+  const autoMoveOn = () => autoPref() === 'on' && !prefersLessMotion();
+  function saveAutoPref(v) { try { localStorage.setItem(AUTO_STORE, v === 'on' ? 'on' : 'off'); } catch (e) { /* storage unavailable */ } }
   const canSpeak = 'speechSynthesis' in window && typeof window.SpeechSynthesisUtterance === 'function';
   const prefersLessMotion = () => Boolean(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
 
@@ -2288,7 +2373,7 @@ THIS SOFTWARE.</pre>
     { id: 'maths', name: 'Maths', blurb: 'Number, patterns and problem solving', paper: 'squared', games: ['fizzbuzz', 'tables', 'target', 'fractions'] },
     // English GCSE is with WJEC Eduqas: English Language (C700QS) and English Literature (C720QS).
     { id: 'english', name: 'English', blurb: 'Reading, spelling and grammar', paper: 'lined', games: ['spelling', 'punctuation', 'homophones', 'devices'], exam: 'eduqas' },
-    { id: 'science', name: 'Science', blurb: 'Biology, chemistry and physics', paper: 'squared', games: ['periodic', 'cell', 'foodweb'] },
+    { id: 'science', name: 'Science', blurb: 'Cells, food webs and the elements', paper: 'squared', games: ['periodic', 'cell', 'foodweb'] },
     // Computing has a drop-down for each key stage: KS3 is Years 7 and 8 (national curriculum), KS4 is Years 9 to 11 (AQA GCSE).
     { id: 'computing', name: 'Computing', years: '7 to 11', blurb: 'Key stages 3 and 4: binary, logic, programming, online safety and typing', paper: 'squared',
       stages: [
@@ -2297,7 +2382,7 @@ THIS SOFTWARE.</pre>
             cyber3: 'Year 7: E-safety, and choosing images and sources (copyright, credibility and plagiarism). Year 8: staying safe in a digital world.',
             typing: 'Keyboard skills for any topic, such as creating documents in Year 7 digital literacy and IT.',
             binary3: 'Year 7: Computer Systems (binary basics).',
-            code3: 'Year 7: Programming (Edublocks and Python). Year 8: Programming in Python, including making code robust.',
+            code3: 'Year 7: Programming (EduBlocks and Python). Year 8: Programming in Python, including making code robust.',
           } },
         { id: 'ks4', short: 'KS4', name: 'Key stage 4', years: 'Years 9 to 11', note: 'AQA GCSE (8525)', games: ['binary', 'logic', 'code', 'cyber', 'typing'],
           fits: {
@@ -2305,7 +2390,7 @@ THIS SOFTWARE.</pre>
             code: 'Year 9: algorithmic thinking and coding in Python.',
           } },
       ] },
-    // Creative iMedia is OCR Cambridge Nationals (J834). Guess the Logo practises unit R094 (visual identity).
+    // Creative iMedia is OCR Cambridge Nationals (J834). Guess the Logo supports the teaching of unit R094 (visual identity).
     { id: 'imedia', name: 'Creative iMedia', blurb: 'Planning, designing and making media products', paper: 'squared', games: ['logos'], exam: 'ocr' },
     { id: 'history', name: 'History', blurb: 'People, events and dates', paper: 'lined', games: ['timeline', 'who', 'source'], hidden: true },
     { id: 'geography', name: 'Geography', blurb: 'Places, maps and the planet', paper: 'lined', games: ['grid', 'pin', 'climate'], hidden: true },
@@ -2334,7 +2419,7 @@ THIS SOFTWARE.</pre>
       modes: ['solo', 'groups', 'class'],
       versions: {
         solo: 'Count and swap numbers for words, with the working shown after every answer. Try a speed round, then practise the numbers you got wrong.',
-        groups: 'Pass it round: take turns to say the next number. Slip up and you’re out, until one player is left.',
+        groups: 'Pass it round: take turns to say the next number. Slip up and you’re out. The last one in, or everyone who reaches the end, wins.',
         class: 'Count around the room. The board shows the number and whose turn it is, and the teacher marks each answer.',
       },
       summary: 'Count and swap numbers for words: multiples, numbers with a certain digit, primes or squares. Choose where to start, the step size, and whether to count up or down.',
@@ -2392,26 +2477,26 @@ THIS SOFTWARE.</pre>
       subject: 'english',
       paper: 'lined',
       title: 'Homophone Hunt',
-      summary: 'Fill the gap with the right sound-alike: there, their or they’re; to, too or two; and 25 more sets. See what each word means after every answer.',
+      summary: 'Fill the gap with the right sound-alike: there, their or they’re; to, too or two; and 27 more sets. See what each word means after every answer.',
       skills: 'Eduqas AO6: homophones and commonly confused words',
       time: '5 to 15 minutes',
       versions: {
         solo: 'Fill the gap in each sentence, then see what every word in the set means.',
         groups: 'Buzzer duel: each player has a key, and the first right answer scores.',
-        class: 'Teams hold up 1, 2 or 3 fingers for their choice, then the board shows the answer and why.',
+        class: 'Teams hold up fingers for their choice (one for the first word, two for the second, and so on), then the board shows the answer and why.',
       },
     }),
     devices: cgGame('devices', {
       subject: 'english',
       paper: 'lined',
       title: 'Device Detective',
-      summary: 'Spot the simile, metaphor, personification, alliteration and seven more devices in lines of writing, including the rhetorical devices Eduqas names. Add lines from the book your class is reading.',
-      skills: 'Eduqas AO2: literary and rhetorical devices, using subject terminology',
+      summary: 'Spot the simile, metaphor, personification, alliteration and seven more devices in lines of writing, including the three rhetorical devices Eduqas asks pupils to use in their own writing. Add lines from the book your class is reading.',
+      skills: 'Eduqas AO2: subject terminology for devices, plus rhetorical devices for your own writing',
       time: '10 to 15 minutes',
       versions: {
         solo: 'Name the device in each line, with an explanation after every answer.',
         groups: 'Teams take turns to sort a stack of lines into piles, one pile for each device.',
-        class: 'A line on the board, 20 seconds of team discussion, then each team votes and the answer is revealed.',
+        class: 'A line on the board for teams to discuss (with a timer, if you like), then each team votes and the answer is revealed.',
       },
     }),
     tables: cgGame('tables', {
@@ -2421,8 +2506,8 @@ THIS SOFTWARE.</pre>
       skills: 'Times tables up to 12 × 12',
       time: '5 to 15 minutes',
       versions: {
-        solo: 'A 60-second race. The grid shows your weak facts, and the next round asks those more.',
-        groups: 'Head-to-head: two to four players or teams take turns answering on one screen.',
+        solo: 'A race against the clock (60 seconds or 2 minutes), or 30 questions with no clock. The grid shows your weak facts, and the next round asks those more.',
+        groups: 'Head-to-head: 2 to 4 players or teams take turns answering on one screen.',
         class: 'A question on the board and answers on mini whiteboards. Rows score, and the class’s weak facts show at the end.',
       },
     }),
@@ -2543,7 +2628,7 @@ THIS SOFTWARE.</pre>
       subject: 'imedia',
       title: 'Guess the Logo',
       summary: 'Logos from a bank of 26 well-known brands, picked at random, each hidden under tiles. Lift them one at a time and guess the brand: the sooner you get it, the more points you score. Then see how its shape and colours make it recognisable.',
-      skills: 'Visual identity: recognising brands from their logos (OCR R094)',
+      skills: 'Recognising brands by their visual identity (supports OCR R094, topic area 1)',
       time: '5 to 15 minutes',
       versions: {
         solo: 'Lift tiles one at a time and choose the brand from four names. Guess early for up to 5 points.',
@@ -2688,6 +2773,18 @@ THIS SOFTWARE.</pre>
   let animating = null; // while a book closes or a page turns: stops the animation
 
   // ================= Shared pieces =================
+  // Tells screen readers about a result or a message, through a live region that's always in the page
+  // (screen readers often miss a region that arrives already filled). Each thing is said once.
+  let lastSaid = '';
+  function announce(text, key) {
+    const t = String(text || '').replace(/\s+/g, ' ').trim();
+    const k = `${key || ''}|${t}`;
+    if (!t || k === lastSaid) return;
+    lastSaid = k;
+    const el = $('live');
+    el.textContent = '';
+    setTimeout(() => { el.textContent = t; }, 60);
+  }
   const markSVG = (ok) => (ok
     ? '<svg viewBox="0 0 100 100" class="right" aria-hidden="true"><path d="M14 54 Q28 64 40 80 Q60 44 88 16"/></svg>'
     : '<svg viewBox="0 0 100 100" class="wrong" aria-hidden="true"><path d="M20 18 Q50 50 82 84"/><path d="M82 16 Q52 48 18 86"/></svg>');
@@ -2751,11 +2848,13 @@ THIS SOFTWARE.</pre>
 
     const key = `${state.screen}:${state.subject}:${state.gameId}:${gameView}`;
     if (shownKey !== null && shownKey !== key) window.scrollTo(0, 0);
-    shownKey = key;
     const place = placeKey();
-    if (shownPlace !== null && shownPlace !== place) focusHeading();
+    if (shownPlace !== null && shownKey !== key) focusHeading();
+    shownKey = key;
     shownPlace = place;
     syncHistory(place);
+    document.title = state.screen === 'home' ? 'Educational In-Class Games'
+      : `${state.screen === 'subject' ? subjectById(state.subject).name : GAMES[state.gameId].title} – Educational In-Class Games`;
   }
 
   // Where we are: 'home', 'subject:maths' or 'game:fizzbuzz'.
@@ -2807,10 +2906,10 @@ THIS SOFTWARE.</pre>
     const a = document.activeElement;
     if (a && a !== document.body && a.getClientRects().length) return;
     const screen = state.screen === 'home' ? $('home-view') : state.screen === 'subject' ? $('subject-view') : $('app').querySelector('.game-screen:not([hidden])');
-    const h = screen && screen.querySelector('h1');
-    if (!h) return;
-    h.setAttribute('tabindex', '-1');
-    h.focus({ preventScroll: true });
+    const target = screen && (screen.querySelector('.results-layout:not([hidden])') || screen.querySelector('h1'));
+    if (!target) return;
+    target.setAttribute('tabindex', '-1');
+    target.focus({ preventScroll: true });
   }
 
   function renderCrumbs() {
@@ -2855,7 +2954,7 @@ THIS SOFTWARE.</pre>
   // Subjects matched to an exam board (Computing's are by key stage, below).
   const BOARD_NOTICES = {
     ocr: '<b>Linked to OCR Cambridge Nationals in Creative iMedia (J834).</b> Guess the Logo supports the teaching of unit R094 (Visual identity and digital graphics), topic area 1 (1.1, purpose, elements and design of visual identity): how a logo’s shape, symbol and colour palette make a brand recognisable. R094 is coursework, so the game is for learning about visual identity, not practice for the set assignment. The logos are trademarks of their owners, shown only so pupils can practise recognising them. This site isn’t produced or endorsed by OCR.',
-    eduqas: '<b>English GCSE: Eduqas.</b> These games practise skills that WJEC Eduqas GCSE English Language (C700QS) rewards. Spelling Challenge, Punctuation Fix and Homophone Hunt practise accurate spelling, punctuation and vocabulary (AO6, 20% of the marks, assessed in both writing sections), which also earn marks in Eduqas English Literature (AO4). Device Detective practises the subject terminology for analysing language (AO2), and the three rhetorical devices the specification asks pupils to use in their own writing: rhetorical questions, antithesis and parenthesis. Punctuation Fix uses the national curriculum’s grammar terms, which the specification refers to. Eduqas doesn’t publish spelling lists, so the word lists are the national curriculum’s. The games aren’t produced or endorsed by Eduqas, so check against the latest specification on Eduqas’s website.',
+    eduqas: '<b>English GCSE: Eduqas.</b> These games practise skills that WJEC Eduqas GCSE English Language (C700QS) rewards: accurate spelling, punctuation and vocabulary (AO6, 20% of the marks, and AO4 in Eduqas English Literature), the subject terminology for analysing language (AO2), and the three rhetorical devices pupils use in their own writing (rhetorical questions, antithesis and parenthesis). The Year 3 to 6 spelling lists are the national curriculum’s, as Eduqas publishes none. Not produced or endorsed by Eduqas: check the latest specification on its website.',
   };
   const STAGE_NOTICES = {
     ks3: '<b>Years 7 and 8.</b> These games follow a Year 7 and 8 curriculum map based on the national curriculum for computing at key stage 3: staying safe online and choosing images and sources responsibly, binary basics, and programming in Python, including making code robust. Typing Trainer is a general keyboard skill. Binary addition, lists, searching, sorting and logic gates come later, so they’re under key stage 4. There’s no exam board at key stage 3.',
@@ -3490,6 +3589,7 @@ THIS SOFTWARE.</pre>
     $('step-input').value = step;
     $('fb-dir').innerHTML = [['up', 'Count up'], ['down', 'Count down']].map(([v, l]) => pill('fb-dir', v, l, dir === v)).join('');
     $('fb-speed').innerHTML = FB_SPEEDS.map(([v, l]) => pill('fb-speed', v, l, speed === v)).join('');
+    $('fb-auto').innerHTML = AUTO_CHOICES.map(([v, l]) => pill('fb-auto', v, l, autoPref() === v)).join('');
     fbUpdateSetup();
   }
 
@@ -3569,7 +3669,9 @@ THIS SOFTWARE.</pre>
   }
   const fbInPlay = () => state.screen === 'game' && state.gameId === 'fizzbuzz' && !fbOnCg() && state.fb.view === 'play' && state.fb.game;
   function fbFocus() {
-    $(state.fb.game.phase === 'answer' ? 'submit-btn' : 'next-btn').focus({ preventScroll: true });
+    const el = $(state.fb.game.phase === 'answer' ? 'submit-btn' : 'next-btn');
+    el.focus({ preventScroll: true });
+    revealIfHidden(el);
   }
 
   // Speed rounds: a countdown for each number. Running out of time counts as a slip.
@@ -3635,9 +3737,10 @@ THIS SOFTWARE.</pre>
     g.best = Math.max(g.best, g.streak);
     g.phase = 'feedback';
     fbClearAuto();
-    if (correct) fbAutoTimer = setTimeout(() => { fbAutoTimer = null; fbNext(); }, AUTO_MS);
+    if (correct && autoMoveOn()) fbAutoTimer = setTimeout(() => { fbAutoTimer = null; fbNext(); }, AUTO_MS);
     fbRenderPlay(false);
     fbFocus();
+    announce($('feedback').innerText, `fb:${g.pos}`);
   }
 
   function fbNext() {
@@ -3695,7 +3798,7 @@ THIS SOFTWARE.</pre>
           <kbd class="key">${i + 1}</kbd><span class="w">${esc(r.word)}</span><span class="div">${esc(ruleTag(r))}</span><span class="res" aria-hidden="true"></span>
         </button>`).join('');
       const k = g.rules.length;
-      $('keys-hint').textContent = `Keyboard: press ${k === 1 ? '1' : `1–${k}`} to pick words, then Enter to answer.`;
+      $('keys-hint').textContent = `Keyboard: press ${k === 1 ? '1' : `1–${k}`} to pick words, then Enter (or Say it) to answer.`;
     }
     [...wb.children].forEach((btn, i) => {
       const picked = inFeedback ? last.said.includes(i) : g.selected.includes(i);
@@ -3895,6 +3998,7 @@ THIS SOFTWARE.</pre>
       const t = e.target;
       if (t.name === 'fb-dir') { state.fb.setup.dir = t.value; fbSaveSetup(); fbUpdateSetup(); }
       else if (t.name === 'fb-speed') { state.fb.setup.speed = t.value; fbSaveSetup(); }
+      else if (t.name === 'fb-auto') saveAutoPref(t.value);
       else if (t.name === 'fb-mode' && t.value !== 'solo') fbSwitchMode(t.value);
     });
     $('setup-form').addEventListener('submit', (e) => { e.preventDefault(); fbStart(); });
@@ -3972,7 +4076,7 @@ THIS SOFTWARE.</pre>
     { id: 'spot', name: 'Spot the right spelling', note: 'Pick the correct spelling from four choices.' },
   ];
   const SP_AMOUNTS = ['10', '20', 'all'];
-  const SP_LOOKS = ['3', '5', '8'];
+  const SP_LOOKS = ['3', '5', '8', 'ready'];
   const SPEAKER = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9h4l5-4v14l-5-4H4z" fill="currentColor"/><path d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>';
   let spLookTimer = null;
   let spAutoTimer = null;
@@ -4785,9 +4889,10 @@ THIS SOFTWARE.</pre>
         </label>`;
     }).join('');
     $('sp-amounts').innerHTML = SP_AMOUNTS.map((a) => pill('sp-amount', a, a === 'all' ? 'All' : a, s.amount === a, a === 'all' ? 'sp-amount-all-label' : '')).join('');
-    $('sp-looks').innerHTML = SP_LOOKS.map((l) => pill('sp-look', l, `${l} seconds`, s.look === l)).join('');
+    $('sp-looks').innerHTML = SP_LOOKS.map((l) => pill('sp-look', l, l === 'ready' ? 'Until I’m ready' : `${l} seconds`, s.look === l)).join('');
     $('sp-hints').innerHTML = [['on', 'Offer hints'], ['off', 'No hints']].map(([v, l]) => pill('sp-hints', v, l, s.hints === v)).join('');
     $('sp-comebacks').innerHTML = [['on', 'Bring them back until right'], ['off', 'Don’t bring them back']].map(([v, l]) => pill('sp-comeback', v, l, s.comeback === v)).join('');
+    $('sp-auto').innerHTML = AUTO_CHOICES.map(([v, l]) => pill('sp-auto', v, l, autoPref() === v)).join('');
     $('sp-custom').value = s.custom;
     spUpdateSetup();
   }
@@ -4866,7 +4971,7 @@ THIS SOFTWARE.</pre>
     sp.game = {
       id: Date.now(),
       mode: s.mode === 'listen' && !canSpeak ? 'look' : s.mode,
-      look: Number(s.look),
+      look: s.look === 'ready' ? 0 : Number(s.look), // 0: until the pupil covers it
       words, back: words.map(() => false), info, rule,
       hints: s.hints !== 'off', comeback: s.comeback !== 'off', again: {},
       i: 0, phase: '', options: [], chosen: -1, typed: '', showing: false, peeked: false, hint: 0,
@@ -4902,13 +5007,14 @@ THIS SOFTWARE.</pre>
     const g = state.sp.game;
     if (g.phase === 'look') {
       clearTimeout(spLookTimer);
-      spLookTimer = setTimeout(spCover, g.look * 1000);
+      spLookTimer = g.look > 0 ? setTimeout(spCover, g.look * 1000) : null;
       $('sp-cover-btn').focus({ preventScroll: true });
     } else if (g.phase === 'write') {
       if (g.mode === 'listen' && !resumed) speak(g.words[g.i]);
       $('sp-input').focus({ preventScroll: true });
     } else if (g.phase === 'check') {
       $('sp-next').focus({ preventScroll: true });
+      revealIfHidden($('sp-next'));
     }
   }
 
@@ -4980,9 +5086,10 @@ THIS SOFTWARE.</pre>
     g.best = Math.max(g.best, g.streak);
     g.phase = 'check';
     clearTimeout(spAutoTimer);
-    spAutoTimer = correct ? setTimeout(() => { spAutoTimer = null; spNext(); }, AUTO_MS * 2) : null;
+    spAutoTimer = correct && autoMoveOn() ? setTimeout(() => { spAutoTimer = null; spNext(); }, AUTO_MS * 2) : null;
     spRenderPlay(false);
     spEnterPhase(false);
+    announce($('sp-feedback').innerText, `sp:${g.i}`);
   }
 
   function spSubmitWritten() {
@@ -5055,8 +5162,8 @@ THIS SOFTWARE.</pre>
     let keys = '';
     if (g.phase === 'look') {
       label = 'Look';
-      body = `${bigWord(esc(word))}<span class="look-timer" aria-hidden="true"><i style="animation-duration:${g.look}s"></i></span>${hearButtons(false)}`;
-      prompt = 'Look carefully at the word. It will be covered in a moment.';
+      body = `${bigWord(esc(word))}${g.look > 0 ? `<span class="look-timer" aria-hidden="true"><i style="animation-duration:${g.look}s"></i></span>` : ''}${hearButtons(false)}`;
+      prompt = g.look > 0 ? `Look carefully at the word. It will be covered after ${g.look} seconds.` : 'Look carefully at the word, then cover it when you’re ready.';
       keys = 'Keyboard: press Enter to cover the word now.';
     } else if (g.phase === 'write' && g.mode === 'look') {
       label = 'Cover';
@@ -5213,6 +5320,7 @@ THIS SOFTWARE.</pre>
       else if (t.name === 'sp-look') s.look = t.value;
       else if (t.name === 'sp-hints') s.hints = t.value;
       else if (t.name === 'sp-comeback') s.comeback = t.value;
+      else if (t.name === 'sp-auto') { saveAutoPref(t.value); return; }
       else return;
       spSaveSetup();
       spUpdateSetup();
@@ -5290,6 +5398,11 @@ THIS SOFTWARE.</pre>
 
   // Re-draws part of the page and puts keyboard focus back on the same element (matched by id).
   let pendingFocus = null;
+  // Scrolls an element into view if it's off screen (on a short screen, the button focused after an answer can be).
+  function revealIfHidden(el) {
+    const r = el.getBoundingClientRect();
+    if (r.top < 0 || r.bottom > window.innerHeight) el.scrollIntoView({ block: 'nearest' });
+  }
   // Focuses an element; a text box gets its cursor at the end of what's in it, not the start.
   function focusAtEnd(el) {
     el.focus({ preventScroll: true });
@@ -5318,7 +5431,8 @@ THIS SOFTWARE.</pre>
   const BUZZ_KEYS = ['A', 'L', 'V', 'P'];
   const TEAM_NAMES = ['Pink team', 'Blue team', 'Green team', 'Yellow team'];
   const TEAM_COLOURS = ['c2', 'c4', 'c3', 'c1'];
-  const ANSWER_SECONDS = 20;
+  const ANSWER_SECONDS = 20; // the time to answer after a buzz, unless the setup says otherwise (or Off)
+  const ANSWER_CHOICES = [['off', 'No limit'], ['20', '20 seconds'], ['30', '30 seconds'], ['60', '1 minute']];
   const GRADE_PATH = 'M40 72 C 30 30, 120 8, 182 28 C 216 40, 212 94, 140 106 C 80 114, 20 100, 26 64 C 30 46, 52 32, 86 24';
   let cgAutoTimer = null;
   let cgTicker = null;
@@ -5762,6 +5876,7 @@ THIS SOFTWARE.</pre>
       aqa: ['nums ← [5, 2, 8, 1]', 'FOR p ← 1 TO LEN(nums) - 1', '    FOR i ← 0 TO LEN(nums) - 2', '        IF nums[i] > nums[i + 1] THEN', '            temp ← nums[i]', '            nums[i] ← nums[i + 1]', '            nums[i + 1] ← temp', '        ENDIF', '    ENDFOR', 'ENDFOR', 'OUTPUT nums'],
       py: ['nums = [5, 2, 8, 1]', 'for p in range(len(nums) - 1):', '    for i in range(len(nums) - 1):', '        if nums[i] > nums[i + 1]:', '            temp = nums[i]', '            nums[i] = nums[i + 1]', '            nums[i + 1] = temp', 'print(nums)'] },
     { id: 'subroutine', level: 3, title: 'A subroutine that returns a value', spec: '3.2.10 Subroutines',
+      ks3: { title: 'A function that returns a value', goal: 'Define a function that works out an area and returns it, then call it and output the result.' },
       goal: 'Define a subroutine that works out an area and returns it, then call it and output the result.',
       aqa: ['SUBROUTINE area(width, height)', '    result ← width * height', '    RETURN result', 'ENDSUBROUTINE', 'answer ← area(4, 5)', 'OUTPUT answer'],
       py: ['def area(width, height):', '    result = width * height', '    return result', 'answer = area(4, 5)', 'print(answer)'] },
@@ -5771,7 +5886,7 @@ THIS SOFTWARE.</pre>
   CODE_PROGRAMS.forEach((p) => { p.langs = { aqa: codeVariant(p.aqa, p.aqaAlts), python: codeVariant(p.py, p.pyAlts) }; });
   const CODE_BY_ID = Object.fromEntries(CODE_PROGRAMS.map((p) => [p.id, p]));
   const CODE_LANGS = { aqa: 'AQA pseudo-code', python: 'Python' };
-  const codeProg = (q) => { const p = CODE_BY_ID[q.pid]; return { ...p, ...p.langs[q.lang === 'python' ? 'python' : 'aqa'] }; };
+  const codeProg = (q) => { const p = CODE_BY_ID[q.pid]; return { ...p, ...p.langs[q.lang === 'python' ? 'python' : 'aqa'], ...(q.ks3 && p.ks3) }; }; // KS3 says "function"
   const codeTargets = (p) => [p.text.map((_, i) => i), ...p.alts];
 
   function codeReset(q) {
@@ -6077,7 +6192,7 @@ THIS SOFTWARE.</pre>
     { id: 'a-secret', opts: ['Say no, and tell an adult you trust. Asking you to keep secrets is a warning sign.', 'Agree, as long as it’s quick', 'Agree, but keep your camera off', 'Keep it secret, but tell one friend'],
       scene: 'Someone you’ve met online, but never in real life, asks you to video chat and to keep it secret.',
       hint: 'Why might someone want it kept secret?',
-      why: 'Someone who asks you to keep secrets from the adults who look after you is a warning sign. Telling a trusted adult is never getting anyone into trouble: it keeps you safe.' },
+      why: 'Being asked to keep secrets from the adults who look after you is a warning sign. Telling a trusted adult isn’t getting anyone into trouble: it keeps you safe.' },
     { id: 'a-nasty', opts: ['Don’t reply. Take a screenshot, block them, and talk to an adult you trust.', 'Reply with something nastier', 'Delete it and tell nobody', 'Share it so everyone can see what they said'],
       scene: 'You get a nasty message that upsets you.',
       hint: 'What would help an adult sort it out?',
@@ -6947,6 +7062,11 @@ THIS SOFTWARE.</pre>
     },
   };
 
+  // A ✓ or ✗ badge for a drawn shape that's been marked (so it isn't shown by colour alone).
+  const svgBadge = (x, y, ok) => `<g class="svg-badge ${ok ? 'ok' : 'bad'}" aria-hidden="true"><circle cx="${x}" cy="${y}" r="10"/><text x="${x}" y="${y + 4.5}">${ok ? '✓' : '✗'}</text></g>`;
+  const markOf = (cls) => (/\bok\b/.test(cls) ? 'ok' : /\bbad\b/.test(cls) ? 'bad' : '');
+  const markWords = { ok: ', right', bad: ', wrong' };
+
   // Draws a cell with a label box for each part (or just one part with `only`).
   function cellSVG(cellId, o) {
     const cell = CELLS[cellId];
@@ -6957,11 +7077,14 @@ THIS SOFTWARE.</pre>
       const edge = side === 'L' ? 164 : 476;
       const text = o.text(p);
       const cls = o.cls ? o.cls(p) : '';
+      const mark = markOf(cls);
+      // Which box it is, by where it sits (naming the part it points to would give the answer away).
+      const where = `${sy < 120 ? 'top' : sy > 240 ? 'bottom' : 'middle'} ${side === 'L' ? 'left' : 'right'}`;
       const attrs = o.act
-        ? ` data-act="${o.act}" data-p="${p}" id="cg-slot-${p}" tabindex="0" role="button" aria-label="${esc(`Label box: ${text || 'empty'}`)}"`
-        : ` role="img" aria-label="${esc(text || 'Unlabelled part')}"`;
+        ? ` data-act="${o.act}" data-p="${p}" id="cg-slot-${p}" tabindex="0" role="button" aria-label="${esc(`Label box, ${where}: ${text || 'empty'}${markWords[mark] || ''}`)}"`
+        : ` role="img" aria-label="${esc(`${text || 'Unlabelled part'}${markWords[mark] || ''}`)}"`;
       return `<line class="leader" x1="${edge}" y1="${sy}" x2="${px}" y2="${py}"/><circle class="pin${o.only ? ' pulse' : ''}" cx="${px}" cy="${py}" r="4.5"/>
-        <g class="slot${text ? ' filled' : ''}${cls ? ` ${cls}` : ''}${o.act ? ' clickable' : ''}" transform="translate(${sx} ${sy - 16})"${attrs}><rect width="156" height="32" rx="8"/><text x="78" y="21">${esc(text || '?')}</text></g>`;
+        <g class="slot${text ? ' filled' : ''}${cls ? ` ${cls}` : ''}${o.act ? ' clickable' : ''}" transform="translate(${sx} ${sy - 16})"${attrs}><rect width="156" height="32" rx="8"/><text x="78" y="21"${(text || '').length > 14 ? ' class="long"' : ''}>${esc(text || '?')}</text>${mark ? svgBadge(154, 2, mark === 'ok') : ''}</g>`;
     }).join('');
     return `<svg class="cell-svg" viewBox="0 0 640 360" role="group" aria-label="${cell.name}">${cell.art}${slots}</svg>`;
   }
@@ -7160,13 +7283,16 @@ THIS SOFTWARE.</pre>
       const live = o.clickable && o.gone !== id && (!o.canPick || o.canPick(id));
       const cls = ['node', o.sel === id ? 'sel' : '', o.gone === id ? 'gone' : '', o.focus === id ? 'focus' : '',
         o.okSet && o.okSet.includes(id) ? 'ok' : '', o.bad === id ? 'bad' : '', live ? 'clickable' : '', o.canPick && !o.canPick(id) ? 'locked' : ''].filter(Boolean).join(' ');
+      const mark = markOf(cls);
       const attrs = live
-        ? ` data-act="node" data-n="${id}" id="cg-node-${id}" tabindex="0" role="button" aria-pressed="${o.sel === id ? 'true' : 'false'}" aria-label="${esc(name)}"`
-        : ` role="img" aria-label="${esc(name)}${o.gone === id ? ' (removed)' : ''}"`;
-      return `<g class="${cls}" transform="translate(${x * 6.4} ${y * 4})"${attrs}><rect x="-56" y="-17" width="112" height="34" rx="10"/><text y="5">${esc(name)}</text>${o.gone === id ? '<line class="cross" x1="-50" y1="-13" x2="50" y2="13"/>' : ''}</g>`;
+        ? ` data-act="node" data-n="${id}" id="cg-node-${id}" tabindex="0" role="button" aria-pressed="${o.sel === id ? 'true' : 'false'}" aria-label="${esc(name)}${markWords[mark] || ''}"`
+        : ` role="img" aria-label="${esc(name)}${o.gone === id ? ' (removed)' : ''}${markWords[mark] || ''}"`;
+      return `<g class="${cls}" transform="translate(${x * 6.4} ${y * 4})"${attrs}><rect x="-56" y="-17" width="112" height="34" rx="10"/><text y="5">${esc(name)}</text>${o.gone === id ? '<line class="cross" x1="-50" y1="-13" x2="50" y2="13"/>' : ''}${mark ? svgBadge(54, -15, mark === 'ok') : ''}</g>`;
     }).join('');
     const markers = ['plain', 'ok', 'bad'].map((m) => `<marker id="${mid}-${m}" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="ah ah-${m}" d="M0 0 L10 5 L0 10 z"/></marker>`).join('');
-    return `<svg class="web-svg" viewBox="0 0 640 400" role="group" aria-label="${esc(web.name)} food web"><defs>${markers}</defs>${arrows}${nodes}</svg>`;
+    const arrowsSaid = (o.links || []).map((k) => { const [a, b] = k.split('>'); return `${webName(web, a)} to ${webName(web, b)}`; });
+    const said = `${web.name} food web. ${arrowsSaid.length ? `Arrows, from each food to the animal that eats it: ${arrowsSaid.join(', ')}.` : 'No arrows yet.'}`;
+    return `<svg class="web-svg" viewBox="0 0 640 400" role="group" aria-label="${esc(said)}"><defs>${markers}</defs>${arrows}${nodes}</svg>`;
   }
   // Group turn, last step: the building team predicts; a wrong guess scores for the team that removed the species.
   function webFinishTeams(q, run, guess) {
@@ -8078,6 +8204,7 @@ THIS SOFTWARE.</pre>
       run.left = q.speed;
       cgRestartClock();
     }
+    if (q.type === 'sprint' && !q.secs && w.log.length >= TT_UNTIMED) { ttEndSprint(q, run); return; }
     ttNext(q);
     cgRenderPlay();
   }
@@ -8086,6 +8213,7 @@ THIS SOFTWARE.</pre>
     const wrong = log.filter((x) => !x.ok && !seen.has(ttKey(x.a, x.b)) && seen.add(ttKey(x.a, x.b)));
     return wrong.length ? `<ul class="working">${wrong.slice(0, 4).map((x) => `<li><span class="eq">${x.a} × ${x.b} = ${x.a * x.b}</span><span class="verdict">${ttTrick(x.a, x.b)}</span></li>`).join('')}</ul>` : '';
   }
+  const TT_UNTIMED = 30; // questions in a sprint with no clock
   function ttEndSprint(q, run) {
     const log = q.work.log;
     const right = log.filter((x) => x.ok).length;
@@ -8093,7 +8221,7 @@ THIS SOFTWARE.</pre>
     const slow = log.filter((x) => x.ok && x.ms > TT_SLOW_MS).length;
     cgDone({
       correct: true,
-      head: `⏱ Time’s up! ${right} right.`,
+      head: q.secs ? `⏱ Time’s up! ${right} right.` : `All ${log.length} done! ${right} right.`,
       html: `<p>You answered ${log.length}: ${right} right${wrong ? ` and ${wrong} wrong` : ''}${slow ? `. ${slow} of the right ones were slow` : ''}.</p>${ttWrongList(log)}`,
       note: `${right} right, ${wrong} wrong`,
     }, null, right);
@@ -8225,7 +8353,7 @@ THIS SOFTWARE.</pre>
     const tiles = p.nums.map((n, i) => (ctx.interactive
       ? `<button type="button" class="tg-tile${spent[i] ? ' spent' : ''}" data-act="tile" data-v="${n}" id="cg-tile-${i}" aria-disabled="${spent[i]}">${n}</button>`
       : `<span class="tg-tile">${n}</span>`)).join('');
-    const clock = ctx.phase === 'think' ? `<span class="clock tt-clock" id="cg-clock" role="timer">${clockText(ctx.run.left ?? q.secs)}</span>` : '';
+    const clock = ctx.phase === 'think' && q.secs ? `<span class="clock tt-clock" id="cg-clock" role="timer">${clockText(ctx.run.left ?? q.secs)}</span>` : '';
     const solution = ctx.done && q.type === 'tclose' ? `<p class="tg-solution">One way: <b>${p.solution} = ${p.target}</b></p>` : '';
     return `<div class="tg-board">${clock}<span class="nc-label">Target</span><span class="tg-target">${p.target}</span><div class="tg-tiles">${tiles}</div>${solution}</div>`;
   }
@@ -8441,7 +8569,7 @@ THIS SOFTWARE.</pre>
     possession: 'An apostrophe shows that something belongs to someone. One owner: add ’s (the dog’s bone). A plural ending in s: add just an apostrophe (the girls’ room). A plural not ending in s: add ’s (the children’s coats).',
     its: 'It’s means “it is” or “it has”. Its, with no apostrophe, means “belonging to it”.',
     plural: 'Plurals (more than one) don’t need an apostrophe: two brothers, three apples.',
-    speech: 'Inverted commas go around the words that are spoken. The punctuation that ends the speech goes inside the closing inverted comma, and the speech starts with a capital letter.',
+    speech: 'Inverted commas (speech marks) go around the words that are spoken. The punctuation that ends the speech goes inside the closing inverted comma, and the speech starts with a capital letter.',
   };
   const PF_TOPICS = {
     stop: 'sentences', question: 'sentences', exclaim: 'sentences', caps: 'sentences', colon: 'sentences', semicolon: 'sentences',
@@ -8469,7 +8597,7 @@ THIS SOFTWARE.</pre>
     { type: 'place', t: 'Although it was raining, we still went out.', m: ',.', r: ['clause'] },
     { type: 'place', t: 'If you finish early, read your book.', m: ',.', r: ['clause'] },
     { type: 'place', t: 'My sister, who is twelve, loves skateboarding.', m: ',.', r: ['parenthesis'] },
-    { type: 'place', t: 'Mr Jones, our head teacher, gave a speech.', m: ',.', r: ['parenthesis'] },
+    { type: 'place', t: 'Mr Jones, our headteacher, gave a speech.', m: ',.', r: ['parenthesis'] },
     { type: 'place', t: 'Can you help me, Sam?', m: ',.?', r: ['address', 'question'] },
     { type: 'place', t: 'You will need three things: a pencil, a ruler and a rubber.', m: ':,.', r: ['colon', 'list'] },
     { type: 'place', t: 'It was getting late; we decided to go home.', m: ';,.', r: ['semicolon'] },
@@ -8993,7 +9121,7 @@ THIS SOFTWARE.</pre>
         }
         const give = {
           listen: canSpeak ? 'The computer reads each team’s word aloud, with its meaning on the board.' : 'This browser can’t play sound, so each word is shown, then covered.',
-          look: `Each word is shown for ${SP_RELAY_LOOK} seconds, then covered, and the team writes it from memory.`,
+          look: `Each word is shown for ${SP_RELAY_LOOK} seconds, then covered, and the team types it from memory.`,
           spot: 'Each team picks the right spelling from four choices.',
         }[s.give];
         return ['Spelling relay: 2 to 4 teams share this computer and take turns, one word each.',
@@ -9254,7 +9382,7 @@ THIS SOFTWARE.</pre>
         if (!w.marks.some(Boolean) && !w.caps.some(Boolean)) return { invalid: 'Add some punctuation first: click the gaps after the words.' };
         const wrong = pfCheckPlace(q);
         if (!wrong) return { correct: true, html: q.explain ? pfRulesHTML(q.r) : '' };
-        return { correct: false, html: `${wrong} ${wrong === 1 ? 'thing needs' : 'things need'} fixing. The red ones are wrong.` };
+        return { correct: false, html: `${wrong} ${wrong === 1 ? 'thing needs' : 'things need'} fixing: the ones marked in red with a wavy line or a dashed box.` };
       },
       reveal(q) {
         if (q.type === 'choose') {
@@ -9301,7 +9429,7 @@ THIS SOFTWARE.</pre>
         }
         if (mode === 'class') {
           return ['Put this on the board and split the class into teams.',
-            'Read the sentence together. Each team holds up 1, 2 or 3 fingers for its choice.',
+            'Read the sentence together. Each team holds up fingers for its choice: one for the first word, two for the second, and so on.',
             'Click each team’s choice, then press Reveal. Every team that was right scores.',
             'The reveal explains what each word means.'];
         }
@@ -9317,7 +9445,7 @@ THIS SOFTWARE.</pre>
       reset: (q) => { q.work = { pick: null }; },
       clearAttempt: (q) => { q.work = { pick: null }; },
       cardLabel: () => 'Fill the gap',
-      prompt: (q, run) => (run.style === 'vote' && run.phase !== 'done' ? 'Which word fits? Each team holds up 1, 2 or 3 fingers.' : 'Which word fits the gap?'),
+      prompt: (q, run) => (run.style === 'vote' && run.phase !== 'done' ? `Which word fits? Each team holds up ${hpOpts(q).length === 2 ? '1 or 2' : '1, 2 or 3'} fingers.` : 'Which word fits the gap?'),
       board(q, ctx) {
         const opts = ctx.run.style === 'solo' ? '' : `<ol class="hp-opts">${hpOpts(q).map((wd, i) => `<li class="${ctx.done ? (wd === q.a ? 'ok' : 'dim') : ''}"><span class="hp-num">${i + 1}</span>${esc(hpFit(q, wd))}</li>`).join('')}</ol>`;
         return `<div class="hp-board"><p class="hp-sentence">${hpSentence(q, ctx.done ? q.a : null)}</p>${opts}</div>`;
@@ -9391,14 +9519,14 @@ THIS SOFTWARE.</pre>
         }
         if (mode === 'class') {
           return ['Put this on the board and split the class into teams.',
-            'A line appears with a timer. Teams have 20 seconds to discuss which device it uses.',
+            'A line appears, with a timer if you’ve chosen one. Teams discuss which device it uses.',
             'Each team votes, then press Reveal. Every team that was right scores.',
-            'Add lines from the book you’re reading under “Your own lines”.'];
+            'To add lines from your class reader, choose “Built-in and your own” under Lines, then type them in “Your own lines”.'];
         }
         return ['Read each line and choose the device it uses.',
           'After each answer, find out what the device is and how the line uses it.',
           'Stuck? A hint points to the clue in the line.',
-          'Add lines from your class reading under “Your own lines”.'];
+          'To add lines from your class reader, choose “Built-in and your own” under Lines, then type them in “Your own lines”.'];
       },
       count: (s) => Math.min(Number(s.rounds), dvPool(s).length),
       makeQuestions(s, mode, names) {
@@ -9516,7 +9644,7 @@ THIS SOFTWARE.</pre>
       ],
       defaults: { rules: 'classic', cap: '50', way: 'up', step: '1', speed: 'off', rounds: '1' },
       validate(s) {
-        if (s.rules === 'mine' && !fbValidate(state.fb.setup).rulesOk) return 'Your own rules have a problem. Fix them in the On your own version, or choose ready-made rules.';
+        if (s.rules === 'mine' && !fbValidate(state.fb.setup).rulesOk) return 'Your own rules have a problem. Fix them in the “On your own” version, or choose ready-made rules.';
         return '';
       },
       peopleHelp: '2 to 5 players sit together and share this computer. Turns go round in this order.',
@@ -9632,7 +9760,7 @@ THIS SOFTWARE.</pre>
       tip: 'Practise the red and amber facts on the grid.',
       options: [
         { key: 'tables', label: 'Tables', choices: [['all', 'All, 2 to 12'], ['2510', '2, 5 and 10'], ['346', '3, 4 and 6'], ['789', '7, 8 and 9'], ['1112', '11 and 12']] },
-        { key: 'secs', label: 'Race length', modes: ['solo'], choices: [['60', '60 seconds'], ['120', '2 minutes']] },
+        { key: 'secs', label: 'Race length', modes: ['solo'], choices: [['60', '60 seconds'], ['120', '2 minutes'], ['off', 'No clock: 30 questions']] },
         { key: 'rounds', label: 'Rounds', modes: ['solo'], choices: [['1', '1'], ['3', '3']] },
         { key: 'each', label: 'Questions each', modes: ['groups'], choices: [['5', '5'], ['10', '10']] },
         { key: 'speed', label: 'Time to answer', modes: ['groups'], choices: [['10', '10 seconds'], ['5', '5 seconds'], ['off', 'No limit']] },
@@ -9654,8 +9782,9 @@ THIS SOFTWARE.</pre>
             'Show the answer, then tick each row where everyone got it right. Each of those rows scores 1.',
             'At the end, a 12 × 12 grid shows the facts the class found hardest.'];
         }
-        return [`Answer as many questions as you can in ${s.secs === '60' ? '60 seconds' : '2 minutes'}. Type each answer and press Enter.`,
-          'A wrong answer doesn’t stop the clock: the next question comes straight away.',
+        return [s.secs === 'off' ? `Answer ${TT_UNTIMED} questions at your own pace. Type each answer and press Enter.`
+          : `Answer as many questions as you can in ${s.secs === '60' ? '60 seconds' : '2 minutes'}. Type each answer and press Enter.`,
+          s.secs === 'off' ? 'After a wrong answer, the next question comes straight away.' : 'A wrong answer doesn’t stop the clock: the next question comes straight away.',
           'At the end, a 12 × 12 grid shows facts you knew quickly in green, slowly in amber, and got wrong in red.',
           'Facts you get wrong or answer slowly come up more often next time (on this computer).'];
       },
@@ -9672,7 +9801,7 @@ THIS SOFTWARE.</pre>
             return make({ type: 'board', a, b });
           });
         }
-        return Array.from({ length: Number(s.rounds) }, () => make({ type: 'sprint', tables, secs: Number(s.secs) }));
+        return Array.from({ length: Number(s.rounds) }, () => make({ type: 'sprint', tables, secs: s.secs === 'off' ? null : Number(s.secs) }));
       },
       reset: (q) => ttReset(q),
       onQuestion(run, q) { if (q.type === 'sprint') run.left = q.secs; },
@@ -9698,7 +9827,8 @@ THIS SOFTWARE.</pre>
           return `<div class="tt-board"><p class="tt-q">${q.a} × ${q.b} = <span class="tt-a">${show ? q.a * q.b : '?'}</span></p></div>`;
         }
         if (ctx.done) return `<div class="tt-board">${ttGrid(ttLogResults(w.log))}</div>`;
-        const clock = q.type === 'sprint' ? `<span class="clock tt-clock" id="cg-clock" role="timer">${clockText(ctx.run.left ?? q.secs)}</span>` : '';
+        const clock = q.type !== 'sprint' ? '' : q.secs ? `<span class="clock tt-clock" id="cg-clock" role="timer">${clockText(ctx.run.left ?? q.secs)}</span>`
+          : `<span class="clock tt-clock">${Math.min(w.log.length + 1, TT_UNTIMED)} of ${TT_UNTIMED}</span>`; // no clock: how far through
         const tally = q.type === 'sprint' ? `<p class="tt-tally"><b>${w.log.filter((x) => x.ok).length}</b> right so far</p>` : '';
         return `<div class="tt-board">${clock}<p class="tt-q">${w.a} × ${w.b}</p>${flashHTML(w.flash)}${tally}</div>`;
       },
@@ -9818,7 +9948,7 @@ THIS SOFTWARE.</pre>
         return `<h2>${run.mode === 'class' ? 'The class’s times table grid' : run.mode === 'groups' ? 'Times table grid' : 'Your times table grid'}</h2>${ttGrid(res, run.mode === 'class')}`;
       },
       chip: (q) => (q.type === 'board' ? `${q.a}×${q.b}` : 'Round'),
-      summary: (q) => ({ sprint: `${q.secs === 60 ? '60-second' : '2-minute'} sprint`, duel: 'Head-to-head', board: `${q.a} × ${q.b} = ${q.a * q.b}` }[q.type]),
+      summary: (q) => ({ sprint: q.secs ? `${q.secs === 60 ? '60-second' : '2-minute'} sprint` : `${TT_UNTIMED} questions, no clock`, duel: 'Head-to-head', board: `${q.a} × ${q.b} = ${q.a * q.b}` }[q.type]),
       keysHint: (q) => (q.type === 'board' ? (q.work.shown ? '' : 'Keyboard: Enter shows the answer.') : 'Keyboard: type the answer and press Enter.'),
       preview: () => ttPreview(),
     },
@@ -9839,7 +9969,7 @@ THIS SOFTWARE.</pre>
       options: [
         { key: 'level', label: 'Numbers', choices: [['easy', 'Small: targets up to 80'], ['hard', 'Big: targets 101 to 500']] },
         { key: 'rounds', label: 'How many', choices: [['3', '3'], ['5', '5'], ['10', '10']] },
-        { key: 'think', label: 'Thinking time', modes: ['groups', 'class'], choices: [['60', '1 minute'], ['120', '2 minutes'], ['180', '3 minutes']] },
+        { key: 'think', label: 'Thinking time', modes: ['groups', 'class'], choices: [['60', '1 minute'], ['120', '2 minutes'], ['180', '3 minutes'], ['off', 'No time limit']] },
       ],
       defaults: { level: 'easy', rounds: '5', think: '120' },
       peopleHelp: '2 to 4 players or teams. Everyone works on the same numbers at the same time, on paper.',
@@ -9848,13 +9978,15 @@ THIS SOFTWARE.</pre>
         const mins = { 60: '1 minute', 120: '2 minutes', 180: '3 minutes' }[s.think];
         if (mode === 'groups') {
           return ['2 to 4 players or teams share this computer.',
-            `Everyone gets the same six numbers and target, and ${mins} to work it out on paper.`,
+            mins ? `Everyone gets the same six numbers and target, and ${mins} to work it out on paper.`
+              : 'Everyone gets the same six numbers and target, and works it out on paper, taking as long as they need.',
             'Then each team types in its working, while the others look away. The game checks the sums.',
             'The closest answer scores 1. Hitting the target exactly scores 2.'];
         }
         if (mode === 'class') {
           return ['Put this on the board and split the class into teams.',
-            `The numbers and target appear with a ${s.think / 60}-minute countdown. Teams work it out on paper.`,
+            mins ? `The numbers and target appear with a ${s.think / 60}-minute countdown. Teams work it out on paper.`
+              : 'The numbers and target appear, with no countdown. Teams work it out on paper, and you move on when they’re ready.',
             'Then each team calls out its working, and the teacher types it in. The game checks it.',
             'The closest answer scores 1. Hitting the target exactly scores 2.'];
         }
@@ -9867,7 +9999,7 @@ THIS SOFTWARE.</pre>
       makeQuestions(s, mode, names) {
         return Array.from({ length: Number(s.rounds) }, (_, k) => {
           const q = mode === 'solo' ? { type: 'tsolo', puzzle: tgPuzzle(s.level) }
-            : { type: 'tclose', puzzle: tgPuzzle(s.level), secs: Number(s.think), start: k % names.length };
+            : { type: 'tclose', puzzle: tgPuzzle(s.level), secs: s.think === 'off' ? null : Number(s.think), start: k % names.length };
           tgReset(q);
           return q;
         });
@@ -9896,8 +10028,8 @@ THIS SOFTWARE.</pre>
           return `<div class="handover">
             <p class="handover-title">Everyone, work it out!</p>
             <p>Make <b>${q.puzzle.target}</b> from the six numbers, each one once at most, with + − × ÷ and brackets. Write your working on paper.</p>
-            <p>When the time is up, each team gives its working in turn.</p>
-            <button type="button" class="btn-primary" data-act="ready" id="cg-ready">${run.mode === 'class' ? 'Stop the clock' : 'We’re all ready'}</button>
+            <p>${q.secs ? 'When the time is up' : 'When everyone’s ready'}, each team gives its working in turn.</p>
+            <button type="button" class="btn-primary" data-act="ready" id="cg-ready">${run.mode === 'class' && q.secs ? 'Stop the clock' : 'We’re all ready'}</button>
           </div>`;
         }
         if (run.phase === 'handover') {
@@ -9990,7 +10122,7 @@ THIS SOFTWARE.</pre>
       classStyle: 'claim',
       tip: 'Line the rows up: fractions that end in the same place are equal.',
       options: [
-        { key: 'tasks', label: 'Questions', modes: ['solo'], choices: [['mix', 'A mix of everything'], ['equiv', 'Equal fractions'], ['order', 'Putting in order'], ['fdp', 'Decimals and percentages']] },
+        { key: 'tasks', label: 'Questions', modes: ['solo'], choices: [['mix', 'A mix of everything'], ['equiv', 'Equivalent fractions'], ['order', 'Putting in order'], ['fdp', 'Decimals and percentages']] },
         { key: 'rounds', label: 'How many', modes: ['solo'], choices: [['6', '6'], ['9', '9'], ['12', '12']] },
         { key: 'walls', label: 'Fractions', modes: ['groups', 'class'], choices: [['3', '3'], ['5', '5']] },
         { key: 'pick', label: 'Who picks them', modes: ['class'], choices: [['game', 'The game'], ['teacher', 'The teacher']] },
@@ -10012,7 +10144,7 @@ THIS SOFTWARE.</pre>
             'Teams call out equal fractions. Shade each one on its row, then click the team that found it.',
             'The wall fills up as fractions are found. Show the rest when the class is stuck.'];
         }
-        return ['Equal fractions: a fraction is shaded on one row. Shade another row to make the same amount.',
+        return ['Equivalent fractions: a fraction is shaded on one row. Shade another row to make the same amount.',
           'Putting in order: drag four fractions from smallest to largest, using the wall to help.',
           'Decimals and percentages: choose the fraction that matches.',
           'Click a part of a row to shade up to it. Click the last shaded part to unshade it.'];
@@ -10032,7 +10164,7 @@ THIS SOFTWARE.</pre>
         return Array.from({ length: Number(s.rounds) }, (_, i) => make(fwMakeSolo(kinds[i % kinds.length])));
       },
       reset: (q) => fwReset(q),
-      cardLabel: (q) => ({ equiv: 'Equal fractions', order: 'Smallest to largest', fdp: 'Decimals and percentages', claim: 'Fraction wall' }[q.type]),
+      cardLabel: (q) => ({ equiv: 'Equivalent fractions', order: 'Smallest to largest', fdp: 'Decimals and percentages', claim: 'Fraction wall' }[q.type]),
       activeIdx: (run, q) => (q.type === 'claim' && !q.free ? q.work.cur : null),
       turnText(run, q, badge) {
         if (q.type !== 'claim' || q.free || q.k === null) return '';
@@ -10227,7 +10359,7 @@ THIS SOFTWARE.</pre>
         { key: 'rounds', label: 'How many', choices: [['10', '10'], ['20', '20']] },
       ],
       defaults: { kind: 'basics', bits: '8', rounds: '10' },
-      peopleHelp: 'Up to 4 players or teams share this computer. Each gets a buzzer key.',
+      peopleHelp: '2 to 4 players or teams share this computer. Each has a buzzer key.',
       personNote: (i) => `Buzzer key <kbd class="key">${BUZZ_KEYS[i]}</kbd>`,
       how(mode, s) {
         const values = binValues(Number(s.bits));
@@ -10240,7 +10372,7 @@ THIS SOFTWARE.</pre>
         if (mode === 'groups') {
           return [what,
             'Work it out, then press your buzzer key (or tap your buzzer) to buzz in.',
-            `The first to buzz has ${ANSWER_SECONDS} seconds to answer on screen. A wrong answer lets the others buzz.`,
+            'The first to buzz answers on screen, within the time to answer you choose. A wrong answer lets the others buzz.',
             'Most points at the end wins.'];
         }
         if (mode === 'class') {
@@ -10619,11 +10751,12 @@ THIS SOFTWARE.</pre>
         const lines = q.work.order.map((lid, pos) => {
           const ind = q.work.indents[lid];
           const mark = marks ? (marks[pos] ? ' ok' : ' bad') : '';
+          const markSaid = marks ? (marks[pos] ? ', right place' : ', wrong place') : '';
           const tool = (act, d, label, sym) => `<button type="button" class="code-tool" data-act="${act}" data-line="${lid}" data-d="${d}" aria-label="${label}" tabindex="-1">${sym}</button>`;
           const tools = live
             ? `<span class="code-tools">${q.hard ? tool('indent', -1, 'Indent less', '⇤') + tool('indent', 1, 'Indent more', '⇥') : ''}${tool('move', -1, 'Move line up', '↑')}${tool('move', 1, 'Move line down', '↓')}</span>`
             : '';
-          return `<li class="code-line drag-row${mark}" id="cg-line-${lid}" data-line="${lid}" tabindex="${live ? 0 : -1}" aria-label="Line ${pos + 1}, indent ${ind}: ${esc(p.text[lid])}"><span class="code-num" aria-hidden="true">${pos + 1}</span><code class="code-text" style="--indent:${ind}">${codeHTML(q, p.text[lid])}</code>${tools}</li>`;
+          return `<li class="code-line drag-row${mark}" id="cg-line-${lid}" data-line="${lid}" tabindex="${live ? 0 : -1}" aria-label="Line ${pos + 1}, indent ${ind}: ${esc(p.text[lid])}${markSaid}"><span class="code-num" aria-hidden="true">${pos + 1}</span><code class="code-text" style="--indent:${ind}">${codeHTML(q, p.text[lid])}</code>${tools}</li>`;
         }).join('');
         return `<div class="code"><p class="code-goal"><b>${esc(p.title)}.</b> ${esc(p.goal)} ${q.ks3 ? '' : `<span class="code-spec">AQA ${esc(p.spec)}</span>`}</p><ol class="code-list"${live ? ' data-live="1"' : ''} aria-label="Program lines">${lines}</ol></div>`;
       },
@@ -10682,7 +10815,7 @@ THIS SOFTWARE.</pre>
       points: (tries) => Math.max(0, 4 - tries),
       chip: (q) => codeProg(q).title,
       summary: (q) => `${codeProg(q).title} (${CODE_LANGS[q.lang === 'python' ? 'python' : 'aqa']})`,
-      keysHint: (q) => `Keyboard: on a line, Alt + ↑ or ↓ moves it${q.hard ? ', and ← or → changes its indent' : ''}. Enter checks.`,
+      keysHint: (q) => `Keyboard: on a line, Alt + ↑ or ↓ moves it${q.hard ? ', and ← or → changes its indent' : ''}. Enter checks. On a touchscreen, drag a line by its number.`,
       preview: () => codePreview(),
     },
 
@@ -10718,12 +10851,12 @@ THIS SOFTWARE.</pre>
         }
         if (mode === 'class') {
           return ['Put this on the board and split the class into teams.',
-            `Each question is ${what}. Read it together.`,
+            `The questions cover ${what}. Read each one together.`,
             'Each team decides: safe or scam, or 1, 2, 3 or 4. Click each team’s choice, then press Reveal.',
             'Every team that was right scores. The reveal shows the warning signs or explains the answer.'];
         }
-        return [`The questions are ${what}.`,
-          'Some messages ask you to click every warning sign. You get two checks for those.',
+        return [`The questions cover ${what}.`,
+          'Some messages ask you to click every warning sign. You get 2 checks for those.',
           'After every answer, you’ll see why. A hint is there if you’re stuck.',
           s.topics === 'online' ? 'These are everyday online safety skills, not part of the AQA specification.'
             : 'The cyber security words come from AQA GCSE Computer Science, section 3.6.'];
@@ -10859,13 +10992,13 @@ THIS SOFTWARE.</pre>
         if (mode === 'groups') {
           return ['Head-to-head: 2 to 4 players share this computer and take turns.',
             'Everyone types the same line. The clock starts when you press your first key.',
-            'The fastest typist with at least 90% accuracy wins the line and scores 1.',
+            'The fastest typist with at least 90% accuracy wins the line and scores 1. If nobody reaches 90%, the most accurate typist wins.',
             'The keyboard is a UK layout. Swap seats quickly between turns.'];
         }
         if (mode === 'class') {
           return ['Typing relay: put this on the board and split the class into teams.',
             'For each line, every team sends a typist to the keyboard, one after another.',
-            'The class watches the speed and accuracy on the board. The fastest typist with at least 90% accuracy wins the line for their team.',
+            'The class watches the speed and accuracy on the board. The fastest typist with at least 90% accuracy wins the line for their team. If nobody reaches 90%, the most accurate typist wins.',
             'Send a different typist each line, so everyone gets a go.'];
         }
         return ['Type each line exactly as it’s shown, with the same capitals, spaces and punctuation.',
@@ -11029,7 +11162,7 @@ THIS SOFTWARE.</pre>
 
     logos: {
       titleHTML: 'Guess the <span class="hl c5">Logo</span>',
-      lede: 'A brand’s logo is hidden under tiles. Lift them one at a time and guess the company: the sooner you get it, the more you score.',
+      lede: 'A brand’s logo is hidden under tiles. Lift them one at a time and guess the brand: the sooner you get it, the more you score.',
       noun: 'Logo',
       plural: 'logos',
       maxPlayers: 4,
@@ -11052,7 +11185,7 @@ THIS SOFTWARE.</pre>
         if (mode === 'groups') {
           return ['2 to 4 players or teams share this computer and take turns.',
             'On your turn, guess the brand, or pass to lift another tile.',
-            'A right guess scores 6 minus the number of tiles lifted. A wrong guess puts you out for that logo.',
+            'A right guess scores 5 points with one tile lifted, 4 with two, down to 1 with five. A wrong guess puts you out for that logo.',
             'Most points at the end wins.'];
         }
         if (mode === 'class') {
@@ -11092,7 +11225,7 @@ THIS SOFTWARE.</pre>
       turnText: (run, q, badge) => (run.style === 'clueturns' ? `${badge(q.work.cur)}’s turn: guess, or pass to lift another tile.` : ''),
       prompt(q, run) {
         if (run.style === 'buzz') return 'Teams buzz in when they know the brand.';
-        if (run.style === 'clueturns') return 'Which company is it?';
+        if (run.style === 'clueturns') return 'Which brand is it?';
         return 'Guess now for more points, or lift another tile.';
       },
       board: (q, ctx) => lgoBoard(q, ctx),
@@ -11312,7 +11445,7 @@ THIS SOFTWARE.</pre>
       tip: 'Learn the three parts only plant cells have.',
       options: [
         { key: 'jobs', label: 'Tasks', modes: ['solo'], choices: [['labels', 'Labels only'], ['both', 'Labels and jobs']] },
-        { key: 'time', label: 'Time to label', modes: ['groups'], choices: [['45', '45 seconds'], ['60', '1 minute'], ['90', '90 seconds']] },
+        { key: 'time', label: 'Time to label', modes: ['groups'], choices: [['45', '45 seconds'], ['60', '1 minute'], ['90', '90 seconds'], ['off', 'No limit']] },
         { key: 'rounds', label: 'How many parts', modes: ['class'], choices: [['6', '6'], ['10', '10']] },
       ],
       defaults: { jobs: 'both', time: '60', rounds: '6' },
@@ -11345,7 +11478,7 @@ THIS SOFTWARE.</pre>
           const n = names.length;
           const qs = [];
           ['animal', 'plant'].forEach((cell) => {
-            for (let t = 0; t < n; t += 1) qs.push(make({ type: 'label', cell, team: t, checker: (t + 1) % n, secs: Number(s.time), bank: bank(cell) }));
+            for (let t = 0; t < n; t += 1) qs.push(make({ type: 'label', cell, team: t, checker: (t + 1) % n, secs: s.time === 'off' ? null : Number(s.time), bank: bank(cell) }));
           });
           return qs;
         }
@@ -11423,9 +11556,9 @@ THIS SOFTWARE.</pre>
         if (run.phase === 'handover') {
           return `<div class="handover">
             <p class="handover-title">${badge(q.team)} labels the ${cellName}</p>
-            <p>You have ${q.secs} seconds. Drag each label onto its part, or click a label and then a box.</p>
+            <p>${q.secs ? `You have ${q.secs} seconds.` : 'There’s no time limit.'} Drag each label onto its part, or click a label and then a box.</p>
             <p>Then ${badge(q.checker)} checks your labels for mistakes.</p>
-            <button type="button" class="btn-primary" data-act="begin" id="cg-begin">Start the clock</button>
+            <button type="button" class="btn-primary" data-act="begin" id="cg-begin">${q.secs ? 'Start the clock' : 'Start labelling'}</button>
           </div>`;
         }
         if (run.phase === 'review') {
@@ -11473,7 +11606,7 @@ THIS SOFTWARE.</pre>
           w.marks = Object.fromEntries(ids.map((p) => [p, w.place[p] === p]));
           const right = ids.filter((p) => w.marks[p]).length;
           if (right === ids.length) return { correct: true, html: '<p>Every label is in the right place.</p>' };
-          return { correct: false, html: `${right} of ${ids.length} labels are right. Move the red ones.` };
+          return { correct: false, html: `${right} of ${ids.length} labels are right. Move the ones marked ✗.` };
         }
         if (q.type === 'job') {
           const part = PARTS[q.part];
@@ -12852,7 +12985,7 @@ THIS SOFTWARE.</pre>
   // ---------- Computing, key stage 3 (Years 7 and 8): the KS3 versions of the GCSE games ----------
   // Matched to the Year 7 and 8 curriculum maps: staying safe online, and choosing images and sources
   // (Y7 E-safety and IT & digital literacy, Y8 physical computing); binary basics (Y7 Computer Systems);
-  // and programming in Python, including robust code (Y7 Edublocks–Python, Y8 Python).
+  // and programming in Python, including robust code (Y7 EduBlocks–Python, Y8 Python).
   // Binary addition, lists, string handling (apart from checking a string's length, to validate what the
   // user types), random numbers, DIV and MOD, searching, sorting and logic gates start in Year 9, so
   // they're only in key stage 4. Typing Trainer is in both key stages as it is.
@@ -12919,12 +13052,12 @@ THIS SOFTWARE.</pre>
       }
       if (mode === 'class') {
         return ['Put this on the board and split the class into teams.',
-          `Each question is about ${what}. Read it together.`,
+          `The questions cover ${what}. Read each one together.`,
           'Each team decides: safe or scam, or 1, 2, 3 or 4. Click each team’s choice, then press Reveal.',
           'Every team that was right scores. The reveal shows the warning signs or explains the answer.'];
       }
-      return [`The questions are about ${what}.`,
-        s.topics === 'sources' ? 'Pick the best answer each time.' : 'Some messages ask you to click every warning sign. You get two checks for those.',
+      return [`The questions cover ${what}.`,
+        s.topics === 'sources' ? 'Pick the best answer each time.' : 'Some messages ask you to click every warning sign. You get 2 checks for those.',
         'After every answer, you’ll see why. A hint is there if you’re stuck.',
         'This covers E-safety and choosing images and sources from Year 7, and staying safe in a digital world from Year 8.'];
     },
@@ -12954,7 +13087,7 @@ THIS SOFTWARE.</pre>
   // ---------- settings, names and saving ----------
   function cgFresh(id) {
     const def = CG_DEFS[id];
-    const base = { view: 'setup', mode: 'solo', settings: { ...def.defaults }, players: ['Player 1', 'Player 2'], teams: TEAM_NAMES.slice(0, 2), timer: def.defaultTimer || '30', run: null };
+    const base = { view: 'setup', mode: 'solo', settings: { ...def.defaults }, players: ['Player 1', 'Player 2'], teams: TEAM_NAMES.slice(0, 2), timer: def.defaultTimer || '30', answer: String(ANSWER_SECONDS), run: null };
     try {
       const saved = JSON.parse(localStorage.getItem(CG_STORE + id));
       if (saved && typeof saved === 'object') {
@@ -12965,13 +13098,14 @@ THIS SOFTWARE.</pre>
         if (Array.isArray(saved.players) && saved.players.length >= 2 && saved.players.length <= def.maxPlayers) base.players = saved.players.map(String);
         if (Array.isArray(saved.teams) && saved.teams.length >= 2 && saved.teams.length <= 4) base.teams = saved.teams.map(String);
         if (['off', '20', '30', '60'].includes(saved.timer)) base.timer = saved.timer;
+        if (ANSWER_CHOICES.some(([v]) => v === saved.answer)) base.answer = saved.answer;
       }
     } catch (e) { /* storage unavailable */ }
     return base;
   }
   function cgSave(id) {
     const s = state.cg[id];
-    try { localStorage.setItem(CG_STORE + id, JSON.stringify({ settings: s.settings, players: s.players, teams: s.teams, timer: s.timer })); } catch (e) { /* storage unavailable */ }
+    try { localStorage.setItem(CG_STORE + id, JSON.stringify({ settings: s.settings, players: s.players, teams: s.teams, timer: s.timer, answer: s.answer })); } catch (e) { /* storage unavailable */ }
   }
 
   const cgS = () => state.cg[state.gameId];
@@ -13119,8 +13253,19 @@ THIS SOFTWARE.</pre>
         <span class="option-label" id="cg-opt-${o.key}-label">${o.label}</span>
         <div class="pills" role="radiogroup" aria-labelledby="cg-opt-${o.key}-label">${o.choices.map(([v, l]) => pill(`cg-opt-${o.key}`, v, l, s.settings[o.key] === v)).join('')}</div>
       </div>`)).join('');
-    const classBuzz = (typeof def.classStyle === 'function' ? def.classStyle(s.settings) : def.classStyle) === 'buzz';
-    const timerRow = s.mode !== 'class' || def.noTimer || classBuzz ? '' : `
+    const autoRow = s.mode !== 'solo' || !def.autoNext ? '' : `
+      <div class="option-row">
+        <span class="option-label" id="cg-auto-label">After a right answer</span>
+        <div class="pills" role="radiogroup" aria-labelledby="cg-auto-label">${AUTO_CHOICES.map(([v, l]) => pill('cg-auto', v, l, autoPref() === v)).join('')}</div>
+      </div>`;
+    const styleIn = (st) => (typeof st === 'function' ? st(s.settings) : st);
+    const buzzNow = (s.mode === 'groups' && styleIn(def.groupStyle) === 'buzz') || (s.mode === 'class' && styleIn(def.classStyle) === 'buzz');
+    const answerRow = !buzzNow ? '' : `
+      <div class="option-row">
+        <span class="option-label" id="cg-answer-label">Time to answer after a buzz</span>
+        <div class="pills" role="radiogroup" aria-labelledby="cg-answer-label">${ANSWER_CHOICES.map(([v, l]) => pill('cg-answer', v, l, (s.answer || String(ANSWER_SECONDS)) === v)).join('')}</div>
+      </div>`;
+    const timerRow = s.mode !== 'class' || def.noTimer || buzzNow ? answerRow : `
       <div class="option-row">
         <span class="option-label" id="cg-timer-label">Timer for each ${def.noun.toLowerCase()}</span>
         <div class="pills" role="radiogroup" aria-labelledby="cg-timer-label">${[['off', 'Off'], ['20', '20 seconds'], ['30', '30 seconds'], ['60', '1 minute']].map(([v, l]) => pill('cg-timer', v, l, s.timer === v)).join('')}</div>
@@ -13134,7 +13279,7 @@ THIS SOFTWARE.</pre>
       </section>
       <section class="block cg-opts" aria-labelledby="cg-opts-title">
         <h2 id="cg-opts-title">Game options</h2>
-        ${optRows}${timerRow}
+        ${optRows}${autoRow}${timerRow}
         <p class="error" id="cg-setup-error" role="alert" hidden></p>
       </section>
       <section class="block rulebook cg-how" aria-labelledby="cg-how-title">
@@ -13201,6 +13346,22 @@ THIS SOFTWARE.</pre>
       cgRenderPanel();
       cgRenderSide();
     });
+    cgAnnounce();
+  }
+  // What screen readers hear: the result once a question is done, or a message (like "Not quite. Over to…").
+  function cgAnnounce() {
+    const run = cgRun();
+    if (!run) return;
+    const panel = $('cg-panel');
+    const key = `${run.id}:${run.i}:${run.phase}`;
+    if (run.phase === 'done') {
+      const head = (panel.querySelector('.fb-head') || {}).innerText || '';
+      const explain = (panel.querySelector('.cg-explain') || {}).innerText || ''; // innerText keeps the gaps between lines
+      announce(`${head}${/[.!?:]\s*$/.test(head) ? '' : '.'} ${explain}`, key);
+    } else {
+      const msg = panel.querySelector('.cg-msg, .cg-partial, .cg-note');
+      if (msg) announce(msg.textContent, key);
+    }
   }
 
   function cgRenderTop() {
@@ -13219,8 +13380,11 @@ THIS SOFTWARE.</pre>
         <div><dt>Wrong</dt><dd class="wrong">${wrong}</dd></div>
         <div><dt>Streak</dt><dd>${run.streak}</dd></div>
       </dl>`;
-    } else if (run.style === 'buzz' || run.style === 'relay') {
-      extra = run.phase === 'answer' ? '<span class="clock" id="cg-clock" role="timer"></span>' : '';
+    } else if (run.style === 'buzz') {
+      // After a buzz: the time to answer (if there is one), which can be paused.
+      extra = run.phase === 'answer' && run.left !== null ? `<span class="clock" id="cg-clock" role="timer"></span>${run.left > 0 ? `<button type="button" class="btn-small" data-act="pause" id="cg-pause">${run.paused ? 'Resume timer' : 'Pause timer'}</button>` : ''}` : '';
+    } else if (run.style === 'relay') {
+      extra = run.phase === 'answer' && run.left !== null ? '<span class="clock" id="cg-clock" role="timer"></span>' : '';
     } else if (run.timer) {
       // The pause button only while the clock is counting down (not once time's up or the answer is out).
       const counting = (run.phase === 'answer' || run.phase === 'vote') && run.left > 0;
@@ -13296,7 +13460,7 @@ THIS SOFTWARE.</pre>
       const h = cgHead(run, run.feedback, last);
       const end = run.i + 1 >= run.qs.length;
       const nextLabel = end ? (run.mode === 'solo' ? 'See my score' : 'See the scores') : `Next ${def.noun.toLowerCase()}`;
-      out.push(`<div class="feedback" aria-live="polite">
+      out.push(`<div class="feedback">
         <p class="fb-head ${h.cls}">${h.text}</p>
         <div class="cg-explain">${run.feedback.html || ''}</div>
         <button type="button" class="btn-primary${cgAutoTimer !== null ? ' auto' : ''}" data-act="next" id="cg-next">${nextLabel}</button>
@@ -13413,6 +13577,7 @@ THIS SOFTWARE.</pre>
       scores: names.map(() => 0), team: 0,
       active: null, locked: [], tried: [], votes: [], turn: 0,
       timer: mode === 'class' && s.timer !== 'off' && !def.noTimer ? Number(s.timer) : null, left: null, paused: false,
+      answer: (s.answer || String(ANSWER_SECONDS)) === 'off' ? null : Number(s.answer || ANSWER_SECONDS), // after a buzz
     };
     cgBeginQuestion();
     s.view = 'play';
@@ -13467,7 +13632,7 @@ THIS SOFTWARE.</pre>
     else if (run.phase === 'answer') target = def.focusId(cgQ(), run);
     else if (def.focusFor) target = def.focusFor(run, cgQ());
     const el = target && $(target);
-    if (el) focusAtEnd(el);
+    if (el) { focusAtEnd(el); if (!def.typesToEnd) revealIfHidden(el); }
     // Typing Trainer on a short screen (a phone, or a tablet with its keyboard open): show the line and the box together.
     if (el && def.typesToEnd && $('ty-text') && el.getBoundingClientRect().bottom > window.innerHeight) $('ty-text').scrollIntoView({ block: 'start' });
   }
@@ -13482,7 +13647,7 @@ THIS SOFTWARE.</pre>
       if (r) { cgRenderPlay(); cgAfter(); return; }
     }
     if (run.style === 'buzz') {
-      if (run.phase === 'answer' && run.left > 0) {
+      if (run.phase === 'answer' && run.left > 0 && !run.paused) {
         run.left -= 1;
         cgRenderClock();
         if (run.left === 0) cgBuzzMiss('Time’s up');
@@ -13501,7 +13666,8 @@ THIS SOFTWARE.</pre>
     if (!run || run.style !== 'buzz' || run.phase !== 'buzz' || p >= run.names.length || run.locked.includes(p)) return;
     run.active = p;
     run.phase = 'answer';
-    run.left = ANSWER_SECONDS;
+    run.left = run.answer === undefined ? ANSWER_SECONDS : run.answer; // null: as long as they need
+    run.paused = false;
     cgRestartClock();
     run.msg = '';
     cgRenderPlay();
@@ -13584,7 +13750,7 @@ THIS SOFTWARE.</pre>
     run.active = null;
     clearTimeout(cgAutoTimer);
     cgAutoTimer = null;
-    if (run.mode === 'solo' && res.correct && cgD().autoNext) cgAutoTimer = setTimeout(() => { cgAutoTimer = null; cgNext(); }, AUTO_MS);
+    if (run.mode === 'solo' && res.correct && cgD().autoNext && autoMoveOn()) cgAutoTimer = setTimeout(() => { cgAutoTimer = null; cgNext(); }, AUTO_MS);
     cgRenderPlay();
     cgAfter();
   }
@@ -13651,7 +13817,7 @@ THIS SOFTWARE.</pre>
             <dl class="stats">
               <div><dt>Accuracy</dt><dd>${pct}%</dd></div>
               <div><dt>Best streak</dt><dd>${run.best}</dd></div>
-              <div><dt>Missed</dt><dd>${answered - right}</dd></div>
+              <div><dt>Mistakes</dt><dd>${answered - right}</dd></div>
             </dl>
           </div>
         </div>`;
@@ -13854,6 +14020,7 @@ THIS SOFTWARE.</pre>
     }
     const li = e.target.closest('.drag-row');
     if (!li || e.target.closest('button') || !li.parentElement.dataset.live) return;
+    if (e.pointerType === 'touch' && !e.target.closest('.code-num')) return; // touch: drag by the line's number
     const r = li.getBoundingClientRect();
     cgDrag = { kind: 'line', li, list: li.parentElement, startY: e.clientY, grab: e.clientY - r.top, moved: false, pid: e.pointerId };
     li.setPointerCapture(e.pointerId);
@@ -13937,6 +14104,8 @@ THIS SOFTWARE.</pre>
         }
       }
       else if (t.name === 'cg-timer') s.timer = t.value;
+      else if (t.name === 'cg-answer') s.answer = t.value;
+      else if (t.name === 'cg-auto') saveAutoPref(t.value);
       else if (t.name.startsWith('cg-opt-')) s.settings[t.name.slice(7)] = t.value;
       else return;
       cgSave(state.gameId);
@@ -13951,7 +14120,8 @@ THIS SOFTWARE.</pre>
       if (t.id === 'cg-read' && cgInPlay()) {
         // Typing Trainer: an edit in the middle of the line (after clicking there) is undone, because the
         // score counts the keys typed at the end. Backspace still fixes mistakes.
-        if (cgD().typesToEnd && t.selectionStart !== t.value.length) {
+        const before = cgD().typesToEnd ? cgQ().work.prev : '';
+        if (cgD().typesToEnd && (t.selectionStart !== t.value.length || !(t.value.startsWith(before) || before.startsWith(t.value)))) {
           t.value = cgQ().work.prev;
           focusAtEnd(t);
           return;
@@ -13969,9 +14139,13 @@ THIS SOFTWARE.</pre>
       cgStart();
     });
     root.addEventListener('pointerdown', cgPointerDown);
-    // Typing Trainer: clicking in the box puts the cursor back at the end of the line.
+    // Typing Trainer: clicking or tapping in the box, or tabbing into it, puts the cursor back at the end
+    // of the line (and doesn't select everything). A tap places its cursor a moment later, hence the wait.
     root.addEventListener('pointerup', (e) => {
-      if (e.target.id === 'cg-read' && cgInPlay() && cgD().typesToEnd) setTimeout(() => focusAtEnd(e.target), 0);
+      if (e.target.id === 'cg-read' && cgInPlay() && cgD().typesToEnd) setTimeout(() => focusAtEnd(e.target), 60);
+    });
+    root.addEventListener('focusin', (e) => {
+      if (e.target.id === 'cg-read' && cgInPlay() && cgD().typesToEnd) setTimeout(() => { if (document.activeElement === e.target) focusAtEnd(e.target); }, 0);
     });
     document.addEventListener('pointermove', cgPointerMove, { passive: false });
     document.addEventListener('pointerup', cgPointerUp);
@@ -14006,9 +14180,22 @@ THIS SOFTWARE.</pre>
     else if (el.dataset.subject) turnToSubject(el.dataset.subject, el.dataset.stage);
   }
 
+  // Single-key shortcuts can be switched off (in the footer). Keys typed into a box, or into a focused
+  // punctuation gap, still work: they only act on the thing that has focus.
+  const KEYS_STORE = 'eicg:keys';
+  const keysOn = () => { try { return localStorage.getItem(KEYS_STORE) !== 'off'; } catch (e) { return true; } };
+  function syncKeysButton() {
+    const on = keysOn();
+    $('keys-btn').textContent = `Single-key shortcuts: ${on ? 'on' : 'off'}`;
+    $('keys-btn').setAttribute('aria-pressed', String(on));
+  }
+  const singleKeyShortcut = (e) => e.key.length === 1 && e.key !== ' ' && !e.ctrlKey && !e.metaKey && !e.altKey
+    && !(e.target.closest && e.target.closest('input, textarea, [data-act="slot"]'));
+
   // Each game decides which keys (and modifier keys) it uses.
   function onKey(e) {
     if (state.screen !== 'game' || animating) return;
+    if (!keysOn() && singleKeyShortcut(e)) return;
     GAMES[state.gameId].onKey(e);
   }
 
@@ -14037,6 +14224,11 @@ THIS SOFTWARE.</pre>
       render();
     });
     window.addEventListener('popstate', onPopState);
+    $('keys-btn').addEventListener('click', () => {
+      try { localStorage.setItem(KEYS_STORE, keysOn() ? 'off' : 'on'); } catch (e) { /* storage unavailable */ }
+      syncKeysButton();
+    });
+    syncKeysButton();
     window.addEventListener('pagehide', saveSession);
     document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden') saveSession(); });
     window.addEventListener('beforeunload', (e) => {
@@ -14140,8 +14332,13 @@ THIS SOFTWARE.</pre>
     if (sg) Object.assign(sg, { back: sg.back || sg.words.map(() => false), info: sg.info || {}, rule: sg.rule || '', again: sg.again || {}, hint: sg.hint || 0 });
     if (!state.sp.game && state.sp.view !== 'setup') state.sp.view = 'setup';
     if (state.sp.game && state.sp.game.phase === 'look') state.sp.game.phase = 'write';
-    const oldCode = state.cg.code && state.cg.code.run;
-    if (oldCode && oldCode.qs.some((q) => !q.lang || !CODE_BY_ID[q.pid])) { state.cg.code.run = null; state.cg.code.view = 'setup'; }
+    ['code', 'code3'].forEach((id) => {
+      const old = state.cg[id] && state.cg[id].run;
+      if (old && old.qs.some((q) => !q.lang || !CODE_BY_ID[q.pid] || (q.work && q.work.order && q.work.order.length !== codeProg(q).text.length))) {
+        state.cg[id].run = null;
+        state.cg[id].view = 'setup';
+      }
+    });
     // Any game saved with questions that refer to something since renamed or removed (a program, a
     // message, a logo) starts afresh, rather than failing while it's drawn.
     Object.entries(state.cg).forEach(([id, g]) => {

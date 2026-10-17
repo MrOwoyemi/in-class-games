@@ -8,7 +8,7 @@ Classroom games for Maths, English, Science, Computing and Creative iMedia. Comp
 
 **Play it here: https://mrowoyemi.github.io/in-class-games/**
 
-> **Exam boards.** Computing KS3 (Years 7 and 8) follows the [national curriculum for computing at key stage 3](https://www.gov.uk/government/publications/national-curriculum-in-england-computing-programmes-of-study/national-curriculum-in-england-computing-programmes-of-study). Computing KS4 (Years 9 to 11) follows the [AQA GCSE Computer Science specification (8525)](https://www.aqa.org.uk/subjects/computer-science/gcse/computer-science-8525/specification), including AQA's wording, Boolean notation and pseudo-code. The exceptions are Typing Trainer and the everyday online safety questions in Cyber Safe, which are general skills rather than part of the specification. The English games are matched to [WJEC Eduqas GCSE English Language (C700QS)](https://www.eduqas.co.uk/qualifications/english-language-gcse/), which the English department uses: spelling, punctuation and vocabulary (AO6) and the subject terminology for analysing language (AO2), plus the three rhetorical devices the specification asks pupils to use in their own writing. The word lists are the national curriculum's, as Eduqas doesn't publish spelling lists. Creative iMedia links to [OCR Cambridge Nationals in Creative iMedia (J834)](https://www.ocr.org.uk/qualifications/cambridge-nationals/creative-imedia-level-1-2-j834/), unit R094. The Maths and Science games aren't matched to an exam board: they follow general curriculum topics and may not match exactly what your course requires, so check them against your own specification. This site isn't produced or endorsed by AQA, Eduqas, OCR or any other exam board.
+> **Exam boards.** Computing KS3 (Years 7 and 8) follows the [national curriculum for computing at key stage 3](https://www.gov.uk/government/publications/national-curriculum-in-england-computing-programmes-of-study/national-curriculum-in-england-computing-programmes-of-study). Computing KS4 (Years 9 to 11) follows the [AQA GCSE Computer Science specification (8525)](https://www.aqa.org.uk/subjects/computer-science/gcse/computer-science-8525/specification), including AQA's wording, Boolean notation and pseudo-code. The exceptions are Typing Trainer and the everyday online safety questions in Cyber Safe, which are general skills rather than part of the specification. The English games are matched to [WJEC Eduqas GCSE English Language (C700QS)](https://www.eduqas.co.uk/qualifications/english-language-gcse/), which the English department uses: spelling, punctuation and vocabulary (AO6) and the subject terminology for analysing language (AO2), plus the three rhetorical devices the specification asks pupils to use in their own writing. Eduqas doesn't publish spelling lists, so the Year 3 to 6 lists are the national curriculum's, and the others are general lists of commonly misspelt words and spelling rules. Guess the Logo supports the teaching of [OCR Cambridge Nationals in Creative iMedia (J834)](https://www.ocr.org.uk/qualifications/cambridge-nationals/creative-imedia-level-1-2-j834/), unit R094, topic area 1 (1.1). The Maths and Science games aren't matched to an exam board: they follow general curriculum topics and may not match exactly what your course requires, so check them against your own specification. This site isn't produced or endorsed by AQA, Eduqas, OCR or any other exam board.
 
 ## Using it in class
 
@@ -29,7 +29,7 @@ It works best on a computer or interactive whiteboard. It also works on tablets 
 | Computing KS4 (Years 9 to 11, AQA 8525) | Binary Switches (3.3.1, 3.3.2 and 3.3.4), Logic Gate Lights (3.4.2), Code Shuffle (3.1 and 3.2), Cyber Safe (3.6, plus online safety), Typing Trainer |
 | Creative iMedia | Guess the Logo: 26 brand logos (OCR Cambridge Nationals J834, unit R094: visual identity) |
 
-Several games let you add your own content, including your own spelling lists (which you can save) and lines from the book your class is reading, and your own logos in Guess the Logo.
+You can add your own content to several games: rules in FizzBuzz, spelling lists (which you can save), lines from your class reader in Device Detective, and logos in Guess the Logo.
 
 ## Privacy
 
@@ -47,7 +47,7 @@ The logos in Guess the Logo are trademarks of their owners. They're shown only s
 - Amazon: [Amazon icon.svg](https://commons.wikimedia.org/wiki/File:Amazon_icon.svg)
 - Apple: [Apple logo black.svg](https://commons.wikimedia.org/wiki/File:Apple_logo_black.svg)
 - Deliveroo: [Deliveroo logo.svg](https://commons.wikimedia.org/wiki/File:Deliveroo_logo.svg) (cropped to the kangaroo)
-- Domino’s: [Domino's pizza logo.svg](https://commons.wikimedia.org/wiki/File:Domino%27s_pizza_logo.svg)
+- Domino's: [Domino's pizza logo.svg](https://commons.wikimedia.org/wiki/File:Domino%27s_pizza_logo.svg)
 - Facebook: [Facebook f logo (2019).svg](https://commons.wikimedia.org/wiki/File:Facebook_f_logo_(2019).svg)
 - Google: [Google Favicon 2025.svg](https://commons.wikimedia.org/wiki/File:Google_Favicon_2025.svg)
 - Google Chrome: [Google Chrome icon (February 2022).svg](https://commons.wikimedia.org/wiki/File:Google_Chrome_icon_(February_2022).svg)
