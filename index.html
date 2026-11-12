@@ -1581,6 +1581,55 @@
   .pr-board.mini { gap: 8px; }
   .pr-board.mini .pr-text { font-size: 1rem; line-height: 2.2; }
 
+  /* Pick a Square */
+  .sq-board { width: 100%; display: grid; gap: 14px; padding-block: 6px; text-align: center; }
+  .sq-top { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 4px 16px; margin: 0; color: var(--ink-soft); font-weight: 700; }
+  .sq-top b { color: var(--pen); font-size: 1.25em; }
+  .sq-grid { display: grid; grid-template-columns: repeat(var(--cols, 5), minmax(0, 1fr)); gap: 8px; }
+  .sq-topic {
+    display: flex; flex-direction: column; justify-content: flex-end; text-align: center; padding: 2px 2px 8px; border-bottom: 4px solid var(--ink);
+    font: 800 clamp(.8rem, 1.3vw, 1.1rem)/1.15 var(--font-display); overflow-wrap: break-word; hyphens: auto;
+  }
+  @media (max-width: 40rem) { .sq-topic { font-size: .72rem; } .sq-grid { gap: 5px; } }
+  .sq-cell { min-height: 3.5rem; display: grid; place-items: center; padding: 4px; border-radius: 8px; overflow-wrap: anywhere; }
+  button.sq-cell {
+    border: 2px solid var(--line); background: var(--card); color: var(--pen); box-shadow: 3px 4px 0 var(--line);
+    font: 800 clamp(1.15rem, 2.2vw, 1.9rem) var(--font-display); cursor: pointer;
+  }
+  button.sq-cell:hover:not(:disabled) { border-color: var(--pen); }
+  button.sq-cell:focus-visible { outline: 3px solid var(--pen); outline-offset: 2px; }
+  button.sq-cell:disabled { cursor: default; }
+  .sq-cell.taken { border: 2px solid transparent; background: var(--c); color: var(--on-hl); font-weight: 700; font-size: .9rem; line-height: 1.15; }
+  .sq-cell.missed { border: 2px dashed var(--line); background: none; color: var(--ink-soft); font-size: 1.2rem; }
+  .sq-cell.empty { visibility: hidden; }
+  .sq-q { justify-items: center; }
+  .sq-where { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 8px; margin: 0; color: var(--ink-soft); font-weight: 700; }
+  .sq-double { padding: 2px 12px; border-radius: 999px; background: var(--hl-1); color: var(--on-hl); font-weight: 800; }
+  .sq-text { margin: 0; max-width: 46rem; font: 700 clamp(1.3rem, 2.8vw, 2rem)/1.3 var(--font-display); text-wrap: balance; }
+  .sq-code { padding: 0 .25em; border-radius: 6px; background: var(--grid); font-family: var(--font-code); font-size: .9em; }
+  .sq-opts { width: 100%; max-width: 46rem; }
+  .sq-opts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  @media (max-width: 40rem) { .sq-opts { grid-template-columns: minmax(0, 1fr); } }
+  .sq-opts .answer-btn { font-size: 1.2rem; }
+  .sq-opts .answer-btn span { min-width: 0; overflow-wrap: anywhere; }
+  .is-class .sq-opts { max-width: 60rem; }
+  .is-class .sq-opts .answer-btn { min-height: 4.2rem; font-size: clamp(1.2rem, 1.9vw, 1.7rem); }
+  /* Scores run into the thousands, so each one sits under its team's name. */
+  .cg-layout[data-game^="sq_"] .score-row { grid-template-columns: auto minmax(0, 1fr); }
+  .cg-layout[data-game^="sq_"] .score-num { grid-column: 1 / -1; justify-self: end; }
+  .sq-opts .answer-btn.right { border-color: var(--right); box-shadow: 0 0 0 2px var(--right); opacity: 1; }
+  .sq-answer { margin: 0; padding: 4px 16px; border-radius: 10px; background: var(--hl-3); color: var(--on-hl); font: 800 1.4rem var(--font-display); }
+  .sq-answer-line { margin: 0; font-size: 1.1rem; }
+  .sq-marks { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+  .is-class .sq-text { font-size: clamp(1.5rem, 3.2vw, 2.5rem); }
+  .is-class button.sq-cell { min-height: 4.4rem; }
+  .is-class .sq-topic { font-size: clamp(.95rem, 1.5vw, 1.35rem); }
+  .sq-board.mini { gap: 6px; }
+  .sq-board.mini .sq-grid { gap: 5px; }
+  .sq-board.mini .sq-topic { font-size: .75rem; padding-bottom: 4px; border-bottom-width: 3px; }
+  .sq-board.mini .sq-cell { min-height: 1.9rem; font-size: .9rem; border: 2px solid var(--line); color: var(--pen); font-weight: 800; }
+  .sq-board.mini .sq-cell.taken { border-color: transparent; color: var(--on-hl); font-size: .75rem; }
+
   /* Device Detective */
   .dv-board { width: 100%; display: grid; justify-items: center; gap: 16px; text-align: center; }
   .dv-line { margin: 0; padding-block: 4px; max-width: 40rem; font: 700 clamp(1.5rem, 4vw, 2.5rem)/1.35 var(--font-hand); text-wrap: balance; } /* the handwriting font's tails need the room */
@@ -1970,7 +2019,7 @@
     .cg-how { grid-area: how; }
     .cg-people { grid-area: people; }
     .cg-layout { grid-template-columns: minmax(0, 1.75fr) minmax(0, 1fr) minmax(14rem, .55fr); }
-    .cg-layout[data-game="proofread"] { grid-template-columns: minmax(0, 2.6fr) minmax(0, 1fr) minmax(13rem, .5fr); }
+    .cg-layout[data-game="proofread"], .cg-layout[data-game^="sq_"] { grid-template-columns: minmax(0, 2.6fr) minmax(0, 1fr) minmax(13rem, .5fr); }
     .cg-card { padding: 50px 24px 24px; }
     .cg-board { max-height: 100%; overflow: auto; }
     .cg-side { flex: 1; min-height: 0; overflow-y: auto; }
@@ -2571,28 +2620,28 @@ purpose. It is provided "as is" without express or implied warranty.</pre>
   // To add a game: give it an entry in GAMES, list its id in its subject's `games`,
   // and add a <section id="game-<id>" class="game-screen"> for it in the page.
   const ALL_SUBJECTS = [
-    { id: 'maths', name: 'Maths', blurb: 'Number, patterns and problem solving', paper: 'squared', games: ['fizzbuzz', 'tables', 'target', 'fractions'] },
+    { id: 'maths', name: 'Maths', blurb: 'Number, patterns and problem solving', paper: 'squared', games: ['fizzbuzz', 'tables', 'target', 'fractions', 'sq_maths'] },
     // English GCSE is with WJEC Eduqas: English Language (C700QS) and English Literature (C720QS).
-    { id: 'english', name: 'English', blurb: 'Reading, spelling and grammar', paper: 'lined', games: ['spelling', 'punctuation', 'homophones', 'proofread', 'devices'], exam: 'eduqas' },
-    { id: 'science', name: 'Science', blurb: 'Cells, food webs and the elements', paper: 'squared', games: ['periodic', 'cell', 'foodweb'] },
+    { id: 'english', name: 'English', blurb: 'Reading, spelling and grammar', paper: 'lined', games: ['spelling', 'punctuation', 'homophones', 'proofread', 'devices', 'sq_english'], exam: 'eduqas' },
+    { id: 'science', name: 'Science', blurb: 'Cells, food webs and the elements', paper: 'squared', games: ['periodic', 'cell', 'foodweb', 'sq_science'] },
     // Computing has a drop-down for each key stage: KS3 is Years 7 and 8 (national curriculum), KS4 is Years 9 to 11 (AQA GCSE).
     { id: 'computing', name: 'Computing', years: '7 to 11', blurb: 'Key stages 3 and 4: binary, logic, programming, online safety and typing', paper: 'squared',
       stages: [
-        { id: 'ks3', short: 'KS3', name: 'Key stage 3', years: 'Years 7 and 8', note: 'National curriculum', games: ['cyber3', 'typing', 'binary3', 'code3'],
+        { id: 'ks3', short: 'KS3', name: 'Key stage 3', years: 'Years 7 and 8', note: 'National curriculum', games: ['cyber3', 'typing', 'binary3', 'code3', 'sq_ks3'],
           fits: {
             cyber3: 'Year 7: E-safety, and choosing images and sources (copyright, credibility and plagiarism). Year 8: staying safe in a digital world.',
             typing: 'Keyboard skills for any topic, such as creating documents in Year 7 digital literacy and IT.',
             binary3: 'Year 7: Computer Systems (binary basics).',
             code3: 'Year 7: Programming (EduBlocks and Python). Year 8: Programming in Python, including making code robust.',
           } },
-        { id: 'ks4', short: 'KS4', name: 'Key stage 4', years: 'Years 9 to 11', note: 'AQA GCSE (8525)', games: ['binary', 'logic', 'code', 'cyber', 'typing'],
+        { id: 'ks4', short: 'KS4', name: 'Key stage 4', years: 'Years 9 to 11', note: 'AQA GCSE (8525)', games: ['binary', 'logic', 'code', 'cyber', 'typing', 'sq_ks4'],
           fits: {
             binary: 'Year 9: data representation (number bases, binary addition and shifts).',
             code: 'Year 9: algorithmic thinking and coding in Python.',
           } },
       ] },
     // Creative iMedia is OCR Cambridge Nationals (J834). Guess the Logo supports the teaching of unit R094 (visual identity).
-    { id: 'imedia', name: 'Creative iMedia', blurb: 'Planning, designing and making media products', paper: 'squared', games: ['crew', 'audience', 'logos'], exam: 'ocr' },
+    { id: 'imedia', name: 'Creative iMedia', blurb: 'Planning, designing and making media products', paper: 'squared', games: ['crew', 'audience', 'logos', 'sq_imedia'], exam: 'ocr' },
     { id: 'history', name: 'History', blurb: 'People, events and dates', paper: 'lined', games: ['timeline', 'who', 'source'], hidden: true },
     { id: 'geography', name: 'Geography', blurb: 'Places, maps and the planet', paper: 'lined', games: ['grid', 'pin', 'climate'], hidden: true },
     // More subjects taught at the school, kept here for later. They have no games yet, so they're hidden too,
@@ -2713,6 +2762,12 @@ purpose. It is provided "as is" without express or implied warranty.</pre>
         class: 'A passage on the board. Teams take turns to say which word is wrong, and every mistake found scores a point.',
       },
     }),
+    sq_maths: sqGame('sq_maths', 'maths', 'squared', 'Number, fractions, algebra, shape and data', 'number, fractions, algebra, shape and data'),
+    sq_english: sqGame('sq_english', 'english', 'lined', 'Eduqas AO6 and AO2: spelling, punctuation, grammar, devices and homophones', 'spelling, punctuation, grammar, devices and homophones'),
+    sq_science: sqGame('sq_science', 'science', 'squared', 'Cells, elements, food webs, forces and energy', 'cells, elements, food webs, forces and energy'),
+    sq_ks3: sqGame('sq_ks3', 'computing', 'squared', 'Online safety, binary, Python, hardware and algorithms', 'online safety, binary, Python, hardware and algorithms'),
+    sq_ks4: sqGame('sq_ks4', 'computing', 'squared', 'AQA 3.1 to 3.6: data, Boolean logic, networks, cyber security and programming', 'data, Boolean logic, networks, cyber security and programming'),
+    sq_imedia: sqGame('sq_imedia', 'imedia', 'squared', 'R093 1.2, 2.1, 2.3 and 2.4, and R094 1.1', 'job roles, purpose, audience, research and visual identity'),
     tables: cgGame('tables', {
       subject: 'maths',
       title: 'Times Table Sprint',
@@ -14197,6 +14252,622 @@ purpose. It is provided "as is" without express or implied warranty.</pre>
     },
   };
 
+  // ---------- Pick a Square: a board of 5 topics × 5 values, in every subject ----------
+  // Each subject (and each Computing key stage) has its own copy of the game, so its settings are kept
+  // apart. A bank has 5 topics, each with 5 rows worth 100 to 500 points, and each row lists questions as
+  // [question, right answer, wrong answers…]; a board picks one at random for each square. `code` in
+  // backticks is shown in the code font.
+  const SQ_VALUES = [100, 200, 300, 400, 500];
+  const SQ_BANKS = {
+    sq_maths: { name: 'Maths', topics: [
+      ['Number', [
+        [['What is 7 × 8?', '56', '54', '48', '64'], ['What is 9 × 6?', '54', '56', '45', '63']],
+        [['What is 3 cubed?', '27', '9', '6', '81'], ['What is the square root of 81?', '9', '8', '18', '40.5']],
+        [['Round 4,682 to the nearest hundred.', '4,700', '4,600', '4,680', '5,000'], ['What is −3 − 5?', '−8', '−2', '2', '8']],
+        [['What is the highest common factor of 24 and 36?', '12', '6', '4', '72'], ['Which of these is a prime number?', '37', '27', '39', '51']],
+        [['Write 360 as a product of prime factors.', '2³ × 3² × 5', '2² × 3³ × 5', '2³ × 3 × 15', '2 × 3² × 20'], ['Write 0.00052 in standard form.', '5.2 × 10⁻⁴', '5.2 × 10⁴', '5.2 × 10⁻³', '5.2 × 10⁻⁵']],
+      ]],
+      ['Fractions', [
+        [['What is ½ of 30?', '15', '10', '60', '16'], ['Which fraction is the same as 0.25?', '¼', '⅕', '2/5', '½']],
+        [['What is ¾ of 56?', '42', '14', '38', '48'], ['Simplify 12/18 fully.', '2/3', '3/4', '6/9', '4/9']],
+        [['What is 1/3 + 1/4?', '7/12', '2/7', '1/7', '5/12'], ['Write 3/8 as a decimal.', '0.375', '0.38', '0.83', '3.8']],
+        [['What is 2/3 × 3/5?', '2/5', '5/8', '6/8', '9/10'], ['What is 40% of 85?', '34', '32', '45', '3.4']],
+        [['What is 2½ ÷ ¼?', '10', '5/8', '2⅛', '8'], ['Increase £80 by 15%.', '£92', '£95', '£68', '£12']],
+      ]],
+      ['Algebra', [
+        [['If x = 4, what is 3x?', '12', '7', '34', '43'], ['Simplify a + a + a.', '3a', 'a³', 'a + 3', '2a']],
+        [['Solve x + 7 = 12.', 'x = 5', 'x = 19', 'x = 7', 'x = 84'], ['What is the next term: 3, 7, 11, 15, …?', '19', '18', '20', '21']],
+        [['Solve 3x − 4 = 11.', 'x = 5', 'x = 7/3', 'x = 3', 'x = 45'], ['Expand 4(x + 3).', '4x + 12', '4x + 3', 'x + 12', '4x + 7']],
+        [['What is the nth term of 5, 8, 11, 14, …?', '3n + 2', '5n + 3', '3n + 5', 'n + 3'], ['Factorise 6x + 9.', '3(2x + 3)', '6(x + 9)', '3(2x + 9)', '9(6x + 1)']],
+        [['Solve 5x + 3 = 2x + 18.', 'x = 5', 'x = 3', 'x = 7', 'x = 15'], ['Expand (x + 3)(x + 5).', 'x² + 8x + 15', 'x² + 15x + 8', 'x² + 8x + 8', '2x + 8']],
+      ]],
+      ['Shape', [
+        [['How many sides does a hexagon have?', '6', '5', '7', '8'], ['What do the angles in a triangle add up to?', '180°', '360°', '90°', '270°']],
+        [['What is the area of a rectangle 7 cm by 4 cm?', '28 cm²', '22 cm²', '11 cm²', '28 cm'], ['What do angles on a straight line add up to?', '180°', '90°', '360°', '100°']],
+        [['What is the area of a triangle with base 10 cm and height 6 cm?', '30 cm²', '60 cm²', '16 cm²', '32 cm²'], ['What do the angles in a quadrilateral add up to?', '360°', '180°', '540°', '720°']],
+        [['What is the volume of a cuboid 3 cm × 2 cm × 4 cm?', '24 cm³', '52 cm³', '9 cm³', '24 cm²'], ['What is the order of rotational symmetry of a square?', '4', '2', '1', '8']],
+        [['What is the circumference of a circle with diameter 10 cm? (Use π = 3.14.)', '31.4 cm', '78.5 cm', '15.7 cm', '314 cm'], ['What do the interior angles of a pentagon add up to?', '540°', '360°', '720°', '900°']],
+      ]],
+      ['Data', [
+        [['What is the mode of 3, 5, 5, 7, 9?', '5', '3', '5.8', '9'], ['What is the range of 2, 9, 4, 11?', '9', '11', '2', '6.5']],
+        [['What is the median of 4, 8, 1, 6, 3?', '4', '6', '8', '4.4'], ['What is the mean of 2, 4, 6, 8?', '5', '4', '6', '20']],
+        [['A fair dice is rolled. What is the probability of a 6?', '1/6', '1/2', '6', '1/5'], ['What is the median of 3, 7, 8, 10?', '7.5', '7', '8', '7 and 8']],
+        [['A pie chart shows 36 people. How many degrees stand for each person?', '10°', '36°', '1°', '360°'], ['The probability of rain is 0.3. What is the probability of no rain?', '0.7', '0.3', '1.3', '0.03']],
+        [['Two fair coins are flipped. What is the probability of two heads?', '1/4', '1/2', '1/3', '3/4'], ['The mean of four numbers is 6. Three of them are 4, 5 and 7. What is the fourth?', '8', '6', '16', '9']],
+      ]],
+    ] },
+    sq_english: { name: 'English', topics: [
+      ['Spelling', [
+        [['Which spelling is right?', 'because', 'becuase', 'becos', 'beacause'], ['Which spelling is right?', 'friend', 'freind', 'frend', 'freinde']],
+        [['Which spelling is right?', 'necessary', 'neccessary', 'necesary', 'neccesary'], ['Which spelling is right?', 'separate', 'seperate', 'separete', 'seprate']],
+        [['Which spelling is right?', 'definitely', 'definately', 'definitly', 'defenitely'], ['Which spelling is right?', 'beginning', 'begining', 'beggining', 'begginning']],
+        [['Which spelling is right?', 'embarrass', 'embarass', 'embarras', 'embaress'], ['Which spelling is right?', 'occurred', 'occured', 'ocurred', 'ocured']],
+        [['Which spelling is right?', 'conscientious', 'conscientous', 'consciencious', 'conscentious'], ['Which spelling is right?', 'onomatopoeia', 'onomatopeia', 'onomatopoea', 'onamatopoeia']],
+      ]],
+      ['Punctuation', [
+        [['Which mark ends a question?', 'a question mark', 'a full stop', 'a comma', 'an apostrophe'], ['Which of these always needs a capital letter?', 'London', 'city', 'river', 'town']],
+        [['Which shows a bone belonging to one dog?', 'the dog’s bone', 'the dogs bone', 'the dogs’ bone', 'the dog’s’ bone'], ['Which is right?', 'It’s raining.', 'Its raining.', 'Its’ raining.', 'It’s’ raining.']],
+        [['Which uses speech marks correctly?', '“Sit down,” said Mr Hale.', '“Sit down” said Mr Hale.', '“Sit down, said Mr Hale.”', 'Sit down, “said Mr Hale.”'], ['What is the apostrophe in “don’t” for?', 'to show missing letters', 'to show belonging', 'to show a plural', 'to show a pause']],
+        [['Which uses a semicolon correctly?', 'It was late; we went home.', 'It was; late we went home.', 'We bought; apples and pears.', 'Because it was late; we went home.'], ['Which shows toys belonging to several children?', 'the children’s toys', 'the childrens’ toys', 'the childrens toys', 'the children’s’ toys']],
+        [['Which uses a colon correctly?', 'She packed three things: a map, a torch and water.', 'She packed: three things a map, a torch and water.', 'She: packed three things, a map, a torch and water.', 'She packed three: things, a map, a torch and water.'], ['Which sentence is a comma splice?', 'The rain stopped, we went outside.', 'The rain stopped, so we went outside.', 'When the rain stopped, we went outside.', 'The rain stopped. We went outside.']],
+      ]],
+      ['Grammar', [
+        [['“They ___ playing football.” Which word fits?', 'were', 'was', 'is', 'be'], ['Which word is a verb in “The cat slept on the mat”?', 'slept', 'cat', 'mat', 'the']],
+        [['“She ___ her homework yesterday.” Which word fits?', 'did', 'done', 'does', 'do'], ['“We ___ to the park last week.” Which word fits?', 'went', 'gone', 'goes', 'go']],
+        [['Which is Standard English?', 'I didn’t do anything.', 'I didn’t do nothing.', 'I never did nothing.', 'I done nothing.'], ['Which is right?', 'an hour', 'a hour', 'an house', 'a apple']],
+        [['“Jo and ___ went to the shops.” Which word fits?', 'I', 'me', 'myself', 'mine'], ['Which word is an adverb in “She ran quickly to the door”?', 'quickly', 'ran', 'door', 'She']],
+        [['“He should ___ told us.” Which word fits?', 'have', 'of', 'had', 'has'], ['Which sentence keeps to one tense?', 'He opened the door and walked in.', 'He opens the door and walked in.', 'He opened the door and walks in.', 'He open the door and walked in.']],
+      ]],
+      ['Devices', [
+        [['“As brave as a lion.” Which device?', 'simile', 'metaphor', 'alliteration', 'onomatopoeia'], ['“Bang! Crash! Pop!” Which device?', 'onomatopoeia', 'simile', 'personification', 'hyperbole']],
+        [['“The classroom was a zoo.” Which device?', 'metaphor', 'simile', 'alliteration', 'oxymoron'], ['“Sally sells seashells.” Which device?', 'alliteration', 'onomatopoeia', 'metaphor', 'hyperbole']],
+        [['“The sun smiled down on us.” Which device?', 'personification', 'simile', 'alliteration', 'hyperbole'], ['“I’ve told you a million times!” Which device?', 'hyperbole', 'metaphor', 'personification', 'oxymoron']],
+        [['“A deafening silence.” Which device?', 'oxymoron', 'antithesis', 'hyperbole', 'simile'], ['“Do we really want a world without trees?” Which device?', 'rhetorical question', 'repetition', 'oxymoron', 'parenthesis']],
+        [['“It was the best of times, it was the worst of times.” Which device?', 'antithesis', 'oxymoron', 'simile', 'onomatopoeia'], ['“My brother – who never cooks – made dinner.” Which device?', 'parenthesis', 'antithesis', 'rhetorical question', 'hyperbole']],
+      ]],
+      ['Homophones', [
+        [['“___ going to the park.” Which word fits?', 'They’re', 'There', 'Their', 'Thier'], ['“I have ___ sisters.” Which word fits?', 'two', 'to', 'too', 'tow']],
+        [['“Put it over ___.” Which word fits?', 'there', 'their', 'they’re', 'thier'], ['“I ate ___ much cake.” Which word fits?', 'too', 'to', 'two', 'tow']],
+        [['“The dog wagged ___ tail.” Which word fits?', 'its', 'it’s', 'its’', 'it is'], ['“___ coat is this?” Which word fits?', 'Whose', 'Who’s', 'Whos', 'Who is']],
+        [['“The weather will ___ our plans.” Which word fits?', 'affect', 'effect', 'afect', 'effects'], ['“I would rather walk ___ wait.” Which word fits?', 'than', 'then', 'that', 'them']],
+        [['“The head teacher is the ___ of the school.” Which word fits?', 'principal', 'principle', 'principel', 'principall'], ['“She gave me some good ___.” Which word fits?', 'advice', 'advise', 'advices', 'advize']],
+      ]],
+    ] },
+    sq_science: { name: 'Science', topics: [
+      ['Cells', [
+        [['Which part of a cell controls what it does?', 'nucleus', 'cell membrane', 'cytoplasm', 'vacuole'], ['Which of these do plant cells have, but animal cells don’t?', 'cell wall', 'nucleus', 'cell membrane', 'cytoplasm']],
+        [['Where in a cell does photosynthesis happen?', 'chloroplasts', 'mitochondria', 'nucleus', 'ribosomes'], ['What does the cell membrane do?', 'controls what goes in and out', 'makes food by photosynthesis', 'releases energy', 'holds the genetic material']],
+        [['Where in a cell does aerobic respiration happen?', 'mitochondria', 'chloroplasts', 'vacuole', 'cell wall'], ['What is a group of similar cells working together called?', 'a tissue', 'an organ', 'an organ system', 'an organism']],
+        [['Which order is right, smallest first?', 'cell, tissue, organ, organ system', 'tissue, cell, organ, organ system', 'cell, organ, tissue, organ system', 'organ, tissue, cell, organ system'], ['Where in a cell are proteins made?', 'ribosomes', 'vacuole', 'cell wall', 'chloroplasts']],
+        [['How does oxygen move into cells?', 'diffusion', 'osmosis', 'photosynthesis', 'respiration'], ['Which is the word equation for photosynthesis?', 'carbon dioxide + water → glucose + oxygen', 'glucose + oxygen → carbon dioxide + water', 'oxygen + water → glucose + carbon dioxide', 'carbon dioxide + oxygen → glucose + water']],
+      ]],
+      ['Elements', [
+        [['What is the chemical symbol for oxygen?', 'O', 'Ox', 'Om', 'Og'], ['What is the chemical symbol for carbon?', 'C', 'Ca', 'Cb', 'Co']],
+        [['What is the chemical symbol for sodium?', 'Na', 'So', 'S', 'Sd'], ['What is the chemical symbol for iron?', 'Fe', 'Ir', 'I', 'In']],
+        [['Which element has the symbol K?', 'potassium', 'krypton', 'calcium', 'phosphorus'], ['What is the chemical formula for water?', 'H₂O', 'HO₂', 'H₂O₂', 'HO']],
+        [['Which group of the periodic table is the noble gases?', 'Group 0', 'Group 1', 'Group 2', 'Group 7'], ['Which of these is a metal?', 'magnesium', 'sulfur', 'chlorine', 'neon']],
+        [['What is the chemical symbol for gold?', 'Au', 'Ag', 'Go', 'Gd'], ['Which group is the alkali metals, which react with water?', 'Group 1', 'Group 0', 'Group 7', 'Group 2']],
+      ]],
+      ['Food webs', [
+        [['What do the arrows in a food chain show?', 'the way energy moves', 'where the animals live', 'how big the animals are', 'how fast the animals run'], ['What is a producer?', 'a plant or alga that makes its own food', 'an animal that eats plants', 'an animal that eats other animals', 'something that breaks down dead matter']],
+        [['What is a herbivore?', 'an animal that eats only plants', 'an animal that eats only meat', 'an animal that eats plants and meat', 'a plant'], ['Where does the energy in almost every food chain start?', 'the Sun', 'the soil', 'water', 'the roots of plants']],
+        [['In grass → rabbit → fox, which is the primary consumer?', 'rabbit', 'grass', 'fox', 'the Sun'], ['What is an animal that hunts other animals called?', 'a predator', 'prey', 'a producer', 'a herbivore']],
+        [['In grass → rabbit → fox, the foxes die out. What happens to the rabbits at first?', 'they increase', 'they decrease', 'they stay the same', 'they all die out'], ['What breaks down dead plants and animals?', 'decomposers', 'producers', 'herbivores', 'predators']],
+        [['Why are food chains rarely longer than five links?', 'energy is lost at each step', 'animals get too big', 'there aren’t enough plants', 'predators eat each other'], ['What is an omnivore?', 'an animal that eats plants and animals', 'an animal that eats only plants', 'an animal that eats only animals', 'a plant that eats insects']],
+      ]],
+      ['Forces', [
+        [['What is the unit of force?', 'newton (N)', 'kilogram (kg)', 'metre (m)', 'joule (J)'], ['Which force pulls objects towards the Earth?', 'gravity', 'friction', 'upthrust', 'air resistance']],
+        [['Which force slows down a book sliding across a table?', 'friction', 'gravity', 'magnetism', 'upthrust'], ['Which force pushes up on a boat in water?', 'upthrust', 'gravity', 'friction', 'weight']],
+        [['The forces on a still object are balanced. What does it do?', 'stays still', 'speeds up', 'slows down', 'changes direction'], ['What is weight?', 'the force of gravity on a mass', 'how much matter is in an object', 'how big an object is', 'how fast an object falls']],
+        [['A runner covers 100 m in 20 s. What is their average speed?', '5 m/s', '2,000 m/s', '0.2 m/s', '80 m/s'], ['What is the unit of mass?', 'kilogram (kg)', 'newton (N)', 'watt (W)', 'metre (m)']],
+        [['What is the weight of a 10 kg mass on Earth? (g = 10 N/kg)', '100 N', '10 N', '1 N', '1,000 N'], ['A force of 6 N acts on 2 m². What is the pressure?', '3 N/m²', '12 N/m²', '8 N/m²', '4 N/m²']],
+      ]],
+      ['Energy', [
+        [['What is the unit of energy?', 'joule (J)', 'newton (N)', 'watt (W)', 'volt (V)'], ['Which of these is a renewable energy resource?', 'wind', 'coal', 'oil', 'natural gas']],
+        [['Which energy store does a stretched elastic band have?', 'elastic potential', 'kinetic', 'chemical', 'thermal'], ['Which energy store does food have?', 'chemical', 'kinetic', 'elastic potential', 'nuclear']],
+        [['Which energy store does a rolling ball have?', 'kinetic', 'gravitational potential', 'elastic potential', 'nuclear'], ['Which of these is a good thermal insulator?', 'wool', 'copper', 'iron', 'aluminium']],
+        [['A book on a high shelf has energy in which store?', 'gravitational potential', 'kinetic', 'elastic potential', 'chemical'], ['Which of these is a fossil fuel?', 'coal', 'wind', 'solar', 'hydroelectric']],
+        [['A kettle uses 2,000 J, and 1,600 J of it heats the water. How efficient is it?', '80%', '20%', '125%', '1.25%'], ['What is the unit of power?', 'watt (W)', 'joule (J)', 'newton (N)', 'amp (A)']],
+      ]],
+    ] },
+    sq_ks3: { name: 'Computing KS3', topics: [
+      ['Online safety', [
+        [['Which is the strongest password?', 'Blue!Owl-Sings-42', 'password123', '12345678', 'yourname2012'], ['Someone you only know online asks for your address. What should you do?', 'not share it, and tell a trusted adult', 'share it if they seem friendly', 'share just your street', 'send a photo of your house instead']],
+        [['What is phishing?', 'a fake message trying to trick you into giving away details', 'a virus that deletes your files', 'a way to speed up the internet', 'backing up your files'], ['What does it mean when a web address starts with https?', 'the connection is encrypted', 'the website can always be trusted', 'the website is free', 'the website is in the UK']],
+        [['Who usually owns the copyright of a photo you find online?', 'the person who took it', 'anyone who downloads it', 'nobody, because it’s online', 'the search engine'], ['What is plagiarism?', 'passing off someone else’s work as your own', 'copying your own old work', 'quoting a source and naming it', 'using a dictionary']],
+        [['What is two-factor authentication?', 'a second check, like a code sent to your phone, as well as a password', 'having two passwords for one account', 'logging in on two devices', 'changing your password twice a year'], ['What is a digital footprint?', 'the trail of data you leave online', 'a virus that follows you', 'your screen time', 'your typing speed']],
+        [['Which makes a source more credible?', 'it names its author and its sources', 'it has lots of adverts', 'it’s the first search result', 'it uses lots of capital letters'], ['What should you do if you see cyberbullying?', 'save the evidence, report it and tell a trusted adult', 'reply to the bully', 'share it with friends', 'delete everything and say nothing']],
+      ]],
+      ['Binary', [
+        [['How many values can one bit have?', '2', '1', '8', '10'], ['What is binary 101 in denary?', '5', '101', '3', '6']],
+        [['What is binary 1000 in denary?', '8', '1000', '4', '16'], ['How many bits are in a byte?', '8', '4', '16', '2']],
+        [['What is binary 1111 in denary?', '15', '16', '4', '1111'], ['What is denary 6 in binary?', '110', '011', '101', '111']],
+        [['What is binary 1010 1010 in denary?', '170', '85', '160', '255'], ['What is the largest number 8 bits can hold?', '255', '256', '128', '8']],
+        [['What is denary 200 in binary?', '1100 1000', '1010 0000', '1100 0100', '1000 1100'], ['What is 0101 + 0011 in binary?', '1000', '0110', '1001', '0111']],
+      ]],
+      ['Python', [
+        [['What does `print("Hi")` show?', 'Hi', '"Hi"', 'print Hi', 'nothing'], ['Which symbol starts a comment in Python?', '#', '//', '--', '*']],
+        [['What does `print(3 + 4)` show?', '7', '3 + 4', '34', 'an error'], ['What does `input()` do?', 'waits for the user to type something', 'shows text on the screen', 'repeats some code', 'stops the program']],
+        [['What does `print(3 * "ab")` show?', 'ababab', '3ab', 'ab3', 'an error'], ['What data type is `3.5`?', 'float', 'integer', 'string', 'Boolean']],
+        [['`x = 10`, then `x = x + 5`. What is `x` now?', '15', '10', '5', 'x + 5'], ['How many numbers does `for i in range(4): print(i)` print?', '4', '3', '5', '1']],
+        [['What does `print(len("hello"))` show?', '5', '4', '6', 'hello'], ['What does `print(7 // 2)` show?', '3', '3.5', '4', '1']],
+      ]],
+      ['Hardware', [
+        [['Which of these is an input device?', 'keyboard', 'monitor', 'printer', 'speakers'], ['Which of these is an output device?', 'monitor', 'mouse', 'microphone', 'scanner']],
+        [['What does CPU stand for?', 'central processing unit', 'computer power unit', 'central program utility', 'control processing unit'], ['Which keeps its data when the power is off?', 'secondary storage, like an SSD', 'RAM', 'the CPU’s registers', 'cache']],
+        [['What is RAM used for?', 'holding the programs and data in use', 'storing files permanently', 'showing images on the screen', 'connecting to Wi-Fi'], ['Which is the smallest?', 'kilobyte', 'megabyte', 'gigabyte', 'terabyte']],
+        [['What does an operating system do?', 'manages the hardware and runs programs', 'only browses the web', 'stores photos', 'types documents'], ['Which part of the CPU does the maths and logic?', 'the ALU (arithmetic logic unit)', 'the control unit', 'the cache', 'the clock']],
+        [['What does a CPU’s clock speed measure?', 'how many cycles it carries out each second', 'how much memory it has', 'how fast the internet is', 'how long the battery lasts'], ['What is the fetch–decode–execute cycle?', 'how the CPU carries out instructions', 'how files are saved', 'how data is sent online', 'how a program is written']],
+      ]],
+      ['Algorithms', [
+        [['What is an algorithm?', 'a set of steps to solve a problem', 'a type of computer', 'a programming language', 'a computer virus'], ['What is a bug?', 'a mistake in a program', 'a fast computer', 'a type of loop', 'a comment']],
+        [['What is decomposition?', 'breaking a problem into smaller parts', 'removing unnecessary detail', 'finding patterns', 'writing code'], ['What is abstraction?', 'removing unnecessary detail', 'breaking a problem into parts', 'repeating code', 'testing code']],
+        [['What is a loop in a program for?', 'repeating instructions', 'making a decision', 'storing a value', 'ending the program'], ['Which flowchart shape shows a decision?', 'diamond', 'rectangle', 'oval', 'parallelogram']],
+        [['Which search checks every item in order, one by one?', 'linear search', 'binary search', 'bubble sort', 'merge sort'], ['What is selection in programming?', 'choosing which code runs, using if', 'repeating code', 'running steps in order', 'storing data']],
+        [['A binary search only works on a list that is…', 'sorted', 'short', 'all numbers', 'unsorted'], ['Which flowchart shape shows an input or an output?', 'parallelogram', 'diamond', 'rectangle', 'oval']],
+      ]],
+    ] },
+    sq_ks4: { name: 'Computing KS4', topics: [
+      ['Data', [
+        [['What is binary 1101 in decimal?', '13', '11', '14', '1101'], ['How many bits are in a nibble?', '4', '8', '2', '16']],
+        [['What is decimal 172 in hexadecimal?', 'AC', 'CA', 'AB', '12C'], ['What is hexadecimal F in decimal?', '15', '16', '14', '10']],
+        [['How many bytes are in 1 kilobyte (kB)?', '1,000', '1,024', '8,000', '100'], ['What is 0000 0110 after a logical left shift of one place?', '0000 1100', '0000 0011', '0110 0000', '0000 0111']],
+        [['How many different values can 7 bits represent?', '128', '127', '256', '7'], ['What does a character set such as ASCII do?', 'maps each character to a binary code', 'compresses images', 'encrypts text', 'sorts a list']],
+        [['An image is 100 × 50 pixels with a colour depth of 8 bits. How many bytes is it, without metadata?', '5,000', '40,000', '625', '158'], ['What does run-length encoding (RLE) store?', 'each value and how many times it repeats in a row', 'each value only once', 'a tree of codes', 'the difference between values']],
+      ]],
+      ['Logic', [
+        [['Which gate outputs 1 only when both inputs are 1?', 'AND', 'OR', 'NOT', 'XOR'], ['Which gate has only one input?', 'NOT', 'AND', 'OR', 'XOR']],
+        [['Which gate outputs 1 when at least one input is 1?', 'OR', 'AND', 'NOT', 'XOR'], ['What is NOT 1?', '0', '1', '2', '10']],
+        [['What is 1 XOR 1?', '0', '1', '2', '11'], ['In Boolean notation, what does A · B mean?', 'A AND B', 'A OR B', 'NOT A', 'A XOR B']],
+        [['In Boolean notation, what does A + B mean?', 'A OR B', 'A AND B', 'A XOR B', 'NOT B'], ['In Boolean notation, what does A ⊕ B mean?', 'A XOR B', 'A OR B', 'A AND B', 'NOT (A AND B)']],
+        [['What is NOT (1 AND 0)?', '1', '0'], ['How many rows does a truth table for 3 inputs have?', '8', '6', '3', '9']],
+      ]],
+      ['Networks', [
+        [['What does LAN stand for?', 'local area network', 'large access network', 'linked area node', 'local access node'], ['Which kind of network covers a large geographical area?', 'WAN', 'LAN', 'PAN', 'USB']],
+        [['Which protocol sends email?', 'SMTP', 'IMAP', 'HTTP', 'FTP'], ['In which topology does every device connect to a central switch?', 'star', 'bus', 'ring', 'mesh']],
+        [['Which protocol sends web pages securely?', 'HTTPS', 'HTTP', 'FTP', 'SMTP'], ['What is a protocol?', 'a set of rules for how devices communicate', 'a cable that joins computers', 'a type of network', 'a device that forwards packets']],
+        [['Which layer of TCP/IP does HTTP belong to?', 'application', 'transport', 'internet', 'link'], ['Which layer of TCP/IP does IP belong to?', 'internet', 'application', 'transport', 'link']],
+        [['Which layer of TCP/IP do Ethernet and Wi-Fi belong to?', 'link', 'internet', 'transport', 'application'], ['What does TCP do?', 'splits data into packets and checks they all arrive', 'gives each device an address', 'sends email', 'encrypts web pages']],
+      ]],
+      ['Cyber security', [
+        [['What is malware?', 'software written to cause harm', 'a broken keyboard', 'a firewall', 'a type of password'], ['What does a firewall do?', 'checks traffic in and out of a network and blocks what isn’t allowed', 'removes viruses from files', 'stops a computer overheating', 'backs up files']],
+        [['What is social engineering?', 'tricking people into giving away information or access', 'writing a virus', 'building a network', 'designing a website'], ['What is shouldering?', 'watching someone enter a password or PIN', 'carrying a laptop', 'sharing a screen in a meeting', 'hacking a webcam']],
+        [['What is pharming?', 'redirecting users to a fake website', 'sending fake emails', 'guessing passwords', 'overloading a server'], ['What is penetration testing?', 'trying to break into a system, with permission, to find its weaknesses', 'checking that a printer works', 'measuring network speed', 'testing a screen for dead pixels']],
+        [['What is a brute-force attack?', 'trying every possible password until one works', 'damaging a server', 'phishing many people at once', 'stealing a laptop'], ['Why do websites use CAPTCHA?', 'to check the user is a human', 'to encrypt data', 'to speed up logging in', 'to block viruses']],
+        [['What is a trojan?', 'malware disguised as useful software', 'a virus that only spreads by email', 'a firewall rule', 'a strong password'], ['What is blagging?', 'inventing a story to persuade someone to give away information', 'watching someone type a PIN', 'sending lots of emails at once', 'guessing passwords']],
+      ]],
+      ['Programming', [
+        [['What is a variable?', 'a named place to store a value that can change', 'a value that never changes', 'a type of loop', 'an error in a program'], ['Which data type stores True or False?', 'Boolean', 'integer', 'real', 'string']],
+        [['What are the three basic programming constructs?', 'sequence, selection and iteration', 'input, process and output', 'variables, constants and arrays', 'loops, lists and strings'], ['What is iteration?', 'repeating a set of instructions', 'choosing between options', 'running steps in order', 'storing a value']],
+        [['What is 17 MOD 5?', '2', '3', '3.4', '12'], ['What is 17 DIV 5?', '3', '2', '3.4', '85']],
+        [['What happens in each pass of a bubble sort?', 'neighbouring items are compared and swapped if they’re in the wrong order', 'the list is split in half', 'the middle item is checked', 'items are merged into new lists'], ['Which needs the list to be sorted first?', 'binary search', 'linear search', 'bubble sort', 'merge sort']],
+        [['What is a subroutine?', 'a named block of code that can be called again and again', 'a loop that never ends', 'a variable that can’t change', 'a comment in the code'], ['The allowed range is 1 to 100. What kind of test data is 100?', 'boundary', 'normal', 'erroneous', 'random']],
+      ]],
+    ] },
+    sq_imedia: { name: 'Creative iMedia', topics: [
+      ['Job roles', [
+        [['Who takes still images for a media product?', 'photographer', 'camera operator', 'illustrator / graphic artist', 'video editor'], ['Who writes the dialogue and directions for actors?', 'script writer', 'copy writer', 'director', 'editor (publishing)']],
+        [['Who cuts and joins raw footage together?', 'video editor', 'sound editor', 'camera operator', 'director'], ['Who writes the persuasive text for adverts and websites?', 'copy writer', 'script writer', 'content creator', 'editor (publishing)']],
+        [['Who designs logos for a client’s brand?', 'graphic designer', 'web developer', 'photographer', 'audio technician'], ['Who writes the code that makes a website work?', 'web developer', 'web designer', 'games programmer / developer', 'content creator']],
+        [['Who places and monitors the microphones on set?', 'audio technician', 'sound editor', 'camera operator', 'video editor'], ['Is a production manager a creative, technical or senior role?', 'senior', 'creative', 'technical']],
+        [['Who organises the production schedule and manages the budget?', 'production manager', 'director', 'campaign manager', 'creative director'], ['In which phase does a sound editor mainly work?', 'post-production', 'pre-production', 'production']],
+      ]],
+      ['Purpose', [
+        [['A cartoon made to make children laugh. What is its main purpose?', 'entertain', 'educate', 'inform', 'influence'], ['A TV advert for a new chocolate bar. What is its main purpose?', 'advertise or promote', 'educate', 'entertain', 'inform']],
+        [['A revision video explaining how to solve equations. What is its main purpose?', 'educate', 'entertain', 'advertise or promote', 'influence'], ['A weather forecast on a news website. What is its main purpose?', 'inform', 'entertain', 'advertise or promote', 'influence']],
+        [['A charity campaign asking people to stop dropping litter. What is its main purpose?', 'influence', 'entertain', 'inform', 'advertise or promote'], ['A cinema trailer for a new film. What is its main purpose?', 'advertise or promote', 'educate', 'inform', 'influence']],
+        [['Which product is mainly made to educate?', 'an online maths course', 'a comedy podcast', 'a billboard for a sports drink', 'a music video'], ['Which product is mainly made to inform?', 'a school newsletter listing the term dates', 'a horror film', 'a poster for a sale', 'a puzzle game']],
+        [['A game app that teaches times tables through levels has two purposes. Which two?', 'educate and entertain', 'advertise and inform', 'influence and promote', 'inform and influence'], ['What does a product made to influence try to do?', 'change what people think or do', 'make people laugh', 'teach a skill', 'list the facts']],
+      ]],
+      ['Audience', [
+        [['A cartoon channel for children aged 3 to 6 targets which segment?', 'age', 'gender', 'income', 'occupation'], ['A local radio station for one city targets which segment?', 'location', 'age', 'education', 'income']],
+        [['A journal for doctors and nurses targets which segment?', 'occupation', 'location', 'income', 'gender'], ['A video channel for people who love knitting targets which segment?', 'interests', 'age', 'location', 'occupation']],
+        [['An advert for watches costing over £10,000 targets which segment?', 'income', 'age', 'location', 'gender'], ['Why do producers split an audience into segments?', 'to make products that suit a particular group', 'to make products cheaper', 'to reach no one in particular', 'to avoid doing research']],
+        [['A newspaper in long, complex sentences for highly educated readers targets which segment?', 'education', 'occupation', 'location', 'gender'], ['A fitness magazine written for men targets which segment?', 'gender', 'location', 'occupation', 'education']],
+        [['What is a client’s target audience?', 'the group of people a product is made for', 'everyone who sees the product', 'the people who make the product', 'the client’s staff'], ['A leaflet on feeding a family for under £20 a week targets which segment?', 'income', 'location', 'occupation', 'education']],
+      ]],
+      ['Research', [
+        [['You write a questionnaire and hand it out. What kind of research is it?', 'primary', 'secondary'], ['Reading a book about the history of video games. What kind of research is it?', 'secondary', 'primary']],
+        [['Viewing figures for TV shows, from a newspaper report. What kind of research is it?', 'secondary', 'primary'], ['A focus group run by a company to test its own game. What kind of research is it?', 'primary', 'secondary']],
+        [['Scores out of 10 are what kind of data?', 'quantitative', 'qualitative'], ['Opinions in people’s own words are what kind of data?', 'qualitative', 'quantitative']],
+        [['Which of these is a primary research method?', 'an interview', 'a newspaper article', 'a published book', 'a report on a website'], ['Which of these is a secondary source?', 'a journal', 'a focus group', 'an online survey you run', 'an interview']],
+        [['A YouTuber’s poll gets 640 votes for one idea and 210 for another. What kind of research and data?', 'primary, quantitative', 'primary, qualitative', 'secondary, quantitative', 'secondary, qualitative'], ['A producer reads critics’ reviews of similar films. What kind of research and data?', 'secondary, qualitative', 'secondary, quantitative', 'primary, qualitative', 'primary, quantitative']],
+      ]],
+      ['Visual identity', [
+        [['Which of these is an element of a visual identity?', 'a logo', 'a price list', 'a staff rota', 'the opening hours'], ['What is a slogan, or strapline?', 'a short, memorable phrase that goes with a brand', 'the brand’s colours', 'the brand’s font', 'a picture of the product']],
+        [['What is typography?', 'the style and arrangement of text', 'the choice of colours', 'the brand’s name', 'the layout of images'], ['What is a colour palette?', 'the set of colours a brand uses', 'a set of paints', 'the brightest colour in a logo', 'a type of font']],
+        [['Why does a brand use the same logo everywhere?', 'so people recognise it', 'to save on printing', 'because logos can’t be changed', 'to confuse competitors'], ['Which three are the elements of a visual identity?', 'name, logo and slogan', 'colour, price and logo', 'font, layout and price', 'name, address and logo']],
+        [['A brand uses green to suggest nature. What does this show?', 'colours can carry meaning', 'green is the cheapest colour', 'every logo must be green', 'colour doesn’t matter'], ['What is brand loyalty?', 'customers choosing the same brand again and again', 'a brand never changing its logo', 'staff staying at a company', 'a brand having many slogans']],
+        [['Which is part of the design of a visual identity, not one of its elements?', 'typography', 'the name', 'the logo', 'the slogan'], ['What are a brand’s values?', 'what the brand stands for, such as quality or fairness', 'how much the brand is worth', 'the prices the brand charges', 'the brand’s share price']],
+      ]],
+    ] },
+  };
+  const sqNum = (n) => Number(n).toLocaleString('en-GB');
+  const sqFmt = (s) => esc(s).replace(/`([^`]+)`/g, '<code class="sq-code">$1</code>');
+  // A teacher's own board: one question per line, "topic | question | answer | wrong answers…", or pasted
+  // from a spreadsheet (one column each). Wrong answers are optional: without them, the answer is marked
+  // right or wrong by hand. A topic's questions are worth 100, 200, 300… in the order they're typed.
+  const SQ_MAX_TOPICS = 6;
+  function sqCustom(text) {
+    const topics = [];
+    const bad = [];
+    const over = [];
+    String(text || '').split(/\r?\n/).forEach((line, n) => {
+      if (!line.trim()) return;
+      const parts = (line.includes('\t') ? line.split('\t') : line.split('|')).map((p) => p.trim());
+      while (parts.length && !parts[parts.length - 1]) parts.pop();
+      if (!topics.length && /^(topic|category)$/i.test(parts[0])) return; // a spreadsheet's heading row
+      if (parts.length < 3 || parts.slice(0, 3).some((p) => !p)) { bad.push(n + 1); return; }
+      const [name, q, a, ...wrong] = parts;
+      let t = topics.find((x) => x.name.toLowerCase() === name.toLowerCase());
+      if (!t && topics.length >= SQ_MAX_TOPICS) { over.push(n + 1); return; }
+      if (!t) { t = { name, qs: [] }; topics.push(t); }
+      if (t.qs.length >= SQ_VALUES.length) { over.push(n + 1); return; }
+      const others = [...new Set(wrong.filter((x) => x && x.toLowerCase() !== a.toLowerCase()))];
+      t.qs.push([q, a, ...others]);
+    });
+    return { topics, bad, over };
+  }
+  function sqMakeBoard(id, s) {
+    const mine = s.source === 'mine';
+    const topics = mine ? sqCustom(s.custom).topics.map((t) => ({ name: t.name, rows: t.qs }))
+      : SQ_BANKS[id].topics.map(([name, rows]) => ({ name, rows: rows.map((list) => list[Math.floor(Math.random() * list.length)]) }));
+    const cells = [];
+    topics.forEach((t, c) => t.rows.forEach(([text, a, ...wrong], r) => {
+      cells.push({ c, r, v: SQ_VALUES[r], text, a, opts: wrong.length ? shuffle([a, ...wrong]) : null });
+    }));
+    return {
+      title: mine ? 'Your own board' : `${SQ_BANKS[id].name} board`,
+      topics: topics.map((t) => t.name),
+      rows: Math.max(1, ...topics.map((t) => t.rows.length)),
+      cells,
+      doubles: Number(s.doubles) || 0,
+      steals: s.steals !== 'off',
+    };
+  }
+  function sqReset(q) {
+    // Practising after a board on your own: only the squares that were missed come back.
+    if (q.work && q.work.order && q.work.order.some((k) => q.work.taken[k].by < 0)) {
+      const missed = q.work.order.filter((k) => q.work.taken[k].by < 0);
+      q.cells = missed.map((k) => q.cells[k]);
+      if (!q.title.startsWith('Practise: ')) q.title = `Practise: ${q.title}`;
+    }
+    // Double squares hide anywhere but the 100 row, so the first pick never lands on one.
+    const pool = q.cells.map((_, k) => k).filter((k) => q.cells[k].r > 0);
+    q.work = {
+      cur: 0, taken: {}, order: [], open: null, by: null, tried: [], cut: [], half: false, stealing: false, shown: false,
+      result: null, flash: null, log: [], pts: 0, doubles: shuffle(pool).slice(0, Math.min(q.doubles, pool.length)),
+    };
+  }
+  const sqLeft = (q) => q.cells.length - q.work.order.length;
+  const sqWorth = (q, k) => q.cells[k].v * (q.work.doubles.includes(k) ? 2 : 1);
+  function sqFocus(q) {
+    const w = q.work;
+    if (w.open === null) { const k = q.cells.findIndex((_, i) => !w.taken[i]); return k >= 0 ? `sq-cell-${k}` : ''; }
+    if (w.result) return 'sq-back';
+    const cell = q.cells[w.open];
+    if (cell.opts) return `sq-opt-${cell.opts.findIndex((_, i) => !w.tried.includes(i) && !w.cut.includes(i))}`;
+    return cgRun().style !== 'solo' || w.shown ? 'sq-mark-1' : 'sq-show';
+  }
+  // Closes the open square. `by` scored it, or -1 for nobody.
+  function sqSettle(q, run, by, how) {
+    const w = q.work;
+    let pts = 0;
+    if (by >= 0) {
+      pts = sqWorth(q, w.open);
+      if (w.half) pts = Math.round(pts / 2);
+      if (run.style === 'solo') w.pts += pts;
+      else run.scores[by] += pts;
+    }
+    w.taken[w.open] = { by, pts, stole: w.stealing && by >= 0 };
+    w.order.push(w.open);
+    w.result = { by, pts, how };
+    w.flash = null;
+    pendingFocus = 'sq-back';
+  }
+  function sqAnswer(q, run, ok, i) {
+    const w = q.work;
+    const cell = q.cells[w.open];
+    if (ok) { sqSettle(q, run, w.by, 'right'); return true; }
+    if (i !== null) w.tried.push(i);
+    if (run.style !== 'solo' && q.steals && !w.stealing && run.names.length > 1) {
+      const from = w.by;
+      w.stealing = true;
+      w.by = (from + 1) % run.names.length;
+      w.flash = { ok: false, html: `✗ ${i !== null ? `Not “${sqFmt(cell.opts[i])}”` : 'Not quite'}, ${esc(run.names[from])}. ${esc(run.names[w.by])} can steal it.` };
+      pendingFocus = sqFocus(q);
+      return true;
+    }
+    sqSettle(q, run, -1, 'wrong');
+    return true;
+  }
+  function sqAct(act, el, q, run) {
+    const w = q.work;
+    const solo = run.style === 'solo';
+    w.log.push(act);
+    if (w.open === null) {
+      if (act !== 'sq') return false;
+      const k = Number(el.dataset.k);
+      if (!q.cells[k] || w.taken[k]) return false;
+      Object.assign(w, { open: k, by: solo ? 0 : w.cur, tried: [], cut: [], half: false, stealing: false, shown: false, result: null, flash: null });
+      pendingFocus = sqFocus(q);
+      return true;
+    }
+    const cell = q.cells[w.open];
+    if (w.result) {
+      if (act !== 'sqback') return false;
+      w.open = null;
+      w.result = null;
+      if (!solo) w.cur = (w.cur + 1) % run.names.length;
+      if (!sqLeft(q)) { sqFinish(q, run); return false; }
+      pendingFocus = sqFocus(q);
+      return true;
+    }
+    if (act === 'sqopt' && cell.opts) {
+      const i = Number(el.dataset.i);
+      if (!cell.opts[i] || w.tried.includes(i) || w.cut.includes(i)) return false;
+      return sqAnswer(q, run, cell.opts[i] === cell.a, i);
+    }
+    if (act === 'sqmark' && !cell.opts && (!solo || w.shown)) return sqAnswer(q, run, el.dataset.ok === '1', null);
+    if (act === 'sqshow') {
+      if (solo && !cell.opts && !w.shown) { w.shown = true; pendingFocus = 'sq-mark-1'; return true; }
+      if (!solo) { sqSettle(q, run, -1, 'shown'); return true; }
+    }
+    if (act === 'sqpass' && w.stealing) { sqSettle(q, run, -1, 'passed'); return true; }
+    if (act === 'sqhalf' && solo && cell.opts && cell.opts.length > 2 && !w.half) {
+      const wrong = cell.opts.map((_, i) => i).filter((i) => cell.opts[i] !== cell.a);
+      w.cut = shuffle(wrong).slice(0, cell.opts.length - 2);
+      w.half = true;
+      pendingFocus = sqFocus(q);
+      return true;
+    }
+    return false;
+  }
+  function sqResultHTML(q, run) {
+    const w = q.work;
+    const r = w.result;
+    const cell = q.cells[w.open];
+    const answer = `<p class="sq-answer-line">The answer: <b>${sqFmt(cell.a)}</b></p>`;
+    if (r.by >= 0) {
+      const pts = `+${sqNum(r.pts)}`;
+      const who = run.style === 'solo' ? `✓ Right! ${pts}${w.half ? ' (half points, for removing two answers)' : ''}`
+        : `✓ ${esc(run.names[r.by])} ${w.taken[w.open].stole ? 'stole it' : 'got it'}: ${pts}`;
+      return `<p class="fbx-flash ok" role="status">${who}</p>${cell.opts ? '' : answer}`;
+    }
+    const lead = { shown: 'Here’s the answer.', passed: '✗ No steal this time.', wrong: run.style === 'solo' ? '✗ Not quite.' : '✗ Nobody got it.' }[r.how];
+    return `<p class="fbx-flash bad" role="status">${lead}</p>${answer}`;
+  }
+  function sqBoard(q, ctx) {
+    const w = q.work;
+    const run = ctx.run;
+    const solo = run.style === 'solo';
+    if (w.open === null) {
+      const left = sqLeft(q);
+      const hiding = w.doubles.some((k) => !w.taken[k]);
+      const head = `<p class="sq-top">${solo ? `<span>Score <b>${sqNum(w.pts)}</b></span>` : ''}<span>${left} square${left === 1 ? '' : 's'} left</span>${hiding ? `<span>${w.doubles.length === 1 ? 'A double square is' : 'Double squares are'} hiding somewhere</span>` : ''}</p>`;
+      const cols = q.topics.length;
+      let grid = q.topics.map((t) => `<div class="sq-topic">${esc(t)}</div>`).join('');
+      for (let r = 0; r < q.rows; r += 1) {
+        for (let c = 0; c < cols; c += 1) {
+          const k = q.cells.findIndex((x) => x.c === c && x.r === r);
+          const cell = q.cells[k];
+          const t = k >= 0 ? w.taken[k] : null;
+          if (k < 0) grid += '<div class="sq-cell empty" aria-hidden="true"></div>';
+          else if (t) {
+            const label = t.by < 0 ? (solo ? '✗' : '–') : solo ? `✓ ${sqNum(t.pts)}` : run.names[t.by];
+            const cls = t.by < 0 ? 'missed' : solo ? 'c3' : cgColour(run, t.by);
+            const said = t.by < 0 ? (solo ? 'wrong' : 'nobody scored') : solo ? `right, ${t.pts} points` : `won by ${run.names[t.by]}`;
+            grid += `<div class="sq-cell taken ${cls}"><span class="sr">${esc(q.topics[c])} ${cell.v}: ${esc(said)}</span><span aria-hidden="true">${esc(label)}</span></div>`;
+          } else {
+            grid += `<button type="button" class="sq-cell" data-act="sq" data-k="${k}" id="sq-cell-${k}" aria-label="${esc(q.topics[c])} for ${cell.v}"${ctx.interactive ? '' : ' disabled'}>${cell.v}</button>`;
+          }
+        }
+      }
+      return `<div class="sq-board">${head}<div class="sq-grid" style="--cols: ${cols}">${grid}</div>${flashHTML(w.flash)}</div>`;
+    }
+    const k = w.open;
+    const cell = q.cells[k];
+    const res = w.result;
+    const where = `<p class="sq-where"><span>${esc(q.topics[cell.c])} · ${cell.v}</span>${w.doubles.includes(k) ? `<span class="sq-double">Double points: ${sqNum(sqWorth(q, k))}!</span>` : ''}</p>`;
+    let body = '';
+    if (cell.opts) {
+      body = `<div class="answer-btns answer-list sq-opts">${cell.opts.map((o, i) => {
+        if (w.cut.includes(i)) return '';
+        const tried = w.tried.includes(i);
+        const right = Boolean(res) && o === cell.a;
+        return `<button type="button" class="answer-btn${tried ? ' tried' : ''}${right ? ' right' : ''}" data-act="sqopt" data-i="${i}" id="sq-opt-${i}"${res || tried || !ctx.interactive ? ' disabled' : ''}><kbd class="key">${i + 1}</kbd><span>${sqFmt(o)}</span></button>`;
+      }).join('')}</div>`;
+    } else if (!res && solo && w.shown) {
+      body = `<p class="sq-answer">${sqFmt(cell.a)}</p>`;
+    }
+    if (!res && !cell.opts) {
+      body += solo && !w.shown ? '<button type="button" class="btn-primary" data-act="sqshow" id="sq-show">Show the answer</button>'
+        : `<div class="sq-marks"><button type="button" class="btn-primary" data-act="sqmark" data-ok="1" id="sq-mark-1">${solo ? 'I got it' : 'Right'}</button><button type="button" class="btn-ghost" data-act="sqmark" data-ok="0" id="sq-mark-0">${solo ? 'I didn’t' : 'Wrong'}</button></div>`;
+    }
+    const after = res ? `${sqResultHTML(q, run)}<button type="button" class="btn-primary" data-act="sqback" id="sq-back">${sqLeft(q) ? 'Back to the board' : 'Finish the board'}</button>` : flashHTML(w.flash);
+    return `<div class="sq-board sq-q">${where}<p class="sq-text">${sqFmt(cell.text)}</p>${body}${after}</div>`;
+  }
+  function sqFinish(q, run) {
+    const w = q.work;
+    const right = w.order.filter((k) => w.taken[k].by >= 0).length;
+    const total = q.cells.length;
+    const solo = run.style === 'solo';
+    cgDone({
+      correct: solo ? right === total : true,
+      head: solo ? `Board cleared: ${right} of ${total} right, for ${sqNum(w.pts)} points.` : 'The board is clear!',
+      html: solo ? (right < total ? '<p>Practise the squares you missed from the results.</p>' : '<p>Every square right!</p>') : `<p>${right} of ${total} squares were answered right.</p>`,
+      note: `${right} of ${total} squares right`,
+    }, null, solo ? w.pts : 0);
+  }
+  function sqPreview(id) {
+    const tops = SQ_BANKS[id].topics.slice(0, 3).map(([t]) => `<div class="sq-topic">${esc(t)}</div>`).join('');
+    const row = (v, taken) => [0, 1, 2].map((c) => (taken === c ? '<div class="sq-cell taken c2">Pink</div>' : `<div class="sq-cell">${v}</div>`)).join('');
+    return `<div class="sq-board mini"><div class="sq-grid" style="--cols: 3">${tops}${row(100, 1)}${row(200, -1)}${row(300, 0)}</div></div>`;
+  }
+  function sqDef(id) {
+    return {
+      titleHTML: 'Pick a <span class="hl c4">Square</span>',
+      lede: 'Choose a topic and a value. The higher the value, the harder the question.',
+      noun: 'Board',
+      plural: 'boards',
+      maxPlayers: 4,
+      maxTries: 1,
+      maxPoints: 500,
+      autoNext: false,
+      noTimer: true,
+      noHint: true,
+      noAdjust: true,
+      noScoreline: true,
+      hideRows: true,
+      playedNote: (run) => `${run.qs[0].work.order.length} of ${run.qs[0].cells.length} squares played.`,
+      startLabel: 'Start the board',
+      side(run, q) {
+        if (run.style !== 'solo' || !q || !q.work) return null;
+        const w = q.work;
+        const right = w.order.filter((k) => w.taken[k].by >= 0).length;
+        return { title: 'Your score', html: `<p class="team-total"><span>${sqNum(w.pts)}</span>points</p><p class="help">${right} of ${w.order.length} square${w.order.length === 1 ? '' : 's'} right, ${sqLeft(q)} to go.</p>` };
+      },
+      groupStyle: 'claim',
+      classStyle: 'claim',
+      tip: 'Warm up on the lower values, then go for the big squares.',
+      options: [
+        { key: 'source', label: 'Questions', choices: [['built', `The ${SQ_BANKS[id].name} board`], ['mine', 'Your own board']] },
+        { key: 'custom', type: 'textarea', label: 'Your own board', showIf: (s) => s.source === 'mine',
+          placeholder: 'Fractions | What is ½ of 30? | 15 | 10 | 60 | 16\nFractions | What is ¾ of 56? | 42 | 14 | 38 | 48\nKey words | What does “perimeter” mean? | the distance around a shape',
+          help: 'One question per line: the topic, the question, the answer, then any wrong answers, each split by |. You can paste from a spreadsheet too, with one column each. A topic’s first question is worth 100, the next 200, and so on: up to 5 questions in each of up to 6 topics. Leave out the wrong answers and you mark each answer right or wrong yourself.' },
+        { key: 'doubles', label: 'Hidden double squares', choices: [['2', '2'], ['1', '1'], ['0', 'None']] },
+        { key: 'steals', label: 'Steals', modes: ['groups', 'class'], choices: [['on', 'On'], ['off', 'Off']] },
+      ],
+      defaults: { source: 'built', custom: '', doubles: '2', steals: 'on' },
+      validate(s) {
+        if (s.source !== 'mine') return '';
+        const { topics, bad, over } = sqCustom(s.custom);
+        const lines = (list) => `${list.length === 1 ? 'line' : 'lines'} ${listAnd(list.slice(0, 3).map(String))}${list.length > 3 ? ' and more' : ''}`;
+        if (bad.length) return `Check ${lines(bad)}: each line needs a topic, a question and an answer, split by |.`;
+        if (over.length) return `Too many questions at ${lines(over)}: up to 5 in a topic, and up to ${SQ_MAX_TOPICS} topics.`;
+        if (topics.reduce((n, t) => n + t.qs.length, 0) < 2) return 'Type at least two questions, like “Fractions | What is ½ of 30? | 15”.';
+        return '';
+      },
+      peopleHelp: '2 to 4 players or teams share this computer and take turns to pick a square.',
+      personNote: (i) => (i === 0 ? 'Picks first' : ''),
+      how(mode, s) {
+        const doubles = s.doubles === '0' ? '' : `${s.doubles === '1' ? 'One square hides' : 'Two squares hide'} double points.`;
+        const own = s.source === 'mine' ? 'Questions without wrong answers have Right and Wrong buttons to mark the answer.' : '';
+        if (mode === 'groups') {
+          return ['2 to 4 players or teams share this computer and one board.',
+            'On your turn, pick a topic and a value, then answer. A right answer scores the value.',
+            s.steals === 'off' ? 'A wrong answer scores nothing, and it’s the next team’s pick.' : 'Get it wrong and the next team can steal it. Either way, it’s the next team’s pick.',
+            doubles, own, 'When the board is clear, the team with the most points wins.'].filter(Boolean);
+        }
+        if (mode === 'class') {
+          return ['Put this on the board and split the class into teams.',
+            'Teams take turns to choose a topic and a value. Click that square.',
+            'The team answers aloud. Click their answer. Nobody knows? Show the answer.',
+            s.steals === 'off' ? 'A wrong answer scores nothing.' : 'Get it wrong and the next team can steal it.',
+            doubles, own].filter(Boolean);
+        }
+        return ['Pick a topic and a value. The higher the value, the harder the question.',
+          'A right answer adds the value to your score.',
+          doubles, 'Stuck? Remove two wrong answers, for half the points.',
+          own, 'Clear the board, then practise any squares you missed.'].filter(Boolean);
+      },
+      count: () => 1,
+      makeQuestions: (s) => [sqMakeBoard(id, s)],
+      reset: (q) => sqReset(q),
+      cardLabel(q) {
+        const w = q.work;
+        return w.open === null ? q.title : `${q.topics[q.cells[w.open].c]} for ${q.cells[w.open].v}`;
+      },
+      progressLabel: (run, q) => `${q.work.order.length} of ${q.cells.length} squares played`,
+      activeIdx: (run, q) => (run.style === 'solo' ? null : q.work.open === null ? q.work.cur : q.work.by),
+      turnText(run, q, badge) {
+        const w = q.work;
+        if (run.style === 'solo' || w.result) return '';
+        if (w.open === null) return `${badge(w.cur)} picks a square`;
+        return `${badge(w.by)} ${w.stealing ? 'can steal it' : 'answers'}`;
+      },
+      prompt(q, run) {
+        const w = q.work;
+        if (w.open === null) return run.mode === 'class' ? 'The team chooses a topic and a value. Click that square.' : 'Pick a topic and a value.';
+        if (w.result) return sqLeft(q) ? 'Back to the board for the next pick.' : 'That was the last square.';
+        const cell = q.cells[w.open];
+        if (!cell.opts) return run.style === 'solo' ? (w.shown ? 'Did you get it right?' : 'Say your answer, then show the answer.') : 'Did they get it right?';
+        return run.mode === 'class' ? 'The team says its answer. Click it.' : 'Choose your answer.';
+      },
+      board: (q, ctx) => sqBoard(q, ctx),
+      controls(q, run) {
+        const w = q.work;
+        if (w.open === null || w.result) return '';
+        const cell = q.cells[w.open];
+        if (run.style === 'solo') {
+          return cell.opts && cell.opts.length > 2 && !w.half ? `<button type="button" class="btn-ghost" data-act="sqhalf" id="sq-half">Remove ${cell.opts.length === 3 ? 'a wrong answer' : 'two wrong answers'} (half points)</button>` : '';
+        }
+        return `${w.stealing ? '<button type="button" class="btn-ghost" data-act="sqpass" id="sq-pass">No steal</button>' : ''}
+          <button type="button" class="btn-link" data-act="sqshow" id="sq-reveal">Nobody knows? Show the answer</button>`;
+      },
+      focusId: (q) => sqFocus(q),
+      act: (act, el, q, run) => sqAct(act, el, q, run),
+      key(e, q, run) {
+        const w = q.work;
+        if (e.altKey || w.open === null || w.result || !/^[1-6]$/.test(e.key)) return false;
+        const cell = q.cells[w.open];
+        const i = Number(e.key) - 1;
+        if (!cell.opts || !cell.opts[i] || w.tried.includes(i) || w.cut.includes(i)) return false;
+        w.log.push('key');
+        return sqAnswer(q, run, cell.opts[i] === cell.a, i);
+      },
+      check: (q) => ({ invalid: q.work.open === null ? 'Pick a square.' : 'Choose an answer.' }),
+      reveal: () => ({ html: '' }),
+      hint: () => '',
+      points: () => 0,
+      chip: (q) => q.title,
+      summary: (q) => q.title,
+      keysHint(q) {
+        const w = q.work;
+        const cell = w.open === null ? null : q.cells[w.open];
+        if (cell && cell.opts && !w.result) return `Keyboard: press 1 to ${cell.opts.length} to answer.`;
+        return w.open === null ? 'Keyboard: Tab to a square and press Enter.' : '';
+      },
+      // On your own: points scored, and how many squares were right.
+      report(run) {
+        if (run.style !== 'solo') return null;
+        const q = run.qs[0];
+        const w = q.work;
+        const played = w.order.length;
+        const right = w.order.filter((k) => w.taken[k].by >= 0).length;
+        const pct = played ? Math.round((right / played) * 100) : 0;
+        const doubles = w.order.filter((k) => w.doubles.includes(k)).length;
+        const note = played < q.cells.length ? `You stopped with ${q.cells.length - played} of ${q.cells.length} squares left.` : 'Board cleared!';
+        return `
+          <div class="report${played && pct >= 50 ? ' good' : ''}">
+            <div class="grade"><svg viewBox="0 0 220 120" aria-hidden="true"><path d="${GRADE_PATH}"/></svg><span class="grade-score">${sqNum(w.pts)}</span></div>
+            <div class="report-body">
+              <p class="comment">${esc(gradeComment(pct, played, this.tip))}</p>
+              <p class="result-note">${esc(note)}</p>
+              <dl class="stats">
+                <div><dt>Squares right</dt><dd>${right} of ${played}</dd></div>
+                <div><dt>Points</dt><dd>${sqNum(w.pts)}</dd></div>
+                <div><dt>Doubles found</dt><dd>${doubles}</dd></div>
+              </dl>
+            </div>
+          </div>`;
+      },
+      // Every square played, with its answer, under the results.
+      resultsExtra(run) {
+        const q = run.qs[0];
+        if (!q || !q.work || !q.work.order.length) return '<h2 id="cg-list-title">Squares played</h2><p class="help">No squares played yet.</p>';
+        const solo = run.style === 'solo';
+        return `<h2 id="cg-list-title">Squares played</h2><ol class="word-results">${q.work.order.map((k) => {
+          const cell = q.cells[k];
+          const t = q.work.taken[k];
+          const said = t.by < 0 ? (solo ? 'Missed' : 'Nobody scored') : solo ? `+${sqNum(t.pts)}` : `${run.names[t.by]} +${sqNum(t.pts)}`;
+          return `<li><span class="wr-mark ${t.by >= 0 ? 'ok' : 'no'}" aria-hidden="true">${t.by >= 0 ? '✓' : '✗'}</span><span class="wr-word">${esc(q.topics[cell.c])} ${cell.v}: ${sqFmt(cell.text)} <b>${sqFmt(cell.a)}</b></span><span class="wr-said">${esc(said)}</span></li>`;
+        }).join('')}</ol>`;
+      },
+      preview: () => sqPreview(id),
+    };
+  }
+  Object.keys(SQ_BANKS).forEach((id) => { CG_DEFS[id] = sqDef(id); });
   // ---------- Computing, key stage 3 (Years 7 and 8): the KS3 versions of the GCSE games ----------
   // Matched to the Year 7 and 8 curriculum maps: staying safe online, and choosing images and sources
   // (Y7 E-safety and IT & digital literacy, Y8 physical computing); binary basics (Y7 Computer Systems);
@@ -14297,6 +14968,22 @@ purpose. It is provided "as is" without express or implied warranty.</pre>
       leave: () => cgStopTimers(),
       onKey: (e) => cgKey(e),
     };
+  }
+  // Pick a Square: the same game in each subject, with that subject's questions.
+  function sqGame(id, subject, paper, skills, topics) {
+    return cgGame(id, {
+      subject,
+      paper,
+      title: 'Pick a Square',
+      summary: `A board of 25 questions in 5 topics: ${topics}. Choose a topic and a value: the higher the value, the harder the question, and double points hide behind two squares. Or make a board of your own questions.`,
+      skills,
+      time: '15 to 30 minutes',
+      versions: {
+        solo: 'Clear the board on your own. Pick any square and answer it, and remove two wrong answers if you’re stuck, for half the points.',
+        groups: 'Players or teams take turns to pick a square and answer. A wrong answer lets the next team steal it.',
+        class: 'The board on the screen. Teams take turns to choose a square and answer aloud, and the next team can steal a wrong answer.',
+      },
+    });
   }
 
   // ---------- settings, names and saving ----------
@@ -14526,7 +15213,7 @@ purpose. It is provided "as is" without express or implied warranty.</pre>
     start.disabled = Boolean(error);
     const count = error ? 0 : def.count(s.settings);
     start.textContent = error ? 'Fix the problem above to start'
-      : s.mode === 'solo' ? `Start ${count} ${count === 1 ? def.noun.toLowerCase() : def.plural}`
+      : s.mode === 'solo' ? def.startLabel || `Start ${count} ${count === 1 ? def.noun.toLowerCase() : def.plural}`
         : s.mode === 'groups' ? 'Start the group game' : 'Start on the board';
   }
 
@@ -14742,7 +15429,7 @@ purpose. It is provided "as is" without express or implied warranty.</pre>
         out.push(`<p class="cg-partial" role="status">${run.feedback.html}${left}</p>`);
       }
       out.push(def.controls(q, run));
-      if (run.style === 'solo') out.push(run.hint ? `<p class="hint-box">${def.hint(q)}</p>` : '<button type="button" class="btn-link" data-act="hint" id="cg-hint">Show a hint</button>');
+      if (run.style === 'solo' && !def.noHint) out.push(run.hint ? `<p class="hint-box">${def.hint(q)}</p>` : '<button type="button" class="btn-link" data-act="hint" id="cg-hint">Show a hint</button>');
       if (run.style === 'coop') out.push('<p class="hint">Agree before you test. You only get one test.</p>');
       if (run.style === 'turns') out.push('<button type="button" class="btn-ghost" data-act="reveal" id="cg-reveal">Reveal the answer</button>');
       out.push(`<p class="keys-hint">${def.keysHint(q, run)}</p>`);
@@ -14755,7 +15442,10 @@ purpose. It is provided "as is" without express or implied warranty.</pre>
     const def = cgD();
     let title;
     let html;
-    if (run.style === 'solo' || run.style === 'coop' || run.style === 'pairs') {
+    const own = def.side ? def.side(run, cgQ()) : null; // a game can draw its own side panel (Pick a Square's score)
+    if (own) {
+      ({ title, html } = own);
+    } else if (run.style === 'solo' || run.style === 'coop' || run.style === 'pairs') {
       const chips = run.results.map((r) => `<li class="chip${r.correct ? '' : ' wrong'}">${esc(def.chip(run.qs[r.qi]))}<span class="sr">${r.correct ? ', right' : ', wrong'}</span></li>`);
       if (run.phase !== 'done') chips.push('<li class="chip current">?<span class="sr"> (the one you are on)</span></li>');
       if (run.style === 'solo') {
@@ -15069,7 +15759,7 @@ purpose. It is provided "as is" without express or implied warranty.</pre>
         <div class="report good">
           <div class="report-body">
             <p class="comment">${esc(headline)}</p>
-            <p class="result-note">${answered} of ${run.qs.length} ${def.plural} played.</p>
+            <p class="result-note">${def.playedNote ? def.playedNote(run) : `${answered} of ${run.qs.length} ${def.plural} played.`}</p>
             <ol class="podium">${order.map((i) => `<li><span class="rank">${1 + run.scores.filter((x) => x > run.scores[i]).length}</span><span class="badge ${cgColour(run, i)}">${esc(run.names[i])}</span><span class="score-num">${run.scores[i]}</span></li>`).join('')}</ol>
           </div>
         </div>`;
@@ -15110,8 +15800,8 @@ purpose. It is provided "as is" without express or implied warranty.</pre>
       ${extra}
       <section class="block results-side" aria-labelledby="cg-list-title">
         ${def.resultsExtra ? def.resultsExtra(run) : ''}
-        <h2 id="cg-list-title">${def.noun} by ${def.noun.toLowerCase()}</h2>
-        <ol class="word-results">${rows}</ol>
+        ${def.hideRows ? '' : `<h2 id="cg-list-title">${def.noun} by ${def.noun.toLowerCase()}</h2>
+        <ol class="word-results">${rows}</ol>`}
       </section>
       <div class="actions">
         <button type="button" class="btn-primary" data-act="again" id="cg-again">Play again</button>

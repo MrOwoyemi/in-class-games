@@ -22,14 +22,16 @@ It works best on a computer or interactive whiteboard. It also works on tablets 
 
 | Subject | Games |
 |---|---|
-| Maths | FizzBuzz, Times Table Sprint, Hit the Target, Fraction Wall |
-| English (Eduqas C700QS) | Spelling Challenge (AO6), Punctuation Fix (AO6), Homophone Hunt (AO6), Proofread the Page (AO6: grammar), Device Detective (AO2) |
-| Science | Periodic Pairs, Label the Cell, Food Web Builder |
-| Computing KS3 (Years 7 and 8) | Cyber Safe (online safety, sources and copyright), Typing Trainer, Binary Switches (binary basics), Code Shuffle (Python, Year 7 and Year 8 programs) |
-| Computing KS4 (Years 9 to 11, AQA 8525) | Binary Switches (3.3.1, 3.3.2 and 3.3.4), Logic Gate Lights (3.4.2), Code Shuffle (3.1 and 3.2), Cyber Safe (3.6, plus online safety), Typing Trainer |
-| Creative iMedia (OCR J834) | Crew Call (R093 1.2: job roles), Who's It For? (R093 2.1, 2.3 and 2.4: purpose, audience and research), Guess the Logo: 26 brand logos (R094: visual identity) |
+| Maths | FizzBuzz, Times Table Sprint, Hit the Target, Fraction Wall, Pick a Square |
+| English (Eduqas C700QS) | Spelling Challenge (AO6), Punctuation Fix (AO6), Homophone Hunt (AO6), Proofread the Page (AO6: grammar), Device Detective (AO2), Pick a Square (AO6 and AO2) |
+| Science | Periodic Pairs, Label the Cell, Food Web Builder, Pick a Square |
+| Computing KS3 (Years 7 and 8) | Cyber Safe (online safety, sources and copyright), Typing Trainer, Binary Switches (binary basics), Code Shuffle (Python, Year 7 and Year 8 programs), Pick a Square |
+| Computing KS4 (Years 9 to 11, AQA 8525) | Binary Switches (3.3.1, 3.3.2 and 3.3.4), Logic Gate Lights (3.4.2), Code Shuffle (3.1 and 3.2), Cyber Safe (3.6, plus online safety), Typing Trainer, Pick a Square (3.1 to 3.6) |
+| Creative iMedia (OCR J834) | Crew Call (R093 1.2: job roles), Who's It For? (R093 2.1, 2.3 and 2.4: purpose, audience and research), Guess the Logo: 26 brand logos (R094: visual identity), Pick a Square (R093 and R094 recap) |
 
-You can add your own content to several games: rules in FizzBuzz, spelling lists (which you can save), lines from your class reader in Device Detective, passages with your own mistakes in Proofread the Page (write each one as `[mistake|correction]`, for example `[were|was]`), and logos in Guess the Logo.
+Pick a Square is in every subject: a board of 5 topics with questions worth 100 to 500 points, built from that subject's own questions. Teams take turns to pick a square, a wrong answer can be stolen by the next team, and two squares hide double points.
+
+You can add your own content to several games: rules in FizzBuzz, spelling lists (which you can save), lines from your class reader in Device Detective, passages with your own mistakes in Proofread the Page (write each one as `[mistake|correction]`, for example `[were|was]`), a whole board of your own questions in Pick a Square (one per line: `topic | question | answer | wrong answers`, or pasted from a spreadsheet), and logos in Guess the Logo.
 
 ## Privacy
 
